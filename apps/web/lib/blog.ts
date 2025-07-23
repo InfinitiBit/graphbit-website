@@ -29,7 +29,7 @@ export function ensureBlogDirectory() {
 
 export function getAllBlogPosts(): BlogPost[] {
   ensureBlogDirectory();
-  
+
   if (!fs.existsSync(BLOG_POSTS_DIRECTORY)) {
     return [];
   }
@@ -71,10 +71,10 @@ export function getAllBlogPosts(): BlogPost[] {
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   ensureBlogDirectory();
-  
+
   try {
     const fullPath = path.join(BLOG_POSTS_DIRECTORY, `${slug}.md`);
-    
+
     if (!fs.existsSync(fullPath)) {
       return null;
     }
@@ -111,7 +111,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 
 export function getBlogPostSlugs(): string[] {
   ensureBlogDirectory();
-  
+
   if (!fs.existsSync(BLOG_POSTS_DIRECTORY)) {
     return [];
   }
@@ -120,4 +120,4 @@ export function getBlogPostSlugs(): string[] {
   return fileNames
     .filter((fileName) => fileName.endsWith('.md'))
     .map((fileName) => fileName.replace(/\.md$/, ''));
-} 
+}

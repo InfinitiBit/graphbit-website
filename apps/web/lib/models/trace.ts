@@ -23,75 +23,80 @@ export interface ITrace {
   updatedAt: Date;
 }
 
-const traceSchema = new Schema<ITrace>({
-  userId: {
-    type: String,
-    required: true,
-    index: true,
+const traceSchema = new Schema<ITrace>(
+  {
+    userId: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    agentId: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    agentName: {
+      type: String,
+      required: true,
+    },
+    sessionId: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    input: {
+      type: String,
+      required: true,
+    },
+    output: {
+      type: String,
+      required: true,
+    },
+    modelName: {
+      type: String,
+      required: true,
+    },
+    promptTokens: {
+      type: Number,
+      default: 0,
+    },
+    completionTokens: {
+      type: Number,
+      default: 0,
+    },
+    totalTokens: {
+      type: Number,
+      default: 0,
+    },
+    latency: {
+      type: Number,
+      default: 0,
+    },
+    cost: {
+      type: Number,
+      default: 0,
+    },
+    status: {
+      type: String,
+      enum: ['success', 'error', 'pending'],
+      default: 'pending',
+    },
+    error: String,
+    metadata: {
+      type: Schema.Types.Mixed,
+      default: {},
+    },
+    tags: [
+      {
+        type: String,
+        trim: true,
+      },
+    ],
   },
-  agentId: {
-    type: String,
-    required: true,
-    index: true,
-  },
-  agentName: {
-    type: String,
-    required: true,
-  },
-  sessionId: {
-    type: String,
-    required: true,
-    index: true,
-  },
-  input: {
-    type: String,
-    required: true,
-  },
-  output: {
-    type: String,
-    required: true,
-  },
-  modelName: {
-    type: String,
-    required: true,
-  },
-  promptTokens: {
-    type: Number,
-    default: 0,
-  },
-  completionTokens: {
-    type: Number,
-    default: 0,
-  },
-  totalTokens: {
-    type: Number,
-    default: 0,
-  },
-  latency: {
-    type: Number,
-    default: 0,
-  },
-  cost: {
-    type: Number,
-    default: 0,
-  },
-  status: {
-    type: String,
-    enum: ['success', 'error', 'pending'],
-    default: 'pending',
-  },
-  error: String,
-  metadata: {
-    type: Schema.Types.Mixed,
-    default: {},
-  },
-  tags: [{
-    type: String,
-    trim: true,
-  }],
-}, {
-  timestamps: true,
-});
+  {
+    timestamps: true,
+  }
+);
 
 // Add compound indexes for efficient querying
 traceSchema.index({ userId: 1, createdAt: -1 });
@@ -100,4 +105,4 @@ traceSchema.index({ sessionId: 1, createdAt: -1 });
 
 const Trace = mongoose.models.Trace || mongoose.model<ITrace>('Trace', traceSchema);
 
-export default Trace; 
+export default Trace;

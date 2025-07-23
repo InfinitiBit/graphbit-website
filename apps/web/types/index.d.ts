@@ -9,7 +9,7 @@ declare module '@clerk/nextjs' {
     isSignedIn: boolean;
     isLoaded: boolean;
   };
-  
+
   export function ClerkProvider(props: { children: React.ReactNode }): JSX.Element;
   export function UserButton(props: { afterSignOutUrl?: string }): JSX.Element;
   export function SignInButton(props: { mode?: string; children: React.ReactNode }): JSX.Element;
@@ -35,13 +35,13 @@ declare module 'geist/font/mono' {
 
 declare module 'lucide-react' {
   import { FC } from 'react';
-  
+
   interface IconProps {
     className?: string;
     size?: number;
     color?: string;
   }
-  
+
   export const ArrowRight: FC<IconProps>;
   export const Zap: FC<IconProps>;
   export const Shield: FC<IconProps>;
@@ -71,4 +71,4 @@ declare module 'lucide-react' {
   export const Calendar: FC<IconProps>;
   export const Hash: FC<IconProps>;
   export const Plus: FC<IconProps>;
-} 
+}
