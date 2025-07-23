@@ -1,35 +1,39 @@
-# GraphBit Cloud Platform
+<div align="center">
 
-A modern cloud platform for the GraphBit LLM framework, providing a marketplace for AI agents and comprehensive LLM tracing capabilities.
+# GraphBit Web App
 
-## Features
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-6-green?style=flat-square&logo=mongodb)](https://www.mongodb.com/)
 
-- **Agent Marketplace**: Browse, download, and run pre-built AI agents
-- **LLM Tracing**: Monitor and analyze your agent outputs in real-time
-- **Authentication**: Secure user authentication with Clerk
-- **Modern UI**: Beautiful, responsive interface built with Next.js and Tailwind CSS
-- **Database**: MongoDB with Mongoose for data persistence
+Main website with agent marketplace, LLM tracing, and dashboard.
 
-## Prerequisites
+</div>
 
-- Node.js 18+ and npm
-- MongoDB instance (local or cloud)
-- Clerk account for authentication
+## Quick Start
 
-## Environment Variables
+```bash
+# Install dependencies (from workspace root)
+npm install
 
-Create a `.env.local` file in the `apps/web` directory with the following variables:
+# Set up environment variables
+cp .env.example .env.local
+
+# Start development server
+npm run dev --filter=web
+
+# Build for production
+npm run build --filter=web
+```
+
+## Environment Setup
+
+Create `.env.local` with:
 
 ```env
 # Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_your_key
-CLERK_SECRET_KEY=sk_test_your_key
-
-# Clerk URLs
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
+CLERK_SECRET_KEY=your_secret
 
 # MongoDB
 MONGODB_URI=mongodb://localhost:27017/graphbit
@@ -38,99 +42,24 @@ MONGODB_URI=mongodb://localhost:27017/graphbit
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-## Installation
+## Features
 
-1. Install dependencies from the workspace root:
-```bash
-npm install
-```
-
-2. Set up your environment variables as described above.
-
-3. Ensure MongoDB is running if using a local instance.
-
-## Development
-
-From the workspace root, run:
-
-```bash
-npm run dev
-```
-
-This will start the development server at `http://localhost:3000`.
-
-## Project Structure
-
-```
-apps/web/
-├── app/                    # Next.js app directory
-│   ├── api/               # API routes
-│   ├── marketplace/       # Marketplace page
-│   ├── tracing/          # Tracing dashboard
-│   └── page.tsx          # Landing page
-├── components/            # React components
-│   ├── layout/           # Layout components
-│   └── ui/               # UI components
-├── lib/                   # Utilities and database
-│   ├── models/           # Mongoose models
-│   ├── db.ts            # Database connection
-│   └── utils.ts         # Utility functions
-└── public/               # Static assets
-```
+- **Agent Marketplace** - Browse and download AI agents
+- **LLM Tracing** - Monitor agent performance and outputs
+- **Blog** - Technical articles and tutorials
+- **Authentication** - Secure user management with Clerk
 
 ## API Endpoints
 
-### Agents API
-- `GET /api/agents` - List all public agents
-- `POST /api/agents` - Create a new agent (authenticated)
-
-### Traces API
-- `GET /api/traces` - Get user's traces (authenticated)
-- `POST /api/traces` - Create a new trace (authenticated)
-
-## Database Models
-
-### Agent Schema
-- `name`: Agent name
-- `description`: Agent description
-- `category`: Agent category (chatbot, analyzer, generator, etc.)
-- `version`: Semantic version
-- `author`: Author name
-- `authorId`: Clerk user ID
-- `downloads`: Download count
-- `rating`: Average rating
-- `tags`: Array of tags
-- `isPublic`: Visibility status
-
-### Trace Schema
-- `userId`: Clerk user ID
-- `agentId`: Associated agent ID
-- `agentName`: Agent name
-- `sessionId`: Session identifier
-- `input`: User input
-- `output`: LLM output
-- `model`: Model used
-- `promptTokens`: Input token count
-- `completionTokens`: Output token count
-- `latency`: Response time in ms
-- `cost`: Estimated cost
-- `status`: success/error/pending
-
-## Technologies Used
-
-- **Next.js 15**: React framework with App Router
-- **TypeScript**: Type-safe development
-- **Tailwind CSS**: Utility-first CSS framework
-- **Clerk**: Authentication and user management
-- **MongoDB**: NoSQL database
-- **Mongoose**: MongoDB object modeling
-- **Radix UI**: Accessible component primitives
-- **Lucide Icons**: Beautiful icon set
+- `GET /api/agents` - List public agents
+- `POST /api/agents` - Create new agent
+- `GET /api/traces` - Get user traces
+- `POST /api/traces` - Create trace
 
 ## Contributing
 
-Please follow the existing code style and conventions. Ensure all TypeScript types are properly defined and components are well-documented.
+Please follow existing conventions and ensure TypeScript compliance.
 
 ## License
 
-This project is part of the GraphBit open-source ecosystem.
+Proprietary License © 2024 InfinitiBit GmbH.
