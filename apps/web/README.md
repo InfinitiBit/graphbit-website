@@ -46,10 +46,10 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ## Features
 
-- **🏪 Agent Marketplace** - Browse and download AI agents
-- **📊 LLM Tracing** - Monitor agent performance and outputs
-- **📝 Blog** - Technical articles and tutorials
-- **🔐 Authentication** - Secure user management with Clerk
+- **Agent Marketplace** - Browse and download AI agents
+- **LLM Tracing** - Monitor agent performance and outputs
+- **Blog** - Technical articles and tutorials
+- **Authentication** - Secure user management with Clerk
 
 ## API Endpoints
 
@@ -64,4 +64,4 @@ Please follow existing conventions and ensure TypeScript compliance.
 
 ## License
 
-Proprietary License © 2024 InfinitiBit GmbH
+Proprietary License © 2024 InfinitiBit GmbH.
