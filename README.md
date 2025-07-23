@@ -1,4 +1,6 @@
-# GraphBit Website
+<div align="center">
+
+git# GraphBit Website
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
@@ -6,6 +8,8 @@
 [![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)](LICENSE)
 
 Official website for GraphBit - AI Agent Monitoring and LLM Tracing Platform.
+
+</div>
 
 ## Quick Start
 
