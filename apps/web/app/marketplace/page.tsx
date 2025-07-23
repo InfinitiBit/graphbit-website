@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { Navigation } from "@/components/layout/navigation";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import useStore from "@/lib/store/useStore";
+import { useEffect } from 'react';
+import { Navigation } from '@/components/layout/navigation';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import useStore from '@/lib/store/useStore';
 import {
   Download,
   Star,
@@ -16,15 +16,15 @@ import {
   Globe,
   Sparkles,
   ChevronDown,
-} from "lucide-react";
+} from 'lucide-react';
 
 const categories = [
-  { value: "all", label: "All Categories", icon: Globe },
-  { value: "chatbot", label: "Chatbots", icon: MessageSquare },
-  { value: "analyzer", label: "Analyzers", icon: BarChart },
-  { value: "generator", label: "Generators", icon: Sparkles },
-  { value: "translator", label: "Translators", icon: Globe },
-  { value: "classifier", label: "Classifiers", icon: Filter },
+  { value: 'all', label: 'All Categories', icon: Globe },
+  { value: 'chatbot', label: 'Chatbots', icon: MessageSquare },
+  { value: 'analyzer', label: 'Analyzers', icon: BarChart },
+  { value: 'generator', label: 'Generators', icon: Sparkles },
+  { value: 'translator', label: 'Translators', icon: Globe },
+  { value: 'classifier', label: 'Classifiers', icon: Filter },
 ];
 
 export default function MarketplacePage() {
@@ -38,7 +38,7 @@ export default function MarketplacePage() {
     fetchAgents,
   } = useStore();
 
-  const showFilters = agentCategory !== "all" || agentSearchQuery !== "";
+  const showFilters = agentCategory !== 'all' || agentSearchQuery !== '';
 
   useEffect(() => {
     fetchAgents();
@@ -52,8 +52,8 @@ export default function MarketplacePage() {
         {/* Header */}
         <div className="border-b bg-white/50 backdrop-blur-sm">
           <div className="container-responsive responsive-py">
-                    <h1 className="responsive-text-2xl font-bold text-balance">Agent Marketplace</h1>
-        <p className="mt-2 text-muted-foreground responsive-text-sm">
+            <h1 className="responsive-text-2xl text-balance font-bold">Agent Marketplace</h1>
+            <p className="responsive-text-sm mt-2 text-muted-foreground">
               Discover and download pre-built AI agents for your applications
             </p>
           </div>
@@ -62,25 +62,27 @@ export default function MarketplacePage() {
         {/* Search and Filters */}
         <div className="container-responsive py-4 sm:py-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="relative flex-1 max-w-2xl">
+            <div className="relative max-w-2xl flex-1">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <input
                 type="text"
                 placeholder="Search agents..."
                 value={agentSearchQuery}
                 onChange={(e) => setAgentSearchQuery(e.target.value)}
-                className="w-full rounded-md border border-input bg-background pl-10 pr-3 py-2 sm:py-3 responsive-text-base ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring touch-target-sm"
+                className="responsive-text-base touch-target-sm w-full rounded-md border border-input bg-background py-2 pl-10 pr-3 ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring sm:py-3"
               />
             </div>
             <Button
               variant="outline"
-              onClick={() => setAgentCategory(agentCategory === "all" ? "chatbot" : "all")}
-              className="gap-2 touch-target w-full lg:w-auto"
+              onClick={() => setAgentCategory(agentCategory === 'all' ? 'chatbot' : 'all')}
+              className="touch-target w-full gap-2 lg:w-auto"
             >
               <Filter className="h-4 w-4" />
               <span className="hidden sm:inline">Filters</span>
               <span className="sm:hidden">Filter</span>
-              <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? "rotate-180" : ""}`} />
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`}
+              />
             </Button>
           </div>
 
@@ -91,14 +93,16 @@ export default function MarketplacePage() {
               return (
                 <Button
                   key={category.value}
-                  variant={agentCategory === category.value ? "default" : "outline"}
+                  variant={agentCategory === category.value ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setAgentCategory(category.value)}
-                  className="gap-2 touch-target-sm"
+                  className="touch-target-sm gap-2"
                 >
                   <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="hidden xs:inline">{category.label}</span>
-                  <span className="xs:hidden">{category.value === "all" ? "All" : category.label.split("s")[0]}</span>
+                  <span className="xs:hidden">
+                    {category.value === 'all' ? 'All' : category.label.split('s')[0]}
+                  </span>
                 </Button>
               );
             })}
@@ -110,17 +114,17 @@ export default function MarketplacePage() {
           {isLoadingAgents ? (
             <div className="grid-responsive-3 responsive-gap">
               {[...Array(6)].map((_, i) => (
-                <Card key={i} className="animate-pulse border-subtle">
+                <Card key={i} className="border-subtle animate-pulse">
                   <CardHeader>
-                    <div className="h-5 sm:h-6 bg-gray-200 rounded w-3/4"></div>
-                    <div className="h-3 sm:h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
+                    <div className="h-5 w-3/4 rounded bg-gray-200 sm:h-6"></div>
+                    <div className="mt-2 h-3 w-1/2 rounded bg-gray-200 sm:h-4"></div>
                   </CardHeader>
                   <CardContent>
-                    <div className="h-3 sm:h-4 bg-gray-200 rounded w-full"></div>
-                    <div className="h-3 sm:h-4 bg-gray-200 rounded w-5/6 mt-2"></div>
+                    <div className="h-3 w-full rounded bg-gray-200 sm:h-4"></div>
+                    <div className="mt-2 h-3 w-5/6 rounded bg-gray-200 sm:h-4"></div>
                     <div className="mt-4 flex gap-2">
-                      <div className="h-5 bg-gray-200 rounded-full w-16"></div>
-                      <div className="h-5 bg-gray-200 rounded-full w-12"></div>
+                      <div className="h-5 w-16 rounded-full bg-gray-200"></div>
+                      <div className="h-5 w-12 rounded-full bg-gray-200"></div>
                     </div>
                   </CardContent>
                 </Card>
@@ -129,23 +133,28 @@ export default function MarketplacePage() {
           ) : (
             <div className="grid-responsive-3 responsive-gap">
               {agents.map((agent) => (
-                <Card key={agent.id} className="group hover:shadow-lg transition-all duration-300 border-subtle bg-white/90 backdrop-blur-sm hover-lift">
+                <Card
+                  key={agent.id}
+                  className="border-subtle hover-lift group bg-white/90 backdrop-blur-sm transition-all duration-300 hover:shadow-lg"
+                >
                   <CardHeader>
                     <div className="flex items-start justify-between gap-3">
-                      <div className="flex-1 min-w-0">
-                                      <CardTitle className="responsive-text-base leading-tight truncate">{agent.name}</CardTitle>
-              <CardDescription className="mt-1 responsive-text-xs">
+                      <div className="min-w-0 flex-1">
+                        <CardTitle className="responsive-text-base truncate leading-tight">
+                          {agent.name}
+                        </CardTitle>
+                        <CardDescription className="responsive-text-xs mt-1">
                           by {agent.author} • v{agent.version}
                         </CardDescription>
                       </div>
-                      <Code className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground flex-shrink-0" />
+                      <Code className="h-6 w-6 flex-shrink-0 text-muted-foreground sm:h-8 sm:w-8" />
                     </div>
                   </CardHeader>
                   <CardContent>
-                                <p className="responsive-text-xs text-muted-foreground line-clamp-3 leading-relaxed">
-              {agent.description}
-            </p>
-                    
+                    <p className="responsive-text-xs line-clamp-3 leading-relaxed text-muted-foreground">
+                      {agent.description}
+                    </p>
+
                     <div className="mt-4 flex flex-wrap gap-2">
                       {agent.tags.slice(0, 3).map((tag) => (
                         <span
@@ -162,14 +171,14 @@ export default function MarketplacePage() {
                       )}
                     </div>
 
-                    <div className="mt-4 flex flex-col xs:flex-row xs:items-center justify-between gap-3">
-                      <div className="flex items-center gap-4 responsive-text-xs text-muted-foreground">
+                    <div className="mt-4 flex flex-col justify-between gap-3 xs:flex-row xs:items-center">
+                      <div className="responsive-text-xs flex items-center gap-4 text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <Download className="h-3 w-3 sm:h-4 sm:w-4" />
                           <span>{agent.downloads.toLocaleString()}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-yellow-500 text-yellow-500" />
+                          <Star className="h-3 w-3 fill-yellow-500 text-yellow-500 sm:h-4 sm:w-4" />
                           <span>{agent.rating}</span>
                           <span className="hidden sm:inline">({agent.reviews})</span>
                         </div>
@@ -185,19 +194,22 @@ export default function MarketplacePage() {
           )}
 
           {!isLoadingAgents && agents.length === 0 && (
-            <div className="text-center py-12 sm:py-16">
+            <div className="py-12 text-center sm:py-16">
               <div className="mx-auto max-w-md">
-                <Code className="h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground mx-auto mb-4" />
-                            <h3 className="responsive-text-base font-semibold text-foreground mb-2">No agents found</h3>
-            <p className="responsive-text-xs text-muted-foreground">
-                  No agents match your current search criteria. Try adjusting your filters or search terms.
+                <Code className="mx-auto mb-4 h-12 w-12 text-muted-foreground sm:h-16 sm:w-16" />
+                <h3 className="responsive-text-base mb-2 font-semibold text-foreground">
+                  No agents found
+                </h3>
+                <p className="responsive-text-xs text-muted-foreground">
+                  No agents match your current search criteria. Try adjusting your filters or search
+                  terms.
                 </p>
-                <Button 
-                  variant="outline" 
-                  className="mt-4 touch-target"
+                <Button
+                  variant="outline"
+                  className="touch-target mt-4"
                   onClick={() => {
-                    setAgentSearchQuery("");
-                    setAgentCategory("all");
+                    setAgentSearchQuery('');
+                    setAgentCategory('all');
                   }}
                 >
                   Clear filters
@@ -209,4 +221,4 @@ export default function MarketplacePage() {
       </main>
     </>
   );
-} 
+}

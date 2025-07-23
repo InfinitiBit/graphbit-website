@@ -29,7 +29,7 @@ interface Trace {
   sessionId: string;
   input: string;
   output: string;
-  modelName: string;  // Changed from model to modelName
+  modelName: string; // Changed from model to modelName
   promptTokens: number;
   completionTokens: number;
   totalTokens: number;
@@ -60,18 +60,18 @@ interface AppState {
   agentSearchQuery: string;
   agentCategory: string;
   isLoadingAgents: boolean;
-  
+
   // Traces
   traces: Trace[];
   traceStats: Stats | null;
   selectedTimeRange: string;
   selectedTraceStatus: string;
   isLoadingTraces: boolean;
-  
+
   // UI State
   sidebarOpen: boolean;
   theme: 'light' | 'dark' | 'system';
-  
+
   // Actions - Agents
   setAgents: (agents: Agent[]) => void;
   setSelectedAgent: (agent: Agent | null) => void;
@@ -79,7 +79,7 @@ interface AppState {
   setAgentCategory: (category: string) => void;
   setIsLoadingAgents: (loading: boolean) => void;
   fetchAgents: () => Promise<void>;
-  
+
   // Actions - Traces
   setTraces: (traces: Trace[]) => void;
   setTraceStats: (stats: Stats | null) => void;
@@ -88,7 +88,7 @@ interface AppState {
   setIsLoadingTraces: (loading: boolean) => void;
   fetchTraces: () => Promise<void>;
   createTrace: (trace: Omit<Trace, 'id' | 'createdAt' | 'updatedAt'>) => Promise<void>;
-  
+
   // Actions - UI
   toggleSidebar: () => void;
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
@@ -104,27 +104,27 @@ const useStore = create<AppState>()(
         agentSearchQuery: '',
         agentCategory: 'all',
         isLoadingAgents: false,
-        
+
         traces: [],
         traceStats: null,
         selectedTimeRange: '24h',
         selectedTraceStatus: 'all',
         isLoadingTraces: false,
-        
+
         sidebarOpen: true,
         theme: 'system',
-        
+
         // Agent actions
         setAgents: (agents) => set({ agents }),
         setSelectedAgent: (agent) => set({ selectedAgent: agent }),
         setAgentSearchQuery: (query) => set({ agentSearchQuery: query }),
         setAgentCategory: (category) => set({ agentCategory: category }),
         setIsLoadingAgents: (loading) => set({ isLoadingAgents: loading }),
-        
+
         fetchAgents: async () => {
           const { agentCategory, agentSearchQuery } = get();
           set({ isLoadingAgents: true });
-          
+
           try {
             const params = new URLSearchParams();
             if (agentCategory && agentCategory !== 'all') {
@@ -133,10 +133,10 @@ const useStore = create<AppState>()(
             if (agentSearchQuery) {
               params.append('search', agentSearchQuery);
             }
-            
+
             const response = await fetch(`/api/agents?${params}`);
             const data = await response.json();
-            
+
             if (response.ok) {
               set({ agents: data.agents });
             }
@@ -146,31 +146,31 @@ const useStore = create<AppState>()(
             set({ isLoadingAgents: false });
           }
         },
-        
+
         // Trace actions
         setTraces: (traces) => set({ traces }),
         setTraceStats: (stats) => set({ traceStats: stats }),
         setSelectedTimeRange: (range) => set({ selectedTimeRange: range }),
         setSelectedTraceStatus: (status) => set({ selectedTraceStatus: status }),
         setIsLoadingTraces: (loading) => set({ isLoadingTraces: loading }),
-        
+
         fetchTraces: async () => {
           const { selectedTraceStatus } = get();
           set({ isLoadingTraces: true });
-          
+
           try {
             const params = new URLSearchParams();
             if (selectedTraceStatus && selectedTraceStatus !== 'all') {
               params.append('status', selectedTraceStatus);
             }
-            
+
             const response = await fetch(`/api/traces?${params}`);
             const data = await response.json();
-            
+
             if (response.ok) {
-              set({ 
+              set({
                 traces: data.traces,
-                traceStats: data.stats
+                traceStats: data.stats,
               });
             }
           } catch (error) {
@@ -179,7 +179,7 @@ const useStore = create<AppState>()(
             set({ isLoadingTraces: false });
           }
         },
-        
+
         createTrace: async (trace) => {
           try {
             const response = await fetch('/api/traces', {
@@ -189,7 +189,7 @@ const useStore = create<AppState>()(
               },
               body: JSON.stringify(trace),
             });
-            
+
             if (response.ok) {
               // Refresh traces after creating
               get().fetchTraces();
@@ -198,7 +198,7 @@ const useStore = create<AppState>()(
             console.error('Failed to create trace:', error);
           }
         },
-        
+
         // UI actions
         toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
         setTheme: (theme) => set({ theme }),
@@ -217,4 +217,4 @@ const useStore = create<AppState>()(
   )
 );
 
-export default useStore; 
+export default useStore;
