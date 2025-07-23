@@ -26,8 +26,6 @@ npm run dev --filter=web
 npm run build --filter=web
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to view the application.
-
 ## Environment Setup
 
 Create `.env.local` with:
