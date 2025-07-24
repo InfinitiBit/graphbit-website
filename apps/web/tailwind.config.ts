@@ -32,16 +32,40 @@ const config: Config = {
       lg: '1024px',
       xl: '1280px',
       '2xl': '1536px',
+      '3xl': '1920px',
+      '4xl': '2560px',
       // Device-specific breakpoints
       mobile: { max: '640px' },
+      'mobile-sm': { max: '480px' },
+      'mobile-md': { min: '481px', max: '640px' },
       tablet: { min: '641px', max: '1024px' },
-      laptop: { min: '1025px', max: '1280px' },
-      desktop: { min: '1281px' },
+      'tablet-sm': { min: '641px', max: '768px' },
+      'tablet-lg': { min: '769px', max: '1024px' },
+      laptop: { min: '1025px', max: '1440px' },
+      desktop: { min: '1441px' },
+      'desktop-lg': { min: '1920px' },
       // Popular device breakpoints
       iphone: { max: '414px' },
+      'iphone-se': { max: '375px' },
       'iphone-plus': { min: '415px', max: '767px' },
       ipad: { min: '768px', max: '1024px' },
+      'ipad-mini': { min: '768px', max: '820px' },
+      'ipad-air': { min: '821px', max: '1024px' },
       'ipad-pro': { min: '1025px', max: '1366px' },
+      'surface-pro': { min: '912px', max: '1368px' },
+      // Orientation-based breakpoints
+      'portrait': { raw: '(orientation: portrait)' },
+      'landscape': { raw: '(orientation: landscape)' },
+      // High DPI displays
+      'retina': { raw: '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)' },
+      // Hover capability
+      'hover-hover': { raw: '(hover: hover)' },
+      'hover-none': { raw: '(hover: none)' },
+      // Pointer type
+      'pointer-fine': { raw: '(pointer: fine)' },
+      'pointer-coarse': { raw: '(pointer: coarse)' },
+      // Print media
+      'print': { raw: 'print' },
     },
     extend: {
       colors: {
