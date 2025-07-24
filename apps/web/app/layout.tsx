@@ -30,8 +30,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="min-h-screen antialiased">{children}</body>
+    <html 
+      lang="en" 
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      data-scroll-behavior="smooth"
+    >
+      <body className="min-h-screen antialiased">
+        {/* Skip to content link for accessibility */}
+        <a 
+          href="#main-content" 
+          className="skip-link"
+          tabIndex={1}
+        >
+          Skip to main content
+        </a>
+        <div id="main-content">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

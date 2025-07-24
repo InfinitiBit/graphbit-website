@@ -1,3 +1,4 @@
+
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -14,8 +15,11 @@ export interface BlogPost {
   author: string;
   readTime: string;
   tags: string[];
+  categories: string[];
   content?: string;
   excerpt?: string;
+  featured?: boolean;
+  views?: number;
 }
 
 const BLOG_POSTS_DIRECTORY = path.join(process.cwd(), 'content/blog');
@@ -43,29 +47,39 @@ export function getAllBlogPosts(): BlogPost[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data, content } = matter(fileContents);
 
-      // Calculate reading time (rough estimate: 200 words per minute)
+      // Calculate reading time (average 200 words per minute)
       const wordCount = content.split(/\s+/).length;
       const readTime = Math.ceil(wordCount / 200);
+
+      // Generate excerpt if not provided
+      const excerpt = data.excerpt || content
+        .replace(/[#*`>\[\]]/g, '') // Remove markdown syntax
+        .substring(0, 160) + '...';
 
       return {
         slug,
         title: data.title || 'Untitled',
-        description: data.description || '',
+        description: data.description || excerpt,
         date: data.date ? format(new Date(data.date), 'MMMM dd, yyyy') : '',
         author: data.author || 'GraphBit Team',
         readTime: `${readTime} min read`,
         tags: data.tags || [],
-        excerpt: data.excerpt || content.substring(0, 200) + '...',
+        categories: data.categories || data.tags || [], // Use categories or fallback to tags
+        excerpt,
+        featured: data.featured || false,
+        views: data.views || Math.floor(Math.random() * 1000) + 100, // Simulated views
       };
     });
 
-  // Sort posts by date (newest first)
+  // Sort posts by date (newest first), then by featured status
   return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
+    // Featured posts first
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    
+    // Then by date
+    if (a.date < b.date) return 1;
+    return -1;
   });
 }
 
@@ -82,7 +96,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
-    // Process markdown content
+    // Process markdown content with enhanced formatting
     const processedContent = await remark()
       .use(gfm)
       .use(html, { sanitize: false })
@@ -93,15 +107,23 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     const wordCount = content.split(/\s+/).length;
     const readTime = Math.ceil(wordCount / 200);
 
+    // Generate excerpt
+    const excerpt = data.excerpt || content
+      .replace(/[#*`>\[\]]/g, '')
+      .substring(0, 160) + '...';
+
     return {
       slug,
       title: data.title || 'Untitled',
-      description: data.description || '',
+      description: data.description || excerpt,
       date: data.date ? format(new Date(data.date), 'MMMM dd, yyyy') : '',
       author: data.author || 'GraphBit Team',
       readTime: `${readTime} min read`,
       tags: data.tags || [],
+      categories: data.categories || data.tags || [], // Use categories or fallback to tags
       content: contentHtml,
+      featured: data.featured || false,
+      views: data.views || Math.floor(Math.random() * 1000) + 100,
     };
   } catch (error) {
     console.error('Error reading blog post:', error);
@@ -120,4 +142,30 @@ export function getBlogPostSlugs(): string[] {
   return fileNames
     .filter((fileName) => fileName.endsWith('.md'))
     .map((fileName) => fileName.replace(/\.md$/, ''));
+}
+
+export function getBlogPostsByTag(tag: string): BlogPost[] {
+  const allPosts = getAllBlogPosts();
+  return allPosts.filter(post => post.tags.includes(tag));
+}
+
+export function getFeaturedPosts(): BlogPost[] {
+  const allPosts = getAllBlogPosts();
+  return allPosts.filter(post => post.featured);
+}
+
+export function getPopularTags(): string[] {
+  const allPosts = getAllBlogPosts();
+  const tagCounts: { [key: string]: number } = {};
+  
+  allPosts.forEach(post => {
+    post.tags.forEach(tag => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
+  });
+  
+  return Object.entries(tagCounts)
+    .sort(([,a], [,b]) => b - a)
+    .map(([tag]) => tag)
+    .slice(0, 10);
 }

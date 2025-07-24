@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -16,6 +17,11 @@ import {
   Calendar,
   ChevronDown,
   Hash,
+  Zap,
+  BarChart3,
+  Users,
+  Code,
+  Eye,
 } from 'lucide-react';
 
 // Mock data for demonstration
@@ -27,7 +33,7 @@ const mockTraces = [
     input: 'Write a Python function to calculate factorial',
     output:
       "Here's a Python function to calculate factorial:\n\n```python\ndef factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n-1)\n```",
-    modelName: 'gpt-4', // Changed from model to modelName
+    modelName: 'gpt-4',
     promptTokens: 28,
     completionTokens: 85,
     totalTokens: 113,
@@ -43,7 +49,7 @@ const mockTraces = [
     input: 'Analyze this code for potential bugs: function divide(a, b) { return a / b; }',
     output:
       "Analysis complete. Found 1 potential issue:\n\n1. Division by zero: The function doesn't check if 'b' is zero, which would result in Infinity or -Infinity.",
-    modelName: 'gpt-3.5-turbo', // Changed from model to modelName
+    modelName: 'gpt-3.5-turbo',
     promptTokens: 42,
     completionTokens: 68,
     totalTokens: 110,
@@ -58,7 +64,7 @@ const mockTraces = [
     sessionId: 'session-125',
     input: 'Generate a product description for eco-friendly water bottle',
     output: 'Error: Rate limit exceeded. Please try again later.',
-    modelName: 'gpt-4', // Changed from model to modelName
+    modelName: 'gpt-4',
     promptTokens: 18,
     completionTokens: 0,
     totalTokens: 18,
@@ -79,6 +85,63 @@ const mockStats = {
   activeAgents: 12,
 };
 
+const statCards = [
+  {
+    title: 'Total Calls',
+    value: mockStats.totalCalls.toLocaleString(),
+    change: '+12%',
+    icon: BarChart3,
+    color: 'text-blue-600',
+    bgGradient: 'from-blue-500/10 to-blue-600/10',
+    trend: 'up',
+  },
+  {
+    title: 'Success Rate',
+    value: `${mockStats.successRate}%`,
+    change: 'Healthy',
+    icon: CheckCircle,
+    color: 'text-green-600',
+    bgGradient: 'from-green-500/10 to-green-600/10',
+    trend: 'up',
+  },
+  {
+    title: 'Avg Latency',
+    value: `${mockStats.avgLatency}ms`,
+    change: '-5%',
+    icon: Clock,
+    color: 'text-orange-600',
+    bgGradient: 'from-orange-500/10 to-orange-600/10',
+    trend: 'down',
+  },
+  {
+    title: 'Total Cost',
+    value: `$${mockStats.totalCost}`,
+    change: 'This month',
+    icon: DollarSign,
+    color: 'text-purple-600',
+    bgGradient: 'from-purple-500/10 to-purple-600/10',
+    trend: 'neutral',
+  },
+  {
+    title: 'Total Tokens',
+    value: `${(mockStats.totalTokens / 1000).toFixed(1)}K`,
+    change: 'Used today',
+    icon: Hash,
+    color: 'text-indigo-600',
+    bgGradient: 'from-indigo-500/10 to-indigo-600/10',
+    trend: 'neutral',
+  },
+  {
+    title: 'Active Agents',
+    value: mockStats.activeAgents.toString(),
+    change: 'Running now',
+    icon: Activity,
+    color: 'text-emerald-600',
+    bgGradient: 'from-emerald-500/10 to-emerald-600/10',
+    trend: 'neutral',
+  },
+];
+
 export default function TracingPage() {
   const [selectedTimeRange, setSelectedTimeRange] = useState('24h');
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -92,285 +155,215 @@ export default function TracingPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-background">
-        {/* Header */}
-        <div className="border-b bg-white/50 backdrop-blur-sm">
-          <div className="container-responsive responsive-py">
-            <h1 className="responsive-text-2xl text-balance font-bold">LLM Tracing</h1>
-            <p className="responsive-text-sm mt-2 text-muted-foreground">
-              Monitor and analyze your agent outputs and performance
-            </p>
-          </div>
-        </div>
-
-        {/* Stats Overview */}
-        <div className="container-responsive py-6 sm:py-8">
-          <div className="grid-responsive-6 responsive-gap">
-            <Card className="hover-lift border-subtle">
-              <CardHeader className="pb-2">
-                <CardDescription className="responsive-text-xs">Total Calls</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="responsive-text-2xl font-bold">
-                  {mockStats.totalCalls.toLocaleString()}
-                </div>
-                <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                  <TrendingUp className="h-3 w-3" />
-                  +12% from last week
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover-lift border-subtle">
-              <CardHeader className="pb-2">
-                <CardDescription className="responsive-text-xs">Success Rate</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="responsive-text-2xl font-bold">{mockStats.successRate}%</div>
-                <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                  <CheckCircle className="h-3 w-3 text-green-500" />
-                  Healthy
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover-lift border-subtle">
-              <CardHeader className="pb-2">
-                <CardDescription className="responsive-text-xs">Avg Latency</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="responsive-text-2xl font-bold">{mockStats.avgLatency}ms</div>
-                <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                  <Clock className="h-3 w-3" />
-                  -5% from last week
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover-lift border-subtle">
-              <CardHeader className="pb-2">
-                <CardDescription className="responsive-text-xs">Total Cost</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="responsive-text-2xl font-bold">${mockStats.totalCost}</div>
-                <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                  <DollarSign className="h-3 w-3" />
-                  This month
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover-lift border-subtle">
-              <CardHeader className="pb-2">
-                <CardDescription className="responsive-text-xs">Total Tokens</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="responsive-text-2xl font-bold">
-                  {(mockStats.totalTokens / 1000).toFixed(1)}K
-                </div>
-                <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                  <Hash className="h-3 w-3" />
-                  Used today
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover-lift border-subtle">
-              <CardHeader className="pb-2">
-                <CardDescription className="responsive-text-xs">Active Agents</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="responsive-text-2xl font-bold">{mockStats.activeAgents}</div>
-                <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                  <Activity className="h-3 w-3" />
-                  Running now
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="container-responsive pb-6">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant={selectedTimeRange === '1h' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedTimeRange('1h')}
-                className="touch-target-sm"
-              >
-                <span className="hidden sm:inline">Last </span>1h
-              </Button>
-              <Button
-                variant={selectedTimeRange === '24h' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedTimeRange('24h')}
-                className="touch-target-sm"
-              >
-                <span className="hidden sm:inline">Last </span>24h
-              </Button>
-              <Button
-                variant={selectedTimeRange === '7d' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedTimeRange('7d')}
-                className="touch-target-sm"
-              >
-                <span className="hidden sm:inline">Last </span>7d
-              </Button>
-              <Button
-                variant={selectedTimeRange === '30d' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedTimeRange('30d')}
-                className="touch-target-sm"
-              >
-                <span className="hidden sm:inline">Last </span>30d
-              </Button>
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30 pt-16 sm:pt-20">
+        {/* Enhanced Hero Header */}
+        <div className="relative overflow-hidden border-b bg-gradient-to-r from-white via-gray-50 to-blue-50">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5" />
+          <div className="container-responsive relative py-12 sm:py-16 lg:py-20">
+            <div className="text-center">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gray-900/10 px-4 py-2 text-sm font-medium text-gray-800 backdrop-blur-sm border border-gray-200">
+                <Zap className="h-4 w-4 text-yellow-500" />
+                <span>Real-time monitoring</span>
+              </div>
+              <h1 className="mb-6 text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
+                LLM{' '}
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Tracing
+                </span>
+              </h1>
+              <p className="mx-auto mb-8 max-w-3xl text-lg text-gray-600 sm:text-xl">
+                Monitor and analyze your agent outputs and performance with comprehensive observability tools.
+              </p>
             </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowFilters(!showFilters)}
-              className="touch-target w-full gap-2 lg:w-auto"
-            >
-              <Filter className="h-4 w-4" />
-              <span className="hidden sm:inline">Filters</span>
-              <span className="sm:hidden">Filter</span>
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`}
-              />
-            </Button>
           </div>
-
-          {showFilters && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Button
-                variant={selectedStatus === 'all' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedStatus('all')}
-                className="touch-target-sm"
-              >
-                All Status
-              </Button>
-              <Button
-                variant={selectedStatus === 'success' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedStatus('success')}
-                className="touch-target-sm gap-1"
-              >
-                <CheckCircle className="h-3 w-3" />
-                <span className="hidden xs:inline">Success</span>
-                <span className="xs:hidden">✓</span>
-              </Button>
-              <Button
-                variant={selectedStatus === 'error' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedStatus('error')}
-                className="touch-target-sm gap-1"
-              >
-                <AlertCircle className="h-3 w-3" />
-                <span className="hidden xs:inline">Error</span>
-                <span className="xs:hidden">✗</span>
-              </Button>
-              <Button
-                variant={selectedStatus === 'pending' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedStatus('pending')}
-                className="touch-target-sm gap-1"
-              >
-                <RefreshCw className="h-3 w-3" />
-                <span className="hidden xs:inline">Pending</span>
-                <span className="xs:hidden">⟳</span>
-              </Button>
-            </div>
-          )}
         </div>
 
-        {/* Traces List */}
-        <div className="container-responsive pb-8 sm:pb-12">
-          <Card className="border-subtle bg-white/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="responsive-text-base">Recent Traces</CardTitle>
-              <CardDescription className="responsive-text-xs">
-                Detailed logs of all LLM interactions
-              </CardDescription>
+        {/* Enhanced Stats Overview */}
+        <div className="container-responsive py-8 sm:py-12">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {statCards.map((stat, index) => (
+              <Card 
+                key={stat.title}
+                className="group relative overflow-hidden border-0 bg-white/80 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.bgGradient} opacity-0 transition-opacity group-hover:opacity-100`} />
+                <CardHeader className="relative pb-3">
+                  <div className="flex items-center justify-between">
+                    <CardDescription className="text-sm font-medium text-gray-600">
+                      {stat.title}
+                    </CardDescription>
+                    <div className={`rounded-lg p-2 ${stat.bgGradient}`}>
+                      <stat.icon className={`h-5 w-5 ${stat.color}`} />
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="relative">
+                  <div className="text-3xl font-bold text-gray-900 mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="flex items-center gap-1 text-sm text-gray-500">
+                    {stat.trend === 'up' && <TrendingUp className="h-3 w-3 text-green-500" />}
+                    {stat.trend === 'down' && <TrendingUp className="h-3 w-3 rotate-180 text-red-500" />}
+                    {stat.trend === 'neutral' && <Activity className="h-3 w-3" />}
+                    <span>{stat.change}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Enhanced Filters */}
+        <div className="container-responsive pb-8">
+          <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-lg">
+            <CardContent className="p-6">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {['1h', '24h', '7d', '30d'].map((range) => (
+                    <Button
+                      key={range}
+                      variant={selectedTimeRange === range ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedTimeRange(range)}
+                      className="touch-target-sm rounded-full"
+                    >
+                      <span className="hidden sm:inline">Last </span>{range}
+                    </Button>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowFilters(!showFilters)}
+                  className="touch-target w-full gap-2 lg:w-auto rounded-full"
+                >
+                  <Filter className="h-4 w-4" />
+                  <span className="hidden sm:inline">Filters</span>
+                  <span className="sm:hidden">Filter</span>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`}
+                  />
+                </Button>
+              </div>
+
+              {showFilters && (
+                <div className="mt-6 pt-6 border-t border-gray-200 flex flex-wrap gap-2">
+                  {[
+                    { key: 'all', label: 'All Status', icon: Eye },
+                    { key: 'success', label: 'Success', icon: CheckCircle },
+                    { key: 'error', label: 'Error', icon: AlertCircle },
+                    { key: 'pending', label: 'Pending', icon: RefreshCw },
+                  ].map((filter) => (
+                    <Button
+                      key={filter.key}
+                      variant={selectedStatus === filter.key ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedStatus(filter.key)}
+                      className="touch-target-sm gap-1 rounded-full"
+                    >
+                      <filter.icon className="h-3 w-3" />
+                      <span className="hidden xs:inline">{filter.label}</span>
+                    </Button>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Enhanced Traces List */}
+        <div className="container-responsive pb-12">
+          <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-lg">
+            <CardHeader className="border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 p-2">
+                  <Code className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl font-bold">Recent Traces</CardTitle>
+                  <CardDescription className="text-sm text-gray-600">
+                    Detailed logs of all LLM interactions
+                  </CardDescription>
+                </div>
+              </div>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {filteredTraces.map((trace) => (
+            <CardContent className="p-6">
+              <div className="space-y-6">
+                {filteredTraces.map((trace, index) => (
                   <div
                     key={trace.id}
-                    className="rounded-lg border border-gray-100 p-4 transition-colors hover:bg-accent/50 sm:p-6"
+                    className="group rounded-xl border border-gray-100 bg-white/50 p-6 transition-all duration-300 hover:shadow-lg hover:bg-white/80"
+                    style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="flex flex-col gap-4">
-                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex min-w-0 flex-1 items-center gap-3">
-                          <h4 className="responsive-text-sm truncate font-semibold">
+                          <h4 className="text-lg font-semibold text-gray-900 truncate">
                             {trace.agentName}
                           </h4>
-                          <span className="rounded bg-gray-100 px-2 py-1 text-xs text-muted-foreground">
+                          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
                             {trace.modelName}
                           </span>
                           {trace.status === 'success' ? (
-                            <CheckCircle className="h-4 w-4 flex-shrink-0 text-green-500" />
+                            <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-500" />
                           ) : trace.status === 'error' ? (
-                            <AlertCircle className="h-4 w-4 flex-shrink-0 text-red-500" />
+                            <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-500" />
                           ) : (
-                            <RefreshCw className="h-4 w-4 flex-shrink-0 animate-spin text-yellow-500" />
+                            <RefreshCw className="h-5 w-5 flex-shrink-0 animate-spin text-yellow-500" />
                           )}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {new Date(trace.createdAt).toLocaleString()}
                         </div>
                       </div>
 
-                      <div className="space-y-3">
-                        <div>
-                          <span className="responsive-text-xs font-medium text-foreground">
+                      <div className="space-y-4">
+                        <div className="rounded-lg bg-gray-50 p-4">
+                          <span className="text-sm font-semibold text-gray-900 mb-2 block">
                             Input:
                           </span>
-                          <p className="responsive-text-xs mt-1 rounded border bg-gray-50 p-3 text-muted-foreground">
+                          <p className="text-sm text-gray-700 leading-relaxed">
                             {trace.input}
                           </p>
                         </div>
-                        <div>
-                          <span className="responsive-text-xs font-medium text-foreground">
+                        <div className="rounded-lg bg-gray-50 p-4">
+                          <span className="text-sm font-semibold text-gray-900 mb-2 block">
                             Output:
                           </span>
-                          <p className="responsive-text-xs mt-1 line-clamp-3 rounded border bg-gray-50 p-3 text-muted-foreground">
+                          <p className="text-sm text-gray-700 leading-relaxed line-clamp-3">
                             {trace.output}
                           </p>
                         </div>
                         {trace.error && (
-                          <div>
-                            <span className="responsive-text-xs font-medium text-red-600">
+                          <div className="rounded-lg bg-red-50 p-4 border border-red-200">
+                            <span className="text-sm font-semibold text-red-700 mb-2 block">
                               Error:
                             </span>
-                            <p className="responsive-text-xs mt-1 rounded border bg-red-50 p-3 text-red-500">
+                            <p className="text-sm text-red-600">
                               {trace.error}
                             </p>
                           </div>
                         )}
                       </div>
 
-                      <div className="flex flex-wrap gap-4 border-t pt-3 text-xs text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {trace.latency}ms
+                      <div className="flex flex-wrap gap-6 pt-4 border-t border-gray-200 text-sm text-gray-600">
+                        <div className="flex items-center gap-2">
+                          <Clock className="h-4 w-4" />
+                          <span>{trace.latency}ms</span>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Hash className="h-3 w-3" />
-                          {trace.totalTokens} tokens
+                        <div className="flex items-center gap-2">
+                          <Hash className="h-4 w-4" />
+                          <span>{trace.totalTokens} tokens</span>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <DollarSign className="h-3 w-3" />${trace.cost.toFixed(4)}
+                        <div className="flex items-center gap-2">
+                          <DollarSign className="h-4 w-4" />
+                          <span>${trace.cost.toFixed(4)}</span>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-3 w-3" />
-                          <span className="hidden sm:inline">
-                            {new Date(trace.createdAt).toLocaleString()}
-                          </span>
-                          <span className="sm:hidden">
-                            {new Date(trace.createdAt).toLocaleDateString()}
-                          </span>
+                        <div className="flex items-center gap-2">
+                          <Calendar className="h-4 w-4" />
+                          <span>Session: {trace.sessionId}</span>
                         </div>
                       </div>
                     </div>
@@ -379,12 +372,14 @@ export default function TracingPage() {
               </div>
 
               {filteredTraces.length === 0 && (
-                <div className="py-8 text-center sm:py-12">
-                  <Activity className="mx-auto mb-4 h-12 w-12 text-muted-foreground sm:h-16 sm:w-16" />
-                  <h3 className="responsive-text-base mb-2 font-semibold text-foreground">
+                <div className="py-16 text-center">
+                  <div className="rounded-full bg-gray-100 p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                    <Activity className="h-8 w-8 text-gray-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     No traces found
                   </h3>
-                  <p className="responsive-text-xs text-muted-foreground">
+                  <p className="text-sm text-gray-600">
                     No traces match your current filter criteria.
                   </p>
                 </div>
