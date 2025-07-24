@@ -320,47 +320,50 @@ export default function Home() {
 
               {/* Quick feature preview cards with black theme */}
               <div className="grid-responsive-3 responsive-gap animate-fade-in-up animation-delay-1200 mx-auto mt-16 max-w-5xl sm:mt-20">
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200">
-                  <CardContent className="p-4 text-center sm:p-6">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/80 backdrop-blur-sm transition-all duration-200 hover:border-blue-200 hover:shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardContent className="relative p-4 text-center sm:p-6">
+                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg transition-transform duration-200 group-hover:scale-105">
                       <Package className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="responsive-text-base mb-2 font-bold text-gray-900">
+                    <h3 className="responsive-text-base mb-2 font-bold text-gray-900 transition-colors duration-200 group-hover:text-blue-600">
                       🚀 Instant Deploy
                     </h3>
-                    <p className="responsive-text-sm text-gray-700">
+                    <p className="responsive-text-sm text-gray-700 transition-colors duration-200 group-hover:text-gray-700">
                       One-click deployment from our marketplace of{' '}
-                      <strong>1,000+ vetted AI agents</strong>
+                      <strong className="text-blue-600">1,000+ vetted AI agents</strong>
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200">
-                  <CardContent className="p-4 text-center sm:p-6">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/80 backdrop-blur-sm transition-all duration-200 hover:border-green-200 hover:shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-50/30 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardContent className="relative p-4 text-center sm:p-6">
+                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg transition-transform duration-200 group-hover:scale-105">
                       <BarChart3 className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="responsive-text-base mb-2 font-bold text-gray-900">
+                    <h3 className="responsive-text-base mb-2 font-bold text-gray-900 transition-colors duration-200 group-hover:text-green-600">
                       📊 Real-time Insights
                     </h3>
-                    <p className="responsive-text-sm text-gray-700">
-                      Monitor performance and costs with <strong>live analytics</strong> and
+                    <p className="responsive-text-sm text-gray-700 transition-colors duration-200 group-hover:text-gray-700">
+                      Monitor performance and costs with <strong className="text-green-600">live analytics</strong> and
                       optimization tips
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200 sm:col-span-2 lg:col-span-1">
-                  <CardContent className="p-4 text-center sm:p-6">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg">
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/80 backdrop-blur-sm transition-all duration-200 hover:border-red-200 hover:shadow-lg sm:col-span-2 lg:col-span-1">
+                  <div className="absolute inset-0 bg-gradient-to-br from-red-50/30 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardContent className="relative p-4 text-center sm:p-6">
+                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg transition-transform duration-200 group-hover:scale-105">
                       <Shield className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="responsive-text-base mb-2 font-bold text-gray-900">
+                    <h3 className="responsive-text-base mb-2 font-bold text-gray-900 transition-colors duration-200 group-hover:text-red-600">
                       🔒 Enterprise Ready
                     </h3>
-                    <p className="responsive-text-sm text-gray-700">
-                      <strong>SOC 2 certified</strong> with enterprise-grade security &{' '}
-                      <strong>99.99% uptime</strong>
+                    <p className="responsive-text-sm text-gray-700 transition-colors duration-200 group-hover:text-gray-700">
+                      <strong className="text-red-600">SOC 2 certified</strong> with enterprise-grade security &{' '}
+                      <strong className="text-red-600">99.99% uptime</strong>
                     </p>
                   </CardContent>
                 </Card>
@@ -389,260 +392,266 @@ export default function Home() {
 
             <div className="mx-auto max-w-7xl">
               <div className="grid-responsive-3 responsive-gap">
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200">
-                  <CardHeader className="pb-4">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg sm:h-14 sm:w-14">
-                      <Package className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-sm transition-all duration-200 hover:border-blue-200 hover:shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardHeader className="relative pb-4">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg transition-all duration-200 group-hover:scale-105 sm:h-14 sm:w-14">
+                      <Package className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-6 sm:h-6 sm:w-6" />
                     </div>
-                    <CardTitle className="responsive-text-base text-gray-900">
+                    <CardTitle className="responsive-text-base text-gray-900 transition-colors duration-200 group-hover:text-blue-600">
                       🚀 Agent Marketplace
                     </CardTitle>
-                    <CardDescription className="responsive-text-xs text-gray-600">
+                    <CardDescription className="responsive-text-xs text-gray-600 transition-colors duration-200 group-hover:text-gray-600">
                       Deploy pre-built agents in seconds, not weeks
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-0">
+                  <CardContent className="relative pt-0">
                     <ul className="responsive-text-sm space-y-3 text-gray-700">
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-green-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>1,000+</strong> vetted AI agents ready to deploy
+                          <strong className="text-blue-600">1,000+</strong> vetted AI agents ready to deploy
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-blue-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>One-click</strong> deployment system
+                          <strong className="text-blue-600">One-click</strong> deployment system
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-purple-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-purple-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Auto-updates</strong> with version control
+                          <strong className="text-blue-600">Auto-updates</strong> with version control
                         </span>
                       </li>
                     </ul>
                     <div className="mt-4 border-t border-gray-100 pt-4">
-                      <span className="rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700">
+                      <span className="rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 transition-all duration-200 group-hover:bg-green-50">
                         Save 10+ dev hours per agent
                       </span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200">
-                  <CardHeader className="pb-4">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg sm:h-14 sm:w-14">
-                      <BarChart3 className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-sm transition-all duration-200 hover:border-green-200 hover:shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-50/20 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardHeader className="relative pb-4">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg transition-all duration-200 group-hover:scale-105 sm:h-14 sm:w-14">
+                      <BarChart3 className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-6 sm:h-6 sm:w-6" />
                     </div>
-                    <CardTitle className="responsive-text-base text-gray-900">
-                      📊 Real-time Insights
+                    <CardTitle className="responsive-text-base text-gray-900 transition-colors duration-200 group-hover:text-green-600">
+                      📊 Real-time Tracing
                     </CardTitle>
-                    <CardDescription className="responsive-text-xs text-gray-600">
-                      Monitor performance and optimize costs instantly
+                    <CardDescription className="responsive-text-xs text-gray-600 transition-colors duration-200 group-hover:text-gray-600">
+                      Monitor every interaction with detailed analytics
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-0">
+                  <CardContent className="relative pt-0">
                     <ul className="responsive-text-sm space-y-3 text-gray-700">
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-red-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-red-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Live tracking</strong> of all agent outputs
+                          <strong className="text-green-600">Live tracking</strong> of all agent outputs
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-yellow-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Cost analytics</strong> with optimization tips
+                          <strong className="text-green-600">Cost analytics</strong> with optimization tips
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-indigo-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-indigo-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Performance metrics</strong> and alerts
+                          <strong className="text-green-600">Performance metrics</strong> and alerts
                         </span>
                       </li>
                     </ul>
                     <div className="mt-4 border-t border-gray-100 pt-4">
-                      <span className="rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700">
+                      <span className="rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 transition-all duration-200 group-hover:bg-blue-50">
                         Reduce costs by 40% on average
                       </span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200">
-                  <CardHeader className="pb-4">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg sm:h-14 sm:w-14">
-                      <Shield className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-sm transition-all duration-200 hover:border-purple-200 hover:shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50/20 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardHeader className="relative pb-4">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg transition-all duration-200 group-hover:scale-105 sm:h-14 sm:w-14">
+                      <Shield className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-6 sm:h-6 sm:w-6" />
                     </div>
-                    <CardTitle className="responsive-text-base text-gray-900">
+                    <CardTitle className="responsive-text-base text-gray-900 transition-colors duration-200 group-hover:text-purple-600">
                       🔒 Enterprise Security
                     </CardTitle>
-                    <CardDescription className="responsive-text-xs text-gray-600">
-                      Bank-level security with compliance guarantees
+                    <CardDescription className="responsive-text-xs text-gray-600 transition-colors duration-200 group-hover:text-gray-600">
+                      Bank-grade security with compliance standards
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-0">
+                  <CardContent className="relative pt-0">
                     <ul className="responsive-text-sm space-y-3 text-gray-700">
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-green-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>SOC 2 Type II</strong> certified
+                          <strong className="text-purple-600">SOC 2 Type II</strong> compliance
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-orange-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-blue-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>End-to-end</strong> encryption
+                          <strong className="text-purple-600">End-to-end</strong> encryption
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-pink-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-red-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Role-based</strong> access control
+                          <strong className="text-purple-600">99.99% uptime</strong> SLA guarantee
                         </span>
                       </li>
                     </ul>
                     <div className="mt-4 border-t border-gray-100 pt-4">
-                      <span className="rounded-full bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700">
-                        99.99% uptime SLA
+                      <span className="rounded-full bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 transition-all duration-200 group-hover:bg-purple-50">
+                        Trusted by Fortune 500 companies
                       </span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200">
-                  <CardHeader className="pb-4">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 shadow-lg sm:h-14 sm:w-14">
-                      <Zap className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-sm transition-all duration-200 hover:border-orange-200 hover:shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50/20 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardHeader className="relative pb-4">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 shadow-lg transition-all duration-200 group-hover:scale-105 sm:h-14 sm:w-14">
+                      <Zap className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-6 sm:h-6 sm:w-6" />
                     </div>
-                    <CardTitle className="responsive-text-base text-gray-900">
+                    <CardTitle className="responsive-text-base text-gray-900 transition-colors duration-200 group-hover:text-orange-600">
                       ⚡ Lightning Performance
                     </CardTitle>
-                    <CardDescription className="responsive-text-xs text-gray-600">
+                    <CardDescription className="responsive-text-xs text-gray-600 transition-colors duration-200 group-hover:text-gray-600">
                       Global infrastructure built for speed
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-0">
+                  <CardContent className="relative pt-0">
                     <ul className="responsive-text-sm space-y-3 text-gray-700">
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-green-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>&lt;50ms</strong> average response time
+                          <strong className="text-orange-600">&lt;50ms</strong> average response time
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-blue-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Global CDN</strong> with edge locations
+                          <strong className="text-orange-600">Global CDN</strong> with edge locations
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-purple-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-purple-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Auto-scaling</strong> infrastructure
+                          <strong className="text-orange-600">Auto-scaling</strong> infrastructure
                         </span>
                       </li>
                     </ul>
                     <div className="mt-4 border-t border-gray-100 pt-4">
-                      <span className="rounded-full bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700">
-                        5x faster than competitors
+                      <span className="rounded-full bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 transition-all duration-200 group-hover:bg-orange-50">
+                        99.9% faster than competitors
                       </span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200">
-                  <CardHeader className="pb-4">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg sm:h-14 sm:w-14">
-                      <Globe className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-sm transition-all duration-200 hover:border-indigo-200 hover:shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/20 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardHeader className="relative pb-4">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg transition-all duration-200 group-hover:scale-105 sm:h-14 sm:w-14">
+                      <Code className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-6 sm:h-6 sm:w-6" />
                     </div>
-                    <CardTitle className="responsive-text-base text-gray-900">
-                      🌍 Global Scale
+                    <CardTitle className="responsive-text-base text-gray-900 transition-colors duration-200 group-hover:text-indigo-600">
+                      🛠️ Developer Experience
                     </CardTitle>
-                    <CardDescription className="responsive-text-xs text-gray-600">
-                      Deploy anywhere, scale everywhere
+                    <CardDescription className="responsive-text-xs text-gray-600 transition-colors duration-200 group-hover:text-gray-600">
+                      Built by developers, for developers
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-0">
+                  <CardContent className="relative pt-0">
                     <ul className="responsive-text-sm space-y-3 text-gray-700">
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-red-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-red-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Multi-region</strong> deployments
+                          <strong className="text-indigo-600">Multi-region</strong> deployments
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-yellow-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Auto-failover</strong> and redundancy
+                          <strong className="text-indigo-600">Auto-failover</strong> and redundancy
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-indigo-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-indigo-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>24/7 monitoring</strong> and support
+                          <strong className="text-indigo-600">24/7 monitoring</strong> and support
                         </span>
                       </li>
                     </ul>
                     <div className="mt-4 border-t border-gray-100 pt-4">
-                      <span className="rounded-full bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700">
+                      <span className="rounded-full bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 transition-all duration-200 group-hover:bg-indigo-50">
                         Trusted by 10K+ developers
                       </span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-modern border-2 border-gray-300 bg-white transition-shadow duration-200">
-                  <CardHeader className="pb-4">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg sm:h-14 sm:w-14">
-                      <Code className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                <Card className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-sm transition-all duration-200 hover:border-pink-200 hover:shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-pink-50/20 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  <CardHeader className="relative pb-4">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 shadow-lg transition-all duration-200 group-hover:scale-105 sm:h-14 sm:w-14">
+                      <Users className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-6 sm:h-6 sm:w-6" />
                     </div>
-                    <CardTitle className="responsive-text-base text-gray-900">
-                      💎 Open Source
+                    <CardTitle className="responsive-text-base text-gray-900 transition-colors duration-200 group-hover:text-pink-600">
+                      👥 Collaboration Tools
                     </CardTitle>
-                    <CardDescription className="responsive-text-xs text-gray-600">
-                      Built transparently with community trust
+                    <CardDescription className="responsive-text-xs text-gray-600 transition-colors duration-200 group-hover:text-gray-600">
+                      Work together seamlessly in real-time
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-0">
+                  <CardContent className="relative pt-0">
                     <ul className="responsive-text-sm space-y-3 text-gray-700">
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-green-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>100% open source</strong> codebase
+                          <strong className="text-pink-600">Team workspaces</strong> with role management
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-orange-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-blue-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>Active community</strong> contributions
+                          <strong className="text-pink-600">Real-time</strong> collaborative editing
                         </span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-pink-500"></div>
+                      <li className="flex items-center gap-3 transition-colors duration-200 group-hover:text-gray-700">
+                        <div className="h-2 w-2 rounded-full bg-purple-500 transition-all duration-200 group-hover:scale-110"></div>
                         <span>
-                          <strong>No vendor lock-in</strong> ever
+                          <strong className="text-pink-600">Shared libraries</strong> and templates
                         </span>
                       </li>
                     </ul>
                     <div className="mt-4 border-t border-gray-100 pt-4">
-                      <span className="rounded-full bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700">
-                        Free forever tier
+                      <span className="rounded-full bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 transition-all duration-200 group-hover:bg-pink-50">
+                        Perfect for remote teams
                       </span>
                     </div>
                   </CardContent>
                 </Card>
               </div>
+            </div>
 
-              {/* Customer confidence section */}
-              <div className="mt-12 text-center sm:mt-16">
-                <div className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-white">
-                  <Star className="h-4 w-4 fill-current" />
-                  <span className="font-medium">Join 10,000+ developers building the future</span>
-                  <ArrowRight className="h-4 w-4" />
-                </div>
+            {/* Customer confidence section */}
+            <div className="mt-12 text-center sm:mt-16">
+              <div className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-white">
+                <Star className="h-4 w-4 fill-current" />
+                <span className="font-medium">Join 10,000+ developers building the future</span>
+                <ArrowRight className="h-4 w-4" />
               </div>
             </div>
           </div>
@@ -660,52 +669,67 @@ export default function Home() {
               </p>
             </div>
             <div className="grid-responsive-4 responsive-gap">
-              <div className="hover:shadow-modern rounded-xl border border-gray-200 bg-white p-4 text-center transition-shadow duration-200 sm:p-6">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
-                  <Package className="h-6 w-6 text-white" />
-                </div>
-                <div className="responsive-text-2xl font-bold text-gray-900">1,000+</div>
-                <div className="responsive-text-xs font-medium text-gray-600">
-                  Ready-to-Deploy Agents
-                </div>
-                <div className="mt-2 inline-block rounded-full bg-green-50 px-2 py-1 text-xs text-green-700">
-                  Growing daily
-                </div>
-              </div>
-              <div className="hover:shadow-modern rounded-xl border border-gray-200 bg-white p-4 text-center transition-shadow duration-200 sm:p-6">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
-                  <Activity className="h-6 w-6 text-white" />
-                </div>
-                <div className="responsive-text-2xl font-bold text-gray-900">50M+</div>
-                <div className="responsive-text-xs font-medium text-gray-600">
-                  API Calls This Month
-                </div>
-                <div className="mt-2 inline-block rounded-full bg-blue-50 px-2 py-1 text-xs text-blue-700">
-                  +67% growth
+              <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 p-4 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/20 sm:p-6">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="relative">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                    <Package className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-12" />
+                  </div>
+                  <div className="responsive-text-2xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-700">1,000+</div>
+                  <div className="responsive-text-xs font-medium text-gray-600 transition-colors duration-300 group-hover:text-gray-700">
+                    Ready-to-Deploy Agents
+                  </div>
+                  <div className="mt-2 inline-block rounded-full bg-green-50 px-2 py-1 text-xs text-green-700 transition-all duration-300 group-hover:bg-green-100 group-hover:shadow-sm">
+                    Growing daily
+                  </div>
                 </div>
               </div>
-              <div className="hover:shadow-modern rounded-xl border border-gray-200 bg-white p-4 text-center transition-shadow duration-200 sm:p-6">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg">
-                  <Shield className="h-6 w-6 text-white" />
-                </div>
-                <div className="responsive-text-2xl font-bold text-gray-900">99.99%</div>
-                <div className="responsive-text-xs font-medium text-gray-600">
-                  Guaranteed Uptime
-                </div>
-                <div className="mt-2 inline-block rounded-full bg-emerald-50 px-2 py-1 text-xs text-emerald-700">
-                  Enterprise SLA
+
+              <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 p-4 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-300 hover:shadow-xl hover:shadow-green-500/20 sm:p-6">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-50/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="relative">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                    <TrendingUp className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-12" />
+                  </div>
+                  <div className="responsive-text-2xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-green-700">99.99%</div>
+                  <div className="responsive-text-xs font-medium text-gray-600 transition-colors duration-300 group-hover:text-gray-700">
+                    Uptime SLA Guarantee
+                  </div>
+                  <div className="mt-2 inline-block rounded-full bg-blue-50 px-2 py-1 text-xs text-blue-700 transition-all duration-300 group-hover:bg-blue-100 group-hover:shadow-sm">
+                    Enterprise grade
+                  </div>
                 </div>
               </div>
-              <div className="hover:shadow-modern rounded-xl border border-gray-200 bg-white p-4 text-center transition-shadow duration-200 sm:p-6">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 shadow-lg">
-                  <Zap className="h-6 w-6 text-white" />
+
+              <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 p-4 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-purple-300 hover:shadow-xl hover:shadow-purple-500/20 sm:p-6">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="relative">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                    <Clock className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-12" />
+                  </div>
+                  <div className="responsive-text-2xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-purple-700">&lt;50ms</div>
+                  <div className="responsive-text-xs font-medium text-gray-600 transition-colors duration-300 group-hover:text-gray-700">
+                    Average Response Time
+                  </div>
+                  <div className="mt-2 inline-block rounded-full bg-orange-50 px-2 py-1 text-xs text-orange-700 transition-all duration-300 group-hover:bg-orange-100 group-hover:shadow-sm">
+                    Lightning fast
+                  </div>
                 </div>
-                <div className="responsive-text-2xl font-bold text-gray-900">&lt;50ms</div>
-                <div className="responsive-text-xs font-medium text-gray-600">
-                  Average Response Time
-                </div>
-                <div className="mt-2 inline-block rounded-full bg-purple-50 px-2 py-1 text-xs text-purple-700">
-                  Industry leading
+              </div>
+
+              <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white/90 p-4 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-500/20 sm:p-6">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="relative">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                    <Users className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-12" />
+                  </div>
+                  <div className="responsive-text-2xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-indigo-700">10K+</div>
+                  <div className="responsive-text-xs font-medium text-gray-600 transition-colors duration-300 group-hover:text-gray-700">
+                    Active Developers
+                  </div>
+                  <div className="mt-2 inline-block rounded-full bg-pink-50 px-2 py-1 text-xs text-pink-700 transition-all duration-300 group-hover:bg-pink-100 group-hover:shadow-sm">
+                    Community driven
+                  </div>
                 </div>
               </div>
             </div>
