@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Code, Home, Package, BarChart3, Menu, X, ArrowRight } from 'lucide-react';
+import { Code, Home, Package, BarChart3, Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const navItems = [
@@ -19,26 +19,15 @@ export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll effect for better mobile experience only
+  // Enhanced scroll effect with glass morphism
   useEffect(() => {
     const handleScroll = () => {
-      // Only apply scroll effect on screens smaller than lg (1024px)
-      if (window.innerWidth < 1024) {
-        setScrolled(window.scrollY > 20);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 10);
     };
 
-    // Check initial state
     handleScroll();
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Close mobile menu when route changes
@@ -63,186 +52,135 @@ export function Navigation() {
     <>
       <nav
         className={cn(
-          'sticky top-0 z-50 transition-all duration-200',
-          'rounded-lg border-2 border-black bg-white backdrop-blur-sm',
-          'mx-auto my-1.5 max-w-7xl',
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out',
           scrolled
-            ? 'shadow-modern mx-0 my-0 max-w-none rounded-none border-x-0 border-b-2 border-t-0'
-            : 'shadow-modern'
+            ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-lg shadow-black/5'
+            : 'bg-white/70 backdrop-blur-md border-b border-transparent',
+          'supports-[backdrop-filter]:bg-white/60'
         )}
       >
-        <div className="responsive-px flex h-16 items-center lg:h-14">
-          {/* Logo/Brand */}
-          <div className="flex-shrink-0">
-            <Button
-              asChild
-              variant="ghost"
-              size="sm"
-              className="touch-target-sm h-9 border-2 border-gray-200 bg-white px-3 transition-all duration-200 hover:border-gray-300 hover:bg-gray-50 lg:h-8"
-            >
-              <Link href="/" className="flex items-center space-x-1.5">
-                <Code className="h-4 w-4 text-gray-900" />
-                <span className="text-base font-bold text-gray-900 lg:text-sm">GraphBit</span>
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 via-transparent to-purple-50/20 pointer-events-none" />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            {/* Logo/Brand - Enhanced with animation */}
+            <div className="flex-shrink-0">
+              <Link 
+                href="/" 
+                className="group flex items-center space-x-2.5 rounded-xl px-3 py-2 transition-all duration-200 hover:bg-white/60 hover:shadow-md hover:shadow-black/5"
+              >
+                <div className="relative">
+                  <div className="rounded-lg bg-gradient-to-br from-gray-900 via-gray-800 to-black p-2 shadow-lg transition-transform duration-200 group-hover:scale-105">
+                    <Sparkles className="h-4 w-4 text-white" />
+                  </div>
+                  <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 blur transition-opacity duration-200 group-hover:opacity-100" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-xl font-bold text-transparent">
+                    GraphBit
+                  </span>
+                  <span className="text-xs text-gray-500 font-medium -mt-1">AI Platform</span>
+                </div>
               </Link>
-            </Button>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-between">
-            <div className="ml-6 flex items-center space-x-1 xl:space-x-6">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive =
-                  pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      'touch-target-sm flex items-center space-x-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-gray-900',
-                      isActive ? 'bg-gray-100/60 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
-                    )}
-                  >
-                    <Icon className="h-3.5 w-3.5" />
-                    <span className="hidden xl:inline">{item.label}</span>
-                  </Link>
-                );
-              })}
             </div>
 
-            <div className="flex items-center space-x-2 xl:space-x-3">
+          {/* Desktop Navigation - Centered pill navigation */}
+            <div className="hidden lg:flex lg:flex-1 lg:justify-center">
+              <div className="flex items-center space-x-1 rounded-full bg-gray-100/60 p-1 backdrop-blur-sm border border-gray-200/50">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive =
+                    pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        'relative flex items-center space-x-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
+                        isActive
+                          ? 'bg-white text-gray-900 shadow-sm shadow-gray-900/10'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
+                      )}
+                    >
+                      <Icon className="h-4 w-4" />
+                      <span className="hidden xl:inline">{item.label}</span>
+                      {isActive && (
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10" />
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Desktop Actions */}
+            <div className="hidden lg:flex lg:items-center lg:space-x-3">
               <Link
                 href="https://github.com/graphbit-org/graphbit"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="touch-target-sm flex items-center space-x-1.5 rounded-md px-2 py-1 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-50 hover:text-gray-700"
+                className="group flex items-center space-x-2 rounded-full border border-gray-200/50 bg-white/60 px-4 py-2 text-sm font-medium text-gray-600 backdrop-blur-sm transition-all duration-200 hover:border-gray-300/50 hover:bg-white/80 hover:text-gray-700 hover:shadow-md hover:shadow-black/5"
               >
-                <Code className="h-3.5 w-3.5" />
+                <Code className="h-4 w-4 transition-transform group-hover:scale-105" />
                 <span className="hidden xl:inline">GitHub</span>
-                <ArrowRight className="hidden h-3 w-3 xl:inline" />
+                <ArrowRight className="hidden h-3 w-3 transition-transform group-hover:translate-x-0.5 xl:inline" />
               </Link>
+
               <Link href="/dashboard">
-                <Button variant="ghost" size="sm" className="touch-target-sm h-9 px-3 text-sm">
-                  <span className="hidden xl:inline">Dashboard</span>
-                  <span className="xl:hidden">Dash</span>
-                </Button>
-              </Link>
-              <Button
-                variant="default"
-                size="sm"
-                className="touch-target-sm h-9 border-2 border-black bg-black px-4 text-sm font-bold hover:border-gray-800 hover:bg-gray-800"
-              >
-                <span className="hidden xl:inline">Sign In</span>
-                <span className="xl:hidden">Sign In</span>
-              </Button>
-            </div>
-          </div>
-
-          {/* Tablet Navigation (md breakpoint) */}
-          <div className="hidden md:flex md:flex-1 md:items-center md:justify-between lg:hidden">
-            <div className="ml-6 flex items-center space-x-4">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive =
-                  pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      'touch-target flex flex-col items-center space-y-1 rounded-md px-2 py-2 text-xs font-medium transition-colors hover:text-gray-900',
-                      isActive ? 'bg-gray-100/60 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
-                    )}
-                  >
-                    <Icon className="h-4 w-4" />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="flex items-center space-x-2">
-              <Link
-                href="https://github.com/graphbit-org/graphbit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="touch-target flex items-center justify-center rounded-md p-2 text-gray-500 transition-colors hover:bg-gray-50 hover:text-gray-700"
-              >
-                <Code className="h-4 w-4" />
-              </Link>
-              <Link href="/dashboard">
-                <Button variant="ghost" size="sm" className="touch-target h-10 px-3 text-sm">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="rounded-full border border-gray-200/50 bg-white/60 px-4 backdrop-blur-sm hover:bg-white/80 hover:shadow-md hover:shadow-black/5"
+                >
                   Dashboard
                 </Button>
               </Link>
+
               <Button
                 variant="default"
                 size="sm"
-                className="touch-target h-10 border-2 border-black bg-black px-4 text-sm font-bold hover:border-gray-800 hover:bg-gray-800"
+                className="relative overflow-hidden rounded-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 px-6 py-2 font-semibold text-white shadow-lg transition-all duration-200 hover:shadow-xl hover:shadow-gray-900/25 hover:scale-105"
               >
-                Sign In
+                <span className="relative z-10">Sign In</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 opacity-0 transition-opacity duration-200 hover:opacity-100" />
               </Button>
             </div>
-          </div>
 
           {/* Mobile menu button */}
-          <div className="ml-auto flex md:hidden">
-            <button
-              className="touch-target flex items-center justify-center rounded-md p-2 transition-colors hover:bg-gray-100/60"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle mobile menu"
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6 text-gray-600" />
-              ) : (
-                <Menu className="h-6 w-6 text-gray-600" />
-              )}
-            </button>
-          </div>
+            <div className="flex lg:hidden">
+              <button
+                className="group flex items-center justify-center rounded-full bg-white/60 p-2.5 backdrop-blur-sm border border-gray-200/50 transition-all duration-200 hover:bg-white/80 hover:shadow-md hover:shadow-black/5"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle mobile menu"
+              >
+                <div className="relative h-6 w-6">
+                  {mobileMenuOpen ? (
+                    <X className="h-6 w-6 text-gray-700 transition-transform duration-200 rotate-0 group-hover:rotate-90" />
+                  ) : (
+                    <Menu className="h-6 w-6 text-gray-700 transition-transform duration-200 group-hover:scale-110" />
+                  )}
+                </div>
+              </button>
+            </div>
+        </div>
         </div>
 
         {/* Mobile Navigation Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 md:hidden">
-            {/* Backdrop */}
+          <div className="fixed inset-0 z-50 lg:hidden">
+            {/* Enhanced Backdrop */}
             <div
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm"
+              className="fixed inset-0 bg-black/30 backdrop-blur-md"
               onClick={() => setMobileMenuOpen(false)}
             />
 
-            {/* Menu Panel */}
-            <div className="fixed inset-x-0 top-0 animate-slide-up border-b-4 border-black bg-white backdrop-blur-md">
-              {/* Header */}
-              <div className="flex h-16 items-center justify-between px-4">
-                <Button
-                  asChild
-                  variant="ghost"
-                  size="sm"
-                  className="h-9 border-2 border-gray-200 bg-white px-3 hover:border-gray-300 hover:bg-gray-50"
-                >
-                  <Link
-                    href="/"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center space-x-1.5"
-                  >
-                    <Code className="h-4 w-4 text-gray-900" />
-                    <span className="text-base font-bold text-gray-900">GraphBit</span>
-                  </Link>
-                </Button>
-
-                <button
-                  className="touch-target flex items-center justify-center rounded-md p-2 transition-colors hover:bg-gray-100/60"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <X className="h-6 w-6 text-gray-600" />
-                </button>
-              </div>
-
+            {/* Modern Menu Panel */}
+            <div className="fixed inset-x-4 top-20 animate-slide-up rounded-2xl border border-gray-200/50 bg-white/95 backdrop-blur-xl shadow-2xl">
               {/* Navigation Items */}
-              <div className="space-y-1 px-4 py-6">
-                {navItems.map((item) => {
+              <div className="space-y-2 p-6">
+                {navItems.map((item, index) => {
                   const Icon = item.icon;
                   const isActive =
                     pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
@@ -253,14 +191,26 @@ export function Navigation() {
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={cn(
-                        'touch-target flex items-center space-x-3 rounded-lg px-4 py-3 text-base font-medium transition-colors',
+                        'group flex items-center space-x-4 rounded-xl px-4 py-4 text-base font-medium transition-all duration-200',
                         isActive
-                          ? 'bg-gray-100 text-gray-900'
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                          ? 'bg-gradient-to-r from-gray-900 to-gray-800 text-white shadow-lg'
+                          : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
                       )}
+                      style={{
+                        animationDelay: `${index * 50}ms`,
+                        animation: 'slideIn 0.3s ease-out forwards'
+                      }}
                     >
-                      <Icon className="h-5 w-5" />
-                      <span>{item.label}</span>
+                      <div className={cn(
+                        'rounded-lg p-2 transition-colors',
+                        isActive ? 'bg-white/20' : 'bg-gray-100 group-hover:bg-gray-200'
+                      )}>
+                        <Icon className={cn("h-5 w-5", isActive ? "text-white" : "text-gray-600")} />
+                      </div>
+                      <span className="flex-1">{item.label}</span>
+                      {isActive && (
+                        <div className="h-2 w-2 rounded-full bg-white shadow-sm"></div>
+                      )}
                     </Link>
                   );
                 })}
@@ -271,25 +221,31 @@ export function Navigation() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="touch-target flex items-center space-x-3 rounded-lg px-4 py-3 text-base font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900"
+                  className="group flex items-center space-x-4 rounded-xl px-4 py-4 text-base font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:text-gray-900"
                 >
-                  <Code className="h-5 w-5" />
-                  <span>GitHub Repository</span>
-                  <ArrowRight className="ml-auto h-4 w-4" />
+                  <div className="rounded-lg bg-gray-100 p-2 group-hover:bg-gray-200">
+                    <Code className="h-5 w-5 text-gray-600" />
+                  </div>
+                  <span className="flex-1">GitHub</span>
+                  <ArrowRight className="h-4 w-4 text-gray-400 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-3 border-t border-gray-100 px-4 py-6">
+              <div className="space-y-3 border-t border-gray-100 bg-gray-50/50 p-6">
                 <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="ghost" size="lg" className="touch-target w-full justify-center">
+                  <Button 
+                    variant="ghost" 
+                    size="lg" 
+                    className="w-full justify-center rounded-xl border border-gray-200/50 bg-white/60 font-medium backdrop-blur-sm hover:bg-white/80 hover:shadow-md"
+                  >
                     Dashboard
                   </Button>
                 </Link>
                 <Button
                   variant="default"
                   size="lg"
-                  className="touch-target w-full border-2 border-black bg-black font-bold hover:border-gray-800 hover:bg-gray-800"
+                  className="w-full rounded-xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 font-semibold text-white shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02]"
                 >
                   Sign In
                 </Button>
@@ -299,8 +255,8 @@ export function Navigation() {
         )}
       </nav>
 
-      {/* Spacer to prevent content jump when navigation becomes fixed */}
-      {scrolled && <div className="h-16 lg:h-14" />}
+      {/* Spacer to prevent content jump */}
+      <div className="h-16" />
     </>
   );
 }
