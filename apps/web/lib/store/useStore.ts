@@ -19,6 +19,42 @@ interface Agent {
   isPublic: boolean;
   createdAt: Date;
   updatedAt: Date;
+  // Extended properties for detailed view
+  longDescription?: string;
+  instructions?: string;
+  settings?: {
+    temperature?: number;
+    maxTokens?: number;
+    topP?: number;
+    frequencyPenalty?: number;
+    presencePenalty?: number;
+    systemPrompt?: string;
+    [key: string]: any;
+  };
+  models?: {
+    primary: string;
+    fallback?: string[];
+    supportedModels: string[];
+  };
+  knowledge?: {
+    domains: string[];
+    dataSources: string[];
+    lastUpdated: Date;
+    expertise: string[];
+  };
+  capabilities?: string[];
+  limitations?: string[];
+  useCases?: string[];
+  pricing?: {
+    tier: 'free' | 'premium' | 'enterprise';
+    costPerCall?: number;
+    monthlyPrice?: number;
+  };
+  performance?: {
+    avgResponseTime: number;
+    uptime: number;
+    successRate: number;
+  };
 }
 
 interface Trace {

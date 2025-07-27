@@ -67,7 +67,7 @@ export function getAllBlogPosts(): BlogPost[] {
         categories: data.categories || data.tags || [], // Use categories or fallback to tags
         excerpt,
         featured: data.featured || false,
-        views: data.views || Math.floor(Math.random() * 1000) + 100, // Simulated views
+        views: data.views || 150, // Default views
       };
     });
 
@@ -123,7 +123,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       categories: data.categories || data.tags || [], // Use categories or fallback to tags
       content: contentHtml,
       featured: data.featured || false,
-      views: data.views || Math.floor(Math.random() * 1000) + 100,
+      views: data.views || 150,
     };
   } catch (error) {
     console.error('Error reading blog post:', error);

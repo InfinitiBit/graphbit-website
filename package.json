@@ -2,9 +2,6 @@
   "name": "website",
   "private": true,
   "scripts": {
-    "format": "prettier --write ."
-  },
-  "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
@@ -25,5 +22,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
 }

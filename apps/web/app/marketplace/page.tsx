@@ -1,10 +1,11 @@
 
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigation } from '@/components/layout/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { AgentDetailModal } from '@/components/marketplace/agent-detail-modal';
 import useStore from '@/lib/store/useStore';
 import {
   Download,
@@ -49,10 +50,14 @@ export default function MarketplacePage() {
     agentSearchQuery,
     agentCategory,
     isLoadingAgents,
+    selectedAgent,
     setAgentSearchQuery,
     setAgentCategory,
+    setSelectedAgent,
     fetchAgents,
   } = useStore();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showFilters = agentCategory !== 'all' || agentSearchQuery !== '';
 
@@ -60,6 +65,16 @@ export default function MarketplacePage() {
     fetchAgents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [agentCategory, agentSearchQuery]);
+
+  const openAgentModal = (agent: any) => {
+    setSelectedAgent(agent);
+    setIsModalOpen(true);
+  };
+
+  const closeAgentModal = () => {
+    setIsModalOpen(false);
+    setSelectedAgent(null);
+  };
 
   return (
     <>
@@ -197,8 +212,9 @@ export default function MarketplacePage() {
               {agents.map((agent, index) => (
                 <Card
                   key={agent.id}
-                  className="group relative overflow-hidden rounded-3xl border-0 bg-white/90 shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:-translate-y-2"
+                  className="group relative overflow-hidden rounded-3xl border-0 bg-white/90 shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 cursor-pointer"
                   style={{ animationDelay: `${index * 100}ms` }}
+                  onClick={() => openAgentModal(agent)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
@@ -308,6 +324,15 @@ export default function MarketplacePage() {
           )}
         </div>
       </main>
+
+      {/* Agent Detail Modal */}
+      {selectedAgent && (
+        <AgentDetailModal
+          agent={selectedAgent}
+          isOpen={isModalOpen}
+          onClose={closeAgentModal}
+        />
+      )}
     </>
   );
 }
