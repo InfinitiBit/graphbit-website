@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Navigation } from '@/components/layout/navigation';
 import { Footer } from '@/components/layout/footer';
 import { HeroSection } from '@/components/ui/hero-section';
+import { ProblemStatementSection } from '@/components/ui/problem-statement-section';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -46,6 +47,9 @@ export default function Home() {
       <main className="relative">
         {/* New Hero Section */}
         <HeroSection />
+
+        {/* Problem Statement Section */}
+        <ProblemStatementSection />
 
         {/* Enhanced Features Section */}
         <section id="features-section" className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-white via-gray-50/30 to-white">

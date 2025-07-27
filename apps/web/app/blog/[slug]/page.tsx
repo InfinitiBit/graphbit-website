@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { getBlogPost, getBlogPostSlugs, getAllBlogPosts } from '@/lib/blog';
-import { ArrowLeft, Clock, Users, Calendar, Share2, Bookmark, Eye, Heart } from 'lucide-react';
+import { ArrowRight, Clock, Users, Calendar, Star } from 'lucide-react';
 import { BlogCard } from '@/components/blog/blog-card';
 
 interface BlogPostPageProps {
@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="mx-auto max-w-4xl">
             <Link href="/blog">
               <Button variant="ghost" className="group -ml-3 mb-8 hover:bg-blue-50">
-                <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                <ArrowRight className="mr-2 h-4 w-4 rotate-180 transition-transform group-hover:-translate-x-1" />
                 Back to Blog
               </Button>
             </Link>
@@ -104,11 +104,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {/* Action buttons */}
               <div className="flex items-center space-x-3">
                 <button className="flex items-center space-x-1 rounded-lg bg-gray-100 px-3 py-2 text-sm text-gray-700 hover:bg-gray-200 transition-colors">
-                  <Bookmark className="h-4 w-4" />
+                                        <Star className="h-4 w-4" />
                   <span>Save</span>
                 </button>
                 <button className="flex items-center space-x-1 rounded-lg bg-blue-600 px-3 py-2 text-sm text-white hover:bg-blue-700 transition-colors">
-                  <Share2 className="h-4 w-4" />
+                                        <ArrowRight className="h-4 w-4" />
                   <span>Share</span>
                 </button>
               </div>
@@ -142,13 +142,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-between pt-8 border-t border-gray-200">
               <Link href="/blog">
                 <Button variant="outline" className="group">
-                  <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                  <ArrowRight className="mr-2 h-4 w-4 rotate-180 transition-transform group-hover:-translate-x-1" />
                   Back to Blog
                 </Button>
               </Link>
               
               <div className="flex items-center space-x-2 text-sm text-gray-500">
-                <Eye className="h-4 w-4" />
+                <Clock className="h-4 w-4" />
                 <span>Reading time: {post.readTime}</span>
               </div>
             </div>

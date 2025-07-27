@@ -4,7 +4,7 @@ import { Footer } from '@/components/layout/footer';
 import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { BookOpen, Sparkles, ArrowLeft, CheckCircle } from 'lucide-react';
+import { BookOpen, Sparkles, ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function BestPracticesPage() {
@@ -46,7 +46,7 @@ export default async function BestPracticesPage() {
               href="/blog" 
               className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6 text-sm font-medium transition-colors"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
+              <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
               Back to Blog
             </Link>
             

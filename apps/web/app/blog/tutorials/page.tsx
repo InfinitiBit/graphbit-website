@@ -2,7 +2,7 @@ import { Navigation } from '@/components/layout/navigation';
 import { Footer } from '@/components/layout/footer';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { BookOpen, GraduationCap, ArrowLeft } from 'lucide-react';
+import { BookOpen, GraduationCap, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function TutorialsPage() {
@@ -29,7 +29,7 @@ export default async function TutorialsPage() {
               href="/blog" 
               className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6 text-sm font-medium transition-colors"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
+              <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
               Back to Blog
             </Link>
             
