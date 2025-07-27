@@ -2,7 +2,7 @@ import { Navigation } from '@/components/layout/navigation';
 import { Footer } from '@/components/layout/footer';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { BookOpen, GraduationCap, ArrowRight } from 'lucide-react';
+import { BarChart3 as BookOpen, BarChart3 as GraduationCap, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function TutorialsPage() {

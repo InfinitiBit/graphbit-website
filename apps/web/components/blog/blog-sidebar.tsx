@@ -1,6 +1,6 @@
 'use client';
 
-import { BookOpen, Users, Clock, TrendingUp } from 'lucide-react';
+import { BarChart3 as BookOpen, Users, Clock, TrendingUp } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

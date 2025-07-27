@@ -3,7 +3,7 @@
 import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { BlogPost } from '@/lib/blog';
-import { BookOpen, Sparkles, TrendingUp } from 'lucide-react';
+import { BarChart3 as BookOpen, Sparkles, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 
 interface BlogPageClientProps {

@@ -4,7 +4,7 @@ import { Footer } from '@/components/layout/footer';
 import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { BookOpen, Sparkles, TrendingUp } from 'lucide-react';
+import { BarChart3 as BookOpen, Sparkles, TrendingUp } from 'lucide-react';
 
 export default async function BlogPage() {
   const posts = getAllBlogPosts();

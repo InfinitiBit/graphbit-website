@@ -4,16 +4,16 @@ import { Footer } from '@/components/layout/footer';
 import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { BookOpen, TrendingUp, ArrowRight, Zap, Target, Brain } from 'lucide-react';
+import { TrendingUp, ArrowRight, Zap, BarChart3, BarChart3 as Target, BarChart3 as Brain } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function AdvancedPage() {
   const allPosts = getAllBlogPosts();
   const categories = [
-    { id: 'all', name: 'All Posts', icon: BookOpen },
-    { id: 'tutorials', name: 'Tutorials', icon: BookOpen },
-    { id: 'best-practices', name: 'Best Practices', icon: BookOpen },
-    { id: 'advanced', name: 'Advanced Techniques', icon: BookOpen },
+    { id: 'all', name: 'All Posts', icon: BarChart3 },
+    { id: 'tutorials', name: 'Tutorials', icon: BarChart3 },
+    { id: 'best-practices', name: 'Best Practices', icon: BarChart3 },
+    { id: 'advanced', name: 'Advanced Techniques', icon: BarChart3 },
   ];
 
   // Filter posts for advanced techniques

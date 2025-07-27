@@ -11,7 +11,7 @@ import {
   ArrowRight, 
   Sparkles,
   Home,
-  BookOpen,
+  BarChart3 as BookOpen,
   ShoppingBag,
   BarChart3,
   FileText,

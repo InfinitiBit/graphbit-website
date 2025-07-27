@@ -3,6 +3,7 @@ import { Navigation } from '@/components/layout/navigation';
 import { Footer } from '@/components/layout/footer';
 import { HeroSection } from '@/components/ui/hero-section';
 import { ProblemStatementSection } from '@/components/ui/problem-statement-section';
+import { SolutionOverviewSection } from '@/components/ui/solution-overview-section';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -13,27 +14,10 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import {
-  ArrowRight,
-  BarChart3,
-  Package,
-  Code,
-  CheckCircle,
   Star,
   Zap,
-  Shield,
-  Globe,
-  Users,
-  Clock,
-  TrendingUp,
-  Activity,
-  Download,
-  PlayCircle,
-  Rocket,
-  Brain,
-  Target,
-  Database,
-  Cpu,
-  GitBranch,
+  ArrowRight,
+  CheckCircle,
 } from 'lucide-react';
 
 export default function Home() {
@@ -51,198 +35,171 @@ export default function Home() {
         {/* Problem Statement Section */}
         <ProblemStatementSection />
 
+        {/* Solution Overview Section */}
+        <SolutionOverviewSection />
+        
         {/* Enhanced Features Section */}
         <section id="features-section" className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-white via-gray-50/30 to-white">
-          <div className="container-responsive">
-            <div className="mx-auto max-w-4xl text-center mb-20">
-              <div className="animate-fade-in-up mb-6">
-                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 px-6 py-2 text-sm font-semibold text-blue-800">
-                  <Star className="h-4 w-4 text-yellow-500" />
-                  Complete AI Toolkit
-                </span>
+          {/* Background Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-blue-50 border border-blue-200/50">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-semibold text-blue-700 uppercase tracking-wide">Key Features</span>
               </div>
-              <h2 className="animate-fade-in-up animation-delay-200 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl mb-6">
-                Everything you need to build
-                <span className="block mt-3 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  intelligent AI systems
+              
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+                Everything You Need to Build 
+                <span className="block mt-2 bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
+                  Production-Ready AI Agents
                 </span>
               </h2>
-              <p className="animate-fade-in-up animation-delay-400 mt-8 text-xl leading-relaxed text-gray-600 font-light">
-                From development to production, GraphBit provides the complete toolkit for AI agent management with enterprise-grade reliability.
+              
+              <p className="max-w-2xl mx-auto text-lg text-gray-600">
+                From development to deployment, monitoring to scaling - GraphBit provides the complete toolkit for AI agent success.
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {/* Enhanced Feature Cards */}
-              <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-white/90 to-blue-50/30 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:shadow-3xl hover:scale-105 hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-                <CardHeader className="relative pb-6 pt-8">
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-110">
-                    <Package className="h-8 w-8 text-white" />
+            {/* Feature Cards */}
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+              {/* Real-time Monitoring */}
+              <div className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="relative">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg mb-6">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
                   </div>
-                  <CardTitle className="text-2xl font-bold text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
-                    AI Agent Marketplace
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="relative">
-                  <CardDescription className="text-gray-600 text-base leading-relaxed mb-6">
-                    Browse, download, and deploy production-ready AI agents. From chatbots to data processors, 
-                    find the perfect agent for your use case.
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    <span className="rounded-full bg-gradient-to-r from-blue-100 to-blue-200 px-4 py-2 text-sm font-semibold text-blue-800">500+ Agents</span>
-                    <span className="rounded-full bg-gradient-to-r from-green-100 to-green-200 px-4 py-2 text-sm font-semibold text-green-800">Ready to Deploy</span>
-                  </div>
-                  <div className="flex items-center text-blue-600 font-semibold group-hover:text-blue-700 transition-colors duration-300">
-                    <span>Explore Marketplace</span>
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
-                  </div>
-                </CardContent>
-              </Card>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Real-time Monitoring</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Track every interaction, performance metric, and decision path with comprehensive real-time dashboards and alerts.
+                  </p>
+                </div>
+              </div>
 
-              <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-white/90 to-purple-50/30 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:shadow-3xl hover:scale-105 hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-red-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"></div>
-                <CardHeader className="relative pb-6 pt-8">
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 via-purple-600 to-pink-600 shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-110">
-                    <Activity className="h-8 w-8 text-white" />
+              {/* Security & Compliance */}
+              <div className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 via-transparent to-teal-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="relative">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg mb-6">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
                   </div>
-                  <CardTitle className="text-2xl font-bold text-gray-900 group-hover:text-purple-700 transition-colors duration-300">
-                    LLM Tracing & Analytics
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="relative">
-                  <CardDescription className="text-gray-600 text-base leading-relaxed mb-6">
-                    Monitor every LLM interaction in real-time. Track performance, costs, and quality 
-                    with comprehensive analytics and debugging tools.
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    <span className="rounded-full bg-gradient-to-r from-purple-100 to-purple-200 px-4 py-2 text-sm font-semibold text-purple-800">Real-time</span>
-                    <span className="rounded-full bg-gradient-to-r from-pink-100 to-pink-200 px-4 py-2 text-sm font-semibold text-pink-800">Analytics</span>
-                  </div>
-                  <div className="flex items-center text-purple-600 font-semibold group-hover:text-purple-700 transition-colors duration-300">
-                    <span>Start Tracing</span>
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
-                  </div>
-                </CardContent>
-              </Card>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Security & Compliance</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Enterprise-grade security with SOC 2 compliance, data encryption, and built-in protection against prompt injection attacks.
+                  </p>
+                </div>
+              </div>
 
-              <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-white/90 to-green-50/30 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:shadow-3xl hover:scale-105 hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-blue-500/5 to-teal-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-blue-500 to-teal-500"></div>
-                <CardHeader className="relative pb-6 pt-8">
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 via-green-600 to-teal-600 shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-110">
-                    <Code className="h-8 w-8 text-white" />
+              {/* Auto-scaling Infrastructure */}
+              <div className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-pink-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="relative">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg mb-6">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
                   </div>
-                  <CardTitle className="text-2xl font-bold text-gray-900 group-hover:text-green-700 transition-colors duration-300">
-                    Enterprise SDK
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="relative">
-                  <CardDescription className="text-gray-600 text-base leading-relaxed mb-6">
-                    Integrate seamlessly with our robust SDK. Support for Python, JavaScript, and REST APIs 
-                    with enterprise-grade security and scalability.
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    <span className="rounded-full bg-gradient-to-r from-green-100 to-green-200 px-4 py-2 text-sm font-semibold text-green-800">Multi-language</span>
-                    <span className="rounded-full bg-gradient-to-r from-teal-100 to-teal-200 px-4 py-2 text-sm font-semibold text-teal-800">Secure</span>
-                  </div>
-                  <div className="flex items-center text-green-600 font-semibold group-hover:text-green-700 transition-colors duration-300">
-                    <span>View Documentation</span>
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
-                  </div>
-                </CardContent>
-              </Card>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Auto-scaling Infrastructure</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Handle any load with intelligent auto-scaling that adapts to demand while optimizing costs and performance automatically.
+                  </p>
+                </div>
+              </div>
 
-              <Card className="group relative overflow-hidden border-0 bg-white/70 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <CardHeader className="relative pb-4">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg">
-                    <BarChart3 className="h-6 w-6 text-white" />
+              {/* Developer Experience */}
+              <div className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-transparent to-red-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="relative">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg mb-6">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
                   </div>
-                  <CardTitle className="text-xl font-semibold">LLM Tracing & Analytics</CardTitle>
-                </CardHeader>
-                <CardContent className="relative">
-                  <CardDescription className="text-gray-600">
-                    Monitor every API call, track performance metrics, and optimize your AI models 
-                    with comprehensive observability tools.
-                  </CardDescription>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800">Real-time</span>
-                    <span className="rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-800">Analytics</span>
-                  </div>
-                </CardContent>
-              </Card>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Developer Experience</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Intuitive APIs, comprehensive documentation, and powerful debugging tools that make development fast and enjoyable.
+                  </p>
+                </div>
+              </div>
 
-              <Card className="group relative overflow-hidden border-0 bg-white/70 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <CardHeader className="relative pb-4">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
-                    <Shield className="h-6 w-6 text-white" />
+              {/* AI Agent Marketplace */}
+              <div className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="relative">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-600 shadow-lg mb-6">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
                   </div>
-                  <CardTitle className="text-xl font-semibold">Enterprise Security</CardTitle>
-                </CardHeader>
-                <CardContent className="relative">
-                  <CardDescription className="text-gray-600">
-                    SOC 2 compliant infrastructure, end-to-end encryption, and role-based access controls 
-                    for enterprise-grade security.
-                  </CardDescription>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">SOC 2</span>
-                    <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-800">Encrypted</span>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">AI Agent Marketplace</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Discover and deploy pre-built AI agents or share your creations with a thriving community of developers.
+                  </p>
+                </div>
+              </div>
+
+              {/* Advanced Analytics */}
+              <div className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-transparent to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="relative">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg mb-6">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
                   </div>
-                </CardContent>
-              </Card>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Advanced Analytics</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Deep insights into agent performance, user interactions, and business metrics with customizable dashboards and reports.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Call to Action */}
+            <div className="text-center mt-16">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Start Building Today
+              </Button>
             </div>
           </div>
         </section>
-
-        {/* Modern Stats Section */}
-        <section className="relative py-16 sm:py-20">
-          <div className="container-responsive">
-            <div className="rounded-2xl border border-gray-200/50 bg-white/70 backdrop-blur-sm p-8 shadow-2xl lg:p-12">
-              <div className="mx-auto max-w-2xl text-center mb-12">
-                <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                  Trusted by developers worldwide
-                </h2>
-                <p className="mt-4 text-lg text-gray-600">
-                  Join thousands of developers building the future of AI
-                </p>
+        
+        {/* Stats Section */}
+        <section className="relative py-16 sm:py-20 bg-gray-900">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-8 md:grid-cols-3 text-center">
+              <div>
+                <div className="text-4xl sm:text-5xl font-bold text-white mb-2">10,000+</div>
+                <div className="text-gray-400">AI Agents Deployed</div>
               </div>
-
-              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="text-center">
-                  <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600">
-                    <Users className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900">10K+</div>
-                  <div className="text-sm text-gray-600">Active Developers</div>
-                </div>
-
-                <div className="text-center">
-                  <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600">
-                    <Activity className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900">1M+</div>
-                  <div className="text-sm text-gray-600">API Calls Tracked</div>
-                </div>
-
-                <div className="text-center">
-                  <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600">
-                    <Download className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900">500+</div>
-                  <div className="text-sm text-gray-600">AI Agents</div>
-                </div>
-
-                <div className="text-center">
-                  <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600">
-                    <TrendingUp className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900">99.9%</div>
-                  <div className="text-sm text-gray-600">Uptime SLA</div>
-                </div>
+              <div>
+                <div className="text-4xl sm:text-5xl font-bold text-white mb-2">99.9%</div>
+                <div className="text-gray-400">Uptime Guarantee</div>
+              </div>
+              <div>
+                <div className="text-4xl sm:text-5xl font-bold text-white mb-2">500+</div>
+                <div className="text-gray-400">Enterprise Customers</div>
               </div>
             </div>
           </div>
@@ -378,7 +335,7 @@ export default function Home() {
                       size="lg"
                       className="bg-white px-8 py-4 text-lg font-semibold text-gray-900 transition-all duration-300 hover:bg-gray-100 hover:shadow-xl hover:scale-105"
                     >
-                      <Rocket className="mr-2 h-5 w-5" />
+                      <Zap className="mr-2 h-5 w-5" />
                       Start Free Trial
                     </Button>
                   </Link>
@@ -389,7 +346,7 @@ export default function Home() {
                       size="lg"
                       className="border-2 border-white/20 bg-transparent px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/10"
                     >
-                      <PlayCircle className="mr-2 h-5 w-5" />
+                      <ArrowRight className="mr-2 h-5 w-5" />
                       View Dashboard
                     </Button>
                   </Link>

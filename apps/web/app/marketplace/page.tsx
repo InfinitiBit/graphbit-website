@@ -24,7 +24,7 @@ import {
   ArrowRight,
   Package,
   Zap,
-  Brain,
+  BarChart3 as Brain,
   Shield,
 } from 'lucide-react';
 

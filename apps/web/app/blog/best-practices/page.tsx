@@ -4,7 +4,7 @@ import { Footer } from '@/components/layout/footer';
 import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { BookOpen, Sparkles, ArrowRight, CheckCircle } from 'lucide-react';
+import { BarChart3 as BookOpen, Sparkles, ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function BestPracticesPage() {

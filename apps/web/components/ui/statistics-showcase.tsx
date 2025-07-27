@@ -8,7 +8,7 @@ import {
   AlertCircle, 
   DollarSign, 
   Users,
-  Target,
+  BarChart3 as Target,
   Zap,
   Info
 } from 'lucide-react';

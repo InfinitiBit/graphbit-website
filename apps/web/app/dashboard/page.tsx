@@ -12,7 +12,7 @@ import {
   Zap,
   TrendingUp,
   Clock,
-  Database,
+  BarChart3 as Database,
   AlertCircle,
   CheckCircle,
   XCircle,

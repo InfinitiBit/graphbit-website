@@ -3,7 +3,7 @@
 import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { BlogPost } from '@/lib/blog';
-import { BookOpen, GraduationCap, ArrowRight } from 'lucide-react';
+import { BarChart3 as BookOpen, BarChart3 as GraduationCap, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface TutorialsPageClientProps {

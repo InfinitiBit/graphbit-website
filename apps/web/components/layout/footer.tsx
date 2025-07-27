@@ -11,7 +11,7 @@ import {
   Sparkles,
   Code,
   Users,
-  BookOpen,
+  BarChart3 as BookOpen,
   MessageCircle
 } from 'lucide-react';
 

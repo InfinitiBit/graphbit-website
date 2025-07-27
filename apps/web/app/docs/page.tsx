@@ -14,7 +14,7 @@ import {
   Play,
   Code,
   Zap,
-  Brain,
+  BarChart3 as Brain,
   BarChart,
   Shield,
   Globe,

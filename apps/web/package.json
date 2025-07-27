@@ -39,7 +39,7 @@
     "next": "^15.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "recharts": "^2.14.3",
+    "recharts": "^2.15.4",
     "rehype": "^13.0.2",
     "rehype-highlight": "^7.0.2",
     "remark": "^15.0.1",

@@ -9,7 +9,7 @@ import {
   Users, 
   Shield, 
   Settings, 
-  Brain, 
+  BarChart3 as Brain, 
   Code, 
   Database, 
   Zap, 
