@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { AgentController } from '@/controllers/agentController';
-import { requireAuth, optionalAuth } from '@/middleware/clerkMiddleware';
+import { AgentController } from '../../../controllers/agentController';
+import { requireAuth, optionalAuth } from '../../../middleware/clerkMiddleware';
 import { body, query, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 

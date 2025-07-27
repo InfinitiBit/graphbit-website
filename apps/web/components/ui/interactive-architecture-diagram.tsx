@@ -398,14 +398,30 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
               
               {/* Flow label */}
               <text
-                x={flow.path.includes('Q') ? 
-                  (parseInt(flow.path.split(' ')[1]) + parseInt(flow.path.split(' ')[5])) / 2 :
-                  (parseInt(flow.path.split(' ')[1]) + parseInt(flow.path.split(' ')[3])) / 2
-                }
-                y={flow.path.includes('Q') ? 
-                  (parseInt(flow.path.split(' ')[2]) + parseInt(flow.path.split(' ')[6])) / 2 - 10 :
-                  (parseInt(flow.path.split(' ')[2]) + parseInt(flow.path.split(' ')[4])) / 2 - 10
-                }
+                x={(() => {
+                  const segments = flow.path.split(' ');
+                  if (flow.path.includes('Q')) {
+                    const x1 = parseInt(segments[1]) || 0;
+                    const x2 = parseInt(segments[5]) || 0;
+                    return (x1 + x2) / 2;
+                  } else {
+                    const x1 = parseInt(segments[1]) || 0;
+                    const x2 = parseInt(segments[3]) || 0;
+                    return (x1 + x2) / 2;
+                  }
+                })()}
+                y={(() => {
+                  const segments = flow.path.split(' ');
+                  if (flow.path.includes('Q')) {
+                    const y1 = parseInt(segments[2]) || 0;
+                    const y2 = parseInt(segments[6]) || 0;
+                    return (y1 + y2) / 2 - 10;
+                  } else {
+                    const y1 = parseInt(segments[2]) || 0;
+                    const y2 = parseInt(segments[4]) || 0;
+                    return (y1 + y2) / 2 - 10;
+                  }
+                })()}
                 textAnchor="middle"
                 className="text-xs fill-gray-600 font-medium pointer-events-none"
               >

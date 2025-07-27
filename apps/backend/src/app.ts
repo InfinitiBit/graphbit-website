@@ -9,17 +9,17 @@ import hpp from 'hpp';
 import cookieParser from 'cookie-parser';
 import 'express-async-errors';
 
-import { config } from '@/config/environment';
-import { connectDB } from '@/config/database';
-import { logger } from '@/utils/logger';
-import { errorHandler } from '@/middleware/errorHandler';
-import { notFoundHandler } from '@/middleware/notFoundHandler';
-import { requestLogger } from '@/middleware/requestLogger';
-import { clerkMiddleware } from '@/middleware/clerkMiddleware';
+import { config } from './config/environment';
+import { connectDB } from './config/database';
+import { logger } from './utils/logger';
+import { errorHandler } from './middleware/errorHandler';
+import { notFoundHandler } from './middleware/notFoundHandler';
+import { requestLogger } from './middleware/requestLogger';
+import { clerkMiddleware } from './middleware/clerkMiddleware';
 
 // Import routes
-import apiRoutes from '@/routes/api/v1';
-import healthRoutes from '@/routes/health';
+import apiRoutes from './routes/api/v1';
+import healthRoutes from './routes/health';
 
 const app = express();
 

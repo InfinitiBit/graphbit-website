@@ -220,6 +220,8 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="Enter your email"
+                defaultValue=""
+                suppressHydrationWarning={true}
                 className="flex-1 rounded-full border border-gray-200/50 bg-white/60 px-4 py-2 text-sm backdrop-blur-sm transition-all duration-200 placeholder:text-gray-500 focus:border-gray-300/50 focus:bg-white/80 focus:outline-none focus:ring-2 focus:ring-gray-200/50"
               />
               <Button 

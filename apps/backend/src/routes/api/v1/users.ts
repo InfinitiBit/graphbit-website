@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { UserController } from '@/controllers/userController';
-import { requireAuth } from '@/middleware/clerkMiddleware';
+import { UserController } from '../../../controllers/userController';
+import { requireAuth } from '../../../middleware/clerkMiddleware';
 import { body, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 

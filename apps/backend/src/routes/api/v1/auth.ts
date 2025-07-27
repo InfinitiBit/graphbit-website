@@ -1,9 +1,69 @@
 import { Router, Request, Response } from 'express';
-import { User } from '@/models/User';
-import { requireAuth, getCurrentUser } from '@/middleware/clerkMiddleware';
-import { logger } from '@/utils/logger';
+import { User } from '../../../models/User';
+import { requireAuth, getCurrentUser } from '../../../middleware/clerkMiddleware';
+import { verifyJWT, optionalJWT } from '../../../middleware/jwtMiddleware';
+import { AuthController } from '../../../controllers/authController';
+import { body, validationResult } from 'express-validator';
+import { logger } from '../../../utils/logger';
 
 const router = Router();
+
+// Validation middleware
+const handleValidationErrors = (req: Request, res: Response, next: any) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'Validation failed',
+      errors: errors.array()
+    });
+  }
+  next();
+};
+
+// Validation schemas
+const registerValidation = [
+  body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
+  body('password')
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters long')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
+    .withMessage('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'),
+  body('firstName').optional().isString().trim().isLength({ max: 50 }),
+  body('lastName').optional().isString().trim().isLength({ max: 50 }),
+  handleValidationErrors
+];
+
+const loginValidation = [
+  body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
+  body('password').isLength({ min: 1 }).withMessage('Password is required'),
+  handleValidationErrors
+];
+
+const forgotPasswordValidation = [
+  body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
+  handleValidationErrors
+];
+
+const resetPasswordValidation = [
+  body('token').isString().isLength({ min: 1 }).withMessage('Reset token is required'),
+  body('newPassword')
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters long')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
+    .withMessage('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'),
+  handleValidationErrors
+];
+
+const changePasswordValidation = [
+  body('currentPassword').isLength({ min: 1 }).withMessage('Current password is required'),
+  body('newPassword')
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters long')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
+    .withMessage('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'),
+  handleValidationErrors
+];
 
 /**
  * @swagger
@@ -42,6 +102,272 @@ const router = Router();
  *           type: string
  *           format: date-time
  */
+
+// ============================================
+// TRADITIONAL EMAIL/PASSWORD AUTHENTICATION
+// ============================================
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register new user with email/password
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 minLength: 8
+ *                 description: Must contain uppercase, lowercase, number, and special character
+ *               firstName:
+ *                 type: string
+ *                 maxLength: 50
+ *               lastName:
+ *                 type: string
+ *                 maxLength: 50
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: success
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       $ref: '#/components/schemas/AuthUser'
+ *                     token:
+ *                       type: string
+ *       400:
+ *         description: Validation error or user already exists
+ */
+router.post('/register', registerValidation, AuthController.register);
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Login with email/password
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: success
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       $ref: '#/components/schemas/AuthUser'
+ *                     token:
+ *                       type: string
+ *       401:
+ *         description: Invalid credentials
+ */
+router.post('/login', loginValidation, AuthController.login);
+
+/**
+ * @swagger
+ * /auth/refresh:
+ *   post:
+ *     summary: Refresh JWT token
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Token refreshed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: success
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     token:
+ *                       type: string
+ *       401:
+ *         description: Unauthorized
+ */
+router.post('/refresh', verifyJWT, AuthController.refreshToken);
+
+/**
+ * @swagger
+ * /auth/forgot-password:
+ *   post:
+ *     summary: Request password reset
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *     responses:
+ *       200:
+ *         description: Password reset instructions sent
+ */
+router.post('/forgot-password', forgotPasswordValidation, AuthController.forgotPassword);
+
+/**
+ * @swagger
+ * /auth/reset-password:
+ *   post:
+ *     summary: Reset password with token
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - token
+ *               - newPassword
+ *             properties:
+ *               token:
+ *                 type: string
+ *               newPassword:
+ *                 type: string
+ *                 minLength: 8
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ *       400:
+ *         description: Invalid or expired token
+ */
+router.post('/reset-password', resetPasswordValidation, AuthController.resetPassword);
+
+/**
+ * @swagger
+ * /auth/change-password:
+ *   post:
+ *     summary: Change password (authenticated user)
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - currentPassword
+ *               - newPassword
+ *             properties:
+ *               currentPassword:
+ *                 type: string
+ *               newPassword:
+ *                 type: string
+ *                 minLength: 8
+ *     responses:
+ *       200:
+ *         description: Password changed successfully
+ *       400:
+ *         description: Current password is incorrect
+ *       401:
+ *         description: Unauthorized
+ */
+router.post('/change-password', verifyJWT, changePasswordValidation, AuthController.changePassword);
+
+/**
+ * @swagger
+ * /auth/me-jwt:
+ *   get:
+ *     summary: Get current user (JWT authentication)
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Current user information
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: success
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       $ref: '#/components/schemas/AuthUser'
+ *       401:
+ *         description: Unauthorized
+ */
+router.get('/me-jwt', verifyJWT, AuthController.getCurrentUser);
+
+/**
+ * @swagger
+ * /auth/logout-jwt:
+ *   post:
+ *     summary: Logout user (JWT authentication)
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ */
+router.post('/logout-jwt', verifyJWT, AuthController.logout);
+
+// ============================================
+// CLERK AUTHENTICATION (EXISTING)
+// ============================================
 
 /**
  * @swagger

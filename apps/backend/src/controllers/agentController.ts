@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { Agent, IAgent } from '@/models/Agent';
-import { User } from '@/models/User';
-import { logger } from '@/utils/logger';
+import { Agent, IAgent } from '../models/Agent';
+import { User } from '../models/User';
+import { logger } from '../utils/logger';
 import { AuthenticatedRequest } from './userController';
 
 export class AgentController {

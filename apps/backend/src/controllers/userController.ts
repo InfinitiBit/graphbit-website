@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { User, IUser } from '@/models/User';
-import { logger } from '@/utils/logger';
+import { User, IUser } from '../models/User';
+import { logger } from '../utils/logger';
 
 export interface AuthenticatedRequest extends Request {
   user?: {

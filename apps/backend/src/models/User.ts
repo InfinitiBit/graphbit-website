@@ -27,8 +27,9 @@ export interface IUserSubscription {
 }
 
 export interface IUser extends Document {
-  clerkId: string;
+  clerkId?: string; // Optional for email/password users
   email: string;
+  password?: string; // For traditional email/password authentication
   firstName?: string;
   lastName?: string;
   avatar?: string;
@@ -122,8 +123,8 @@ const UserSubscriptionSchema = new Schema<IUserSubscription>({
 const UserSchema = new Schema<IUser>({
   clerkId: {
     type: String,
-    required: true,
     unique: true,
+    sparse: true, // Allows multiple null values
     index: true
   },
   email: {
@@ -132,6 +133,10 @@ const UserSchema = new Schema<IUser>({
     unique: true,
     lowercase: true,
     index: true
+  },
+  password: {
+    type: String,
+    select: false // Don't include password in queries by default
   },
   firstName: {
     type: String,
@@ -248,6 +253,10 @@ UserSchema.statics.findByClerkId = function(clerkId: string) {
 
 UserSchema.statics.findByEmail = function(email: string) {
   return this.findOne({ email: email.toLowerCase() });
+};
+
+UserSchema.statics.findByEmailWithPassword = function(email: string) {
+  return this.findOne({ email: email.toLowerCase() }).select('+password');
 };
 
 UserSchema.statics.getActiveUsers = function() {

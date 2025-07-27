@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { Trace } from '@/models/Trace';
-import { Agent } from '@/models/Agent';
-import { User } from '@/models/User';
-import { requireAuth, optionalAuth } from '@/middleware/clerkMiddleware';
+import { Trace } from '../../../models/Trace';
+import { Agent } from '../../../models/Agent';
+import { User } from '../../../models/User';
+import { requireAuth, optionalAuth } from '../../../middleware/clerkMiddleware';
 import { body, query, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
-import { logger } from '@/utils/logger';
-import { AuthenticatedRequest } from '@/controllers/userController';
+import { logger } from '../../../utils/logger';
+import { AuthenticatedRequest } from '../../../controllers/userController';
 
 const router = Router();
 

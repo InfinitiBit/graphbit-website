@@ -1,18 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
-import { ClerkExpressWithAuth, WithAuthProp } from '@clerk/backend';
-import { config } from '@/config/environment';
-import { logger } from '@/utils/logger';
-import { User } from '@/models/User';
+import { clerkClient } from '@clerk/backend';
+import { config } from '../config/environment';
+import { logger } from '../utils/logger';
+import { User } from '../models/User';
 
-// Extend Express Request interface to include auth and user
+// Extend Express Request interface to include user
 declare global {
   namespace Express {
-    interface Request extends WithAuthProp {
+    interface Request {
       user?: {
         id: string;
         clerkId: string;
         email?: string;
         role?: string;
+      };
+      auth?: {
+        userId?: string;
+        sessionId?: string;
+        actor?: any;
+        sessionClaims?: any;
       };
     }
   }
@@ -35,16 +41,40 @@ class ForbiddenError extends Error {
   }
 }
 
-// Initialize Clerk middleware
-export const clerkMiddleware = ClerkExpressWithAuth({
-  secretKey: config.CLERK_SECRET_KEY,
-  publishableKey: config.CLERK_PUBLISHABLE_KEY,
-});
+// Initialize Clerk client
+const clerk = clerkClient;
+clerk.setKey(config.CLERK_SECRET_KEY);
+
+// Middleware to extract auth from headers
+export const clerkMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const authHeader = req.headers.authorization;
+    
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.substring(7);
+      
+      try {
+        const session = await clerk.sessions.verifySession(token);
+        req.auth = {
+          userId: session.userId,
+          sessionId: session.id,
+          sessionClaims: session.claims
+        };
+      } catch (error) {
+        logger.warn('Invalid session token', { error: error.message });
+      }
+    }
+    
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
 
 // Middleware to require authentication
 export const requireAuth = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { userId } = req.auth;
+    const { userId } = req.auth || {};
 
     if (!userId) {
       logger.warn('Unauthorized access attempt', {
@@ -62,16 +92,21 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
     
     if (!user) {
       // Auto-create user if not exists (sync with Clerk)
-      const clerkUser = req.auth.user;
-      user = new User({
-        clerkId: userId,
-        email: clerkUser?.emailAddresses?.[0]?.emailAddress || '',
-        firstName: clerkUser?.firstName || undefined,
-        lastName: clerkUser?.lastName || undefined,
-        avatar: clerkUser?.profileImageUrl || undefined,
-      });
-      await user.save();
-      logger.info(`Auto-created user from Clerk: ${userId}`);
+      try {
+        const clerkUser = await clerk.users.getUser(userId);
+        user = new User({
+          clerkId: userId,
+          email: clerkUser.emailAddresses?.[0]?.emailAddress || '',
+          firstName: clerkUser.firstName || undefined,
+          lastName: clerkUser.lastName || undefined,
+          avatar: clerkUser.profileImageUrl || undefined,
+        });
+        await user.save();
+        logger.info(`Auto-created user from Clerk: ${userId}`);
+      } catch (error) {
+        logger.error('Failed to create user from Clerk', { userId, error: error.message });
+        throw new UnauthorizedError('Invalid user');
+      }
     }
 
     // Update last login
@@ -104,7 +139,7 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
 // Middleware to optionally authenticate (doesn't throw if not authenticated)
 export const optionalAuth = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { userId } = req.auth;
+    const { userId } = req.auth || {};
 
     if (userId) {
       // Find user in database
@@ -144,7 +179,7 @@ export const optionalAuth = async (req: Request, res: Response, next: NextFuncti
 export const requireRole = (allowedRoles: string[]) => {
   return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { userId } = req.auth;
+      const { userId } = req.auth || {};
 
       if (!userId) {
         throw new UnauthorizedError('Authentication required');
@@ -200,7 +235,7 @@ export const requireModerator = requireRole(['moderator', 'admin']);
 
 // Get current user info helper
 export const getCurrentUser = async (req: Request) => {
-  const { userId } = req.auth;
+  const { userId } = req.auth || {};
 
   if (!userId) {
     return null;

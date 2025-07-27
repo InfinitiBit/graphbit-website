@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
-import { healthCheck } from '@/config/database';
-import { logger } from '@/utils/logger';
-import { config } from '@/config/environment';
+import { healthCheck } from '../config/database';
+import { logger } from '../utils/logger';
+import { config } from '../config/environment';
 
 const router = Router();
 
