@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Navigation } from '@/components/layout/navigation';
 import { Footer } from '@/components/layout/footer';
+import { HeroSection } from '@/components/ui/hero-section';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -15,7 +16,6 @@ import {
   BarChart3,
   Package,
   Code,
-  Sparkles,
   CheckCircle,
   Star,
   Zap,
@@ -43,143 +43,12 @@ export default function Home() {
       {/* Enhanced background with modern gradient layers */}
       <div className="animated-gradient-bg fixed inset-0 -z-10"></div>
 
-      <main className="relative min-h-screen pt-16 sm:pt-20">
-        {/* Enhanced Hero Section */}
-        <section className="relative overflow-hidden py-20 sm:py-24 lg:py-32">
-          {/* Advanced Background Elements */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/20"></div>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute top-40 right-10 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
-            <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-green-400/10 to-blue-400/10 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
-          </div>
-
-          <div className="container-responsive relative z-10">
-            <div className="mx-auto max-w-6xl text-center">
-              {/* Enhanced badge with modern styling */}
-              <div className="animate-fade-in-up mb-12">
-                <span className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-gradient-to-r from-white/80 to-gray-50/80 px-8 py-4 text-sm font-semibold text-gray-900 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-white/30 hover:shadow-3xl hover:scale-105">
-                  <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-lg">
-                    <Sparkles className="h-4 w-4 text-white animate-pulse" />
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 opacity-50 animate-ping"></div>
-                  </div>
-                  <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                    🚀 Introducing AI Agent Marketplace & LLM Tracing
-                  </span>
-                  <ArrowRight className="h-5 w-5 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
-                </span>
-              </div>
-
-              {/* Enhanced hero title with advanced styling */}
-              <h1 className="animate-fade-in-up animation-delay-200 hero-title mx-auto mb-8 max-w-5xl text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl">
-                <span className="block bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent drop-shadow-sm">
-                  Build AI Agents
-                </span>
-                <span className="mt-3 block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent animate-pulse">
-                  That Actually Work
-                </span>
-              </h1>
-
-              {/* Enhanced description with better styling */}
-              <p className="animate-fade-in-up animation-delay-400 mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-600 sm:text-2xl lg:text-2xl font-light">
-                Download <span className="font-semibold text-gray-800">production-ready AI agents</span>, track every LLM interaction, 
-                and scale your AI applications with <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">confidence</span>.
-              </p>
-
-              {/* Enhanced CTA Buttons */}
-              <div className="animate-fade-in-up animation-delay-600 flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-                <Link href="/marketplace">
-                  <Button className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 text-white px-10 py-4 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-110 border-0">
-                    <span className="relative z-10 flex items-center gap-3">
-                      <Rocket className="h-5 w-5 transition-transform group-hover:rotate-12" />
-                      Explore Marketplace
-                      <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-2" />
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  </Button>
-                </Link>
-                <Link href="/tracing">
-                  <Button variant="outline" className="group px-10 py-4 text-lg font-semibold rounded-2xl border-2 border-gray-300 hover:border-gray-400 bg-white/80 backdrop-blur-sm hover:bg-white hover:shadow-xl transition-all duration-300">
-                    <span className="flex items-center gap-3 text-gray-700 group-hover:text-gray-900">
-                      <Activity className="h-5 w-5 transition-transform group-hover:scale-110" />
-                      Start Tracing
-                    </span>
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Enhanced trust indicators */}
-              <div className="animate-fade-in-up animation-delay-800 flex flex-wrap justify-center items-center gap-8 opacity-60">
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span>500+ Ready Agents</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <Users className="h-4 w-4 text-blue-500" />
-                  <span>10k+ Developers</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <Zap className="h-4 w-4 text-yellow-500" />
-                  <span>99.9% Uptime</span>
-                </div>
-              </div>
-
-              {/* Enhanced CTA buttons */}
-              <div className="animate-fade-in-up animation-delay-600 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                <Link href="/marketplace">
-                  <Button
-                    size="lg"
-                    className="group relative overflow-hidden rounded-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-2xl transition-all duration-300 hover:shadow-3xl hover:scale-105"
-                  >
-                    <span className="relative z-10 flex items-center gap-2">
-                      <Rocket className="h-5 w-5" />
-                      Explore Marketplace
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  </Button>
-                </Link>
-
-                <Link href="/tracing">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="group rounded-full border-2 border-gray-200/50 bg-white/70 px-8 py-4 text-lg font-semibold text-gray-900 backdrop-blur-sm transition-all duration-300 hover:border-gray-300/50 hover:bg-white/80 hover:shadow-lg"
-                  >
-                    <PlayCircle className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                    Watch Demo
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Trust indicators */}
-              <div className="animate-fade-in-up animation-delay-800 mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span>1M+ API Calls Tracked</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span>500+ AI Agents</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span>Enterprise Ready</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Modern floating elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="bubble-1 absolute top-20 left-10 animate-float"></div>
-            <div className="bubble-2 absolute top-40 right-20 animate-float animation-delay-200"></div>
-            <div className="bubble-3 absolute bottom-20 left-20 animate-float animation-delay-400"></div>
-          </div>
-        </section>
+      <main className="relative">
+        {/* New Hero Section */}
+        <HeroSection />
 
         {/* Enhanced Features Section */}
-        <section className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-white via-gray-50/30 to-white">
+        <section id="features-section" className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-white via-gray-50/30 to-white">
           <div className="container-responsive">
             <div className="mx-auto max-w-4xl text-center mb-20">
               <div className="animate-fade-in-up mb-6">
