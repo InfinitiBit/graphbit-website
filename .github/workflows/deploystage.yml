@@ -21,19 +21,29 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Install SSH key
+            - name: Setup SSH
               run: |
                   mkdir -p ~/.ssh
-                  echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-                  echo "${{ env.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+                  echo "${{ env.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+                  echo "${{ env.SSH_PUBLIC_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa.pub
                   chmod 600 ~/.ssh/id_rsa
+                  chmod 644 ~/.ssh/id_rsa.pub
+                  eval $(ssh-agent -s)
+                  ssh-add ~/.ssh/id_rsa
+                  ssh-keyscan -H ${{ env.EC2_HOST }} >> ~/.ssh/known_hosts
 
+            - name: Test SSH connection
+              run: |
+                  ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no ${{ env.SSH_USER }}@${{ env.EC2_HOST }} "echo 'SSH connection successful'"
+                      
             - name: SSH into EC2 and remove old code
               uses: appleboy/ssh-action@master
               with:
                   host: ${{ env.EC2_HOST }}
                   username: ${{ env.SSH_USER }}
                   key: ${{ env.SSH_PRIVATE_KEY }}
+                  timeout: 60s
+                  command_timeout: 30m
                   script: |
                       sudo rm -rf ${{ env.EC2_DIR }}
                       
@@ -45,6 +55,8 @@ jobs:
                   key: ${{ env.SSH_PRIVATE_KEY }}
                   source: .
                   target: ${{ env.EC2_DIR }}
+                  timeout: 60s
+                  strip_components: 0
 
             - name: Create .env files on EC2
               uses: appleboy/ssh-action@master
@@ -52,6 +64,8 @@ jobs:
                    host: ${{ env.EC2_HOST }}
                    username: ${{ env.SSH_USER }}
                    key: ${{ env.SSH_PRIVATE_KEY }}
+                   timeout: 60s
+                   command_timeout: 30m
                    script: |
                       echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" > ${{ env.EC2_DIR }}/apps/web/.env
                       echo "NODE_ENV=production" >> ${{ env.EC2_DIR }}/apps/web/.env
@@ -62,6 +76,8 @@ jobs:
                   host: ${{ env.EC2_HOST }}
                   username: ${{ env.SSH_USER }}
                   key: ${{ env.SSH_PRIVATE_KEY }}
+                  timeout: 60s
+                  command_timeout: 30m
                   script: |
                       cd ${{ env.EC2_DIR }}
                       echo "Y" | sudo docker system prune
