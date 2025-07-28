@@ -27,6 +27,10 @@ jobs:
                   echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
                   echo "${{ env.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
                   chmod 600 ~/.ssh/id_rsa
+                  echo "Host *" >> ~/.ssh/config
+                  echo "    StrictHostKeyChecking no" >> ~/.ssh/config
+                  echo "    UserKnownHostsFile /dev/null" >> ~/.ssh/config
+                  chmod 600 ~/.ssh/config
 
             - name: SSH into EC2 and remove old code
               uses: appleboy/ssh-action@master
@@ -34,6 +38,7 @@ jobs:
                   host: ${{ env.EC2_HOST }}
                   username: ${{ env.SSH_USER }}
                   key: ${{ env.SSH_PRIVATE_KEY }}
+                  script_stop: false
                   script: |
                       sudo rm -rf ${{ env.EC2_DIR }}
                       
@@ -66,3 +71,4 @@ jobs:
                       cd ${{ env.EC2_DIR }}
                       echo "Y" | sudo docker system prune
                       sudo docker compose up --build -d
+
