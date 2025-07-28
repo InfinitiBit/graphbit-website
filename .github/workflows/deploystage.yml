@@ -2,73 +2,82 @@
 name: Deploy to EC2
 
 on:
-    push:
-        branches:
-            - main
-
-env:
-    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-    SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-    SSH_USER: ubuntu
-    EC2_HOST: ec2-3-1-90-70.ap-southeast-1.compute.amazonaws.com
-    EC2_DIR: /home/ubuntu/graphbit-website
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Install SSH key
-              run: |
-                  mkdir -p ~/.ssh
-                  echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-                  echo "${{ env.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
-                  chmod 600 ~/.ssh/id_rsa
-                  echo "Host *" >> ~/.ssh/config
-                  echo "    StrictHostKeyChecking no" >> ~/.ssh/config
-                  echo "    UserKnownHostsFile /dev/null" >> ~/.ssh/config
-                  chmod 600 ~/.ssh/config
+      - name: SSH into EC2 and deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ${{ secrets.SSH_USER }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: |
+          echo "Starting deployment process..."
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          echo "SSH key prepared"
 
-            - name: SSH into EC2 and remove old code
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ env.EC2_HOST }}
-                  username: ${{ env.SSH_USER }}
-                  key: ${{ env.SSH_PRIVATE_KEY }}
-                  script_stop: false
-                  script: |
-                      sudo rm -rf ${{ env.EC2_DIR }}
-                      
-            - name: Copy code to EC2
-              uses: appleboy/scp-action@master
-              with:
-                  host: ${{ env.EC2_HOST }}
-                  username: ${{ env.SSH_USER }}
-                  key: ${{ env.SSH_PRIVATE_KEY }}
-                  source: .
-                  target: ${{ env.EC2_DIR }}
+          # Create environment file for web app
+          cat > .env.web << EOF
+          MONGODB_URI=${MONGODB_URI}
+          NODE_ENV=production
+          EOF
 
-            - name: Create .env files on EC2
-              uses: appleboy/ssh-action@master
-              with:
-                   host: ${{ env.EC2_HOST }}
-                   username: ${{ env.SSH_USER }}
-                   key: ${{ env.SSH_PRIVATE_KEY }}
-                   script: |
-                      echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" > ${{ env.EC2_DIR }}/apps/web/.env
-                      echo "NODE_ENV=production" >> ${{ env.EC2_DIR }}/apps/web/.env
+          # Copy environment file to EC2
+          scp -o StrictHostKeyChecking=no -i private_key .env.web ${USER}@${HOST}:/home/ubuntu/graphbit-website/apps/web/.env
+          
+          # Cleanup local env file
+          rm .env.web
 
-            - name: SSH into EC2 and deploy code
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ env.EC2_HOST }}
-                  username: ${{ env.SSH_USER }}
-                  key: ${{ env.SSH_PRIVATE_KEY }}
-                  script: |
-                      cd ${{ env.EC2_DIR }}
-                      echo "Y" | sudo docker system prune
-                      sudo docker compose up --build -d
+          # SSH into EC2 and deploy
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
+            echo "Connected to EC2 instance"
+            cd /home/ubuntu/graphbit-website || exit 1
+            echo "Changed to project directory"
+
+            echo "Updating codebase..."
+            git checkout main || git switch main
+            git pull origin main
+            echo "Code updated"
+
+            echo "Stopping existing containers..."
+            sudo docker compose down
+
+            echo "Cleaning up Docker resources..."
+            echo "Y" | sudo docker system prune
+
+            echo "Rebuilding web container..."
+            sudo docker compose build --no-cache web
+
+            echo "Starting web container..."
+            sudo docker compose up -d web
+
+            echo "Checking container status..."
+            sudo docker ps | grep graphbit-website-web || echo "Web container not found."
+
+            echo "Waiting for web service to start..."
+            sleep 30
+
+            echo "Fetching recent web logs..."
+            sudo docker logs graphbit-website-web-1 --tail 50 || echo "Web app logs not found."
+
+            echo "Checking web service health..."
+            curl -f http://localhost:3000 || echo "Web health check failed."
+          '
+
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "Starting cleanup..."
+          rm -f private_key
+          echo "Deployment process completed"
 
