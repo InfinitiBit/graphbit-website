@@ -12,17 +12,29 @@ COPY packages/ui/package*.json ./packages/ui/
 COPY packages/typescript-config/package*.json ./packages/typescript-config/
 COPY packages/eslint-config/package*.json ./packages/eslint-config/
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with memory optimization
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+RUN npm ci --frozen-lockfile --prefer-offline
 
 # Build the application
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
 
-# Build the web app for static export
-RUN npm run build --workspace=apps/web
+# Set Node.js memory limit for build process
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV NODE_ENV=production
+
+# Copy node_modules from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+
+# Copy source code (in layers for better caching)
+COPY packages/ ./packages/
+COPY turbo.json ./
+COPY tsconfig.json ./
+COPY apps/web/ ./apps/web/
+
+# Build with memory optimization and timeout handling
+RUN timeout 900s npm run build --workspace=apps/web || (echo "Build timed out or failed" && exit 1)
 
 # Production image with nginx
 FROM nginx:alpine AS runner
