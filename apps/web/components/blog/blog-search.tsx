@@ -1,7 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { Search, X } from 'lucide-react';
+import { Search } from 'lucide-react';
+
+interface BlogSearchProps {
+  searchTerm: string;
+  onSearchChange: (value: string) => void;
+}
 
 export function BlogSearch({ searchTerm, onSearchChange }: BlogSearchProps) {
   return (

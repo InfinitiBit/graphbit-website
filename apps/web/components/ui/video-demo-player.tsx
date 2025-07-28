@@ -1,302 +1,125 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, ChevronRight, ChevronLeft, Circle, CheckCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
-// Placeholder assets (replace with real video and thumbnail as needed)
-const DEMO_VIDEO = '/demo-video.mp4'; // Place your video in public/ or use a remote URL
-const DEMO_THUMBNAIL = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80';
-
-const CHAPTERS = [
-  { time: 0, label: 'Intro' },
-  { time: 15, label: 'Setup' },
-  { time: 40, label: 'Demo' },
-  { time: 70, label: 'Results' },
-  { time: 100, label: 'Conclusion' }
-];
+interface VideoDemoPlayerProps {
+  videoId?: string;
+  title?: string;
+  description?: string;
+  className?: string;
+}
 
 export function VideoDemoPlayer({
-  videoSrc = DEMO_VIDEO,
-  thumbnail = DEMO_THUMBNAIL,
-  chapters = CHAPTERS,
-  captionsSrc = '',
-  className = ''
-}: {
-  videoSrc?: string;
-  thumbnail?: string;
-  chapters?: { time: number; label: string }[];
-  captionsSrc?: string;
-  className?: string;
-}) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
-  const [muted, setMuted] = useState(false);
-  const [fullscreen, setFullscreen] = useState(false);
-  const [showChapters, setShowChapters] = useState(false);
-  const [activeChapter, setActiveChapter] = useState(0);
-  const [showCaptions, setShowCaptions] = useState(false);
+  videoId = "dQw4w9WgXcQ", // Default YouTube video ID (Rick Roll as placeholder)
+  title = "GraphBit Demo",
+  description = "Watch how GraphBit transforms your AI agent development workflow",
+  className = ""
+}: VideoDemoPlayerProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Keyboard accessibility
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!videoRef.current) return;
-      switch (e.key) {
-        case ' ': // Spacebar
-        case 'k':
-          setPlaying((p) => !p);
-          e.preventDefault();
-          break;
-        case 'ArrowRight':
-          videoRef.current.currentTime = Math.min(videoRef.current.currentTime + 5, duration);
-          break;
-        case 'ArrowLeft':
-          videoRef.current.currentTime = Math.max(videoRef.current.currentTime - 5, 0);
-          break;
-        case 'f':
-          handleFullscreen();
-          break;
-        case 'm':
-          setMuted((m) => !m);
-          break;
-        case 'c':
-          setShowCaptions((c) => !c);
-          break;
-        default:
-          break;
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [duration]);
-
-  // Play/pause logic
-  useEffect(() => {
-    if (!videoRef.current) return;
-    if (playing) {
-      videoRef.current.play();
-    } else {
-      videoRef.current.pause();
-    }
-  }, [playing]);
-
-  // Volume/mute logic
-  useEffect(() => {
-    if (!videoRef.current) return;
-    videoRef.current.volume = volume;
-    videoRef.current.muted = muted;
-  }, [volume, muted]);
-
-  // Progress tracking
-  const handleTimeUpdate = () => {
-    if (!videoRef.current) return;
-    setProgress(videoRef.current.currentTime);
-    // Update active chapter
-    const idx = chapters.findIndex((c, i) =>
-      i === chapters.length - 1
-        ? videoRef.current!.currentTime >= c.time
-        : videoRef.current!.currentTime >= c.time && videoRef.current!.currentTime < chapters[i + 1].time
-    );
-    setActiveChapter(idx === -1 ? 0 : idx);
-  };
-
-  const handleLoadedMetadata = () => {
-    if (!videoRef.current) return;
-    setDuration(videoRef.current.duration);
-  };
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!videoRef.current) return;
-    const time = parseFloat(e.target.value);
-    videoRef.current.currentTime = time;
-    setProgress(time);
-  };
-
-  const handlePlayOverlay = () => {
-    setShowOverlay(false);
-    setPlaying(true);
-    videoRef.current?.focus();
-  };
-
-  const handleFullscreen = () => {
-    if (!videoRef.current) return;
-    const container = videoRef.current.parentElement;
-    if (!container) return;
-    if (!fullscreen) {
-      if (container.requestFullscreen) container.requestFullscreen();
-      setFullscreen(true);
-    } else {
-      if (document.exitFullscreen) document.exitFullscreen();
-      setFullscreen(false);
-    }
-  };
-
-  // Listen for fullscreen change
-  useEffect(() => {
-    const handleFsChange = () => {
-      setFullscreen(!!document.fullscreenElement);
-    };
-    document.addEventListener('fullscreenchange', handleFsChange);
-    return () => document.removeEventListener('fullscreenchange', handleFsChange);
-  }, []);
-
-  // Format time helper
-  const formatTime = (t: number) => {
-    const m = Math.floor(t / 60);
-    const s = Math.floor(t % 60);
-    return `${m}:${s.toString().padStart(2, '0')}`;
+  const handlePlayClick = () => {
+    setIsLoaded(true);
   };
 
   return (
-    <div className={`relative w-full max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-lg bg-black ${className}`} tabIndex={0} aria-label="Demo video player">
-      {/* Video/Thumbnail Overlay */}
-      <div className="relative aspect-video bg-black">
-        <video
-          ref={videoRef}
-          src={videoSrc}
-          poster={thumbnail}
-          tabIndex={-1}
-          className="w-full h-full object-cover"
-          onTimeUpdate={handleTimeUpdate}
-          onLoadedMetadata={handleLoadedMetadata}
-          onClick={() => setPlaying((p) => !p)}
-          aria-label="Demo video"
-        >
-          {captionsSrc && <track kind="captions" src={captionsSrc} srcLang="en" label="English" default={showCaptions} />}
-        </video>
-        <AnimatePresence>
-          {showOverlay && !playing && (
-            <motion.button
-              className="absolute inset-0 flex items-center justify-center bg-black/60 hover:bg-black/70 transition-colors cursor-pointer"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={handlePlayOverlay}
-              aria-label="Play demo video"
+    <motion.div
+      className={`relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl ${className}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Video Container */}
+      <div className="relative aspect-video bg-gray-900">
+        {!isLoaded ? (
+          // Thumbnail with Play Button
+          <div className="relative w-full h-full">
+            {/* Thumbnail Background */}
+            <div 
+              className="w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center"
+              style={{
+                backgroundImage: `url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
             >
-              <Play className="h-16 w-16 text-white drop-shadow-lg" />
-            </motion.button>
-          )}
-        </AnimatePresence>
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-black/40" />
+              
+              {/* Play Button */}
+              <motion.button
+                onClick={handlePlayClick}
+                className="relative z-10 flex items-center justify-center w-20 h-20 bg-red-600 hover:bg-red-700 rounded-full text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Play video"
+              >
+                                 <div className="w-0 h-0 border-l-[12px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1" />
+              </motion.button>
+            </div>
+
+            {/* Video Info Overlay */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+              <h3 className="text-white text-xl font-semibold mb-2">{title}</h3>
+              <p className="text-gray-200 text-sm">{description}</p>
+            </div>
+          </div>
+        ) : (
+          // YouTube Embed
+          <iframe
+            className="w-full h-full"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+            title={title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        )}
       </div>
 
-      {/* Custom Controls */}
-      <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-2 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10">
-        {/* Progress Bar with Chapters */}
-        <div className="relative flex items-center w-full mb-2">
-          <input
-            type="range"
-            min={0}
-            max={duration}
-            step={0.1}
-            value={progress}
-            onChange={handleSeek}
-            className="w-full accent-green-500 h-2 cursor-pointer bg-gray-700 rounded-lg appearance-none focus:outline-none"
-            aria-label="Seek video"
-          />
-          {/* Chapter Markers */}
-          <div className="absolute left-0 top-1/2 w-full h-2 pointer-events-none">
-            {chapters.map((chapter, i) => (
-              <div
-                key={i}
-                className="absolute top-0 h-2 w-1 bg-green-400 rounded"
-                style={{ left: `${(chapter.time / duration) * 100}%` }}
-                title={chapter.label}
-                aria-label={`Chapter: ${chapter.label}`}
-              />
-            ))}
-          </div>
-        </div>
-        {/* Time & Chapters */}
-        <div className="flex items-center justify-between text-xs text-white/80 mb-1">
+      {/* Video Details */}
+      <div className="bg-white dark:bg-gray-800 p-6">
+        <div className="flex items-start justify-between">
           <div>
-            {formatTime(progress)} / {formatTime(duration)}
+            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              {title}
+            </h4>
+            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+              {description}
+            </p>
           </div>
-          <button
-            className="flex items-center gap-1 hover:text-green-400 transition-colors"
-            onClick={() => setShowChapters((v) => !v)}
-            aria-label="Show chapters"
+          <motion.a
+            href={`https://www.youtube.com/watch?v=${videoId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <Circle className="h-4 w-4" /> Chapters
-          </button>
+                         <ArrowRight className="w-4 h-4" />
+            Watch on YouTube
+          </motion.a>
         </div>
-        {/* Chapters List */}
-        <AnimatePresence>
-          {showChapters && (
-            <motion.div
-              className="absolute bottom-16 left-4 bg-black/90 rounded-lg shadow-lg p-3 z-20 w-56"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-            >
-              <div className="font-semibold text-green-400 mb-2">Chapters</div>
-              <ul>
-                {chapters.map((chapter, i) => (
-                  <li key={i} className="flex items-center gap-2 mb-1">
-                    {i === activeChapter ? <CheckCircle className="h-4 w-4 text-green-400" /> : <Circle className="h-4 w-4 text-gray-500" />}
-                    <button
-                      className={`text-left text-white/90 hover:text-green-400 transition-colors text-sm ${i === activeChapter ? 'font-bold' : ''}`}
-                      onClick={() => {
-                        if (videoRef.current) videoRef.current.currentTime = chapter.time;
-                        setShowChapters(false);
-                      }}
-                    >
-                      {chapter.label} <span className="text-xs text-gray-400 ml-2">{formatTime(chapter.time)}</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {/* Controls Row */}
-        <div className="flex items-center gap-4 mt-2">
-          {/* Play/Pause */}
-          <button
-            onClick={() => setPlaying((p) => !p)}
-            className="p-2 rounded hover:bg-white/10 focus:outline-none"
-            aria-label={playing ? 'Pause' : 'Play'}
-          >
-            {playing ? <Pause className="h-6 w-6 text-white" /> : <Play className="h-6 w-6 text-white" />}
-          </button>
-          {/* Volume */}
-          <button
-            onClick={() => setMuted((m) => !m)}
-            className="p-2 rounded hover:bg-white/10 focus:outline-none"
-            aria-label={muted ? 'Unmute' : 'Mute'}
-          >
-            {muted || volume === 0 ? <VolumeX className="h-6 w-6 text-white" /> : <Volume2 className="h-6 w-6 text-white" />}
-          </button>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={volume}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
-            className="w-24 accent-green-500 h-1 cursor-pointer bg-gray-700 rounded-lg appearance-none focus:outline-none"
-            aria-label="Volume"
-          />
-          {/* Captions */}
-          <button
-            onClick={() => setShowCaptions((c) => !c)}
-            className={`p-2 rounded hover:bg-white/10 focus:outline-none ${showCaptions ? 'bg-green-500/20' : ''}`}
-            aria-label={showCaptions ? 'Hide captions' : 'Show captions'}
-          >
-            <span className="text-xs font-bold text-white">CC</span>
-          </button>
-          {/* Fullscreen */}
-          <button
-            onClick={handleFullscreen}
-            className="p-2 rounded hover:bg-white/10 focus:outline-none"
-            aria-label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-          >
-            {fullscreen ? <Minimize2 className="h-6 w-6 text-white" /> : <Maximize2 className="h-6 w-6 text-white" />}
-          </button>
+
+        {/* Features List */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">5min</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Quick Demo</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-600 dark:text-green-400">Live</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Real Usage</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">Step-by-Step</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Tutorial</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">Results</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">See Benefits</div>
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 } 

@@ -3,16 +3,10 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { 
-  Github, 
-  Twitter, 
-  Linkedin, 
-  Mail, 
-  ArrowUp,
-  Sparkles,
+  X,
   Code,
   Users,
-  BarChart3 as BookOpen,
-  MessageCircle
+  BarChart3 as BookOpen
 } from 'lucide-react';
 
 export function Footer() {
@@ -30,7 +24,7 @@ export function Footer() {
             <Link href="/" className="group mb-6 flex items-center space-x-3">
               <div className="relative">
                 <div className="rounded-lg bg-gradient-to-br from-gray-900 via-gray-800 to-black p-2.5 shadow-lg transition-transform duration-200 group-hover:scale-105">
-                  <Sparkles className="h-5 w-5 text-white" />
+                  <X className="h-5 w-5 text-white" />
                 </div>
                 <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 blur transition-opacity duration-200 group-hover:opacity-100" />
               </div>
@@ -55,7 +49,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-white/60 backdrop-blur-sm transition-all duration-200 hover:border-gray-300/50 hover:bg-white/80 hover:shadow-md"
               >
-                <Github className="h-4 w-4 text-gray-600 transition-colors group-hover:text-gray-900" />
+                <X className="h-4 w-4 text-gray-600 transition-colors group-hover:text-gray-900" />
               </Link>
               <Link
                 href="https://twitter.com/graphbit"
@@ -63,7 +57,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-white/60 backdrop-blur-sm transition-all duration-200 hover:border-gray-300/50 hover:bg-white/80 hover:shadow-md"
               >
-                <Twitter className="h-4 w-4 text-gray-600 transition-colors group-hover:text-gray-900" />
+                <X className="h-4 w-4 text-gray-600 transition-colors group-hover:text-gray-900" />
               </Link>
               <Link
                 href="https://linkedin.com/company/graphbit"
@@ -71,7 +65,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-white/60 backdrop-blur-sm transition-all duration-200 hover:border-gray-300/50 hover:bg-white/80 hover:shadow-md"
               >
-                <Linkedin className="h-4 w-4 text-gray-600 transition-colors group-hover:text-gray-900" />
+                <X className="h-4 w-4 text-gray-600 transition-colors group-hover:text-gray-900" />
               </Link>
             </div>
           </div>
@@ -208,7 +202,7 @@ export function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
             <div className="text-center lg:text-left">
               <h3 className="font-semibold text-gray-900 flex items-center justify-center lg:justify-start gap-2">
-                <Mail className="h-4 w-4" />
+                <X className="h-4 w-4" />
                 Stay updated
               </h3>
               <p className="text-sm text-gray-600 mt-1">
@@ -258,7 +252,7 @@ export function Footer() {
             onClick={scrollToTop}
             className="group mt-4 rounded-full border border-gray-200/50 bg-white/60 backdrop-blur-sm transition-all duration-200 hover:border-gray-300/50 hover:bg-white/80 hover:shadow-md lg:mt-0"
           >
-            <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-1" />
+                          <X className="h-4 w-4 transition-transform group-hover:-translate-y-1" />
             <span className="sr-only">Scroll to top</span>
           </Button>
         </div>

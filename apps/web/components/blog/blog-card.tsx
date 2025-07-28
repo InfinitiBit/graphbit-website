@@ -1,8 +1,8 @@
 
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Users, Calendar, ArrowRight, Eye } from 'lucide-react';
+import { Clock, Users, Calendar, ArrowRight } from 'lucide-react';
 import { BlogPost } from '@/lib/blog';
 
 interface BlogCardProps {
@@ -11,7 +11,7 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
-  const getGradientForTag = (tag: string) => {
+  const getGradientForTag = () => {
     const gradients = {
       'Getting Started': 'from-green-50 via-emerald-50 to-teal-50',
       'Tutorial': 'from-green-50 via-emerald-50 to-teal-50',
@@ -27,7 +27,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     return gradients[primaryTag as keyof typeof gradients] || gradients.default;
   };
 
-  const getIconForCategory = (tag: string) => {
+  const getIconForCategory = () => {
     const icons = {
       'Getting Started': '🚀',
       'Tutorial': '📚',
@@ -47,10 +47,10 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     <Link href={`/blog/${post.slug}`}>
       <article className={`group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${featured ? 'ring-2 ring-blue-100' : ''}`}>
         {/* Featured image */}
-        <div className={`${featured ? 'aspect-[2/1]' : 'aspect-[16/9]'} bg-gradient-to-br ${getGradientForTag(post.tags[0])} overflow-hidden relative`}>
+        <div className={`${featured ? 'aspect-[2/1]' : 'aspect-[16/9]'} bg-gradient-to-br ${getGradientForTag()} overflow-hidden relative`}>
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className={`${featured ? 'text-5xl' : 'text-3xl'} opacity-60`}>
-              {getIconForCategory(post.tags[0])}
+                          <div className={`${featured ? 'text-5xl' : 'text-3xl'} opacity-60`}>
+                {getIconForCategory()}
             </div>
             {featured && (
               <div className="absolute top-4 right-4">
@@ -59,7 +59,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
             )}
             {post.views && (
               <div className="absolute bottom-4 right-4 flex items-center space-x-1 text-xs text-gray-600 bg-white/80 px-2 py-1 rounded-full">
-                <Eye className="h-3 w-3" />
+                                  <ArrowRight className="h-3 w-3" />
                 <span>{post.views}</span>
               </div>
             )}

@@ -12,19 +12,19 @@ import {
   Sparkles,
   Home,
   BarChart3 as BookOpen,
-  ShoppingBag,
+
   BarChart3,
-  FileText,
+
   Zap
 } from 'lucide-react';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
   { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
-  { name: 'Marketplace', href: '/marketplace', icon: ShoppingBag },
+  { name: 'Marketplace', href: '/marketplace', icon: X },
   { name: 'Tracing', href: '/tracing', icon: Zap },
   { name: 'Docs', href: '/docs', icon: BookOpen },
-  { name: 'Blog', href: '/blog', icon: FileText },
+  { name: 'Blog', href: '/blog', icon: X },
 ];
 
 export function Navigation() {

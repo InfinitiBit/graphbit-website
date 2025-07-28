@@ -13,7 +13,7 @@ import {
   CheckCircle,
   Users,
   Zap,
-  Rocket,
+  Star as Rocket,
   Activity,
 } from 'lucide-react';
 import { motion } from 'framer-motion';

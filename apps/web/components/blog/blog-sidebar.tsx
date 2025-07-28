@@ -1,20 +1,30 @@
 'use client';
 
-import { BarChart3 as BookOpen, Users, Clock, TrendingUp } from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
+import { BarChart3 as BookOpen, Users, Clock, TrendingUp, BarChart3, Sparkles, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import React from 'react';
 
 interface Category {
   id: string;
   name: string;
-  icon: LucideIcon;
+  icon: string;
 }
+
+const iconMap = {
+  BookOpen,
+  BarChart3,
+  Sparkles,
+  Zap,
+  Target: BarChart3,
+  Brain: BarChart3,
+  TrendingUp,
+};
 
 interface BlogSidebarProps {
   categories: Category[];
   selectedCategory: string;
-  onCategoryChange: (category: string) => void;
+  onCategoryChange?: (category: string) => void;
 }
 
 export function BlogSidebar({ categories, selectedCategory, onCategoryChange }: BlogSidebarProps) {
@@ -56,7 +66,7 @@ export function BlogSidebar({ categories, selectedCategory, onCategoryChange }: 
         </h3>
         <nav className="space-y-2">
           {categories.map((category) => {
-            const Icon = category.icon;
+            const Icon = iconMap[category.icon as keyof typeof iconMap] || BookOpen;
             const isCurrentlyActive = isActive(category.id);
             
             return (

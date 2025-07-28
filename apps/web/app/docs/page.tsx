@@ -6,12 +6,12 @@ import { Navigation } from '@/components/layout/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  Book,
-  ChevronRight,
+
+
   Search,
   Menu,
   X,
-  Play,
+
   Code,
   Zap,
   BarChart3 as Brain,
@@ -19,12 +19,12 @@ import {
   Shield,
   Globe,
   ArrowRight,
-  ExternalLink,
-  Copy,
-  Check,
-  FileText,
-  Layers,
-  Settings,
+
+
+
+
+
+
   Users,
   Sparkles,
   MessageSquare,
@@ -34,9 +34,9 @@ const sidebarSections = [
   {
     title: 'Getting Started',
     items: [
-      { label: 'Introduction', href: '#introduction', icon: Book },
-      { label: 'Quick Start', href: '#quick-start', icon: Play },
-      { label: 'Installation', href: '#installation', icon: Settings },
+              { label: 'Introduction', href: '#introduction', icon: X },
+              { label: 'Quick Start', href: '#quick-start', icon: ArrowRight },
+      { label: 'Installation', href: '#installation', icon: ArrowRight },
       { label: 'Authentication', href: '#authentication', icon: Shield },
     ],
   },
@@ -46,14 +46,14 @@ const sidebarSections = [
       { label: 'AI Agents', href: '#ai-agents', icon: Brain },
       { label: 'LLM Tracing', href: '#llm-tracing', icon: BarChart },
       { label: 'Marketplace', href: '#marketplace', icon: Globe },
-      { label: 'Workflows', href: '#workflows', icon: Layers },
+              { label: 'Workflows', href: '#workflows', icon: X },
     ],
   },
   {
     title: 'API Reference',
     items: [
       { label: 'Agent API', href: '#agent-api', icon: Code },
-      { label: 'Tracing API', href: '#tracing-api', icon: FileText },
+              { label: 'Tracing API', href: '#tracing-api', icon: X },
       { label: 'Webhooks', href: '#webhooks', icon: Zap },
       { label: 'SDKs', href: '#sdks', icon: Sparkles },
     ],
@@ -63,7 +63,7 @@ const sidebarSections = [
     items: [
       { label: 'Examples', href: '#examples', icon: MessageSquare },
       { label: 'Community', href: '#community', icon: Users },
-      { label: 'Support', href: '#support', icon: ExternalLink },
+              { label: 'Support', href: '#support', icon: ArrowRight },
     ],
   },
 ];
@@ -146,7 +146,7 @@ export default function DocsPage() {
                 </Button>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg">
-                    <Book className="h-5 w-5 text-white" />
+                    <X className="h-5 w-5 text-white" />
                   </div>
                   <div>
                     <h1 className="text-xl font-bold text-gray-900">Documentation</h1>
@@ -194,7 +194,7 @@ export default function DocsPage() {
                         <item.icon className="h-4 w-4" />
                         {item.label}
                         {activeSection === item.href.slice(1) && (
-                          <ChevronRight className="h-4 w-4 ml-auto" />
+                          <ArrowRight className="h-4 w-4 ml-auto" />
                         )}
                       </a>
                     ))}
@@ -327,7 +327,7 @@ export default function DocsPage() {
                       onClick={() => copyToClipboard(codeExamples[activeCodeTab as keyof typeof codeExamples])}
                       className="text-gray-400 hover:text-white"
                     >
-                      {copiedCode ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copiedCode ? <X className="h-4 w-4" /> : <X className="h-4 w-4" />}
                     </Button>
                   </div>
                   <div className="p-6">
@@ -458,7 +458,7 @@ export default function DocsPage() {
                     <CardContent>
                       <Button className="w-full group-hover:bg-blue-700 transition-colors">
                         Join Discord
-                        <ExternalLink className="ml-2 h-4 w-4" />
+                        <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </CardContent>
                   </Card>
@@ -474,7 +474,7 @@ export default function DocsPage() {
                     <CardContent>
                       <Button variant="outline" className="w-full group-hover:border-green-600 group-hover:text-green-600 transition-colors">
                         Contact Sales
-                        <ExternalLink className="ml-2 h-4 w-4" />
+                        <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </CardContent>
                   </Card>

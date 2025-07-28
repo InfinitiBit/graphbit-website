@@ -14,10 +14,10 @@ export function BlogPageClient({ posts }: BlogPageClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const categories = [
-    { id: 'all', name: 'All Posts', icon: BookOpen },
-    { id: 'tutorials', name: 'Tutorials', icon: BookOpen },
-    { id: 'best-practices', name: 'Best Practices', icon: Sparkles },
-    { id: 'advanced', name: 'Advanced Techniques', icon: TrendingUp },
+    { id: 'all', name: 'All Posts', icon: 'BookOpen' },
+    { id: 'tutorials', name: 'Tutorials', icon: 'BookOpen' },
+    { id: 'best-practices', name: 'Best Practices', icon: 'Sparkles' },
+    { id: 'advanced', name: 'Advanced Techniques', icon: 'TrendingUp' },
   ];
 
   const filteredPosts = selectedCategory === 'all' 

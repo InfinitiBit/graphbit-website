@@ -19,9 +19,7 @@ import {
   Hash,
   Zap,
   BarChart3,
-  Users,
   Code,
-  Eye,
 } from 'lucide-react';
 
 // Mock data for demonstration
@@ -251,7 +249,7 @@ export default function TracingPage() {
               {showFilters && (
                 <div className="mt-6 pt-6 border-t border-gray-200 flex flex-wrap gap-2">
                   {[
-                    { key: 'all', label: 'All Status', icon: Eye },
+                    { key: 'all', label: 'All Status', icon: Activity },
                     { key: 'success', label: 'Success', icon: CheckCircle },
                     { key: 'error', label: 'Error', icon: AlertCircle },
                     { key: 'pending', label: 'Pending', icon: RefreshCw },

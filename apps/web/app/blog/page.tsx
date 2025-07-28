@@ -1,7 +1,6 @@
 
 import { Navigation } from '@/components/layout/navigation';
 import { Footer } from '@/components/layout/footer';
-import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
 import { BarChart3 as BookOpen, Sparkles, TrendingUp } from 'lucide-react';

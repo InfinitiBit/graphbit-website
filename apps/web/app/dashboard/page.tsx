@@ -1,25 +1,20 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Navigation } from '@/components/layout/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
   BarChart3,
   Activity,
   Users,
-  Zap,
-  TrendingUp,
   Clock,
   BarChart3 as Database,
   AlertCircle,
   CheckCircle,
-  XCircle,
-  Settings,
+  X,
   Plus,
-  Eye,
-  Download,
 } from 'lucide-react';
 
 interface DashboardStats {
@@ -32,7 +27,7 @@ interface DashboardStats {
 }
 
 export default function DashboardPage() {
-  const [stats, setStats] = useState<DashboardStats>({
+  const [stats, _setStats] = useState<DashboardStats>({
     totalAgents: 12,
     activeTraces: 147,
     totalRequests: 2847,
@@ -41,7 +36,7 @@ export default function DashboardPage() {
     errorRate: 1.8,
   });
 
-  const [recentActivity, setRecentActivity] = useState([
+  const [recentActivity, _setRecentActivity] = useState([
     { id: 1, type: 'success', message: 'Agent "CustomerSupport" completed successfully', time: '2 minutes ago' },
     { id: 2, type: 'warning', message: 'High latency detected on "DataProcessor"', time: '5 minutes ago' },
     { id: 3, type: 'success', message: 'New agent "SalesBot" deployed', time: '15 minutes ago' },
@@ -66,7 +61,7 @@ export default function DashboardPage() {
               </div>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <Button variant="outline" className="w-full sm:w-auto">
-                  <Settings className="mr-2 h-4 w-4" />
+                  <Plus className="mr-2 h-4 w-4" />
                   <span className="sm:inline">Settings</span>
                 </Button>
                 <Button className="w-full sm:w-auto">
@@ -162,7 +157,7 @@ export default function DashboardPage() {
                   <CardTitle className="text-sm font-medium text-gray-600">
                     Error Rate
                   </CardTitle>
-                  <XCircle className="h-4 w-4 text-red-600" />
+                  <X className="h-4 w-4 text-red-600" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
@@ -181,7 +176,7 @@ export default function DashboardPage() {
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg font-semibold">Recent Activity</CardTitle>
                     <Button variant="outline" size="sm">
-                      <Eye className="mr-2 h-4 w-4" />
+                      <Plus className="mr-2 h-4 w-4" />
                       View All
                     </Button>
                   </div>
@@ -198,7 +193,7 @@ export default function DashboardPage() {
                             <AlertCircle className="h-4 w-4 text-yellow-600" />
                           )}
                           {activity.type === 'error' && (
-                            <XCircle className="h-4 w-4 text-red-600" />
+                            <X className="h-4 w-4 text-red-600" />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">

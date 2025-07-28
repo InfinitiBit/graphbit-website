@@ -8,10 +8,7 @@ import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle,
-  CardFooter,
 } from '@/components/ui/card';
 import {
   Star,
@@ -233,9 +230,9 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="mb-6 font-medium leading-relaxed text-gray-900">
-                    "GraphBit cut our AI development time by <strong>70%</strong>. 
+                    &quot;GraphBit cut our AI development time by <strong>70%</strong>. 
                     The marketplace had exactly what we needed, and the tracing tools 
-                    helped us optimize performance instantly."
+                    helped us optimize performance instantly.&quot;
                   </p>
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-sm font-bold text-white">
@@ -264,9 +261,9 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="mb-6 font-medium leading-relaxed text-gray-900">
-                    "The observability features are game-changing. We can now track 
+                    &quot;The observability features are game-changing. We can now track 
                     every LLM interaction across our <strong>25+ microservices</strong> 
-                    in real-time."
+                    in real-time.&quot;
                   </p>
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-blue-500 text-sm font-bold text-white">
@@ -295,9 +292,9 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="mb-6 font-medium leading-relaxed text-gray-900">
-                    "From prototype to production in <strong>2 days</strong>. 
+                    &quot;From prototype to production in <strong>2 days</strong>. 
                     Now earning <strong>$15K/month</strong> from my AI SaaS. 
-                    GraphBit made it possible."
+                    GraphBit made it possible.&quot;
                   </p>
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-sm font-bold text-white">

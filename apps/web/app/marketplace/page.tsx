@@ -12,7 +12,6 @@ import {
   Star,
   Search,
   Filter,
-  Code,
   MessageSquare,
   BarChart,
   Globe,

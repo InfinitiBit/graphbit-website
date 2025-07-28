@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Rocket, Play, Loader2, ArrowRight, Sparkles } from 'lucide-react';
+import { Star as Rocket, ArrowRight as Play, Clock as Loader2, ArrowRight, Star as Sparkles } from 'lucide-react';
 
 // Button state types
 type ButtonState = 'idle' | 'loading' | 'success' | 'error';

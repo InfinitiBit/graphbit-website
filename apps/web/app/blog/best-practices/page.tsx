@@ -4,16 +4,16 @@ import { Footer } from '@/components/layout/footer';
 import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { BarChart3 as BookOpen, Sparkles, ArrowRight, CheckCircle } from 'lucide-react';
+import { Sparkles, ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function BestPracticesPage() {
   const allPosts = getAllBlogPosts();
   const categories = [
-    { id: 'all', name: 'All Posts', icon: BookOpen },
-    { id: 'tutorials', name: 'Tutorials', icon: BookOpen },
-    { id: 'best-practices', name: 'Best Practices', icon: BookOpen },
-    { id: 'advanced', name: 'Advanced Techniques', icon: BookOpen },
+    { id: 'all', name: 'All Posts', icon: 'BookOpen' },
+    { id: 'tutorials', name: 'Tutorials', icon: 'BookOpen' },
+    { id: 'best-practices', name: 'Best Practices', icon: 'BookOpen' },
+    { id: 'advanced', name: 'Advanced Techniques', icon: 'BookOpen' },
   ];
 
   // Filter posts for best practices
@@ -89,7 +89,6 @@ export default async function BestPracticesPage() {
               <BlogSidebar 
                 categories={categories}
                 selectedCategory="best-practices"
-                onCategoryChange={() => {}}
               />
             </aside>
 
@@ -136,7 +135,7 @@ export default async function BestPracticesPage() {
                     <Sparkles className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                     <h3 className="mb-3 text-lg font-semibold text-gray-700">No Best Practices Yet</h3>
                     <p className="text-gray-500 text-sm">
-                      We're compiling industry best practices. Check back soon!
+                      We&apos;re compiling industry best practices. Check back soon!
                     </p>
                   </div>
                 </div>

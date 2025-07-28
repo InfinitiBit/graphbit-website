@@ -4,18 +4,18 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Zap, 
-  Database, 
+  Shield as Database, 
   Shield, 
-  Eye, 
-  Cloud, 
-  Cpu, 
-  GitBranch,
+  Star as Eye, 
+  Star as Cloud, 
+  Star as Cpu, 
+  Star as GitBranch,
   Users,
   BarChart3,
   X,
-  ZoomIn,
-  ZoomOut,
-  RotateCcw
+  Plus as ZoomIn,
+  X as ZoomOut,
+  RefreshCw as RotateCcw
 } from 'lucide-react';
 
 interface ArchitectureNode {
@@ -241,9 +241,11 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     if (e.touches.length === 1) {
-      const touch = e.touches[0];
+          const touch = e.touches[0];
+    if (touch) {
       setIsDragging(true);
       setDragStart({ x: touch.clientX - transform.x, y: touch.clientY - transform.y });
+    }
     }
   }, [transform]);
 
@@ -251,11 +253,13 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     if (!isDragging || e.touches.length !== 1) return;
     e.preventDefault();
     const touch = e.touches[0];
-    setTransform(prev => ({
-      ...prev,
-      x: touch.clientX - dragStart.x,
-      y: touch.clientY - dragStart.y
-    }));
+    if (touch) {
+      setTransform(prev => ({
+        ...prev,
+        x: touch.clientX - dragStart.x,
+        y: touch.clientY - dragStart.y
+      }));
+    }
   }, [isDragging, dragStart]);
 
   const handleTouchEnd = useCallback(() => {
@@ -401,24 +405,24 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
                 x={(() => {
                   const segments = flow.path.split(' ');
                   if (flow.path.includes('Q')) {
-                    const x1 = parseInt(segments[1]) || 0;
-                    const x2 = parseInt(segments[5]) || 0;
+                    const x1 = parseInt(segments[1] || '0') || 0;
+                    const x2 = parseInt(segments[5] || '0') || 0;
                     return (x1 + x2) / 2;
                   } else {
-                    const x1 = parseInt(segments[1]) || 0;
-                    const x2 = parseInt(segments[3]) || 0;
+                    const x1 = parseInt(segments[1] || '0') || 0;
+                    const x2 = parseInt(segments[3] || '0') || 0;
                     return (x1 + x2) / 2;
                   }
                 })()}
                 y={(() => {
                   const segments = flow.path.split(' ');
                   if (flow.path.includes('Q')) {
-                    const y1 = parseInt(segments[2]) || 0;
-                    const y2 = parseInt(segments[6]) || 0;
+                    const y1 = parseInt(segments[2] || '0') || 0;
+                    const y2 = parseInt(segments[6] || '0') || 0;
                     return (y1 + y2) / 2 - 10;
                   } else {
-                    const y1 = parseInt(segments[2]) || 0;
-                    const y2 = parseInt(segments[4]) || 0;
+                    const y1 = parseInt(segments[2] || '0') || 0;
+                    const y2 = parseInt(segments[4] || '0') || 0;
                     return (y1 + y2) / 2 - 10;
                   }
                 })()}
@@ -485,7 +489,6 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
                 >
                   <IconComponent 
                     className="w-5 h-5" 
-                    style={{ color: node.color }}
                   />
                 </foreignObject>
                 

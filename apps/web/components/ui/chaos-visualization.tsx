@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, RotateCcw } from 'lucide-react';
+import { ArrowRight as Play, X as Pause, RefreshCw as RotateCcw } from 'lucide-react';
 
 interface Node {
   id: number;
@@ -32,7 +32,7 @@ interface ChaosVisualizationProps {
 
 export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVisualizationProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [progress, setProgress] = useState(0);
   const [nodes, setNodes] = useState<Node[]>([]);
@@ -100,8 +100,8 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
       const connectionsCount = Math.floor(Math.random() * 4) + 1;
       for (let j = 0; j < connectionsCount; j++) {
         const target = Math.floor(Math.random() * nodeCount);
-        if (target !== i && !newNodes[i].connections.includes(target)) {
-          newNodes[i].connections.push(target);
+        if (target !== i && newNodes[i] && !newNodes[i]?.connections?.includes(target)) {
+          newNodes[i]?.connections?.push(target);
           
           newConnections.push({
             from: i,
@@ -214,12 +214,14 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
         const fromNode = updatedNodes[conn.from];
         const toNode = updatedNodes[conn.to];
         
-        ctx.beginPath();
-        ctx.moveTo(fromNode.x, fromNode.y);
-        ctx.lineTo(toNode.x, toNode.y);
-        ctx.strokeStyle = conn.color + Math.floor(conn.strength * 255).toString(16).padStart(2, '0');
-        ctx.lineWidth = conn.strength * (conn.color === '#ef4444' ? 1 : 2);
-        ctx.stroke();
+        if (fromNode && toNode) {
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
+          ctx.strokeStyle = conn.color + Math.floor(conn.strength * 255).toString(16).padStart(2, '0');
+          ctx.lineWidth = conn.strength * (conn.color === '#ef4444' ? 1 : 2);
+          ctx.stroke();
+        }
       }
     });
 

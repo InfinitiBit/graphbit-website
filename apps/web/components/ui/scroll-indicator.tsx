@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Mouse, ArrowDown } from 'lucide-react';
+import { ChevronDown, Star as Mouse, ChevronDown as ArrowDown } from 'lucide-react';
 
 // Types
 interface ScrollIndicatorProps {
@@ -16,7 +16,7 @@ interface ScrollIndicatorProps {
 function useScrollVisibility() {
   const [isVisible, setIsVisible] = useState(true);
   const [hasScrolled, setHasScrolled] = useState(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
     let ticking = false;
@@ -94,26 +94,30 @@ function useTouchGestures(onSwipeUp: () => void) {
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     const touch = e.touches[0];
-    touchStartRef.current = {
-      x: touch.clientX,
-      y: touch.clientY,
-      time: Date.now()
-    };
+    if (touch) {
+      touchStartRef.current = {
+        x: touch.clientX,
+        y: touch.clientY,
+        time: Date.now()
+      };
+    }
   }, []);
 
   const handleTouchEnd = useCallback((e: React.TouchEvent) => {
     if (!touchStartRef.current) return;
 
     const touch = e.changedTouches[0];
-    const deltaX = touch.clientX - touchStartRef.current.x;
-    const deltaY = touch.clientY - touchStartRef.current.y;
-    const deltaTime = Date.now() - touchStartRef.current.time;
+    if (touch) {
+      const deltaX = touch.clientX - touchStartRef.current.x;
+      const deltaY = touch.clientY - touchStartRef.current.y;
+      const deltaTime = Date.now() - touchStartRef.current.time;
 
-    // Detect swipe up gesture
-    const isSwipeUp = deltaY < -50 && Math.abs(deltaX) < 100 && deltaTime < 500;
-    
-    if (isSwipeUp) {
-      onSwipeUp();
+      // Detect swipe up gesture
+      const isSwipeUp = deltaY < -50 && Math.abs(deltaX) < 100 && deltaTime < 500;
+      
+      if (isSwipeUp) {
+        onSwipeUp();
+      }
     }
 
     touchStartRef.current = null;
@@ -401,7 +405,7 @@ export function EnhancedScrollIndicator({ targetSectionId }: { targetSectionId?:
 
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % variants.length;
-      setCurrentVariant(variants[currentIndex]);
+      setCurrentVariant(variants[currentIndex] || 'arrow');
     }, 10000);
 
     return () => clearInterval(interval);

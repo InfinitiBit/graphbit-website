@@ -3,13 +3,13 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  Copy, 
-  Check, 
-  ChevronRight,
-  Terminal,
+  ArrowRight as Play, 
+  X as Pause, 
+  RefreshCw as RotateCcw, 
+  Code as Copy, 
+  CheckCircle as Check, 
+  ArrowRight as ChevronRight,
+  Star as Terminal,
   Zap,
   CheckCircle,
   AlertCircle,
@@ -209,18 +209,22 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
     
     // Update current step status
     const updatedSteps = [...codeSteps];
-    updatedSteps[currentStep].status = 'running';
+    if (updatedSteps[currentStep]) {
+      updatedSteps[currentStep].status = 'running';
+    }
     
     // Simulate execution time
     intervalRef.current = setTimeout(() => {
-      updatedSteps[currentStep].status = 'completed';
+      if (updatedSteps[currentStep]) {
+        updatedSteps[currentStep].status = 'completed';
+      }
       
       if (currentStep < codeSteps.length - 1) {
         setCurrentStep(prev => prev + 1);
       } else {
         setIsPlaying(false);
       }
-    }, codeSteps[currentStep].duration);
+    }, codeSteps[currentStep]?.duration || 1000);
   }, [currentStep, codeSteps]);
 
   const pauseExecution = useCallback(() => {

@@ -24,8 +24,8 @@ interface MorphState {
 
 // Custom hook for animation loop
 function useAnimationFrame(callback: (deltaTime: number) => void) {
-  const requestRef = useRef<number>();
-  const previousTimeRef = useRef<number>();
+  const requestRef = useRef<number | undefined>(undefined);
+  const previousTimeRef = useRef<number | undefined>(undefined);
 
   const animate = useCallback((time: number) => {
     if (previousTimeRef.current !== undefined) {
@@ -252,7 +252,7 @@ function CanvasParticleSystem({ morphState }: { morphState: MorphState }) {
       life: Math.random() * 1000,
       maxLife: 1000 + Math.random() * 2000,
       size: Math.random() * 3 + 1,
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: colors[Math.floor(Math.random() * colors.length)] || '#3b82f6',
     }));
   }, [dimensions]);
 

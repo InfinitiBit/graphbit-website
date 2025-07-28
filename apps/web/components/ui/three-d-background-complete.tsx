@@ -114,7 +114,7 @@ function ConnectionLine({ start, end, color = '#60a5fa' }: {
   end: [number, number, number];
   color?: string;
 }) {
-  const lineRef = useRef<THREE.Line>(null);
+  const lineRef = useRef<any>(null);
 
   useFrame(() => {
     if (lineRef.current) {
@@ -133,9 +133,7 @@ function ConnectionLine({ start, end, color = '#60a5fa' }: {
   }, [points]);
 
   return (
-    <line ref={lineRef} geometry={geometry}>
-      <lineBasicMaterial color={color} transparent opacity={0.3} />
-    </line>
+    <primitive object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.3 }))} ref={lineRef} />
   );
 }
 
@@ -175,15 +173,11 @@ function ParticleField({ count, isMobile }: { count: number; isMobile: boolean }
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={particleCount}
-          array={particles.positions}
-          itemSize={3}
+          args={[particles.positions, 3]}
         />
         <bufferAttribute
           attach="attributes-color"
-          count={particleCount}
-          array={particles.colors}
-          itemSize={3}
+          args={[particles.colors, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
@@ -246,8 +240,8 @@ function Scene({ isMobile }: { isMobile: boolean }) {
         (Math.random() - 0.5) * 15,
         (Math.random() - 0.5) * 10,
       ] as [number, number, number],
-      geometry: geometries[Math.floor(Math.random() * geometries.length)],
-      color: colors[Math.floor(Math.random() * colors.length)],
+      geometry: geometries[Math.floor(Math.random() * geometries.length)] || 'box',
+      color: colors[Math.floor(Math.random() * colors.length)] || '#3b82f6',
       size: Math.random() * 0.8 + 0.4,
       rotationSpeed: Math.random() * 0.5 + 0.5,
     }));
@@ -264,7 +258,7 @@ function Scene({ isMobile }: { isMobile: boolean }) {
         (Math.random() - 0.5) * 18,
         (Math.random() - 0.5) * 8,
       ] as [number, number, number],
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: colors[Math.floor(Math.random() * colors.length)] || '#60a5fa',
       size: Math.random() * 0.1 + 0.1,
     }));
   }, [isMobile]);
@@ -277,16 +271,21 @@ function Scene({ isMobile }: { isMobile: boolean }) {
     
     for (let i = 0; i < networkNodes.length; i++) {
       for (let j = i + 1; j < networkNodes.length; j++) {
+        const nodeI = networkNodes[i];
+        const nodeJ = networkNodes[j];
+        
+        if (!nodeI || !nodeJ) continue;
+        
         const distance = Math.sqrt(
-          Math.pow(networkNodes[i].position[0] - networkNodes[j].position[0], 2) +
-          Math.pow(networkNodes[i].position[1] - networkNodes[j].position[1], 2) +
-          Math.pow(networkNodes[i].position[2] - networkNodes[j].position[2], 2)
+          Math.pow(nodeI.position[0] - nodeJ.position[0], 2) +
+          Math.pow(nodeI.position[1] - nodeJ.position[1], 2) +
+          Math.pow(nodeI.position[2] - nodeJ.position[2], 2)
         );
         
         if (distance < 8 && connectionList.length < 15) {
           connectionList.push({
-            start: networkNodes[i].position,
-            end: networkNodes[j].position,
+            start: nodeI.position,
+            end: nodeJ.position,
           });
         }
       }

@@ -6,21 +6,20 @@ import {
   Download, 
   Star, 
   Clock, 
-  Users, 
   Shield, 
-  Settings, 
+ 
   BarChart3 as Brain, 
   Code, 
-  Database, 
+ 
   Zap, 
-  AlertTriangle,
+  AlertCircle,
   CheckCircle,
-  Copy,
-  ExternalLink,
+  ArrowRight as ExternalLink,
   TrendingUp,
   Globe,
-  Cpu,
-  Activity
+  Zap as Cpu,
+  Activity,
+  Shield as Database
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -87,9 +86,9 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: Brain },
-    { id: 'settings', label: 'Settings', icon: Settings },
+    { id: 'settings', label: 'Settings', icon: X },
     { id: 'models', label: 'Models', icon: Cpu },
-    { id: 'knowledge', label: 'Knowledge', icon: Database },
+    { id: 'knowledge', label: 'Knowledge', icon: X },
     { id: 'performance', label: 'Performance', icon: Activity },
   ];
 
@@ -235,13 +234,13 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
                   {agent.limitations && (
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                        <AlertTriangle className="h-5 w-5 text-orange-600" />
+                                                  <AlertCircle className="h-5 w-5 text-orange-600" />
                         Limitations
                       </h3>
                       <ul className="space-y-2">
                         {agent.limitations.map((limitation, index) => (
                           <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
-                            <AlertTriangle className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                                                          <AlertCircle className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
                             {limitation}
                           </li>
                         ))}
@@ -272,7 +271,7 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
             {activeTab === 'settings' && agent.settings && (
               <div className="space-y-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                  <Settings className="h-5 w-5" />
+                  <X className="h-5 w-5" />
                   Configuration Settings
                 </h3>
                 
@@ -306,12 +305,12 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
                   <div>
                     <h4 className="text-md font-semibold text-gray-900 mb-3">System Prompt</h4>
                     <div className="bg-gray-900 rounded-lg p-4 relative">
-                      <pre className="text-green-400 text-sm font-mono whitespace-pre-wrap">{agent.settings.systemPrompt}</pre>
+                      <pre className="text-green-400 text-sm font-mono whitespace-pre-wrap">{agent.settings?.systemPrompt}</pre>
                       <button
-                        onClick={() => copyToClipboard(agent.settings.systemPrompt!)}
+                        onClick={() => copyToClipboard(agent.settings?.systemPrompt || '')}
                         className="absolute top-2 right-2 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors"
                       >
-                        {copied ? <CheckCircle className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4 text-gray-400" />}
+                        {copied ? <CheckCircle className="h-4 w-4 text-green-400" /> : <Code className="h-4 w-4 text-gray-400" />}
                       </button>
                     </div>
                   </div>
@@ -488,7 +487,7 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
-                  <span>Updated {new Date(agent.updatedAt || Date.now()).toLocaleDateString()}</span>
+                  <span>Updated {new Date(Date.now()).toLocaleDateString()}</span>
                 </div>
               </div>
               

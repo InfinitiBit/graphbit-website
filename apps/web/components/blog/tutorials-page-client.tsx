@@ -12,10 +12,10 @@ interface TutorialsPageClientProps {
 
 export function TutorialsPageClient({ posts }: TutorialsPageClientProps) {
   const categories = [
-    { id: 'all', name: 'All Posts', icon: BookOpen },
-    { id: 'tutorials', name: 'Tutorials', icon: BookOpen },
-    { id: 'best-practices', name: 'Best Practices', icon: BookOpen },
-    { id: 'advanced', name: 'Advanced Techniques', icon: BookOpen },
+    { id: 'all', name: 'All Posts', icon: 'BookOpen' },
+    { id: 'tutorials', name: 'Tutorials', icon: 'BookOpen' },
+    { id: 'best-practices', name: 'Best Practices', icon: 'BookOpen' },
+    { id: 'advanced', name: 'Advanced Techniques', icon: 'BookOpen' },
   ];
 
   // Filter posts for tutorials
@@ -75,7 +75,6 @@ export function TutorialsPageClient({ posts }: TutorialsPageClientProps) {
             <BlogSidebar 
               categories={categories}
               selectedCategory="tutorials"
-              onCategoryChange={() => {}}
             />
           </aside>
 

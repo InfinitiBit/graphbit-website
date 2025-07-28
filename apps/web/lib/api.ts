@@ -90,12 +90,9 @@ class ApiClient {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
       ...options.headers,
+      // Add authorization header if token exists
+      ...(this.token && { Authorization: `Bearer ${this.token}` }),
     };
-
-    // Add authorization header if token exists
-    if (this.token) {
-      headers.Authorization = `Bearer ${this.token}`;
-    }
 
     try {
       const response = await fetch(url, {

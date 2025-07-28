@@ -4,16 +4,16 @@ import { Footer } from '@/components/layout/footer';
 import { BlogSidebar } from '@/components/blog/blog-sidebar';
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { TrendingUp, ArrowRight, Zap, BarChart3, BarChart3 as Target, BarChart3 as Brain } from 'lucide-react';
+import { TrendingUp, ArrowRight, Zap, BarChart3 as Target, BarChart3 as Brain } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function AdvancedPage() {
   const allPosts = getAllBlogPosts();
   const categories = [
-    { id: 'all', name: 'All Posts', icon: BarChart3 },
-    { id: 'tutorials', name: 'Tutorials', icon: BarChart3 },
-    { id: 'best-practices', name: 'Best Practices', icon: BarChart3 },
-    { id: 'advanced', name: 'Advanced Techniques', icon: BarChart3 },
+    { id: 'all', name: 'All Posts', icon: 'BarChart3' },
+    { id: 'tutorials', name: 'Tutorials', icon: 'BarChart3' },
+    { id: 'best-practices', name: 'Best Practices', icon: 'BarChart3' },
+    { id: 'advanced', name: 'Advanced Techniques', icon: 'BarChart3' },
   ];
 
   // Filter posts for advanced techniques
@@ -115,7 +115,6 @@ export default async function AdvancedPage() {
               <BlogSidebar 
                 categories={categories}
                 selectedCategory="advanced"
-                onCategoryChange={() => {}}
               />
             </aside>
 
@@ -162,7 +161,7 @@ export default async function AdvancedPage() {
                     <TrendingUp className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                     <h3 className="mb-3 text-lg font-semibold text-gray-700">No Advanced Techniques Yet</h3>
                     <p className="text-gray-500 text-sm">
-                      We're preparing advanced content for expert developers. Stay tuned!
+                      We&apos;re preparing advanced content for expert developers. Stay tuned!
                     </p>
                   </div>
                 </div>

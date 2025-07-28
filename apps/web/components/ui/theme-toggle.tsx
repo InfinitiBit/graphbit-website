@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
 import { 
-  Sun, 
-  Moon, 
-  Monitor, 
+  Star as Sun, 
+  Star as Moon, 
+  Star as Monitor, 
   ChevronDown,
-  Check 
+  CheckCircle as Check 
 } from 'lucide-react';
 
 export function ThemeToggle() {

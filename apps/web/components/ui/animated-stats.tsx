@@ -3,14 +3,10 @@
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { useRef, useEffect } from 'react';
 import { 
-  Users, 
-  Activity, 
-  Download, 
-  TrendingUp, 
   Zap, 
   Clock,
-  Database,
-  Cpu
+  Shield as Database,
+  Star as Cpu
 } from 'lucide-react';
 
 interface StatItem {
@@ -148,7 +144,7 @@ export function AnimatedStats({
       y: 0,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12
       }
@@ -193,7 +189,7 @@ export function AnimatedStats({
                 variants={itemVariants}
                 whileHover={{ 
                   scale: 1.05,
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
+                  transition: { type: "spring" as const, stiffness: 300, damping: 20 }
                 }}
               >
                 {/* Background glow effect */}

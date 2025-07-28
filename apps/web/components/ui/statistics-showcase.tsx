@@ -10,7 +10,7 @@ import {
   Users,
   BarChart3 as Target,
   Zap,
-  Info
+  Star as Info
 } from 'lucide-react';
 
 interface Statistic {
@@ -96,7 +96,7 @@ function MiniChart({ data, color }: { data: number[]; color: string }) {
       />
       <circle
         cx={data.length > 1 ? ((data.length - 1) / (data.length - 1)) * 100 : 50}
-        cy={data.length > 0 ? 100 - (data[data.length - 1] / maxValue) * 80 : 50}
+        cy={data.length > 0 ? 100 - ((data[data.length - 1] || 0) / maxValue) * 80 : 50}
         r="2"
         fill={color}
         className="animate-pulse"
@@ -264,7 +264,7 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
                 <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br`} style={{
                   background: `linear-gradient(135deg, ${stat.color}20, ${stat.color}10)`
                 }}>
-                  <IconComponent className="h-5 w-5" style={{ color: stat.color }} />
+                  <IconComponent className="h-5 w-5" />
                 </div>
                 
                 {/* Mini Chart */}

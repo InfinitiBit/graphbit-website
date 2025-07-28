@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <h3 className="text-lg font-semibold text-gray-900">{post.author}</h3>
                   <p className="text-gray-600 mt-1">
                     Expert in AI systems and LLM frameworks. Passionate about building intelligent 
-                    solutions that push the boundaries of what's possible with artificial intelligence.
+                    solutions that push the boundaries of what&apos;s possible with artificial intelligence.
                   </p>
                 </div>
               </div>

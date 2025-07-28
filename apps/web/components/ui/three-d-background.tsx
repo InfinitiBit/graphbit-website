@@ -42,18 +42,38 @@ function FloatingShape({ position, shape, color, size, speed = 1 }: {
     }
   });
 
-  const ShapeComponent = shape === 'sphere' ? Sphere : shape === 'box' ? Box : Octahedron;
-
   return (
     <Float speed={1.5 * speed} rotationIntensity={0.3} floatIntensity={0.5}>
-      <ShapeComponent ref={meshRef} position={position} args={[size, size, size]}>
-        <meshLambertMaterial 
-          color={color} 
-          transparent 
-          opacity={0.3}
-          wireframe={false}
-        />
-      </ShapeComponent>
+      {shape === 'sphere' && (
+        <Sphere ref={meshRef} position={position} args={[size]}>
+          <meshLambertMaterial 
+            color={color} 
+            transparent 
+            opacity={0.3}
+            wireframe={false}
+          />
+        </Sphere>
+      )}
+      {shape === 'box' && (
+        <Box ref={meshRef} position={position} args={[size, size, size]}>
+          <meshLambertMaterial 
+            color={color} 
+            transparent 
+            opacity={0.3}
+            wireframe={false}
+          />
+        </Box>
+      )}
+      {shape === 'octahedron' && (
+        <Octahedron ref={meshRef} position={position} args={[size]}>
+          <meshLambertMaterial 
+            color={color} 
+            transparent 
+            opacity={0.3}
+            wireframe={false}
+          />
+        </Octahedron>
+      )}
     </Float>
   );
 }
@@ -95,17 +115,16 @@ function NetworkNodes({ isMobile }: { isMobile: boolean }) {
       {!isMobile && nodes.map((node, index) => {
         if (index === 0) return null;
         const prevNode = nodes[index - 1];
+        if (!prevNode) return null;
         return (
           <line key={`line-${index}`}>
             <bufferGeometry>
               <bufferAttribute
                 attach="attributes-position"
-                count={2}
-                array={new Float32Array([
+                args={[new Float32Array([
                   ...node.position,
                   ...prevNode.position,
-                ])}
-                itemSize={3}
+                ]), 3]}
               />
             </bufferGeometry>
             <lineBasicMaterial color="#60a5fa" transparent opacity={0.2} />
@@ -148,8 +167,8 @@ function Scene({ isMobile }: { isMobile: boolean }) {
           (Math.random() - 0.5) * 20,
           (Math.random() - 0.5) * 20,
         ] as [number, number, number],
-        shape: ['sphere', 'box', 'octahedron'][Math.floor(Math.random() * 3)] as 'sphere' | 'box' | 'octahedron',
-        color: ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981'][Math.floor(Math.random() * 4)],
+        shape: (['sphere', 'box', 'octahedron'][Math.floor(Math.random() * 3)] || 'sphere') as 'sphere' | 'box' | 'octahedron',
+        color: ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981'][Math.floor(Math.random() * 4)] || '#3b82f6',
         size: Math.random() * 0.8 + 0.3,
         speed: Math.random() * 0.5 + 0.5,
       });

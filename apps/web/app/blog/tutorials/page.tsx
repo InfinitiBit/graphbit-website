@@ -74,22 +74,22 @@ export default async function TutorialsPage() {
                     Categories
                   </h3>
                   <nav className="space-y-2">
-                    <a href="/blog" className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200">
+                    <Link href="/blog" className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200">
                       <BookOpen className="h-4 w-4 mr-3 flex-shrink-0" />
                       All Posts
-                    </a>
-                    <a href="/blog/tutorials" className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white shadow-md transition-all duration-200">
+                    </Link>
+                    <Link href="/blog/tutorials" className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white shadow-md transition-all duration-200">
                       <BookOpen className="h-4 w-4 mr-3 flex-shrink-0" />
                       Tutorials
-                    </a>
-                    <a href="/blog/best-practices" className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200">
+                    </Link>
+                    <Link href="/blog/best-practices" className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200">
                       <BookOpen className="h-4 w-4 mr-3 flex-shrink-0" />
                       Best Practices
-                    </a>
-                    <a href="/blog/advanced" className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200">
+                    </Link>
+                    <Link href="/blog/advanced" className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200">
                       <BookOpen className="h-4 w-4 mr-3 flex-shrink-0" />
                       Advanced Techniques
-                    </a>
+                    </Link>
                   </nav>
                 </div>
               </div>
@@ -138,7 +138,7 @@ export default async function TutorialsPage() {
                     <GraduationCap className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                     <h3 className="mb-3 text-lg font-semibold text-gray-700">No Tutorials Yet</h3>
                     <p className="text-gray-500 text-sm">
-                      We're working on comprehensive tutorials. Check back soon!
+                      We&apos;re working on comprehensive tutorials. Check back soon!
                     </p>
                   </div>
                 </div>
