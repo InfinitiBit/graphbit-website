@@ -12,8 +12,8 @@ COPY packages/ui/package*.json ./packages/ui/
 COPY packages/typescript-config/package*.json ./packages/typescript-config/
 COPY packages/eslint-config/package*.json ./packages/eslint-config/
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with increased timeout
+RUN npm ci --timeout=60000
 
 # Build the application
 FROM base AS builder
@@ -21,8 +21,12 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the web app for static export
-RUN npm run build --workspace=apps/web
+# Set environment variables for build optimization
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build the web app for static export with increased timeout
+RUN npm run build --workspace=apps/web --timeout=60000
 
 # Production image with nginx
 FROM nginx:alpine AS runner
