@@ -1,0 +1,11 @@
+services:
+    app:
+        build:
+            context: ./
+            dockerfile: apps/web/Dockerfile
+        ports:
+            - '3000:80'
+        container_name: graphbit-website
+        env_file: 
+            - ./apps/web/.env
+
