@@ -3,6 +3,9 @@ import { auth } from '@clerk/nextjs/server';
 import { connectDB } from '@/lib/db';
 import Trace from '@/lib/models/trace';
 
+// Force static generation for static export compatibility
+export const dynamic = 'force-static';
+
 export async function GET(request: NextRequest) {
   try {
     const { userId } = await auth();

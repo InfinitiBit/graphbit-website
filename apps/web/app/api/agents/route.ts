@@ -3,6 +3,9 @@ import { auth } from '@clerk/nextjs/server';
 import { connectDB } from '@/lib/db';
 import Agent from '@/lib/models/agent';
 
+// Force static generation for static export compatibility
+export const dynamic = 'force-static';
+
 // Sample data for demonstration - replace with actual database calls
 const sampleAgents = [
   {
