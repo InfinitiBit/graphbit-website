@@ -1,21 +1,20 @@
-
 'use client';
 
-import { useState } from 'react';
-import { Navigation } from '@/components/layout/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Navigation } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  BarChart3,
   Activity,
-  Users,
+  AlertCircle,
+  BarChart3,
+  CheckCircle,
   Clock,
   BarChart3 as Database,
-  AlertCircle,
-  CheckCircle,
-  X,
   Plus,
+  Users,
+  X,
 } from 'lucide-react';
+import { useState } from 'react';
 
 interface DashboardStats {
   totalAgents: number;
@@ -37,10 +36,25 @@ export default function DashboardPage() {
   });
 
   const [recentActivity, _setRecentActivity] = useState([
-    { id: 1, type: 'success', message: 'Agent "CustomerSupport" completed successfully', time: '2 minutes ago' },
-    { id: 2, type: 'warning', message: 'High latency detected on "DataProcessor"', time: '5 minutes ago' },
+    {
+      id: 1,
+      type: 'success',
+      message: 'Agent "CustomerSupport" completed successfully',
+      time: '2 minutes ago',
+    },
+    {
+      id: 2,
+      type: 'warning',
+      message: 'High latency detected on "DataProcessor"',
+      time: '5 minutes ago',
+    },
     { id: 3, type: 'success', message: 'New agent "SalesBot" deployed', time: '15 minutes ago' },
-    { id: 4, type: 'error', message: 'Agent "ReportGenerator" failed with timeout', time: '23 minutes ago' },
+    {
+      id: 4,
+      type: 'error',
+      message: 'Agent "ReportGenerator" failed with timeout',
+      time: '23 minutes ago',
+    },
   ]);
 
   return (
@@ -75,38 +89,34 @@ export default function DashboardPage() {
 
         <div className="container-responsive py-6 sm:py-8 lg:py-12">
           {/* Stats Grid */}
-          <div className="mb-8 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-            <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-6">
+            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">
-                    Total Agents
-                  </CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600">Total Agents</CardTitle>
                   <Users className="h-4 w-4 text-blue-600" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="text-2xl font-bold text-gray-900">{stats.totalAgents}</div>
-                <p className="text-xs text-green-600 mt-1">+2 this week</p>
+                <p className="mt-1 text-xs text-green-600">+2 this week</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">
-                    Active Traces
-                  </CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600">Active Traces</CardTitle>
                   <Activity className="h-4 w-4 text-green-600" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="text-2xl font-bold text-gray-900">{stats.activeTraces}</div>
-                <p className="text-xs text-blue-600 mt-1">Real-time</p>
+                <p className="mt-1 text-xs text-blue-600">Real-time</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-sm font-medium text-gray-600">
@@ -116,12 +126,14 @@ export default function DashboardPage() {
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-2xl font-bold text-gray-900">{stats.totalRequests.toLocaleString()}</div>
-                <p className="text-xs text-green-600 mt-1">+12% from last month</p>
+                <div className="text-2xl font-bold text-gray-900">
+                  {stats.totalRequests.toLocaleString()}
+                </div>
+                <p className="mt-1 text-xs text-green-600">+12% from last month</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-sm font-medium text-gray-600">
@@ -132,46 +144,42 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="text-2xl font-bold text-gray-900">{stats.avgResponseTime}ms</div>
-                <p className="text-xs text-green-600 mt-1">-15ms from yesterday</p>
+                <p className="mt-1 text-xs text-green-600">-15ms from yesterday</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">
-                    Success Rate
-                  </CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600">Success Rate</CardTitle>
                   <CheckCircle className="h-4 w-4 text-green-600" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="text-2xl font-bold text-gray-900">{stats.successRate}%</div>
-                <p className="text-xs text-green-600 mt-1">+0.3% this week</p>
+                <p className="mt-1 text-xs text-green-600">+0.3% this week</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">
-                    Error Rate
-                  </CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600">Error Rate</CardTitle>
                   <X className="h-4 w-4 text-red-600" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="text-2xl font-bold text-gray-900">{stats.errorRate}%</div>
-                <p className="text-xs text-red-600 mt-1">-0.3% this week</p>
+                <p className="mt-1 text-xs text-red-600">-0.3% this week</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid gap-6 lg:gap-8 grid-cols-1 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
             {/* Recent Activity */}
             <div className="lg:col-span-2">
-              <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
+              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg font-semibold">Recent Activity</CardTitle>
@@ -184,23 +192,24 @@ export default function DashboardPage() {
                 <CardContent>
                   <div className="space-y-4">
                     {recentActivity.map((activity) => (
-                      <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50/50 hover:bg-gray-100/50 transition-colors">
-                        <div className="flex-shrink-0 mt-0.5">
+                      <div
+                        key={activity.id}
+                        className="flex items-start gap-3 rounded-lg bg-gray-50/50 p-3 transition-colors hover:bg-gray-100/50"
+                      >
+                        <div className="mt-0.5 flex-shrink-0">
                           {activity.type === 'success' && (
                             <CheckCircle className="h-4 w-4 text-green-600" />
                           )}
                           {activity.type === 'warning' && (
                             <AlertCircle className="h-4 w-4 text-yellow-600" />
                           )}
-                          {activity.type === 'error' && (
-                            <X className="h-4 w-4 text-red-600" />
-                          )}
+                          {activity.type === 'error' && <X className="h-4 w-4 text-red-600" />}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-900 font-medium leading-5">
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-medium leading-5 text-gray-900">
                             {activity.message}
                           </p>
-                          <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
+                          <p className="mt-1 text-xs text-gray-500">{activity.time}</p>
                         </div>
                       </div>
                     ))}
@@ -211,7 +220,7 @@ export default function DashboardPage() {
 
             {/* Quick Actions */}
             <div className="space-y-6">
-              <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
+              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold">Quick Actions</CardTitle>
                 </CardHeader>
@@ -235,7 +244,7 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
+              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold">System Health</CardTitle>
                 </CardHeader>
@@ -243,21 +252,21 @@ export default function DashboardPage() {
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">API Status</span>
                     <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                      <div className="h-2 w-2 rounded-full bg-green-500"></div>
                       <span className="text-sm font-medium text-green-600">Operational</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Database</span>
                     <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                      <div className="h-2 w-2 rounded-full bg-green-500"></div>
                       <span className="text-sm font-medium text-green-600">Healthy</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Cache</span>
                     <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 bg-yellow-500 rounded-full"></div>
+                      <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
                       <span className="text-sm font-medium text-yellow-600">Degraded</span>
                     </div>
                   </div>
