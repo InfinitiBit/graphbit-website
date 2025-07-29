@@ -1,26 +1,25 @@
-
 'use client';
 
-import { useState } from 'react';
-import { Navigation } from '@/components/layout/navigation';
+import { Navigation } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Activity,
-  Clock,
-  DollarSign,
-  TrendingUp,
   AlertCircle,
-  CheckCircle,
-  RefreshCw,
-  Filter,
-  Calendar,
-  ChevronDown,
-  Hash,
-  Zap,
   BarChart3,
+  Calendar,
+  CheckCircle,
+  ChevronDown,
+  Clock,
   Code,
+  DollarSign,
+  Filter,
+  Hash,
+  RefreshCw,
+  TrendingUp,
+  Zap,
 } from 'lucide-react';
+import { useState } from 'react';
 
 // Mock data for demonstration
 const mockTraces = [
@@ -159,7 +158,7 @@ export default function TracingPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5" />
           <div className="container-responsive relative py-12 sm:py-16 lg:py-20">
             <div className="text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gray-900/10 px-4 py-2 text-sm font-medium text-gray-800 backdrop-blur-sm border border-gray-200">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-900/10 px-4 py-2 text-sm font-medium text-gray-800 backdrop-blur-sm">
                 <Zap className="h-4 w-4 text-yellow-500" />
                 <span>Real-time monitoring</span>
               </div>
@@ -170,7 +169,8 @@ export default function TracingPage() {
                 </span>
               </h1>
               <p className="mx-auto mb-8 max-w-3xl text-lg text-gray-600 sm:text-xl">
-                Monitor and analyze your agent outputs and performance with comprehensive observability tools.
+                Monitor and analyze your agent outputs and performance with comprehensive
+                observability tools.
               </p>
             </div>
           </div>
@@ -180,12 +180,14 @@ export default function TracingPage() {
         <div className="container-responsive py-8 sm:py-12">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {statCards.map((stat, index) => (
-              <Card 
+              <Card
                 key={stat.title}
-                className="group relative overflow-hidden border-0 bg-white/80 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
+                className="group relative overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.bgGradient} opacity-0 transition-opacity group-hover:opacity-100`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${stat.bgGradient} opacity-0 transition-opacity group-hover:opacity-100`}
+                />
                 <CardHeader className="relative pb-3">
                   <div className="flex items-center justify-between">
                     <CardDescription className="text-sm font-medium text-gray-600">
@@ -197,12 +199,12 @@ export default function TracingPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="relative">
-                  <div className="text-3xl font-bold text-gray-900 mb-2">
-                    {stat.value}
-                  </div>
+                  <div className="mb-2 text-3xl font-bold text-gray-900">{stat.value}</div>
                   <div className="flex items-center gap-1 text-sm text-gray-500">
                     {stat.trend === 'up' && <TrendingUp className="h-3 w-3 text-green-500" />}
-                    {stat.trend === 'down' && <TrendingUp className="h-3 w-3 rotate-180 text-red-500" />}
+                    {stat.trend === 'down' && (
+                      <TrendingUp className="h-3 w-3 rotate-180 text-red-500" />
+                    )}
                     {stat.trend === 'neutral' && <Activity className="h-3 w-3" />}
                     <span>{stat.change}</span>
                   </div>
@@ -214,7 +216,7 @@ export default function TracingPage() {
 
         {/* Enhanced Filters */}
         <div className="container-responsive pb-8">
-          <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-lg">
+          <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex flex-wrap gap-2">
@@ -226,7 +228,8 @@ export default function TracingPage() {
                       onClick={() => setSelectedTimeRange(range)}
                       className="touch-target-sm rounded-full"
                     >
-                      <span className="hidden sm:inline">Last </span>{range}
+                      <span className="hidden sm:inline">Last </span>
+                      {range}
                     </Button>
                   ))}
                 </div>
@@ -235,7 +238,7 @@ export default function TracingPage() {
                   variant="outline"
                   size="sm"
                   onClick={() => setShowFilters(!showFilters)}
-                  className="touch-target w-full gap-2 lg:w-auto rounded-full"
+                  className="touch-target w-full gap-2 rounded-full lg:w-auto"
                 >
                   <Filter className="h-4 w-4" />
                   <span className="hidden sm:inline">Filters</span>
@@ -247,7 +250,7 @@ export default function TracingPage() {
               </div>
 
               {showFilters && (
-                <div className="mt-6 pt-6 border-t border-gray-200 flex flex-wrap gap-2">
+                <div className="mt-6 flex flex-wrap gap-2 border-t border-gray-200 pt-6">
                   {[
                     { key: 'all', label: 'All Status', icon: Activity },
                     { key: 'success', label: 'Success', icon: CheckCircle },
@@ -273,7 +276,7 @@ export default function TracingPage() {
 
         {/* Enhanced Traces List */}
         <div className="container-responsive pb-12">
-          <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-lg">
+          <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-sm">
             <CardHeader className="border-b border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 p-2">
@@ -292,13 +295,13 @@ export default function TracingPage() {
                 {filteredTraces.map((trace, index) => (
                   <div
                     key={trace.id}
-                    className="group rounded-xl border border-gray-100 bg-white/50 p-6 transition-all duration-300 hover:shadow-lg hover:bg-white/80"
+                    className="group rounded-xl border border-gray-100 bg-white/50 p-6 transition-all duration-300 hover:bg-white/80 hover:shadow-lg"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="flex flex-col gap-4">
                       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex min-w-0 flex-1 items-center gap-3">
-                          <h4 className="text-lg font-semibold text-gray-900 truncate">
+                          <h4 className="truncate text-lg font-semibold text-gray-900">
                             {trace.agentName}
                           </h4>
                           <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
@@ -319,34 +322,30 @@ export default function TracingPage() {
 
                       <div className="space-y-4">
                         <div className="rounded-lg bg-gray-50 p-4">
-                          <span className="text-sm font-semibold text-gray-900 mb-2 block">
+                          <span className="mb-2 block text-sm font-semibold text-gray-900">
                             Input:
                           </span>
-                          <p className="text-sm text-gray-700 leading-relaxed">
-                            {trace.input}
-                          </p>
+                          <p className="text-sm leading-relaxed text-gray-700">{trace.input}</p>
                         </div>
                         <div className="rounded-lg bg-gray-50 p-4">
-                          <span className="text-sm font-semibold text-gray-900 mb-2 block">
+                          <span className="mb-2 block text-sm font-semibold text-gray-900">
                             Output:
                           </span>
-                          <p className="text-sm text-gray-700 leading-relaxed line-clamp-3">
+                          <p className="line-clamp-3 text-sm leading-relaxed text-gray-700">
                             {trace.output}
                           </p>
                         </div>
                         {trace.error && (
-                          <div className="rounded-lg bg-red-50 p-4 border border-red-200">
-                            <span className="text-sm font-semibold text-red-700 mb-2 block">
+                          <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+                            <span className="mb-2 block text-sm font-semibold text-red-700">
                               Error:
                             </span>
-                            <p className="text-sm text-red-600">
-                              {trace.error}
-                            </p>
+                            <p className="text-sm text-red-600">{trace.error}</p>
                           </div>
                         )}
                       </div>
 
-                      <div className="flex flex-wrap gap-6 pt-4 border-t border-gray-200 text-sm text-gray-600">
+                      <div className="flex flex-wrap gap-6 border-t border-gray-200 pt-4 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Clock className="h-4 w-4" />
                           <span>{trace.latency}ms</span>
@@ -371,12 +370,10 @@ export default function TracingPage() {
 
               {filteredTraces.length === 0 && (
                 <div className="py-16 text-center">
-                  <div className="rounded-full bg-gray-100 p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 p-4">
                     <Activity className="h-8 w-8 text-gray-400" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    No traces found
-                  </h3>
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900">No traces found</h3>
                   <p className="text-sm text-gray-600">
                     No traces match your current filter criteria.
                   </p>

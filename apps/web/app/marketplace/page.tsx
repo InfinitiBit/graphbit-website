@@ -1,31 +1,30 @@
-
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Navigation } from '@/components/layout/navigation';
+import { AgentDetailModal } from '@/components/marketplace/agent-detail-modal';
+import { Navigation } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { AgentDetailModal } from '@/components/marketplace/agent-detail-modal';
 import useStore from '@/lib/store/useStore';
 import {
-  Download,
-  Star,
-  Search,
-  Filter,
-  MessageSquare,
+  ArrowRight,
   BarChart,
-  Globe,
-  Sparkles,
+  BarChart3 as Brain,
   ChevronDown,
+  Clock,
+  Download,
+  Filter,
+  Globe,
+  MessageSquare,
+  Package,
+  Search,
+  Shield,
+  Sparkles,
+  Star,
   TrendingUp,
   Users,
-  Clock,
-  ArrowRight,
-  Package,
   Zap,
-  BarChart3 as Brain,
-  Shield,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const categories = [
   { value: 'all', label: 'All Categories', icon: Globe, color: 'from-blue-500 to-purple-500' },
@@ -33,7 +32,12 @@ const categories = [
   { value: 'analyzer', label: 'Analyzers', icon: BarChart, color: 'from-orange-500 to-red-500' },
   { value: 'generator', label: 'Generators', icon: Sparkles, color: 'from-purple-500 to-pink-500' },
   { value: 'translator', label: 'Translators', icon: Globe, color: 'from-indigo-500 to-blue-500' },
-  { value: 'classifier', label: 'Classifiers', icon: Filter, color: 'from-yellow-500 to-orange-500' },
+  {
+    value: 'classifier',
+    label: 'Classifiers',
+    icon: Filter,
+    color: 'from-yellow-500 to-orange-500',
+  },
 ];
 
 const featuredStats = [
@@ -84,7 +88,7 @@ export default function MarketplacePage() {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5" />
           <div className="container-responsive relative py-16 sm:py-20 lg:py-24">
             <div className="text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gray-900/10 px-4 py-2 text-sm font-medium text-gray-800 backdrop-blur-sm border border-gray-200">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-900/10 px-4 py-2 text-sm font-medium text-gray-800 backdrop-blur-sm">
                 <Zap className="h-4 w-4 text-yellow-500" />
                 <span>New agents added weekly</span>
               </div>
@@ -95,7 +99,8 @@ export default function MarketplacePage() {
                 </span>
               </h1>
               <p className="mx-auto mb-8 max-w-3xl text-lg text-gray-600 sm:text-xl">
-                Discover, deploy, and scale production-ready AI agents. Built by developers, for developers.
+                Discover, deploy, and scale production-ready AI agents. Built by developers, for
+                developers.
               </p>
 
               {/* Stats Grid */}
@@ -103,11 +108,13 @@ export default function MarketplacePage() {
                 {featuredStats.map((stat, index) => (
                   <div
                     key={stat.label}
-                    className="group rounded-2xl bg-white/60 p-4 backdrop-blur-sm border border-gray-200/50 transition-all duration-300 hover:bg-white/80 hover:scale-105 hover:shadow-lg"
+                    className="group rounded-2xl border border-gray-200/50 bg-white/60 p-4 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/80 hover:shadow-lg"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="flex items-center justify-center gap-3">
-                      <stat.icon className={`h-5 w-5 ${stat.color} transition-transform group-hover:scale-110`} />
+                      <stat.icon
+                        className={`h-5 w-5 ${stat.color} transition-transform group-hover:scale-110`}
+                      />
                       <div className="text-left">
                         <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
                         <div className="text-xs text-gray-600">{stat.label}</div>
@@ -173,7 +180,9 @@ export default function MarketplacePage() {
                         </span>
                       </span>
                       {!isActive && (
-                        <div className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 transition-opacity duration-300 group-hover:opacity-10`} />
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 transition-opacity duration-300 group-hover:opacity-10`}
+                        />
                       )}
                     </Button>
                   );
@@ -188,7 +197,10 @@ export default function MarketplacePage() {
           {isLoadingAgents ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[...Array(6)].map((_, i) => (
-                <Card key={i} className="animate-pulse overflow-hidden rounded-3xl border-0 shadow-xl">
+                <Card
+                  key={i}
+                  className="animate-pulse overflow-hidden rounded-3xl border-0 shadow-xl"
+                >
                   <CardHeader className="p-6">
                     <div className="h-6 w-3/4 rounded-xl bg-gray-200"></div>
                     <div className="mt-3 h-4 w-1/2 rounded-lg bg-gray-200"></div>
@@ -211,17 +223,17 @@ export default function MarketplacePage() {
               {agents.map((agent, index) => (
                 <Card
                   key={agent.id}
-                  className="group relative overflow-hidden rounded-3xl border-0 bg-white/90 shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 cursor-pointer"
+                  className="group relative cursor-pointer overflow-hidden rounded-3xl border-0 bg-white/90 shadow-xl backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
                   style={{ animationDelay: `${index * 100}ms` }}
                   onClick={() => openAgentModal(agent)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
-                  
+                  <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+
                   <CardHeader className="relative p-6">
                     <div className="flex items-start justify-between gap-4">
                       <div className="min-w-0 flex-1">
-                        <CardTitle className="truncate text-xl font-bold leading-tight text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                        <CardTitle className="truncate text-xl font-bold leading-tight text-gray-900 transition-colors duration-300 group-hover:text-blue-700">
                           {agent.name}
                         </CardTitle>
                         <CardDescription className="mt-2 flex items-center gap-2 text-sm text-gray-600">
@@ -271,7 +283,7 @@ export default function MarketplacePage() {
                           <span className="text-xs">({agent.reviews})</span>
                         </div>
                       </div>
-                      <Button className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
+                      <Button className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                         <span className="relative z-10 flex items-center gap-2">
                           Install
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -284,7 +296,7 @@ export default function MarketplacePage() {
                     <div className="mt-4 flex items-center gap-2 text-xs text-gray-500">
                       <Shield className="h-3 w-3 text-green-600" />
                       <span>Verified</span>
-                      <Clock className="h-3 w-3 ml-2" />
+                      <Clock className="ml-2 h-3 w-3" />
                       <span>Updated 2 days ago</span>
                     </div>
                   </CardContent>
@@ -297,21 +309,20 @@ export default function MarketplacePage() {
           {!isLoadingAgents && agents.length === 0 && (
             <div className="py-20 text-center">
               <div className="mx-auto max-w-md">
-                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-gray-100 to-gray-200 mx-auto">
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-gray-100 to-gray-200">
                   <Package className="h-10 w-10 text-gray-400" />
                 </div>
-                <h3 className="mb-4 text-2xl font-bold text-gray-900">
-                  No agents found
-                </h3>
+                <h3 className="mb-4 text-2xl font-bold text-gray-900">No agents found</h3>
                 <p className="mb-8 text-gray-600">
-                  No agents match your current search criteria. Try adjusting your filters or search terms.
+                  No agents match your current search criteria. Try adjusting your filters or search
+                  terms.
                 </p>
                 <Button
                   onClick={() => {
                     setAgentSearchQuery('');
                     setAgentCategory('all');
                   }}
-                  className="group bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
+                  className="group bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <span className="flex items-center gap-2">
                     Clear all filters
@@ -326,11 +337,7 @@ export default function MarketplacePage() {
 
       {/* Agent Detail Modal */}
       {selectedAgent && (
-        <AgentDetailModal
-          agent={selectedAgent}
-          isOpen={isModalOpen}
-          onClose={closeAgentModal}
-        />
+        <AgentDetailModal agent={selectedAgent} isOpen={isModalOpen} onClose={closeAgentModal} />
       )}
     </>
   );

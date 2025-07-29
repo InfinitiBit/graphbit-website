@@ -1,13 +1,12 @@
-
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { Navigation } from '@/components/layout/navigation';
-import { Footer } from '@/components/layout/footer';
+import { BlogCard } from '@/components/blog/blog-card';
+import { Footer } from '@/components/footer';
+import { Navigation } from '@/components/navbar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { getBlogPost, getBlogPostSlugs, getAllBlogPosts } from '@/lib/blog';
-import { ArrowRight, Clock, Users, Calendar, Star } from 'lucide-react';
-import { BlogCard } from '@/components/blog/blog-card';
+import { getAllBlogPosts, getBlogPost, getBlogPostSlugs } from '@/lib/blog';
+import { ArrowRight, Calendar, Clock, Star, Users } from 'lucide-react';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -33,7 +32,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   // Get related posts (same tags)
   const allPosts = getAllBlogPosts();
   const relatedPosts = allPosts
-    .filter(p => p.slug !== slug && p.tags.some(tag => post.tags.includes(tag)))
+    .filter((p) => p.slug !== slug && p.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 3);
 
   return (
@@ -65,7 +64,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <Badge
                   key={tag}
                   variant="secondary"
-                  className="border border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
+                  className="border border-blue-200 bg-blue-50 text-blue-700 transition-colors hover:bg-blue-100"
                 >
                   {tag}
                 </Badge>
@@ -79,13 +78,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Description */}
             {post.description && (
-              <p className="mb-8 text-xl leading-relaxed text-gray-700 font-medium">
+              <p className="mb-8 text-xl font-medium leading-relaxed text-gray-700">
                 {post.description}
               </p>
             )}
 
             {/* Meta information */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-lg border border-gray-200 bg-white/80 backdrop-blur-sm px-6 py-4 shadow-sm">
+            <div className="flex flex-col gap-4 rounded-lg border border-gray-200 bg-white/80 px-6 py-4 shadow-sm backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between">
               <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600">
                 <div className="flex items-center space-x-2">
                   <Users className="h-4 w-4 text-blue-600" />
@@ -103,12 +102,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Action buttons */}
               <div className="flex items-center space-x-3">
-                <button className="flex items-center space-x-1 rounded-lg bg-gray-100 px-3 py-2 text-sm text-gray-700 hover:bg-gray-200 transition-colors">
-                                        <Star className="h-4 w-4" />
+                <button className="flex items-center space-x-1 rounded-lg bg-gray-100 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-200">
+                  <Star className="h-4 w-4" />
                   <span>Save</span>
                 </button>
-                <button className="flex items-center space-x-1 rounded-lg bg-blue-600 px-3 py-2 text-sm text-white hover:bg-blue-700 transition-colors">
-                                        <ArrowRight className="h-4 w-4" />
+                <button className="flex items-center space-x-1 rounded-lg bg-blue-600 px-3 py-2 text-sm text-white transition-colors hover:bg-blue-700">
+                  <ArrowRight className="h-4 w-4" />
                   <span>Share</span>
                 </button>
               </div>
@@ -116,7 +115,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </header>
 
           {/* Article Content */}
-          <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-strong:text-gray-900 prose-code:rounded prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:text-sm prose-pre:border prose-pre:border-gray-200 prose-pre:bg-gray-50 prose-pre:rounded-lg prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:italic prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+          <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:leading-relaxed prose-p:text-gray-700 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:italic prose-strong:text-gray-900 prose-code:rounded prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:text-sm prose-pre:rounded-lg prose-pre:border prose-pre:border-gray-200 prose-pre:bg-gray-50">
             <div dangerouslySetInnerHTML={{ __html: post.content || '' }} />
           </div>
 
@@ -125,28 +124,29 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Author bio */}
             <div className="rounded-lg border border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 p-6">
               <div className="flex items-start space-x-4">
-                <div className="h-16 w-16 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-xl">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-xl font-bold text-white">
                   {post.author.charAt(0)}
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{post.author}</h3>
-                  <p className="text-gray-600 mt-1">
-                    Expert in AI systems and LLM frameworks. Passionate about building intelligent 
-                    solutions that push the boundaries of what&apos;s possible with artificial intelligence.
+                  <p className="mt-1 text-gray-600">
+                    Expert in AI systems and LLM frameworks. Passionate about building intelligent
+                    solutions that push the boundaries of what&apos;s possible with artificial
+                    intelligence.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Navigation */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-between pt-8 border-t border-gray-200">
+            <div className="flex flex-col justify-between gap-4 border-t border-gray-200 pt-8 sm:flex-row">
               <Link href="/blog">
                 <Button variant="outline" className="group">
                   <ArrowRight className="mr-2 h-4 w-4 rotate-180 transition-transform group-hover:-translate-x-1" />
                   Back to Blog
                 </Button>
               </Link>
-              
+
               <div className="flex items-center space-x-2 text-sm text-gray-500">
                 <Clock className="h-4 w-4" />
                 <span>Reading time: {post.readTime}</span>
@@ -157,9 +157,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
-          <section className="px-4 py-16 bg-gradient-to-r from-gray-50 to-blue-50">
+          <section className="bg-gradient-to-r from-gray-50 to-blue-50 px-4 py-16">
             <div className="mx-auto max-w-6xl">
-              <h2 className="mb-8 text-3xl font-bold text-gray-900 text-center">
+              <h2 className="mb-8 text-center text-3xl font-bold text-gray-900">
                 Related Articles
               </h2>
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
