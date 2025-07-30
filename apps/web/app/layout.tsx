@@ -48,7 +48,7 @@ export default function RootLayout({
           <ClerkProvider>
             <AuthProvider>
               <Navigation />
-              <div className="dev-border flex w-full pt-16">{children}</div>
+              <div className="flex w-full pt-16">{children}</div>
               <Footer />
             </AuthProvider>
           </ClerkProvider>
