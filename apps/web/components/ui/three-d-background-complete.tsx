@@ -227,25 +227,25 @@ function Scene({ isMobile }: { isMobile: boolean }) {
     }
   });
 
-  // Geometric shapes configuration
-  const shapes = useMemo(() => {
-    const shapeCount = isMobile ? 8 : 15;
-    const geometries: Array<'box' | 'sphere' | 'octahedron' | 'tetrahedron'> = 
-      ['box', 'sphere', 'octahedron', 'tetrahedron'];
-    const colors = ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444'];
-    
-    return Array.from({ length: shapeCount }, (_, i) => ({
-      position: [
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 15,
-        (Math.random() - 0.5) * 10,
-      ] as [number, number, number],
-      geometry: geometries[Math.floor(Math.random() * geometries.length)] || 'box',
-      color: colors[Math.floor(Math.random() * colors.length)] || '#3b82f6',
-      size: Math.random() * 0.8 + 0.4,
-      rotationSpeed: Math.random() * 0.5 + 0.5,
-    }));
-  }, [isMobile]);
+  // Geometric shapes configuration - REMOVED
+  // const shapes = useMemo(() => {
+  //   const shapeCount = isMobile ? 8 : 15;
+  //   const geometries: Array<'box' | 'sphere' | 'octahedron' | 'tetrahedron'> = 
+  //     ['box', 'sphere', 'octahedron', 'tetrahedron'];
+  //   const colors = ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444'];
+  //   
+  //   return Array.from({ length: shapeCount }, (_, i) => ({
+  //     position: [
+  //       (Math.random() - 0.5) * 20,
+  //       (Math.random() - 0.5) * 15,
+  //       (Math.random() - 0.5) * 10,
+  //     ] as [number, number, number],
+  //     geometry: geometries[Math.floor(Math.random() * geometries.length)] || 'box',
+  //     color: colors[Math.floor(Math.random() * colors.length)] || '#3b82f6',
+  //     size: Math.random() * 0.8 + 0.4,
+  //     rotationSpeed: Math.random() * 0.5 + 0.5,
+  //   }));
+  // }, [isMobile]);
 
   // Network nodes configuration
   const networkNodes = useMemo(() => {
@@ -302,8 +302,8 @@ function Scene({ isMobile }: { isMobile: boolean }) {
       <pointLight position={[-10, -10, 5]} intensity={0.3} color="#8b5cf6" />
       <pointLight position={[0, 15, -5]} intensity={0.4} color="#06b6d4" />
 
-      {/* Floating geometric shapes */}
-      {shapes.map((shape, index) => (
+      {/* Floating geometric shapes - REMOVED */}
+      {/* {shapes.map((shape, index) => (
         <GeometricShape
           key={`shape-${index}`}
           position={shape.position}
@@ -312,7 +312,7 @@ function Scene({ isMobile }: { isMobile: boolean }) {
           size={shape.size}
           rotationSpeed={shape.rotationSpeed}
         />
-      ))}
+      ))} */}
 
       {/* Network nodes */}
       {networkNodes.map((node, index) => (

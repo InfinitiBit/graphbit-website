@@ -137,8 +137,8 @@ function MorphingSVGShapes({ morphState }: { morphState: MorphState }) {
         />
       </svg>
 
-      {/* Additional positioned shapes */}
-      <svg 
+      {/* Additional positioned shapes - REMOVED */}
+      {/* <svg 
         className="absolute top-0 right-0 w-1/3 h-1/3 opacity-20"
         viewBox="0 0 200 200"
       >
@@ -173,7 +173,7 @@ function MorphingSVGShapes({ morphState }: { morphState: MorphState }) {
           opacity="0.3"
           transform={`rotate(${time * 0.025} 75 75)`}
         />
-      </svg>
+      </svg> */}
     </div>
   );
 }
