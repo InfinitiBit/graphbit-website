@@ -163,7 +163,7 @@ export function ProblemStatementSection() {
           >
             Building AI Agents
             <span className="block mt-2 bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-              Shouldn't Be This Hard
+              Shouldn&apos;t Be This Hard
             </span>
           </motion.h2>
 
@@ -176,7 +176,7 @@ export function ProblemStatementSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             Developers are struggling with the same painful challenges when building AI agents. 
-            <span className="text-white font-medium"> It's time for a better way.</span>
+            <span className="text-white font-medium"> It&apos;s time for a better way.</span>
           </motion.p>
         </motion.div>
 
