@@ -46,7 +46,7 @@ export default function RootLayout({
         <div id="main-content">
           <AuthProvider>
             <Navigation />
-            <div className="dev-border flex w-full pt-20">{children}</div>
+            <div className="dev-border flex w-full pt-16">{children}</div>
             <Footer />
           </AuthProvider>
         </div>
