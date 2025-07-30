@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   trailingSlash: true,
-  distDir: 'out',
   // Build optimizations to reduce build time
   experimental: {
     // Optimize build performance

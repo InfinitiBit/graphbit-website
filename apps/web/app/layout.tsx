@@ -1,6 +1,7 @@
 import AuthProvider from '@/components/auth/AuthProvider';
 import { Footer } from '@/components/footer';
 import { Navigation } from '@/components/navbar';
+import { ClerkProvider } from '@clerk/nextjs';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
@@ -44,11 +45,13 @@ export default function RootLayout({
           Skip to main content
         </a>
         <div id="main-content">
-          <AuthProvider>
-            <Navigation />
-            <div className="dev-border flex w-full pt-16">{children}</div>
-            <Footer />
-          </AuthProvider>
+          <ClerkProvider>
+            <AuthProvider>
+              <Navigation />
+              <div className="dev-border flex w-full pt-16">{children}</div>
+              <Footer />
+            </AuthProvider>
+          </ClerkProvider>
         </div>
       </body>
     </html>

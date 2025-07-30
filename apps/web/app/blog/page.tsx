@@ -1,6 +1,4 @@
 import { BlogCard } from '@/components/blog/blog-card';
-import { Footer } from '@/components/footer';
-import { Navigation } from '@/components/navbar';
 import { getAllBlogPosts } from '@/lib/blog';
 import { BarChart3 as BookOpen, Sparkles, TrendingUp } from 'lucide-react';
 
@@ -19,10 +17,9 @@ export default async function BlogPage() {
 
   return (
     <>
-      <Navigation />
       <div className="animated-gradient-bg fixed inset-0 -z-10"></div>
 
-      <main className="relative pt-16 sm:pt-20">
+      <main className="relative w-full pt-16 sm:pt-20">
         {/* Header Section */}
         <section className="border-b border-gray-200/50 px-4 py-12 text-center">
           <div className="mx-auto max-w-4xl">
@@ -166,8 +163,6 @@ export default async function BlogPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }

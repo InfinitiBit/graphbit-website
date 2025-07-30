@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { SignInButton, useClerk, useUser } from '@clerk/nextjs';
 import {
   ArrowRight,
   BarChart3,
@@ -27,6 +28,8 @@ const navigation = [
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { isSignedIn, user } = useUser();
+  const { signOut } = useClerk();
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -66,7 +69,8 @@ export function Navigation() {
           <div className="hidden items-center space-x-1 lg:flex">
             {navigation.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+              const isActive =
+                pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
               return (
                 <Link
                   key={item.name}
@@ -79,7 +83,9 @@ export function Navigation() {
                 >
                   <Icon
                     className={`h-4 w-4 transition-colors duration-300 ${
-                      isActive ? 'text-blue-400' : 'text-muted-foreground group-hover:text-foreground'
+                      isActive
+                        ? 'text-blue-400'
+                        : 'text-muted-foreground group-hover:text-foreground'
                     }`}
                   />
                   {item.name}
@@ -93,15 +99,28 @@ export function Navigation() {
 
           {/* Desktop CTA Button */}
           <div className="hidden items-center space-x-4 lg:flex">
-            <Link href="/dashboard">
-              <Button className="group relative overflow-hidden rounded-xl border-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 px-6 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 hover:shadow-xl">
+            {isSignedIn ? (
+              <Button
+                onClick={() => signOut()}
+                className="group relative overflow-hidden rounded-xl border-0 bg-gradient-to-r from-red-600 via-red-700 to-red-800 px-6 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-red-700 hover:via-red-800 hover:to-red-900 hover:shadow-xl"
+              >
                 <span className="relative z-10 flex items-center gap-2">
-                  Get Started
+                  Log Out
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </Button>
-            </Link>
+            ) : (
+              <SignInButton mode="modal">
+                <Button className="group relative overflow-hidden rounded-xl border-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 px-6 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 hover:shadow-xl">
+                  <span className="relative z-10 flex items-center gap-2">
+                    Sign In
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                </Button>
+              </SignInButton>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -133,7 +152,9 @@ export function Navigation() {
                 <div className="mobile-spacing px-4">
                   {navigation.map((item) => {
                     const Icon = item.icon;
-                    const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+                    const isActive =
+                      pathname === item.href ||
+                      (item.href !== '/' && pathname.startsWith(item.href));
                     return (
                       <Link
                         key={item.name}
@@ -159,14 +180,26 @@ export function Navigation() {
 
               {/* Mobile CTA */}
               <div className="border-t border-border p-4">
-                <Link href="/dashboard" className="block">
-                  <Button className="mobile-cta group rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800">
+                {isSignedIn ? (
+                  <Button
+                    onClick={() => signOut()}
+                    className="mobile-cta group w-full rounded-xl bg-gradient-to-r from-red-600 via-red-700 to-red-800 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-red-700 hover:via-red-800 hover:to-red-900"
+                  >
                     <span className="flex items-center gap-2">
-                      Get Started
+                      Log Out
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                   </Button>
-                </Link>
+                ) : (
+                  <SignInButton mode="modal">
+                    <Button className="mobile-cta group w-full rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800">
+                      <span className="flex items-center gap-2">
+                        Sign In
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </Button>
+                  </SignInButton>
+                )}
               </div>
             </div>
           </div>

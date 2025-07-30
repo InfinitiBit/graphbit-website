@@ -1,6 +1,5 @@
 'use client';
 
-import { Navigation } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -119,8 +118,7 @@ export default function DocsPage() {
 
   return (
     <>
-      <Navigation />
-      <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30">
+      <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-blue-50/30">
         {/* Header */}
         <div className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur-sm">
           <div className="container-responsive py-4">

@@ -1,6 +1,5 @@
 'use client';
 
-import { Navigation } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -59,8 +58,7 @@ export default function DashboardPage() {
 
   return (
     <>
-      <Navigation />
-      <main className="w-full min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30 pt-16 sm:pt-20">
+      <main className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-blue-50/30 pt-16 sm:pt-20">
         {/* Header */}
         <div className="border-b bg-white/80 backdrop-blur-sm">
           <div className="container-responsive py-6 sm:py-8">
