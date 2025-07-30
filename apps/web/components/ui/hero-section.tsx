@@ -93,7 +93,7 @@ export function HeroSection() {
             className="mx-auto mb-3 max-w-5xl text-3xl font-extrabold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
             variants={fadeInUp}
           >
-            <span className="block bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent drop-shadow-sm">
+            <span className="block bg-gradient-to-r from-[#00253e] via-[#003a5c] to-[#001a2e] bg-clip-text text-transparent drop-shadow-sm">
               Build AI Agents
             </span>
             <span className="mt-1 block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent sm:mt-2">
