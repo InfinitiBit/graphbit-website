@@ -25,28 +25,28 @@ export default function Home() {
         {/* Enhanced Features Section */}
         <section
           id="features-section"
-          className="relative bg-gradient-to-b from-white via-gray-50/30 to-white py-20 sm:py-24 lg:py-32"
+          className="relative bg-gradient-to-b from-background via-muted/30 to-background py-20 sm:py-24 lg:py-32"
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
 
           <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16 text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200/50 bg-blue-50 px-4 py-2">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2">
                 <div className="h-2 w-2 animate-pulse rounded-full bg-blue-500"></div>
-                <span className="text-sm font-semibold uppercase tracking-wide text-blue-700">
+                <span className="text-sm font-semibold uppercase tracking-wide text-blue-400">
                   Key Features
                 </span>
               </div>
 
-              <h2 className="mb-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+              <h2 className="mb-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                 Everything You Need to Build
                 <span className="mt-2 block bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
                   Production-Ready AI Agents
                 </span>
               </h2>
 
-              <p className="mx-auto max-w-2xl text-lg text-gray-600">
+              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
                 From development to deployment, monitoring to scaling - GraphBit provides the
                 complete toolkit for AI agent success.
               </p>
@@ -55,7 +55,7 @@ export default function Home() {
             {/* Feature Cards */}
             <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-3">
               {/* Real-time Monitoring */}
-              <div className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
@@ -75,8 +75,8 @@ export default function Home() {
                     </svg>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900">Real-time Monitoring</h3>
-                  <p className="leading-relaxed text-gray-600">
+                  <h3 className="mb-3 text-xl font-semibold text-foreground">Real-time Monitoring</h3>
+                  <p className="leading-relaxed text-muted-foreground">
                     Track every interaction, performance metric, and decision path with
                     comprehensive real-time dashboards and alerts.
                   </p>
@@ -84,7 +84,7 @@ export default function Home() {
               </div>
 
               {/* Security & Compliance */}
-              <div className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 via-transparent to-teal-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
@@ -104,10 +104,10 @@ export default function Home() {
                     </svg>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900">
+                  <h3 className="mb-3 text-xl font-semibold text-foreground">
                     Security & Compliance
                   </h3>
-                  <p className="leading-relaxed text-gray-600">
+                  <p className="leading-relaxed text-muted-foreground">
                     Enterprise-grade security with SOC 2 compliance, data encryption, and built-in
                     protection against prompt injection attacks.
                   </p>
@@ -115,7 +115,7 @@ export default function Home() {
               </div>
 
               {/* Auto-scaling Infrastructure */}
-              <div className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-pink-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
@@ -135,10 +135,10 @@ export default function Home() {
                     </svg>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900">
+                  <h3 className="mb-3 text-xl font-semibold text-foreground">
                     Auto-scaling Infrastructure
                   </h3>
-                  <p className="leading-relaxed text-gray-600">
+                  <p className="leading-relaxed text-muted-foreground">
                     Handle any load with intelligent auto-scaling that adapts to demand while
                     optimizing costs and performance automatically.
                   </p>
@@ -146,7 +146,7 @@ export default function Home() {
               </div>
 
               {/* Developer Experience */}
-              <div className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-transparent to-red-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
@@ -166,8 +166,8 @@ export default function Home() {
                     </svg>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900">Developer Experience</h3>
-                  <p className="leading-relaxed text-gray-600">
+                  <h3 className="mb-3 text-xl font-semibold text-foreground">Developer Experience</h3>
+                  <p className="leading-relaxed text-muted-foreground">
                     Intuitive APIs, comprehensive documentation, and powerful debugging tools that
                     make development fast and enjoyable.
                   </p>
@@ -175,7 +175,7 @@ export default function Home() {
               </div>
 
               {/* AI Agent Marketplace */}
-              <div className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/50 via-transparent to-blue-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
@@ -195,8 +195,8 @@ export default function Home() {
                     </svg>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900">AI Agent Marketplace</h3>
-                  <p className="leading-relaxed text-gray-600">
+                  <h3 className="mb-3 text-xl font-semibold text-foreground">AI Agent Marketplace</h3>
+                  <p className="leading-relaxed text-muted-foreground">
                     Discover and deploy pre-built AI agents or share your creations with a thriving
                     community of developers.
                   </p>
@@ -204,7 +204,7 @@ export default function Home() {
               </div>
 
               {/* Advanced Analytics */}
-              <div className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
@@ -224,8 +224,8 @@ export default function Home() {
                     </svg>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900">Advanced Analytics</h3>
-                  <p className="leading-relaxed text-gray-600">
+                  <h3 className="mb-3 text-xl font-semibold text-foreground">Advanced Analytics</h3>
+                  <p className="leading-relaxed text-muted-foreground">
                     Deep insights into agent performance, user interactions, and business metrics
                     with customizable dashboards and reports.
                   </p>
@@ -269,16 +269,16 @@ export default function Home() {
         <section className="relative py-16 sm:py-20 lg:py-24">
           <div className="container-responsive">
             <div className="mx-auto mb-16 max-w-2xl text-center">
-              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
+              <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
                 What developers are saying
               </h2>
-              <p className="mt-6 text-lg text-gray-600">
+              <p className="mt-6 text-lg text-muted-foreground">
                 See how GraphBit is transforming AI development workflows
               </p>
             </div>
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
+              <Card className="border-0 bg-card/70 shadow-lg backdrop-blur-sm">
                 <CardHeader className="pb-4">
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-1">
@@ -292,7 +292,7 @@ export default function Home() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="mb-6 font-medium leading-relaxed text-gray-900">
+                  <p className="mb-6 font-medium leading-relaxed text-foreground">
                     &quot;GraphBit cut our AI development time by <strong>70%</strong>. The
                     marketplace had exactly what we needed, and the tracing tools helped us optimize
                     performance instantly.&quot;
@@ -302,14 +302,14 @@ export default function Home() {
                       SK
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Sarah Kim</p>
-                      <p className="text-sm text-gray-600">CTO, AI Startup</p>
+                      <p className="font-semibold text-foreground">Sarah Kim</p>
+                      <p className="text-sm text-muted-foreground">CTO, AI Startup</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
+              <Card className="border-0 bg-card/70 shadow-lg backdrop-blur-sm">
                 <CardHeader className="pb-4">
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-1">
@@ -323,7 +323,7 @@ export default function Home() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="mb-6 font-medium leading-relaxed text-gray-900">
+                  <p className="mb-6 font-medium leading-relaxed text-foreground">
                     &quot;The observability features are game-changing. We can now track every LLM
                     interaction across our <strong>25+ microservices</strong>
                     in real-time.&quot;
@@ -333,14 +333,14 @@ export default function Home() {
                       DK
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">David Kim</p>
-                      <p className="text-sm text-gray-600">Lead Engineer, Fortune 500</p>
+                      <p className="font-semibold text-foreground">David Kim</p>
+                      <p className="text-sm text-muted-foreground">Lead Engineer, Fortune 500</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
+              <Card className="border-0 bg-card/70 shadow-lg backdrop-blur-sm">
                 <CardHeader className="pb-4">
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-1">
@@ -354,7 +354,7 @@ export default function Home() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="mb-6 font-medium leading-relaxed text-gray-900">
+                  <p className="mb-6 font-medium leading-relaxed text-foreground">
                     &quot;From prototype to production in <strong>2 days</strong>. Now earning{' '}
                     <strong>$15K/month</strong> from my AI SaaS. GraphBit made it possible.&quot;
                   </p>
@@ -363,8 +363,8 @@ export default function Home() {
                       AC
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Alex Chen</p>
-                      <p className="text-sm text-gray-600">Indie Developer</p>
+                      <p className="font-semibold text-foreground">Alex Chen</p>
+                      <p className="text-sm text-muted-foreground">Indie Developer</p>
                     </div>
                   </div>
                 </CardContent>
@@ -379,7 +379,7 @@ export default function Home() {
             This code applies responsive design improvements to the main page, including adjustments
             to background orbs, text sizes, and button layouts, to ensure a better user experience
             across different devices.{' '}
-            <div className="relative overflow-hidden rounded-3xl border border-gray-200/50 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8 shadow-2xl lg:p-16">
+            <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8 shadow-2xl lg:p-16">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10" />
 
               <div className="relative mx-auto max-w-3xl text-center">

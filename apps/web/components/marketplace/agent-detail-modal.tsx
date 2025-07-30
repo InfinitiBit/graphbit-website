@@ -117,9 +117,9 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
         />
         
         {/* Modal */}
-        <div className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <div className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl bg-background shadow-2xl">
           {/* Header */}
-          <div className="sticky top-0 z-10 border-b border-gray-200 bg-white/95 backdrop-blur-sm px-6 py-4">
+          <div className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur-sm px-6 py-4">
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-4 mb-2">
@@ -127,12 +127,12 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
                     <Brain className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 truncate">{agent.name}</h2>
-                    <p className="text-sm text-gray-600">by {agent.author} • v{agent.version}</p>
+                    <h2 className="text-2xl font-bold text-foreground truncate">{agent.name}</h2>
+                    <p className="text-sm text-muted-foreground">by {agent.author} • v{agent.version}</p>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4 text-sm text-gray-600">
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Download className="h-4 w-4 text-green-600" />
                     <span className="font-medium">{agent.downloads.toLocaleString()}</span>
@@ -150,7 +150,7 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
               
               <button
                 onClick={onClose}
-                className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+                className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -158,7 +158,7 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
           </div>
 
           {/* Tabs */}
-          <div className="sticky top-[88px] z-10 border-b border-gray-200 bg-white/95 backdrop-blur-sm px-6">
+          <div className="sticky top-[88px] z-10 border-b border-border bg-background/95 backdrop-blur-sm px-6">
             <div className="flex space-x-6 overflow-x-auto">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
@@ -168,8 +168,8 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center gap-2 border-b-2 px-1 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
                       activeTab === tab.id
-                        ? 'border-blue-600 text-blue-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                        ? 'border-blue-400 text-blue-400'
+                        : 'border-transparent text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -186,13 +186,13 @@ export function AgentDetailModal({ agent, isOpen, onClose }: AgentDetailModalPro
               <div className="space-y-6">
                 {/* Description */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Description</h3>
-                  <p className="text-gray-700 leading-relaxed mb-4">{agent.longDescription || agent.description}</p>
+                  <h3 className="text-lg font-semibold text-foreground mb-3">Description</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-4">{agent.longDescription || agent.description}</p>
                   
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {agent.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-blue-50 text-blue-700">
+                      <Badge key={tag} variant="secondary" className="bg-blue-500/10 text-blue-400">
                         {tag}
                       </Badge>
                     ))}

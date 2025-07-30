@@ -91,16 +91,16 @@ function StatCard({ stat, index }: { stat: StatItem; index: number }) {
         delay: index * 0.1,
         ease: [0.21, 1.02, 0.73, 1],
       }}
-      className="group relative overflow-hidden rounded-xl bg-white/70 backdrop-blur-sm border border-white/20 p-3 sm:p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-1"
+      className="group relative overflow-hidden rounded-xl bg-card/70 backdrop-blur-sm border border-border/20 p-3 sm:p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-1"
     >
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
       {/* Content */}
       <div className="relative z-10 text-center">
         {/* Icon */}
         <motion.div 
-          className={`inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-gray-100 to-gray-50 ${stat.color} mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300`}
+          className={`inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-muted to-muted/50 ${stat.color} mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300`}
           whileHover={{ rotate: 5 }}
         >
           {stat.icon}
@@ -108,14 +108,14 @@ function StatCard({ stat, index }: { stat: StatItem; index: number }) {
         
         {/* Value */}
         <div className="mb-1">
-          <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
+          <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">
             <AnimatedNumber value={stat.value} suffix={stat.suffix} />
             <span className={`${stat.color} ml-1 font-extrabold`}>{stat.suffix}</span>
           </span>
         </div>
         
         {/* Label */}
-        <p className="text-xs sm:text-sm text-gray-600 font-medium leading-tight">
+        <p className="text-xs sm:text-sm text-muted-foreground font-medium leading-tight">
           {stat.label}
         </p>
       </div>
@@ -145,7 +145,7 @@ export function AnimatedHeroStats() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="text-center mb-4 sm:mb-6"
       >
-        <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-2">
+        <h3 className="text-base sm:text-lg font-semibold text-muted-foreground mb-2">
           Trusted by developers worldwide
         </h3>
         <div className="w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />

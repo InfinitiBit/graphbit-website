@@ -46,7 +46,7 @@ export function Navigation() {
   }, [mobileMenuOpen]);
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur-md">
+    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-border bg-background/95 shadow-sm backdrop-blur-md">
       <div className="responsive-container">
         <div className="flex h-16 items-center justify-between sm:h-20">
           {/* GraphBit Logo */}
@@ -57,7 +57,7 @@ export function Navigation() {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-20"></div>
               </div>
             </div>
-            <span className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-xl font-bold text-transparent sm:text-2xl">
+            <span className="bg-gradient-to-r from-foreground via-blue-400 to-foreground bg-clip-text text-xl font-bold text-transparent sm:text-2xl">
               GraphBit
             </span>
           </Link>
@@ -71,15 +71,15 @@ export function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`group relative flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-300 hover:scale-105 hover:bg-gray-100/80 ${
+                  className={`group relative flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-300 hover:scale-105 hover:bg-muted/80 ${
                     isActive
-                      ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 shadow-md'
-                      : 'text-gray-700 hover:text-gray-900'
+                      ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-400 shadow-md'
+                      : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   <Icon
                     className={`h-4 w-4 transition-colors duration-300 ${
-                      isActive ? 'text-blue-600' : 'text-gray-500 group-hover:text-gray-700'
+                      isActive ? 'text-blue-400' : 'text-muted-foreground group-hover:text-foreground'
                     }`}
                   />
                   {item.name}
@@ -107,13 +107,13 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="touch-friendly relative z-10 rounded-lg bg-gray-100 transition-colors hover:bg-gray-200 lg:hidden"
+            className="touch-friendly relative z-10 rounded-lg bg-muted transition-colors hover:bg-muted/80 lg:hidden"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-gray-700" />
+              <X className="h-6 w-6 text-foreground" />
             ) : (
-              <Menu className="h-6 w-6 text-gray-700" />
+              <Menu className="h-6 w-6 text-foreground" />
             )}
           </button>
         </div>
@@ -126,7 +126,7 @@ export function Navigation() {
           <div className="mobile-overlay" onClick={() => setMobileMenuOpen(false)} />
 
           {/* Mobile Menu Content */}
-          <div className="fixed inset-x-0 bottom-0 top-16 bg-white shadow-xl sm:top-20">
+          <div className="fixed inset-x-0 bottom-0 top-16 bg-background shadow-xl sm:top-20">
             <div className="flex h-full flex-col">
               {/* Navigation Links */}
               <div className="flex-1 overflow-y-auto py-6">
@@ -140,12 +140,12 @@ export function Navigation() {
                         href={item.href}
                         className={`mobile-nav-item rounded-xl ${
                           isActive
-                            ? 'border border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700'
-                            : 'text-gray-700'
+                            ? 'border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-400'
+                            : 'text-muted-foreground'
                         }`}
                       >
                         <Icon
-                          className={`mr-3 h-5 w-5 ${isActive ? 'text-blue-600' : 'text-gray-500'}`}
+                          className={`mr-3 h-5 w-5 ${isActive ? 'text-blue-400' : 'text-muted-foreground'}`}
                         />
                         {item.name}
                         {isActive && (
@@ -158,7 +158,7 @@ export function Navigation() {
               </div>
 
               {/* Mobile CTA */}
-              <div className="border-t border-gray-200 p-4">
+              <div className="border-t border-border p-4">
                 <Link href="/dashboard" className="block">
                   <Button className="mobile-cta group rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800">
                     <span className="flex items-center gap-2">
