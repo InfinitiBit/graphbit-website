@@ -71,4 +71,5 @@ declare module 'lucide-react' {
   export const Calendar: FC<IconProps>;
   export const Hash: FC<IconProps>;
   export const Plus: FC<IconProps>;
+  export const Check: FC<IconProps>;
 }

@@ -1,7 +1,9 @@
 'use client';
 
+import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SubscriptionModal } from '@/components/ui/subscription-modal';
 import {
   Activity,
   AlertCircle,
@@ -25,6 +27,7 @@ interface DashboardStats {
 }
 
 export default function DashboardPage() {
+  const { isLoaded, isSignedIn, user } = useUser();
   const [stats, _setStats] = useState<DashboardStats>({
     totalAgents: 12,
     activeTraces: 147,
@@ -56,6 +59,21 @@ export default function DashboardPage() {
     },
   ]);
 
+  // Show loading state while Clerk is loading
+  if (!isLoaded) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-lg">Loading...</div>
+      </div>
+    );
+  }
+
+  // Redirect to sign-in if not authenticated
+  if (!isSignedIn) {
+    window.location.href = '/sign-in';
+    return null;
+  }
+
   return (
     <>
       <main className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-blue-50/30 pt-16 sm:pt-20">
@@ -76,10 +94,7 @@ export default function DashboardPage() {
                   <Plus className="mr-2 h-4 w-4" />
                   <span className="sm:inline">Settings</span>
                 </Button>
-                <Button className="w-full sm:w-auto">
-                  <Plus className="mr-2 h-4 w-4" />
-                  <span className="sm:inline">New Agent</span>
-                </Button>
+                <SubscriptionModal />
               </div>
             </div>
           </div>
@@ -272,7 +287,7 @@ export default function DashboardPage() {
               </Card>
             </div>
           </div>
-        </div>
+      </div>
       </main>
     </>
   );
