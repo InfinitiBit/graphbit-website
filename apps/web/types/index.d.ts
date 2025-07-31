@@ -10,6 +10,10 @@ declare module '@clerk/nextjs' {
     isLoaded: boolean;
   };
 
+  export function useClerk(): {
+    signOut: () => void;
+  };
+
   export function ClerkProvider(props: { children: React.ReactNode }): JSX.Element;
   export function UserButton(props: { afterSignOutUrl?: string }): JSX.Element;
   export function SignInButton(props: { mode?: string; children: React.ReactNode }): JSX.Element;

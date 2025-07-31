@@ -114,7 +114,7 @@ function ConnectionLine({ start, end, color = '#60a5fa' }: {
   end: [number, number, number];
   color?: string;
 }) {
-  const lineRef = useRef<any>(null);
+  const lineRef = useRef<THREE.Line>(null);
 
   useFrame(() => {
     if (lineRef.current) {

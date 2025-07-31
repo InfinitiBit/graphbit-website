@@ -3,6 +3,7 @@
 import { SignInButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from 'next/link';
 
 export default function Page() {
   return (
@@ -17,9 +18,9 @@ export default function Page() {
           </SignInButton>
           <p className="text-center text-sm text-gray-600">
             Already have an account?{' '}
-            <a href="/sign-in" className="text-blue-600 hover:underline">
+            <Link href="/sign-in" className="text-blue-600 hover:underline">
               Sign in
-            </a>
+            </Link>
           </p>
         </CardContent>
       </Card>

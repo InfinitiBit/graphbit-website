@@ -149,8 +149,8 @@ async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
 }
 
 async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
-  const subscriptionId =
-    typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id;
+  // Access subscription ID from invoice - it can be a string or null
+  const subscriptionId = (invoice as any).subscription as string | null;
 
   if (!subscriptionId) {
     console.error('No subscription ID in invoice');
@@ -162,8 +162,8 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
 }
 
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
-  const subscriptionId =
-    typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id;
+  // Access subscription ID from invoice - it can be a string or null
+  const subscriptionId = (invoice as any).subscription as string | null;
 
   if (!subscriptionId) {
     console.error('No subscription ID in invoice');

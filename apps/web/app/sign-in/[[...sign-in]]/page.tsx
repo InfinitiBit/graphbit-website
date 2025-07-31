@@ -3,6 +3,7 @@
 import { SignInButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from 'next/link';
 
 export default function Page() {
   return (
@@ -16,10 +17,10 @@ export default function Page() {
             <Button className="w-full">Sign In</Button>
           </SignInButton>
           <p className="text-center text-sm text-gray-600">
-            Don't have an account?{' '}
-            <a href="/sign-up" className="text-blue-600 hover:underline">
+            Don&apos;t have an account?{' '}
+            <Link href="/sign-up" className="text-blue-600 hover:underline">
               Sign up
-            </a>
+            </Link>
           </p>
         </CardContent>
       </Card>

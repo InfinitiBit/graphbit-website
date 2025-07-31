@@ -2,9 +2,10 @@
 
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 
 function RotatingBox() {
-  const meshRef = useRef<any>(null);
+  const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame(() => {
     if (meshRef.current) {

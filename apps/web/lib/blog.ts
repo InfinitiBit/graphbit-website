@@ -53,7 +53,7 @@ export function getAllBlogPosts(): BlogPost[] {
 
       // Generate excerpt if not provided
       const excerpt = data.excerpt || content
-        .replace(/[#*`>\[\]]/g, '') // Remove markdown syntax
+        .replace(/[#*`>[\]]/g, '') // Remove markdown syntax
         .substring(0, 160) + '...';
 
       return {
@@ -109,7 +109,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 
     // Generate excerpt
     const excerpt = data.excerpt || content
-      .replace(/[#*`>\[\]]/g, '')
+      .replace(/[#*`>[\]]/g, '')
       .substring(0, 160) + '...';
 
     return {

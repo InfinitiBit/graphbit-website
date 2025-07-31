@@ -13,14 +13,18 @@ export async function GET() {
       country: account.country,
       currency: account.default_currency
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Stripe connection error:', error);
+    
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorType = (error as any)?.type || 'unknown';
+    const errorCode = (error as any)?.code || 'unknown';
     
     return NextResponse.json({
       success: false,
-      error: error.message,
-      type: error.type,
-      code: error.code
+      error: errorMessage,
+      type: errorType,
+      code: errorCode
     }, { status: 500 });
   }
 }

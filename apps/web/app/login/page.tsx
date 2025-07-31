@@ -74,15 +74,17 @@ export default function LoginPage() {
       } else {
         setErrors({ general: response.message || 'Login failed' });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Login error:', error);
 
-      if (error.message.includes('Invalid email or password')) {
+      const errorMessage = error instanceof Error ? error.message : '';
+      
+      if (errorMessage.includes('Invalid email or password')) {
         setErrors({
           email: 'Invalid email or password',
           password: 'Invalid email or password',
         });
-      } else if (error.message.includes('Account is deactivated')) {
+      } else if (errorMessage.includes('Account is deactivated')) {
         setErrors({ general: 'Account is deactivated. Please contact support.' });
       } else {
         setErrors({ general: 'An error occurred. Please try again.' });

@@ -88,12 +88,14 @@ export default function RegisterPage() {
       } else {
         setErrors({ general: response.message || 'Registration failed' });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Registration error:', error);
       
-      if (error.message.includes('User already exists')) {
+      const errorMessage = error instanceof Error ? error.message : '';
+      
+      if (errorMessage.includes('User already exists')) {
         setErrors({ email: 'An account with this email already exists' });
-      } else if (error.message.includes('Validation failed')) {
+      } else if (errorMessage.includes('Validation failed')) {
         setErrors({ general: 'Please check your input and try again' });
       } else {
         setErrors({ general: 'An error occurred. Please try again.' });

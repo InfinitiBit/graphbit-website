@@ -183,8 +183,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
     }
   ];
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
+  const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number }>; label?: string }) => {
+    if (active && payload && payload.length && payload[0]) {
       return (
         <div className="bg-gray-900 text-white p-3 rounded-lg shadow-xl border border-gray-700">
           <p className="font-semibold">{label}</p>
@@ -396,4 +396,4 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
       <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/10 to-green-500/10 rounded-full blur-2xl" />
     </div>
   );
-} 
+}
