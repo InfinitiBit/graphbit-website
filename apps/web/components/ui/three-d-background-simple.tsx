@@ -138,7 +138,7 @@ export function ThreeDBackgroundSimple() {
   }
 
   return (
-    <div className="absolute inset-0 -z-10">
+    <div className="fixed inset-0 -z-10">
       <Suspense fallback={<LoadingFallback />}>
         <Canvas
           camera={{ position: [0, 0, 15], fov: 50 }}

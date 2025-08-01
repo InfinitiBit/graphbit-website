@@ -383,7 +383,7 @@ export function MorphingBackground() {
   });
 
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="fixed inset-0 -z-10 overflow-hidden">
       {/* Animated gradient background */}
       <AnimatedGradientBackground morphState={morphState} />
       

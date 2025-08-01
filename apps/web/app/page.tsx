@@ -9,9 +9,6 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <>
-      {/* Enhanced background with modern gradient layers */}
-      <div className="animated-gradient-bg fixed inset-0 -z-10 w-full h-full"></div>
-
       <main className="relative w-full h-full">
         {/* New Hero Section */}
         <HeroSection />

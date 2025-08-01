@@ -23,7 +23,7 @@ const MorphingBackground = dynamic(() =>
 // Loading fallback component
 function LoadingFallback() {
   return (
-    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/50 to-purple-50/30 -z-10" />
+    <div className="fixed inset-0 bg-gradient-to-br from-slate-50 via-blue-50/50 to-purple-50/30 -z-10" />
   );
 }
 
@@ -107,18 +107,13 @@ export function AdaptiveBackground() {
   
   switch (performanceMode) {
     case 'high':
-      return (
-        <>
-          <MorphingBackground />
-          <ThreeDBackgroundComplete />
-        </>
-      );
-    
-    case 'medium':
       return <ThreeDBackgroundComplete />;
     
-    case 'low':
+    case 'medium':
       return <MorphingBackground />;
+    
+    case 'low':
+      return <LoadingFallback />;
     
     default:
       return <LoadingFallback />;
