@@ -61,8 +61,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       title: 'API Gateway',
       description: 'Secure entry point for all AI agent interactions',
       icon: Shield,
-      color: '#3b82f6',
-      gradient: 'from-blue-500 to-blue-600',
+      color: 'hsl(195 100% 28%)',
+      gradient: 'from-primary to-primary-light',
       features: ['Rate limiting', 'Authentication', 'Request routing', 'SSL termination'],
       connections: ['agent-runtime', 'monitoring']
     },
@@ -73,8 +73,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       title: 'Agent Runtime',
       description: 'Core execution environment for AI agents',
       icon: Cpu,
-      color: '#10b981',
-      gradient: 'from-emerald-500 to-emerald-600',
+      color: 'hsl(160 84% 39%)',
+      gradient: 'from-success to-success-light',
       features: ['Multi-model support', 'Auto-scaling', 'Isolation', 'Resource management'],
       connections: ['llm-orchestrator', 'data-layer', 'monitoring']
     },
@@ -85,8 +85,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       title: 'LLM Orchestrator',
       description: 'Intelligent routing and optimization for language models',
       icon: GitBranch,
-      color: '#8b5cf6',
-      gradient: 'from-purple-500 to-purple-600',
+      color: 'hsl(243 75% 59%)',
+      gradient: 'from-accent to-accent-light',
       features: ['Model selection', 'Load balancing', 'Fallback handling', 'Cost optimization'],
       connections: ['external-llms', 'monitoring']
     },
@@ -97,8 +97,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       title: 'Data Layer',
       description: 'Secure and scalable data storage and retrieval',
       icon: Database,
-      color: '#f59e0b',
-      gradient: 'from-amber-500 to-amber-600',
+      color: 'hsl(32 95% 44%)',
+      gradient: 'from-warning to-warning-light',
       features: ['Vector databases', 'Caching', 'Data encryption', 'Backup & recovery'],
       connections: ['knowledge-base']
     },
@@ -109,8 +109,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       title: 'Monitoring & Analytics',
       description: 'Real-time observability and performance tracking',
       icon: BarChart3,
-      color: '#ef4444',
-      gradient: 'from-red-500 to-red-600',
+      color: 'hsl(215 14% 34%)',
+      gradient: 'from-secondary to-secondary-light',
       features: ['Real-time dashboards', 'Alerting', 'Performance metrics', 'Usage analytics'],
       connections: ['user-dashboard']
     },
@@ -121,8 +121,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       title: 'External LLMs',
       description: 'Integration with leading AI model providers',
       icon: Cloud,
-      color: '#06b6d4',
-      gradient: 'from-cyan-500 to-cyan-600',
+      color: 'hsl(195 85% 41%)',
+      gradient: 'from-primary-light to-primary-lighter',
       features: ['OpenAI GPT', 'Anthropic Claude', 'Google PaLM', 'Custom models'],
       connections: []
     },
@@ -133,8 +133,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       title: 'Knowledge Base',
       description: 'Centralized repository for agent knowledge and context',
       icon: Eye,
-      color: '#84cc16',
-      gradient: 'from-lime-500 to-lime-600',
+      color: 'hsl(160 80% 52%)',
+      gradient: 'from-success-light to-success-lighter',
       features: ['Document indexing', 'Semantic search', 'Version control', 'Access control'],
       connections: []
     },
@@ -145,8 +145,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       title: 'User Dashboard',
       description: 'Intuitive interface for managing and monitoring agents',
       icon: Users,
-      color: '#ec4899',
-      gradient: 'from-pink-500 to-pink-600',
+      color: 'hsl(243 75% 70%)',
+      gradient: 'from-accent-light to-accent-lighter',
       features: ['Agent management', 'Performance insights', 'Configuration', 'Team collaboration'],
       connections: []
     }
@@ -157,42 +157,42 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       from: 'api-gateway',
       to: 'agent-runtime',
       label: 'Requests',
-      color: '#3b82f6',
+      color: 'hsl(195 100% 28%)',
       path: 'M 400 80 Q 300 100 200 180'
     },
     {
       from: 'agent-runtime',
       to: 'llm-orchestrator',
       label: 'LLM Calls',
-      color: '#10b981',
+      color: 'hsl(160 84% 39%)',
       path: 'M 230 150 Q 400 120 570 150'
     },
     {
       from: 'llm-orchestrator',
       to: 'external-llms',
       label: 'API Calls',
-      color: '#8b5cf6',
+      color: 'hsl(243 75% 59%)',
       path: 'M 600 120 L 600 80'
     },
     {
       from: 'agent-runtime',
       to: 'data-layer',
       label: 'Data Access',
-      color: '#10b981',
+      color: 'hsl(160 84% 39%)',
       path: 'M 180 180 Q 140 200 120 220'
     },
     {
       from: 'data-layer',
       to: 'knowledge-base',
       label: 'Knowledge',
-      color: '#f59e0b',
+      color: 'hsl(32 95% 44%)',
       path: 'M 100 280 L 100 320'
     },
     {
       from: 'monitoring',
       to: 'user-dashboard',
       label: 'Analytics',
-      color: '#ef4444',
+      color: 'hsl(215 14% 34%)',
       path: 'M 680 280 Q 600 300 520 320'
     }
   ];
@@ -274,44 +274,44 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
   };
 
   return (
-    <div className={`relative bg-gradient-to-br from-gray-50 to-white border border-gray-200/50 rounded-2xl overflow-hidden ${className}`}>
+    <div className={`relative bg-gradient-to-br from-background via-muted/30 to-background border border-border/50 rounded-2xl overflow-hidden shadow-lg backdrop-blur-sm ${className}`}>
       {/* Header */}
-      <div className="p-6 border-b border-gray-200/50">
+      <div className="p-6 border-b border-border/50">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">GraphBit Architecture</h3>
-            <p className="text-gray-600">Interactive diagram showing how our components work together</p>
+            <h3 className="text-xl font-bold text-foreground mb-2">GraphBit Architecture</h3>
+            <p className="text-muted-foreground">Interactive diagram showing how our components work together</p>
           </div>
           
           {/* Controls */}
           <div className="flex items-center gap-3">
             <button
               onClick={handleZoomIn}
-              className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="p-2 bg-card border border-border rounded-lg hover:bg-muted transition-colors"
               aria-label="Zoom in"
             >
-              <ZoomIn className="h-4 w-4 text-gray-600" />
+              <ZoomIn className="h-4 w-4 text-muted-foreground" />
             </button>
             <button
               onClick={handleZoomOut}
-              className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="p-2 bg-card border border-border rounded-lg hover:bg-muted transition-colors"
               aria-label="Zoom out"
             >
-              <ZoomOut className="h-4 w-4 text-gray-600" />
+              <ZoomOut className="h-4 w-4 text-muted-foreground" />
             </button>
             <button
               onClick={handleReset}
-              className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="p-2 bg-card border border-border rounded-lg hover:bg-muted transition-colors"
               aria-label="Reset view"
             >
-              <RotateCcw className="h-4 w-4 text-gray-600" />
+              <RotateCcw className="h-4 w-4 text-muted-foreground" />
             </button>
             <button
               onClick={toggleAnimation}
               className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                 isAnimating 
-                  ? 'bg-blue-100 text-blue-700 border border-blue-200' 
-                  : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-50'
+                  ? 'bg-primary/10 text-primary border border-primary/20' 
+                  : 'bg-card text-muted-foreground border border-border hover:bg-muted'
               }`}
             >
               {isAnimating ? 'Pause' : 'Play'}
@@ -346,7 +346,7 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
           {/* Background Grid */}
           <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f1f5f9" strokeWidth="1" opacity="0.5"/>
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3"/>
             </pattern>
             
             {/* Animated gradient for data flows */}

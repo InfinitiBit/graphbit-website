@@ -18,25 +18,25 @@ const problems = [
     icon: Clock,
     title: "Slow Development Cycles",
     description: "Months spent building AI agents from scratch, dealing with complex infrastructure, and debugging production issues that could have been avoided.",
-    gradient: "from-red-500 to-orange-500"
+    gradient: "from-warning to-warning-light"
   },
   {
     icon: Shield,
     title: "Zero Visibility",
     description: "AI agents fail silently in production with no insights into performance, decision-making processes, or user interactions.",
-    gradient: "from-purple-500 to-pink-500"
+    gradient: "from-accent to-accent-light"
   },
   {
     icon: Shield,
     title: "Security Vulnerabilities",
     description: "Prompt injection attacks, data leaks, and unauthorized access threats that put your business and users at risk.",
-    gradient: "from-blue-500 to-cyan-500"
+    gradient: "from-secondary to-secondary-light"
   },
   {
     icon: ChevronDown,
     title: "Poor Performance at Scale",
     description: "AI agents that work in development but fail under real-world load, leading to frustrated users and lost revenue.",
-    gradient: "from-yellow-500 to-red-500"
+    gradient: "from-destructive to-destructive-light"
   }
 ];
 
@@ -105,23 +105,23 @@ const iconVariants = {
 
 export function ProblemStatementSection() {
   return (
-    <section className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+    <section className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-muted via-muted/50 to-background overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-red-900/10 via-transparent to-blue-900/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-warning/5 via-transparent to-secondary/5" />
         
         {/* Static background pattern - no hydration issues */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-red-500/50 rounded-full animate-pulse" />
-          <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-orange-500/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-yellow-500/30 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
-          <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-red-400/50 rounded-full animate-pulse" style={{ animationDelay: '3s' }} />
-          <div className="absolute bottom-1/3 right-1/5 w-2 h-2 bg-orange-400/30 rounded-full animate-pulse" style={{ animationDelay: '4s' }} />
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/30 rounded-full animate-pulse" />
+          <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-accent/25 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-warning/20 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-secondary/35 rounded-full animate-pulse" style={{ animationDelay: '3s' }} />
+          <div className="absolute bottom-1/3 right-1/5 w-2 h-2 bg-accent/20 rounded-full animate-pulse" style={{ animationDelay: '4s' }} />
           
           {/* Radial gradients for atmosphere */}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-red-500/5 to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-orange-500/5 to-transparent rounded-full blur-3xl" />
+          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-primary/5 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl" />
         </div>
       </div>
 
@@ -143,40 +143,40 @@ export function ProblemStatementSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="relative">
-              <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-orange-500 shadow-2xl">
+              <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-gradient-to-br from-warning to-warning-light shadow-2xl">
                 <AlertCircle className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
               </div>
-              <div className="absolute inset-0 rounded-full bg-red-500 opacity-50 animate-ping"></div>
+              <div className="absolute inset-0 rounded-full bg-warning opacity-30 animate-ping"></div>
             </div>
-            <span className="text-lg sm:text-xl font-semibold text-red-400">
+            <span className="text-lg sm:text-xl font-semibold text-warning">
               Critical Development Challenges
             </span>
           </motion.div>
 
           {/* Main Headline */}
           <motion.h2 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground mb-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             Building AI Agents
-            <span className="block mt-2 bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+            <span className="block mt-2 bg-gradient-to-r from-warning via-accent to-destructive bg-clip-text text-transparent">
               Shouldn&apos;t Be This Hard
             </span>
           </motion.h2>
 
           {/* Description */}
           <motion.p 
-            className="max-w-3xl mx-auto text-lg sm:text-xl leading-relaxed text-gray-300 font-light"
+            className="max-w-3xl mx-auto text-lg sm:text-xl leading-relaxed text-muted-foreground font-light"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             Developers are struggling with the same painful challenges when building AI agents. 
-            <span className="text-white font-medium"> It&apos;s time for a better way.</span>
+            <span className="text-foreground font-medium"> It&apos;s time for a better way.</span>
           </motion.p>
         </motion.div>
 
@@ -198,9 +198,9 @@ export function ProblemStatementSection() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="group relative"
               >
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-xl border border-gray-700/50 p-6 sm:p-8 shadow-2xl transition-all duration-500 hover:shadow-red-500/10 hover:border-red-500/30 hover:scale-[1.02] hover:-translate-y-1">
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-background to-card backdrop-blur-xl border border-border p-6 sm:p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:border-primary/20 hover:scale-[1.02] hover:-translate-y-1">
                   {/* Subtle glow effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   
                   {/* Icon */}
                   <motion.div 
@@ -215,10 +215,10 @@ export function ProblemStatementSection() {
 
                   {/* Content */}
                   <div className="relative">
-                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 group-hover:text-red-100 transition-colors duration-300">
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                       {problem.title}
                     </h3>
-                    <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                    <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
                       {problem.description}
                     </p>
                   </div>
@@ -264,33 +264,33 @@ export function ProblemStatementSection() {
           {/* Severity Section Header */}
           <div className="text-center mb-12 sm:mb-16">
             <motion.div
-              className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500/20 to-red-500/20 border border-orange-500/30"
+              className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-warning/10 to-accent/10 border border-primary/20"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
-              <span className="text-sm font-semibold text-orange-300 uppercase tracking-wide">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              <span className="text-sm font-semibold text-primary uppercase tracking-wide">
                 Impact Analysis
               </span>
             </motion.div>
             
             <motion.h3 
-              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               Measuring the Real Cost
-              <span className="block mt-1 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
+              <span className="block mt-1 bg-gradient-to-r from-warning via-accent to-destructive bg-clip-text text-transparent">
                 of These Problems
               </span>
             </motion.h3>
             
             <motion.p 
-              className="max-w-2xl mx-auto text-gray-300 text-lg"
+              className="max-w-2xl mx-auto text-muted-foreground text-lg"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -334,13 +334,13 @@ export function ProblemStatementSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <p className="text-lg sm:text-xl text-gray-300 mb-6">
-            <span className="text-white font-semibold">Sound familiar?</span> 
+          <p className="text-lg sm:text-xl text-muted-foreground mb-6">
+            <span className="text-foreground font-semibold">Sound familiar?</span> 
             {" "}Let's solve these problems together.
           </p>
           
           <motion.div
-            className="inline-flex items-center gap-2 text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 cursor-pointer"
+            className="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors duration-300 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
