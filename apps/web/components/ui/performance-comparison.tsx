@@ -57,8 +57,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
       competitor2: 120,
       competitor3: 180,
       betterIs: 'lower',
-      color: '#10b981',
-      gradient: 'from-emerald-500 to-green-600'
+      color: 'hsl(var(--success))',
+      gradient: 'from-success to-success-light'
     },
     {
       id: 'memory',
@@ -70,8 +70,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
       competitor2: 1024,
       competitor3: 2048,
       betterIs: 'lower',
-      color: '#3b82f6',
-      gradient: 'from-blue-500 to-indigo-600'
+      color: 'hsl(var(--primary))',
+      gradient: 'from-primary to-primary-light'
     },
     {
       id: 'complexity',
@@ -83,8 +83,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
       competitor2: 300,
       competitor3: 500,
       betterIs: 'lower',
-      color: '#8b5cf6',
-      gradient: 'from-purple-500 to-violet-600'
+      color: 'hsl(var(--secondary))',
+      gradient: 'from-secondary to-secondary-light'
     },
     {
       id: 'accuracy',
@@ -96,8 +96,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
       competitor2: 82.1,
       competitor3: 78.9,
       betterIs: 'higher',
-      color: '#f59e0b',
-      gradient: 'from-amber-500 to-orange-600'
+      color: 'hsl(var(--warning))',
+      gradient: 'from-warning to-warning-light'
     },
     {
       id: 'cost',
@@ -109,8 +109,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
       competitor2: 0.015,
       competitor3: 0.025,
       betterIs: 'lower',
-      color: '#ef4444',
-      gradient: 'from-red-500 to-pink-600'
+      color: 'hsl(var(--accent))',
+      gradient: 'from-accent to-accent-light'
     },
     {
       id: 'scalability',
@@ -122,8 +122,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
       competitor2: 300,
       competitor3: 600,
       betterIs: 'lower',
-      color: '#06b6d4',
-      gradient: 'from-cyan-500 to-blue-600'
+      color: 'hsl(var(--primary))',
+      gradient: 'from-primary to-accent'
     }
   ];
 
@@ -160,26 +160,26 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
     {
       name: 'GraphBit',
       value: currentMetric.graphbit,
-      color: '#10b981',
-      gradient: 'from-emerald-500 to-green-600'
+      color: 'hsl(var(--success))',
+      gradient: 'from-success to-success-light'
     },
     {
       name: 'LangChain',
       value: currentMetric.competitor1,
-      color: '#3b82f6',
-      gradient: 'from-blue-500 to-indigo-600'
+      color: 'hsl(var(--primary))',
+      gradient: 'from-primary to-primary-light'
     },
     {
       name: 'AutoGen',
       value: currentMetric.competitor2,
-      color: '#8b5cf6',
-      gradient: 'from-purple-500 to-violet-600'
+      color: 'hsl(var(--secondary))',
+      gradient: 'from-secondary to-secondary-light'
     },
     {
       name: 'Custom Solution',
       value: currentMetric.competitor3,
-      color: '#f59e0b',
-      gradient: 'from-amber-500 to-orange-600'
+      color: 'hsl(var(--muted-foreground))',
+      gradient: 'from-muted to-muted-dark'
     }
   ];
 
@@ -203,43 +203,53 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
   };
 
   return (
-    <div className={`relative bg-gradient-to-br from-gray-50 to-white border border-gray-200/50 rounded-2xl overflow-hidden ${className}`}>
-      {/* Header */}
-      <div className="p-6 border-b border-gray-200/50">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-500/20 rounded-lg">
-              <TrendingUp className="h-5 w-5 text-green-600" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-1">Performance Comparison</h3>
-              <p className="text-gray-600 text-sm">See how GraphBit outperforms the competition</p>
-            </div>
+    <section className={`relative bg-gradient-to-b from-background via-muted/30 to-background py-20 sm:py-24 lg:py-32 ${className}`}>
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-16 text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
+            <span className="text-sm font-semibold uppercase tracking-wide text-primary">
+              Performance Metrics
+            </span>
           </div>
+          
+          <h2 className="mb-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            See How GraphBit
+            <span className="mt-2 block bg-gradient-to-r from-primary via-accent to-success bg-clip-text text-transparent">
+              Outperforms the Competition
+            </span>
+          </h2>
+          
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            Real benchmarks showing GraphBit's superior performance across key metrics that matter for AI development.
+          </p>
         </div>
-      </div>
 
-      <div className="p-6" ref={containerRef}>
-        {/* Metric Selector */}
-        <div className="mb-8">
-          <div className="flex flex-wrap gap-2">
-            {metrics.map((metric) => (
-              <motion.button
-                key={metric.id}
-                onClick={() => setSelectedMetric(metric.id)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                  selectedMetric === metric.id
-                    ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
-                    : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {metric.name}
-              </motion.button>
-            ))}
+        <div className="" ref={containerRef}>
+          {/* Metric Selector */}
+          <div className="mb-12">
+            <div className="flex flex-wrap gap-3 justify-center">
+              {metrics.map((metric) => (
+                <motion.button
+                  key={metric.id}
+                  onClick={() => setSelectedMetric(metric.id)}
+                  className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                    selectedMetric === metric.id
+                      ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg scale-105'
+                      : 'bg-card/80 border border-border/50 text-foreground hover:bg-card hover:border-border backdrop-blur-sm hover:shadow-lg'
+                  }`}
+                  whileHover={{ scale: selectedMetric === metric.id ? 1.05 : 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {metric.name}
+                </motion.button>
+              ))}
+            </div>
           </div>
-        </div>
 
         {/* Chart Container */}
         <div className="relative">
@@ -345,55 +355,65 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
             })}
           </div>
 
-          {/* Key Insights */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Zap,
-                title: "Speed Advantage",
-                description: `${getImprovementPercentage(currentMetric.graphbit, currentMetric.competitor1, currentMetric.betterIs)}% faster than LangChain`,
-                color: "text-green-600",
-                bgColor: "bg-green-50"
-              },
-              {
-                icon: BarChart3,
-                title: "Resource Efficiency",
-                description: `${getImprovementPercentage(currentMetric.graphbit, currentMetric.competitor2, currentMetric.betterIs)}% more efficient than AutoGen`,
-                color: "text-blue-600",
-                bgColor: "bg-blue-50"
-              },
-              {
-                icon: BarChart3,
-                title: "Ease of Use",
-                description: `${getImprovementPercentage(currentMetric.graphbit, currentMetric.competitor3, currentMetric.betterIs)}% simpler than custom solutions`,
-                color: "text-purple-600",
-                bgColor: "bg-purple-50"
-              }
-            ].map((insight, index) => {
-              const IconComponent = insight.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className={`${insight.bgColor} p-4 rounded-xl border border-gray-200`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <IconComponent className={`h-5 w-5 ${insight.color}`} />
-                    <h5 className="font-semibold text-gray-900">{insight.title}</h5>
-                  </div>
-                  <p className="text-sm text-gray-600">{insight.description}</p>
-                </motion.div>
-              );
-            })}
+            {/* Key Insights */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: Zap,
+                  title: "Speed Advantage",
+                  description: `${getImprovementPercentage(currentMetric.graphbit, currentMetric.competitor1, currentMetric.betterIs)}% faster than LangChain`,
+                  color: "text-success",
+                  bgColor: "from-success-lighter/20 via-transparent to-success-lighter/10",
+                  iconBg: "from-success to-success-light"
+                },
+                {
+                  icon: BarChart3,
+                  title: "Resource Efficiency",
+                  description: `${getImprovementPercentage(currentMetric.graphbit, currentMetric.competitor2, currentMetric.betterIs)}% more efficient than AutoGen`,
+                  color: "text-primary",
+                  bgColor: "from-primary-lighter/20 via-transparent to-primary-lighter/10",
+                  iconBg: "from-primary to-primary-light"
+                },
+                {
+                  icon: BarChart3,
+                  title: "Ease of Use",
+                  description: `${getImprovementPercentage(currentMetric.graphbit, currentMetric.competitor3, currentMetric.betterIs)}% simpler than custom solutions`,
+                  color: "text-accent",
+                  bgColor: "from-accent-lighter/20 via-transparent to-accent-lighter/10",
+                  iconBg: "from-accent to-accent-light"
+                }
+              ].map((insight, index) => {
+                const IconComponent = insight.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    className={`group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${insight.bgColor} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}></div>
+                    
+                    <div className="relative">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${insight.iconBg} shadow-lg`}>
+                          <IconComponent className="h-5 w-5 text-white" />
+                        </div>
+                        <h5 className="font-semibold text-foreground">{insight.title}</h5>
+                      </div>
+                      <p className="text-muted-foreground leading-relaxed">{insight.description}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-
+      
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/10 to-green-500/10 rounded-full blur-2xl" />
-    </div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-success/10 to-primary/10 rounded-full blur-2xl" />
+    </section>
   );
 }

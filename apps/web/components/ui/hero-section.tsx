@@ -1,6 +1,6 @@
 'use client';
 
-import { AdaptiveBackground } from '@/components/ui/adaptive-background';
+import { ThreeDBackgroundComplete } from '@/components/ui/three-d-background-complete';
 import { AnimatedHeroStats } from '@/components/ui/animated-hero-stats';
 import { CTAButtonGroup } from '@/components/ui/interactive-cta-buttons';
 import { SimpleScrollIndicator } from '@/components/ui/simple-scroll-indicator';
@@ -64,8 +64,8 @@ export function HeroSection() {
 
   return (
     <section className="relative flex h-screen items-center justify-center overflow-hidden">
-      {/* Adaptive Background System */}
-      <AdaptiveBackground />
+      {/* Neural Network Background Effect */}
+      <ThreeDBackgroundComplete />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
