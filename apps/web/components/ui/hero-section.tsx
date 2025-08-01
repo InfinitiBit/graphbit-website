@@ -1,10 +1,12 @@
 'use client';
 
-// Temporarily using CSS background for SSR optimization
-// const ThreeDBackgroundComplete = dynamic(() => import('@/components/ui/three-d-background-complete').then(mod => ({ default: mod.ThreeDBackgroundComplete })), {
-//   ssr: false,
-//   loading: () => <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/30 to-background" />
-// });
+import dynamic from 'next/dynamic';
+
+// Enable neural network 3D background
+const ThreeDBackgroundComplete = dynamic(() => import('@/components/ui/three-d-background-complete').then(mod => ({ default: mod.ThreeDBackgroundComplete })), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900" />
+});
 import { AnimatedHeroStats } from '@/components/ui/animated-hero-stats';
 import { CTAButtonGroup } from '@/components/ui/interactive-cta-buttons';
 import { SimpleScrollIndicator } from '@/components/ui/simple-scroll-indicator';
@@ -68,11 +70,11 @@ export function HeroSection() {
 
   return (
     <section className="relative flex h-screen items-center justify-center overflow-hidden">
-      {/* Optimized CSS Background for SSR */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e5_1px,transparent_1px),linear-gradient(to_bottom,#4f46e5_1px,transparent_1px)] bg-[size:14px_24px] opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent animate-pulse"></div>
-      </div>
+      {/* Neural Network 3D Background */}
+      <ThreeDBackgroundComplete />
+      
+      {/* Subtle overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/20 via-transparent to-purple-900/10 pointer-events-none"></div>
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
