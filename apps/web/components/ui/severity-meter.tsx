@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { AlertCircle } from 'lucide-react';
-import React from 'react'; // Added missing import for React
+import React from 'react';
 
 interface SeverityMeterProps {
   percentage: number;
@@ -16,6 +16,7 @@ interface SeverityMeterProps {
 function SeverityMeter({ percentage, title, description, explanation, index }: SeverityMeterProps) {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [animatedPercentage, setAnimatedPercentage] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
   
   const progress = useMotionValue(0);
   const smoothProgress = useSpring(progress, { stiffness: 100, damping: 30 });
@@ -30,14 +31,21 @@ function SeverityMeter({ percentage, title, description, explanation, index }: S
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
+  // Handle mounting state for SSR
   useEffect(() => {
-    if (isInView) {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isInView && isMounted) {
       const timer = setTimeout(() => {
         progress.set(percentage);
       }, 300);
 
-      // Animate the percentage number
+      // Animate the percentage number - only in browser
       const animatePercentage = () => {
+        if (typeof window === 'undefined') return;
+        
         const startTime = Date.now();
         const duration = 1000; // 1 second
 
@@ -58,7 +66,7 @@ function SeverityMeter({ percentage, title, description, explanation, index }: S
 
       return () => clearTimeout(timer);
     }
-  }, [isInView, percentage, progress]);
+  }, [isInView, percentage, progress, isMounted]);
 
   // Generate gradient colors based on percentage
   const getGradientColors = (percent: number) => {
@@ -150,7 +158,7 @@ function SeverityMeter({ percentage, title, description, explanation, index }: S
           <span
             className="text-xl font-bold text-white block leading-none"
           >
-            {animatedPercentage}%
+            {isMounted ? animatedPercentage : percentage}%
           </span>
           <span className="text-xs text-gray-300 mt-1 text-center leading-tight">
             {title}
@@ -228,7 +236,7 @@ interface ScrollSeverityMetersProps {
 export function ScrollSeverityMeters({ problems }: ScrollSeverityMetersProps) {
   return (
     <motion.div
-      className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-6xl mx-auto"
+      className="grid grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-16 max-w-6xl mx-auto"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
