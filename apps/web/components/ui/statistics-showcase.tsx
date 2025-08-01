@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { 
   TrendingUp, 
   Clock, 
@@ -37,6 +37,57 @@ interface TooltipState {
 
 interface StatisticsShowcaseProps {
   className?: string;
+}
+
+// Statistic card component with animated counter
+function StatisticCard({ stat, index }: { stat: Statistic; index: number }) {
+  const IconComponent = stat.icon;
+  const { current, ref } = useAnimatedCounter(stat.value, 2000 + index * 200);
+  
+  return (
+    <motion.div
+      ref={ref}
+      className="group relative bg-gray-800/50 border border-gray-700/50 rounded-xl p-6 hover:border-red-500/30 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+    >
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-orange-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      
+      {/* Content */}
+      <div className="relative">
+        {/* Icon */}
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-600 mb-4 shadow-lg">
+          <IconComponent className="h-6 w-6 text-white" />
+        </div>
+        
+        {/* Value */}
+        <div className="mb-2">
+          <span className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            {current.toLocaleString()}
+          </span>
+          <span className="text-2xl sm:text-3xl font-bold text-red-400 ml-1">
+            {stat.suffix}
+          </span>
+        </div>
+        
+        {/* Label */}
+        <h3 className="text-lg font-semibold text-gray-200 mb-2 group-hover:text-white transition-colors">
+          {stat.label}
+        </h3>
+        
+        {/* Description */}
+        <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors leading-relaxed">
+          {stat.description}
+        </p>
+        
+        {/* Decorative element */}
+        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
+    </motion.div>
+  );
 }
 
 // Animated counter hook
@@ -236,113 +287,15 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
         </motion.div>
         
         <p className="text-gray-300 max-w-2xl mx-auto">
-          The numbers don't lie. AI development faces systemic challenges that impact every project.
+          The numbers don&apos;t lie. AI development faces systemic challenges that impact every project.
         </p>
       </div>
 
       {/* Statistics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {statistics.map((stat, index) => {
-          const IconComponent = stat.icon;
-          const { current, ref } = useAnimatedCounter(stat.value, 2000 + index * 200);
-          
-          return (
-            <motion.div
-              key={stat.id}
-              ref={ref}
-              className="group relative bg-gray-800/50 border border-gray-700/50 rounded-xl p-6 hover:border-red-500/30 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-              
-              {/* Header */}
-              <div className="flex items-center justify-between mb-4">
-                <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br`} style={{
-                  background: `linear-gradient(135deg, ${stat.color}20, ${stat.color}10)`
-                }}>
-                  <IconComponent className="h-5 w-5" />
-                </div>
-                
-                {/* Mini Chart */}
-                {stat.chartData && (
-                  <MiniChart data={stat.chartData} color={stat.color} />
-                )}
-              </div>
-
-              {/* Main Statistic */}
-              <div className="mb-3">
-                <div className="flex items-baseline gap-1 mb-1">
-                  <motion.span 
-                    className="text-3xl font-bold text-white"
-                    key={current} // Re-trigger animation on value change
-                    initial={{ scale: 1.1, opacity: 0.8 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {current}
-                  </motion.span>
-                  <span className="text-lg font-semibold" style={{ color: stat.color }}>
-                    {stat.suffix}
-                  </span>
-                  {stat.trend === 'up' && (
-                    <div className="ml-2 flex items-center gap-1 text-xs px-2 py-1 bg-red-500/20 text-red-300 rounded-full">
-                      <TrendingUp className="h-3 w-3" />
-                      <span>↑</span>
-                    </div>
-                  )}
-                </div>
-                <h4 className="text-lg font-semibold text-gray-200 group-hover:text-white transition-colors">
-                  {stat.label}
-                </h4>
-              </div>
-
-              {/* Description */}
-              <p className="text-sm text-gray-400 mb-4 group-hover:text-gray-300 transition-colors">
-                {stat.description}
-              </p>
-
-              {/* Source */}
-              <div className="flex items-center justify-between">
-                <button
-                  className="flex items-center gap-2 text-xs text-gray-500 hover:text-blue-400 transition-colors focus:outline-none focus:text-blue-400"
-                  onMouseEnter={(e) => handleMouseEnter(stat, e)}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={() => window.open(stat.sourceUrl, '_blank')}
-                >
-                  <Info className="h-3 w-3" />
-                  <span>Source</span>
-                </button>
-                
-                <div className="w-8 h-1 rounded-full bg-gray-700 overflow-hidden">
-                  <motion.div
-                    className="h-full rounded-full"
-                    style={{ background: stat.color }}
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '100%' }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
-                  />
-                </div>
-              </div>
-
-              {/* Progress indicator */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700 rounded-b-xl overflow-hidden">
-                <motion.div
-                  className="h-full"
-                  style={{ background: `linear-gradient(90deg, ${stat.color}40, ${stat.color})` }}
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${stat.value}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, delay: 0.3 + index * 0.1 }}
-                />
-              </div>
-            </motion.div>
-          );
-        })}
+        {statistics.map((stat, index) => (
+          <StatisticCard key={stat.id} stat={stat} index={index} />
+        ))}
       </div>
 
       {/* Summary Stats */}

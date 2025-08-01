@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star as Rocket, ArrowRight as Play, Clock as Loader2, ArrowRight, Star as Sparkles } from 'lucide-react';
 
@@ -234,7 +234,7 @@ export function PrimaryCTAButton({
 
       {/* Hidden description for screen readers */}
       <span id="primary-cta-description" className="sr-only">
-        Start your journey with GraphBit's AI agent marketplace and LLM tracing platform
+        Start your journey with GraphBit&apos;s AI agent marketplace and LLM tracing platform
       </span>
     </motion.button>
   );
@@ -414,7 +414,7 @@ export function SecondaryCTAButton({
 
       {/* Hidden description for screen readers */}
       <span id="secondary-cta-description" className="sr-only">
-        Watch a demonstration of GraphBit's AI platform features and capabilities
+        Watch a demonstration of GraphBit&apos;s AI platform features and capabilities
       </span>
     </motion.button>
   );

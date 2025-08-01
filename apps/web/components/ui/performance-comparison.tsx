@@ -3,12 +3,8 @@
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
-  TrendingUp, 
   Zap, 
-  BarChart3,
-  CheckCircle,
-  AlertCircle,
-  X
+  BarChart3
 } from 'lucide-react';
 import {
   BarChart,
@@ -17,7 +13,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   Cell
 } from 'recharts';
@@ -225,7 +220,7 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
           </h2>
           
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Real benchmarks showing GraphBit's superior performance across key metrics that matter for AI development.
+            Real benchmarks showing GraphBit&apos;s superior performance across key metrics that matter for AI development.
           </p>
         </div>
 

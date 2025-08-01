@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { BarChart3, Users, TrendingUp, Clock, DollarSign, ArrowRight } from 'lucide-react';
 
 interface CostCalculatorProps {
@@ -90,7 +90,7 @@ export function CostCalculator({ className = "" }: CostCalculatorProps) {
     };
 
     animateTotal();
-  }, [teamSize, complexity]);
+  }, [teamSize, complexity, animatedTotal]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -117,7 +117,7 @@ export function CostCalculator({ className = "" }: CostCalculatorProps) {
 
   return (
     <>
-      <style jsx>{`
+      <style>{`
         .cost-calculator-slider {
           -webkit-appearance: none;
           appearance: none;

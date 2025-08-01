@@ -96,14 +96,6 @@ export function Footer() {
                   Dashboard
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/pricing"
-                  className="text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  Pricing
-                </Link>
-              </li>
             </ul>
           </div>
 

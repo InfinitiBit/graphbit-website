@@ -152,7 +152,7 @@ export default async function AdvancedPage() {
                       </div>
 
                       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        {regularAdvanced.map((post, index) => (
+                        {regularAdvanced.map((post) => (
                           <BlogCard key={post.slug} post={post} />
                         ))}
                       </div>

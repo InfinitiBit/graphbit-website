@@ -108,7 +108,7 @@ export function TutorialsPageClient({ posts }: TutorialsPageClientProps) {
                     </div>
 
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                      {regularTutorials.map((post, index) => (
+                      {regularTutorials.map((post) => (
                         <BlogCard key={post.slug} post={post} />
                       ))}
                     </div>
@@ -121,7 +121,7 @@ export function TutorialsPageClient({ posts }: TutorialsPageClientProps) {
                   <GraduationCap className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="mb-3 text-lg font-semibold text-gray-700">No Tutorials Yet</h3>
                   <p className="text-gray-500 text-sm">
-                    We're working on comprehensive tutorials. Check back soon!
+                    We&apos;re working on comprehensive tutorials. Check back soon!
                   </p>
                 </div>
               </div>

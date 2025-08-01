@@ -296,7 +296,7 @@ export function ProblemStatementSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Each challenge creates measurable business impact. Here's how severe these problems really are.
+              Each challenge creates measurable business impact. Here&apos;s how severe these problems really are.
             </motion.p>
           </div>
 
@@ -336,7 +336,7 @@ export function ProblemStatementSection() {
         >
           <p className="text-lg sm:text-xl text-muted-foreground mb-6">
             <span className="text-foreground font-semibold">Sound familiar?</span> 
-            {" "}Let's solve these problems together.
+            {" "}Let&apos;s solve these problems together.
           </p>
           
           <motion.div

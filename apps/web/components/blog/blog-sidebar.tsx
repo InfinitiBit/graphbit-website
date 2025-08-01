@@ -23,11 +23,11 @@ const iconMap = {
 
 interface BlogSidebarProps {
   categories: Category[];
-  selectedCategory: string;
+  selectedCategory?: string;
   onCategoryChange?: (category: string) => void;
 }
 
-export function BlogSidebar({ categories, selectedCategory, onCategoryChange }: BlogSidebarProps) {
+export function BlogSidebar({ categories }: BlogSidebarProps) {
   const pathname = usePathname();
   
   const stats = [

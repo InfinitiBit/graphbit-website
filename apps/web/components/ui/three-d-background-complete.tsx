@@ -12,6 +12,9 @@ function useIsMobile() {
 
   useEffect(() => {
     setMounted(true);
+    
+    if (typeof window === 'undefined') return;
+    
     const checkMobile = () => {
       setIsMobile(
         window.innerWidth < 768 || 
@@ -27,59 +30,6 @@ function useIsMobile() {
   return { isMobile, mounted };
 }
 
-// Geometric shape component
-function GeometricShape({ 
-  position, 
-  geometry, 
-  color, 
-  size, 
-  rotationSpeed = 1 
-}: {
-  position: [number, number, number];
-  geometry: 'box' | 'sphere' | 'octahedron' | 'tetrahedron';
-  color: string;
-  size: number;
-  rotationSpeed?: number;
-}) {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += 0.001 * rotationSpeed;
-      meshRef.current.rotation.y += 0.002 * rotationSpeed;
-      meshRef.current.rotation.z += 0.0015 * rotationSpeed;
-    }
-  });
-
-  const renderGeometry = () => {
-    switch (geometry) {
-      case 'box':
-        return <boxGeometry args={[size, size, size]} />;
-      case 'sphere':
-        return <sphereGeometry args={[size, 16, 16]} />;
-      case 'octahedron':
-        return <octahedronGeometry args={[size]} />;
-      case 'tetrahedron':
-        return <tetrahedronGeometry args={[size]} />;
-      default:
-        return <boxGeometry args={[size, size, size]} />;
-    }
-  };
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
-      <mesh ref={meshRef} position={position}>
-        {renderGeometry()}
-        <meshLambertMaterial 
-          color={color} 
-          transparent 
-          opacity={0.7}
-          wireframe={false}
-        />
-      </mesh>
-    </Float>
-  );
-}
 
 // Network node component
 function NetworkNode({ position, color, size = 0.15 }: {
@@ -252,7 +202,7 @@ function Scene({ isMobile }: { isMobile: boolean }) {
     const nodeCount = isMobile ? 6 : 12;
     const colors = ['#60a5fa', '#a855f7', '#10b981', '#f59e0b'];
     
-    return Array.from({ length: nodeCount }, (_, i) => ({
+    return Array.from({ length: nodeCount }, (__, _i) => ({
       position: [
         (Math.random() - 0.5) * 25,
         (Math.random() - 0.5) * 18,

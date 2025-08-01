@@ -1,10 +1,13 @@
+import { IAgent } from './models/agent';
+import { ITrace } from './models/trace';
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   status: 'success' | 'error';
   message?: string;
   data?: T;
-  errors?: any[];
+  errors?: string[];
 }
 
 export interface User {
@@ -81,7 +84,7 @@ class ApiClient {
     return this.token;
   }
 
-  private async request<T = any>(
+  private async request<T = unknown>(
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
@@ -208,8 +211,11 @@ class ApiClient {
   }
 
   // Agent endpoints
-  async getAgents(params: Record<string, any> = {}): Promise<ApiResponse> {
-    const searchParams = new URLSearchParams(params);
+  async getAgents(params: Record<string, string | number> = {}): Promise<ApiResponse<IAgent[]>> {
+    const stringParams = Object.fromEntries(
+      Object.entries(params).map(([key, value]) => [key, String(value)])
+    );
+    const searchParams = new URLSearchParams(stringParams);
     return this.request(`/agents?${searchParams}`);
   }
 
@@ -217,14 +223,14 @@ class ApiClient {
     return this.request(`/agents/${id}`);
   }
 
-  async createAgent(agentData: any): Promise<ApiResponse> {
+  async createAgent(agentData: Partial<IAgent>): Promise<ApiResponse<IAgent>> {
     return this.request('/agents', {
       method: 'POST',
       body: JSON.stringify(agentData),
     });
   }
 
-  async updateAgent(id: string, updates: any): Promise<ApiResponse> {
+  async updateAgent(id: string, updates: Partial<IAgent>): Promise<ApiResponse<IAgent>> {
     return this.request(`/agents/${id}`, {
       method: 'PUT',
       body: JSON.stringify(updates),
@@ -238,12 +244,15 @@ class ApiClient {
   }
 
   // Trace endpoints
-  async getTraces(params: Record<string, any> = {}): Promise<ApiResponse> {
-    const searchParams = new URLSearchParams(params);
+  async getTraces(params: Record<string, string | number> = {}): Promise<ApiResponse<ITrace[]>> {
+    const stringParams = Object.fromEntries(
+      Object.entries(params).map(([key, value]) => [key, String(value)])
+    );
+    const searchParams = new URLSearchParams(stringParams);
     return this.request(`/traces?${searchParams}`);
   }
 
-  async createTrace(traceData: any): Promise<ApiResponse> {
+  async createTrace(traceData: Partial<ITrace>): Promise<ApiResponse<ITrace>> {
     return this.request('/traces', {
       method: 'POST',
       body: JSON.stringify(traceData),
@@ -254,7 +263,7 @@ class ApiClient {
     return this.request(`/traces/${id}`);
   }
 
-  async addTraceFeedback(id: string, feedback: any): Promise<ApiResponse> {
+  async addTraceFeedback(id: string, feedback: { rating?: number; comment?: string; helpful?: boolean }): Promise<ApiResponse> {
     return this.request(`/traces/${id}/feedback`, {
       method: 'POST',
       body: JSON.stringify(feedback),
@@ -297,15 +306,15 @@ export const api = {
   // Agents
   getAgents: (params?: Record<string, any>) => apiClient.getAgents(params),
   getAgent: (id: string) => apiClient.getAgent(id),
-  createAgent: (agentData: any) => apiClient.createAgent(agentData),
-  updateAgent: (id: string, updates: any) => apiClient.updateAgent(id, updates),
+  createAgent: (agentData: Partial<IAgent>) => apiClient.createAgent(agentData),
+  updateAgent: (id: string, updates: Partial<IAgent>) => apiClient.updateAgent(id, updates),
   deleteAgent: (id: string) => apiClient.deleteAgent(id),
   
   // Traces
   getTraces: (params?: Record<string, any>) => apiClient.getTraces(params),
-  createTrace: (traceData: any) => apiClient.createTrace(traceData),
+  createTrace: (traceData: Partial<ITrace>) => apiClient.createTrace(traceData),
   getTrace: (id: string) => apiClient.getTrace(id),
-  addTraceFeedback: (id: string, feedback: any) => 
+  addTraceFeedback: (id: string, feedback: { rating?: number; comment?: string; helpful?: boolean }) => 
     apiClient.addTraceFeedback(id, feedback),
   getTraceAnalytics: (params?: Record<string, any>) => 
     apiClient.getTraceAnalytics(params),

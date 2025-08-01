@@ -42,7 +42,7 @@ interface Agent {
     frequencyPenalty?: number;
     presencePenalty?: number;
     systemPrompt?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   models?: {
     primary: string;
