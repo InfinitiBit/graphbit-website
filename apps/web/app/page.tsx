@@ -28,20 +28,20 @@ export default function Home() {
           className="relative bg-gradient-to-b from-background via-muted/30 to-background py-20 sm:py-24 lg:py-32"
         >
           {/* Background Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:14px_24px]"></div>
 
           <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16 text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2">
-                <div className="h-2 w-2 animate-pulse rounded-full bg-blue-500"></div>
-                <span className="text-sm font-semibold uppercase tracking-wide text-blue-400">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2">
+                <div className="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
+                <span className="text-sm font-semibold uppercase tracking-wide text-primary">
                   Key Features
                 </span>
               </div>
 
               <h2 className="mb-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                 Everything You Need to Build
-                <span className="mt-2 block bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
+                <span className="mt-2 block bg-gradient-to-r from-primary via-accent to-success bg-clip-text text-transparent">
                   Production-Ready AI Agents
                 </span>
               </h2>
@@ -56,10 +56,10 @@ export default function Home() {
             <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-3">
               {/* Real-time Monitoring */}
               <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-lighter/20 via-transparent to-primary-lighter/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
-                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-light shadow-lg">
                     <svg
                       className="h-6 w-6 text-white"
                       fill="none"
@@ -85,10 +85,10 @@ export default function Home() {
 
               {/* Security & Compliance */}
               <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 via-transparent to-teal-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-success-lighter/20 via-transparent to-success-lighter/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
-                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg">
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-success to-success-light shadow-lg">
                     <svg
                       className="h-6 w-6 text-white"
                       fill="none"
@@ -116,10 +116,10 @@ export default function Home() {
 
               {/* Auto-scaling Infrastructure */}
               <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-pink-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-accent-lighter/20 via-transparent to-accent-lighter/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
-                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg">
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-light shadow-lg">
                     <svg
                       className="h-6 w-6 text-white"
                       fill="none"
@@ -147,10 +147,10 @@ export default function Home() {
 
               {/* Developer Experience */}
               <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-transparent to-red-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-warning-lighter/20 via-transparent to-warning-lighter/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
-                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg">
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-warning to-warning-light shadow-lg">
                     <svg
                       className="h-6 w-6 text-white"
                       fill="none"
@@ -176,10 +176,10 @@ export default function Home() {
 
               {/* AI Agent Marketplace */}
               <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/50 via-transparent to-blue-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary-lighter/20 via-transparent to-secondary-lighter/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
-                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-600 shadow-lg">
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-secondary-light shadow-lg">
                     <svg
                       className="h-6 w-6 text-white"
                       fill="none"
@@ -205,10 +205,10 @@ export default function Home() {
 
               {/* Advanced Analytics */}
               <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-lighter/20 via-transparent to-accent-lighter/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                 <div className="relative">
-                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg">
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary-light to-accent shadow-lg">
                     <svg
                       className="h-6 w-6 text-white"
                       fill="none"
@@ -237,7 +237,7 @@ export default function Home() {
             <div className="mt-16 text-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl"
+                className="bg-gradient-to-r from-primary to-accent text-white shadow-lg transition-all duration-300 hover:from-primary-light hover:to-accent-light hover:shadow-xl"
               >
                 Start Building Today
               </Button>
@@ -246,20 +246,20 @@ export default function Home() {
         </section>
 
         {/* Stats Section */}
-        <section className="relative bg-gray-900 py-16 sm:py-20">
+        <section className="relative bg-gradient-to-br from-muted-dark to-secondary py-16 sm:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-8 text-center md:grid-cols-3">
               <div>
                 <div className="mb-2 text-4xl font-bold text-white sm:text-5xl">10,000+</div>
-                <div className="text-gray-400">AI Agents Deployed</div>
+                <div className="text-white/70">AI Agents Deployed</div>
               </div>
               <div>
                 <div className="mb-2 text-4xl font-bold text-white sm:text-5xl">99.9%</div>
-                <div className="text-gray-400">Uptime Guarantee</div>
+                <div className="text-white/70">Uptime Guarantee</div>
               </div>
               <div>
                 <div className="mb-2 text-4xl font-bold text-white sm:text-5xl">500+</div>
-                <div className="text-gray-400">Enterprise Customers</div>
+                <div className="text-white/70">Enterprise Customers</div>
               </div>
             </div>
           </div>
@@ -283,10 +283,10 @@ export default function Home() {
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="h-4 w-4 fill-warning text-warning" />
                       ))}
                     </div>
-                    <div className="rounded-full bg-gradient-to-r from-gray-900 to-gray-800 px-3 py-1 text-xs font-medium text-white">
+                    <div className="rounded-full bg-gradient-to-r from-secondary to-muted-dark px-3 py-1 text-xs font-medium text-white">
                       Tech Lead
                     </div>
                   </div>
@@ -298,7 +298,7 @@ export default function Home() {
                     performance instantly.&quot;
                   </p>
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-sm font-bold text-white">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-sm font-bold text-white">
                       SK
                     </div>
                     <div>
@@ -314,10 +314,10 @@ export default function Home() {
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="h-4 w-4 fill-warning text-warning" />
                       ))}
                     </div>
-                    <div className="rounded-full bg-gradient-to-r from-gray-900 to-gray-800 px-3 py-1 text-xs font-medium text-white">
+                    <div className="rounded-full bg-gradient-to-r from-secondary to-muted-dark px-3 py-1 text-xs font-medium text-white">
                       Enterprise
                     </div>
                   </div>
@@ -329,7 +329,7 @@ export default function Home() {
                     in real-time.&quot;
                   </p>
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-blue-500 text-sm font-bold text-white">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-success to-primary text-sm font-bold text-white">
                       DK
                     </div>
                     <div>
@@ -345,10 +345,10 @@ export default function Home() {
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="h-4 w-4 fill-warning text-warning" />
                       ))}
                     </div>
-                    <div className="rounded-full bg-gradient-to-r from-gray-900 to-gray-800 px-3 py-1 text-xs font-medium text-white">
+                    <div className="rounded-full bg-gradient-to-r from-secondary to-muted-dark px-3 py-1 text-xs font-medium text-white">
                       Solo Dev
                     </div>
                   </div>
@@ -359,7 +359,7 @@ export default function Home() {
                     <strong>$15K/month</strong> from my AI SaaS. GraphBit made it possible.&quot;
                   </p>
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-sm font-bold text-white">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-accent to-secondary text-sm font-bold text-white">
                       AC
                     </div>
                     <div>
@@ -376,17 +376,14 @@ export default function Home() {
         {/* Modern CTA Section */}
         <section className="relative py-16 sm:py-20 lg:py-24">
           <div className="container-responsive">
-            This code applies responsive design improvements to the main page, including adjustments
-            to background orbs, text sizes, and button layouts, to ensure a better user experience
-            across different devices.{' '}
-            <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8 shadow-2xl lg:p-16">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10" />
+            <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-secondary via-muted-dark to-secondary p-8 shadow-2xl lg:p-16">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-success/10" />
 
               <div className="relative mx-auto max-w-3xl text-center">
                 <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
                   Ready to build the future of AI?
                 </h2>
-                <p className="mb-8 text-lg text-gray-300 sm:text-xl">
+                <p className="mb-8 text-lg text-white/80 sm:text-xl">
                   Join thousands of developers using GraphBit to create, deploy, and monitor AI
                   agents at scale. Start your free trial today.
                 </p>
@@ -395,7 +392,7 @@ export default function Home() {
                   <Link href="/marketplace">
                     <Button
                       size="lg"
-                      className="bg-white px-8 py-4 text-lg font-semibold text-gray-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
+                      className="bg-white px-8 py-4 text-lg font-semibold text-secondary transition-all duration-300 hover:scale-105 hover:bg-white/95 hover:shadow-xl"
                     >
                       <Zap className="mr-2 h-5 w-5" />
                       Start Free Trial
@@ -414,25 +411,25 @@ export default function Home() {
                   </Link>
                 </div>
 
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-400">
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-8 text-sm text-white/60">
                   <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-400" />
+                    <CheckCircle className="h-4 w-4 text-success" />
                     <span>No credit card required</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-400" />
+                    <CheckCircle className="h-4 w-4 text-success" />
                     <span>14-day free trial</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-400" />
+                    <CheckCircle className="h-4 w-4 text-success" />
                     <span>Cancel anytime</span>
                   </div>
                 </div>
               </div>
 
               {/* Decorative elements */}
-              <div className="absolute left-4 top-4 h-20 w-20 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-xl" />
-              <div className="absolute bottom-4 right-4 h-32 w-32 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 blur-xl" />
+              <div className="absolute left-4 top-4 h-20 w-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 blur-xl" />
+              <div className="absolute bottom-4 right-4 h-32 w-32 rounded-full bg-gradient-to-br from-accent/20 to-success/20 blur-xl" />
             </div>
           </div>
         </section>

@@ -77,22 +77,43 @@ const config: Config = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          light: 'hsl(var(--primary-light))',
+          lighter: 'hsl(var(--primary-lighter))',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
+          light: 'hsl(var(--secondary-light))',
+          lighter: 'hsl(var(--secondary-lighter))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
+          light: 'hsl(var(--destructive-light))',
+          lighter: 'hsl(var(--destructive-lighter))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
+          dark: 'hsl(var(--muted-dark))',
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
+          light: 'hsl(var(--accent-light))',
+          lighter: 'hsl(var(--accent-lighter))',
+        },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))',
+          light: 'hsl(var(--success-light))',
+          lighter: 'hsl(var(--success-lighter))',
+        },
+        warning: {
+          DEFAULT: 'hsl(var(--warning))',
+          foreground: 'hsl(var(--warning-foreground))',
+          light: 'hsl(var(--warning-light))',
+          lighter: 'hsl(var(--warning-lighter))',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -102,6 +123,13 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        // Brand gradients as utilities
+        'gradient-primary': 'var(--gradient-primary)',
+        'gradient-secondary': 'var(--gradient-secondary)',
+        'gradient-accent': 'var(--gradient-accent)',
+        'gradient-success': 'var(--gradient-success)',
+        'gradient-hero': 'var(--gradient-hero)',
+        'gradient-background': 'var(--gradient-background)',
       },
       borderRadius: {
         lg: 'var(--radius)',

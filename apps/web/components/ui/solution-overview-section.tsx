@@ -43,9 +43,9 @@ const benefits: Benefit[] = [
     title: 'Lightning Fast Deployment',
     shortDescription: 'Deploy AI agents in minutes, not days',
     detailedDescription: 'GraphBit\'s optimized architecture enables rapid deployment of AI agents with zero configuration overhead. Go from concept to production in under 5 minutes.',
-    color: 'text-yellow-600',
-    gradient: 'from-yellow-500 to-orange-600',
-    bgGradient: 'from-yellow-50 to-orange-50',
+    color: 'text-accent',
+    gradient: 'from-accent to-accent-light',
+    bgGradient: 'from-accent-lighter/50 to-accent-lighter/20',
     features: ['5-minute deployment', 'Zero configuration', 'Auto-scaling', 'Instant updates']
   },
   {
@@ -54,9 +54,9 @@ const benefits: Benefit[] = [
     title: 'Enterprise Security',
     shortDescription: 'Bank-grade security and compliance',
     detailedDescription: 'Built with enterprise security standards, GraphBit provides end-to-end encryption, role-based access control, and compliance with SOC 2, GDPR, and HIPAA.',
-    color: 'text-blue-600',
-    gradient: 'from-blue-500 to-indigo-600',
-    bgGradient: 'from-blue-50 to-indigo-50',
+    color: 'text-primary',
+    gradient: 'from-primary to-primary-light',
+    bgGradient: 'from-primary-lighter/50 to-primary-lighter/20',
     features: ['End-to-end encryption', 'SOC 2 compliant', 'GDPR ready', 'Role-based access']
   },
   {
@@ -65,9 +65,9 @@ const benefits: Benefit[] = [
     title: 'Intelligent Monitoring',
     shortDescription: 'Real-time insights and analytics',
     detailedDescription: 'Advanced monitoring and analytics provide deep insights into agent performance, user interactions, and system health with real-time dashboards and alerts.',
-    color: 'text-green-600',
-    gradient: 'from-green-500 to-emerald-600',
-    bgGradient: 'from-green-50 to-emerald-50',
+    color: 'text-success',
+    gradient: 'from-success to-success-light',
+    bgGradient: 'from-success-lighter/50 to-success-lighter/20',
     features: ['Real-time dashboards', 'Performance analytics', 'Smart alerts', 'Usage insights']
   },
   {
@@ -76,9 +76,9 @@ const benefits: Benefit[] = [
     title: 'Seamless Integration',
     shortDescription: 'Works with your existing stack',
     detailedDescription: 'GraphBit integrates seamlessly with your existing tools and workflows. Connect to any API, database, or service with our extensive library of connectors.',
-    color: 'text-purple-600',
-    gradient: 'from-purple-500 to-violet-600',
-    bgGradient: 'from-purple-50 to-violet-50',
+    color: 'text-secondary',
+    gradient: 'from-secondary to-secondary-light',
+    bgGradient: 'from-secondary-lighter/50 to-secondary-lighter/20',
     features: ['100+ connectors', 'REST API support', 'Webhook integration', 'Custom adapters']
   },
   {
@@ -87,9 +87,9 @@ const benefits: Benefit[] = [
     title: 'Cost Optimization',
     shortDescription: 'Reduce AI costs by up to 80%',
     detailedDescription: 'Smart resource management and optimization algorithms help you reduce AI infrastructure costs while maintaining or improving performance.',
-    color: 'text-red-600',
-    gradient: 'from-red-500 to-pink-600',
-    bgGradient: 'from-red-50 to-pink-50',
+    color: 'text-warning',
+    gradient: 'from-warning to-warning-light',
+    bgGradient: 'from-warning-lighter/50 to-warning-lighter/20',
     features: ['80% cost reduction', 'Smart scaling', 'Resource optimization', 'Usage analytics']
   },
   {
@@ -98,9 +98,9 @@ const benefits: Benefit[] = [
     title: 'Team Collaboration',
     shortDescription: 'Built for modern teams',
     detailedDescription: 'Collaborative features enable teams to work together efficiently with shared workspaces, version control, and real-time collaboration tools.',
-    color: 'text-indigo-600',
-    gradient: 'from-indigo-500 to-blue-600',
-    bgGradient: 'from-indigo-50 to-blue-50',
+    color: 'text-accent',
+    gradient: 'from-accent to-accent-light',
+    bgGradient: 'from-accent-lighter/50 to-accent-lighter/20',
     features: ['Shared workspaces', 'Version control', 'Real-time collaboration', 'Team permissions']
   },
   {
@@ -109,9 +109,9 @@ const benefits: Benefit[] = [
     title: 'Reliable Infrastructure',
     shortDescription: '99.9% uptime guarantee',
     detailedDescription: 'Enterprise-grade infrastructure with automatic failover, global CDN, and redundant systems ensure your AI agents are always available.',
-    color: 'text-cyan-600',
-    gradient: 'from-cyan-500 to-blue-600',
-    bgGradient: 'from-cyan-50 to-blue-50',
+    color: 'text-primary',
+    gradient: 'from-primary to-primary-light',
+    bgGradient: 'from-primary-lighter/50 to-primary-lighter/20',
     features: ['99.9% uptime', 'Global CDN', 'Auto failover', 'Redundant systems']
   },
   {
@@ -120,9 +120,9 @@ const benefits: Benefit[] = [
     title: 'Data Intelligence',
     shortDescription: 'Smart data processing and insights',
     detailedDescription: 'Advanced data processing capabilities with built-in analytics, machine learning pipelines, and intelligent data transformation tools.',
-    color: 'text-emerald-600',
-    gradient: 'from-emerald-500 to-green-600',
-    bgGradient: 'from-emerald-50 to-green-50',
+    color: 'text-success',
+    gradient: 'from-success to-success-light',
+    bgGradient: 'from-success-lighter/50 to-success-lighter/20',
     features: ['ML pipelines', 'Data transformation', 'Intelligent insights', 'Auto-processing']
   }
 ];
@@ -191,7 +191,7 @@ function SolutionBenefitsGrid() {
       {/* Header */}
       <div className="text-center mb-12">
         <motion.div
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-4"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-success text-white px-4 py-2 rounded-full text-sm font-medium mb-4"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -201,7 +201,7 @@ function SolutionBenefitsGrid() {
           Why Choose GraphBit
         </motion.div>
         <motion.h2
-          className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4"
+          className="text-3xl sm:text-4xl font-bold text-foreground mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -210,7 +210,7 @@ function SolutionBenefitsGrid() {
           Comprehensive Solution Benefits
         </motion.h2>
         <motion.p
-          className="text-lg text-gray-600 max-w-3xl mx-auto"
+          className="text-lg text-muted-foreground max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -234,7 +234,7 @@ function SolutionBenefitsGrid() {
           return (
             <motion.div
               key={benefit.id}
-              className="group relative bg-white border border-gray-200/50 rounded-xl p-6 hover:border-gray-300/50 transition-all duration-300 overflow-hidden"
+              className="group relative bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-all duration-300 overflow-hidden"
               variants={cardVariants}
               whileHover="hover"
             >
@@ -252,12 +252,12 @@ function SolutionBenefitsGrid() {
                 </motion.div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors">
+                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                   {benefit.title}
                 </h3>
 
                 {/* Short Description */}
-                <p className="text-gray-600 mb-4 group-hover:text-gray-700 transition-colors">
+                <p className="text-muted-foreground mb-4 group-hover:text-foreground transition-colors">
                   {benefit.shortDescription}
                 </p>
 
@@ -268,7 +268,7 @@ function SolutionBenefitsGrid() {
                   whileHover="visible"
                 >
                   <motion.div variants={featuresVariants}>
-                    <p className="text-sm text-gray-500 mb-4">
+                    <p className="text-sm text-muted-foreground mb-4">
                       {benefit.detailedDescription}
                     </p>
                     
@@ -277,12 +277,12 @@ function SolutionBenefitsGrid() {
                       {benefit.features.map((feature, featureIndex) => (
                         <motion.div
                           key={featureIndex}
-                          className="flex items-center gap-2 text-sm text-gray-600"
+                          className="flex items-center gap-2 text-sm text-muted-foreground"
                           initial={{ opacity: 0, x: -10 }}
                           whileHover={{ opacity: 1, x: 0 }}
                           transition={{ delay: featureIndex * 0.1 }}
                         >
-                          <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                          <CheckCircle className="h-4 w-4 text-success flex-shrink-0" />
                           <span>{feature}</span>
                         </motion.div>
                       ))}
@@ -296,7 +296,7 @@ function SolutionBenefitsGrid() {
                   initial={{ opacity: 0, y: 10 }}
                   whileHover={{ opacity: 1, y: 0 }}
                 >
-                  <button className="inline-flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                  <button className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                     Learn more
                     <ArrowRight className="h-4 w-4" />
                   </button>
@@ -304,7 +304,7 @@ function SolutionBenefitsGrid() {
               </div>
 
               {/* Hover effect border */}
-              <div className={`absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-${benefit.color.split('-')[1]}-200/30 transition-colors duration-300`} />
+              <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-primary/20 transition-colors duration-300" />
             </motion.div>
           );
         })}
@@ -319,38 +319,38 @@ function SolutionBenefitsGrid() {
         transition={{ duration: 0.8, delay: 0.6 }}
       >
         {[
-          { label: 'Faster Deployment', value: '10x', icon: Clock },
-          { label: 'Cost Reduction', value: '80%', icon: Cpu },
-          { label: 'Uptime Guarantee', value: '99.9%', icon: Cloud },
-          { label: 'Team Members', value: 'Unlimited', icon: Users }
+          { label: 'Faster Deployment', value: '10x', icon: Clock, color: 'accent' },
+          { label: 'Cost Reduction', value: '80%', icon: Cpu, color: 'warning' },
+          { label: 'Uptime Guarantee', value: '99.9%', icon: Cloud, color: 'primary' },
+          { label: 'Team Members', value: 'Unlimited', icon: Users, color: 'success' }
         ].map((stat, index) => {
           const IconComponent = stat.icon;
           return (
             <div key={index} className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-3">
-                <IconComponent className="h-6 w-6 text-green-600" />
+              <div className={`inline-flex items-center justify-center w-12 h-12 bg-${stat.color}-lighter/50 rounded-lg mb-3`}>
+                <IconComponent className={`h-6 w-6 text-${stat.color}`} />
               </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
+              <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
+              <div className="text-sm text-muted-foreground">{stat.label}</div>
             </div>
           );
         })}
       </motion.div>
 
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/10 to-green-500/10 rounded-full blur-2xl" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-success/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-accent/10 to-primary/10 rounded-full blur-2xl" />
     </motion.div>
   );
 }
 
 export function SolutionOverviewSection({ className = "" }: SolutionOverviewSectionProps) {
   return (
-    <section className={`relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden ${className}`}>
+    <section className={`relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-background via-muted/30 to-background overflow-hidden ${className}`}>
       {/* Background Patterns */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-gradient-to-tl from-purple-500/20 to-pink-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-primary/20 to-success/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-gradient-to-tl from-accent/20 to-primary/20 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -363,7 +363,7 @@ export function SolutionOverviewSection({ className = "" }: SolutionOverviewSect
           transition={{ duration: 0.8 }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-success text-white px-4 py-2 rounded-full text-sm font-medium mb-6"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -372,10 +372,10 @@ export function SolutionOverviewSection({ className = "" }: SolutionOverviewSect
             <Sparkles className="h-4 w-4" />
             Solution Overview
           </motion.div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
             The Complete AI Development Platform
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             GraphBit provides everything you need to build, deploy, and scale AI agents 
             with enterprise-grade reliability and lightning-fast performance.
           </p>
@@ -433,15 +433,15 @@ export function SolutionOverviewSection({ className = "" }: SolutionOverviewSect
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-8 sm:p-12 text-white">
+          <div className="bg-gradient-to-r from-primary to-success rounded-2xl p-8 sm:p-12 text-white">
             <h3 className="text-3xl sm:text-4xl font-bold mb-4">
               Ready to Transform Your AI Development?
             </h3>
-            <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Join thousands of developers who are already building the future with GraphBit.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
+              <button className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-white/95 transition-colors flex items-center justify-center gap-2">
                 Get Started Free
                 <ArrowRight className="h-5 w-5" />
               </button>
@@ -467,14 +467,14 @@ export function SolutionOverviewSection({ className = "" }: SolutionOverviewSect
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-6 bg-white/50 backdrop-blur-sm border border-gray-200/30 rounded-xl"
+              className="text-center p-6 bg-card/80 backdrop-blur-sm border border-border/30 rounded-xl"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.2 + index * 0.1 }}
             >
-              <div className="text-3xl font-bold text-gray-900 mb-2">{stat.metric}</div>
-              <div className="text-gray-600">{stat.label}</div>
+              <div className="text-3xl font-bold text-foreground mb-2">{stat.metric}</div>
+              <div className="text-muted-foreground">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -489,7 +489,7 @@ export function SolutionOverviewSection({ className = "" }: SolutionOverviewSect
         >
           <div className="text-center mb-8">
             <motion.h3
-              className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2"
+              className="text-3xl sm:text-4xl font-bold text-foreground mb-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -498,7 +498,7 @@ export function SolutionOverviewSection({ className = "" }: SolutionOverviewSect
               Live Product Demo
             </motion.h3>
             <motion.p
-              className="text-lg text-gray-600 max-w-2xl mx-auto"
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

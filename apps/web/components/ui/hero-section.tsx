@@ -76,15 +76,15 @@ export function HeroSection() {
         >
           {/* Announcement Badge */}
           <motion.div className="mb-4 sm:mb-6" variants={fadeInUp}>
-            <span className="hover:shadow-3xl group inline-flex items-center gap-3 rounded-full border border-border/20 bg-gradient-to-r from-background/80 to-muted/80 px-6 py-3 text-sm font-semibold text-foreground shadow-2xl backdrop-blur-xl transition-all duration-500 hover:scale-105 hover:border-border/30 sm:px-8 sm:py-4">
-              <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-lg sm:h-8 sm:w-8">
+            <span className="hover:shadow-3xl group inline-flex items-center gap-3 rounded-full border border-primary/20 bg-gradient-to-r from-background/95 to-primary-lighter/10 px-6 py-3 text-sm font-semibold text-foreground shadow-lg backdrop-blur-xl transition-all duration-500 hover:scale-105 hover:border-primary/30 sm:px-8 sm:py-4">
+              <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent shadow-lg sm:h-8 sm:w-8">
                 <Sparkles className="h-3 w-3 animate-pulse text-white sm:h-4 sm:w-4" />
-                <div className="absolute inset-0 animate-ping rounded-full bg-gradient-to-br from-blue-500 to-purple-500 opacity-50"></div>
+                <div className="absolute inset-0 animate-ping rounded-full bg-gradient-to-br from-primary to-accent opacity-50"></div>
               </div>
-              <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-medium">
                 🚀 Introducing AI Agent Marketplace & LLM Tracing
               </span>
-              <ArrowRight className="h-4 w-4 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110 sm:h-5 sm:w-5" />
+              <ArrowRight className="h-4 w-4 text-primary transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110 sm:h-5 sm:w-5" />
             </span>
           </motion.div>
 
@@ -93,10 +93,10 @@ export function HeroSection() {
             className="mx-auto mb-3 max-w-5xl text-3xl font-extrabold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
             variants={fadeInUp}
           >
-            <span className="block bg-gradient-to-r from-[#00253e] via-[#003a5c] to-[#001a2e] bg-clip-text text-transparent drop-shadow-sm">
+            <span className="block bg-gradient-to-r from-secondary to-muted-dark bg-clip-text text-transparent drop-shadow-sm">
               Build AI Agents
             </span>
-            <span className="mt-1 block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent sm:mt-2">
+            <span className="mt-1 block bg-gradient-to-r from-primary via-accent to-primary-light bg-clip-text text-transparent sm:mt-2">
               That Actually Work
             </span>
           </motion.h1>
@@ -108,7 +108,7 @@ export function HeroSection() {
           >
             Download <span className="font-semibold text-foreground">production-ready AI agents</span>
             , track every LLM interaction, and scale your AI applications with{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text font-semibold text-transparent">
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text font-semibold text-transparent">
               confidence
             </span>
             .
@@ -128,19 +128,19 @@ export function HeroSection() {
 
           {/* Trust Indicators */}
           <motion.div
-            className="mb-8 flex flex-wrap items-center justify-center gap-4 opacity-60 sm:mb-10 sm:gap-6"
+            className="mb-8 flex flex-wrap items-center justify-center gap-4 opacity-70 sm:mb-10 sm:gap-6"
             variants={fadeInUp}
           >
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <CheckCircle className="h-4 w-4 text-green-500" />
+              <CheckCircle className="h-4 w-4 text-success" />
               <span>500+ Ready Agents</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Users className="h-4 w-4 text-blue-500" />
+              <Users className="h-4 w-4 text-primary" />
               <span>10k+ Developers</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Zap className="h-4 w-4 text-yellow-500" />
+              <Zap className="h-4 w-4 text-accent" />
               <span>99.9% Uptime</span>
             </div>
           </motion.div>
