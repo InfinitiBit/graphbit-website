@@ -197,7 +197,7 @@ export const ensureValidToken = async (): Promise<boolean> => {
     refreshPromise = null;
     
     return refreshed;
-  } catch (error) {
+  } catch {
     // Try to refresh token
     refreshPromise = refreshToken();
     const refreshed = await refreshPromise;

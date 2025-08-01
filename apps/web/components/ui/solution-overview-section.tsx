@@ -26,7 +26,7 @@ interface SolutionOverviewSectionProps {
 
 interface Benefit {
   id: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string; size?: number }>;
   title: string;
   shortDescription: string;
   detailedDescription: string;
@@ -512,4 +512,4 @@ export function SolutionOverviewSection({ className = "" }: SolutionOverviewSect
       </div>
     </section>
   );
-} 
+}

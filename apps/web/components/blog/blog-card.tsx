@@ -45,7 +45,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
 
   return (
     <Link href={`/blog/${post.slug}`}>
-      <article className={`group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${featured ? 'ring-2 ring-blue-100' : ''}`}>
+      <article className={`group bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${featured ? 'ring-2 ring-blue-500/20' : ''}`}>
         {/* Featured image */}
         <div className={`${featured ? 'aspect-[2/1]' : 'aspect-[16/9]'} bg-gradient-to-br ${getGradientForTag()} overflow-hidden relative`}>
           <div className="w-full h-full flex items-center justify-center relative">
@@ -58,7 +58,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
               </div>
             )}
             {post.views && (
-              <div className="absolute bottom-4 right-4 flex items-center space-x-1 text-xs text-gray-600 bg-white/80 px-2 py-1 rounded-full">
+              <div className="absolute bottom-4 right-4 flex items-center space-x-1 text-xs text-muted-foreground bg-background/80 px-2 py-1 rounded-full">
                                   <ArrowRight className="h-3 w-3" />
                 <span>{post.views}</span>
               </div>
@@ -74,7 +74,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
               <Badge 
                 key={tag} 
                 variant="secondary" 
-                className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                className="text-xs bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
               >
                 {tag}
               </Badge>
@@ -82,27 +82,27 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className={`${featured ? 'text-2xl' : 'text-lg'} font-bold mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 text-gray-900`}>
+          <h3 className={`${featured ? 'text-2xl' : 'text-lg'} font-bold mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 text-foreground`}>
             {post.title}
           </h3>
 
           {/* Description */}
-          <p className={`${featured ? 'text-base' : 'text-sm'} text-gray-600 mb-6 line-clamp-3 leading-relaxed`}>
+          <p className={`${featured ? 'text-base' : 'text-sm'} text-muted-foreground mb-6 line-clamp-3 leading-relaxed`}>
             {post.description}
           </p>
 
           {/* Meta info */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-1 text-xs text-gray-500">
+              <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                 <Users className="h-3 w-3" />
                 <span>{post.author}</span>
               </div>
-              <div className="flex items-center space-x-1 text-xs text-gray-500">
+              <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                 <Calendar className="h-3 w-3" />
                 <span>{post.date}</span>
               </div>
-              <div className="flex items-center space-x-1 text-xs text-gray-500">
+              <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 <span>{post.readTime}</span>
               </div>

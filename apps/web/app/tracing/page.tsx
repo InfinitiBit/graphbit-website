@@ -152,7 +152,7 @@ export default function TracingPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30 pt-16 sm:pt-20">
+      <main className="w-full min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30 pt-16 sm:pt-20">
         {/* Enhanced Hero Header */}
         <div className="relative overflow-hidden border-b bg-gradient-to-r from-white via-gray-50 to-blue-50">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5" />

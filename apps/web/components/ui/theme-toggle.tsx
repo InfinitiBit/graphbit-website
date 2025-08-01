@@ -99,12 +99,12 @@ export function ThemeToggle() {
                     <Icon className="h-4 w-4" />
                     <div className="flex flex-1 flex-col items-start">
                       <span>{themeOption.label}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                      <span className="text-xs text-muted-foreground">
                         {themeOption.description}
                       </span>
                     </div>
                     {isSelected && (
-                      <Check className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      <Check className="h-4 w-4 text-blue-400" />
                     )}
                   </button>
                 );
@@ -112,8 +112,8 @@ export function ThemeToggle() {
             </div>
             
             {/* Current resolved theme indicator */}
-            <div className="border-t border-gray-200 px-3 py-2 dark:border-gray-700">
-              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+            <div className="border-t border-border px-3 py-2">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 {resolvedTheme === 'dark' ? (
                   <Moon className="h-3 w-3" />
                 ) : (

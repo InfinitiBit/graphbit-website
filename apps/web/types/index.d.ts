@@ -10,6 +10,10 @@ declare module '@clerk/nextjs' {
     isLoaded: boolean;
   };
 
+  export function useClerk(): {
+    signOut: () => void;
+  };
+
   export function ClerkProvider(props: { children: React.ReactNode }): JSX.Element;
   export function UserButton(props: { afterSignOutUrl?: string }): JSX.Element;
   export function SignInButton(props: { mode?: string; children: React.ReactNode }): JSX.Element;
@@ -71,4 +75,5 @@ declare module 'lucide-react' {
   export const Calendar: FC<IconProps>;
   export const Hash: FC<IconProps>;
   export const Plus: FC<IconProps>;
+  export const Check: FC<IconProps>;
 }

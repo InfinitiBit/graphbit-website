@@ -1,15 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   trailingSlash: true,
-  distDir: 'out',
   // Build optimizations to reduce build time
   experimental: {
     // Optimize build performance
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
   },
-  // Reduce build time by limiting concurrent operations
-  swcMinify: true,
+  // SWC minification is enabled by default in Next.js 13+
   // Optimize image handling for static export
   images: {
     unoptimized: true,

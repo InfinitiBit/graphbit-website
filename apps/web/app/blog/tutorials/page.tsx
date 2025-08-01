@@ -1,6 +1,4 @@
 import { BlogCard } from '@/components/blog/blog-card';
-import { Footer } from '@/components/footer';
-import { Navigation } from '@/components/navbar';
 import { getAllBlogPosts } from '@/lib/blog';
 import { ArrowRight, BarChart3 as BookOpen, BarChart3 as GraduationCap } from 'lucide-react';
 import Link from 'next/link';
@@ -18,7 +16,6 @@ export default async function TutorialsPage() {
 
   return (
     <>
-      <Navigation />
       <div className="animated-gradient-bg fixed inset-0 -z-10"></div>
 
       <main className="relative pt-16 sm:pt-20">
@@ -190,8 +187,6 @@ export default async function TutorialsPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }
