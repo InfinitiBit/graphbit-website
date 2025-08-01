@@ -4,7 +4,7 @@ import { AgentDetailModal } from '@/components/marketplace/agent-detail-modal';
 import { Navigation } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import useStore from '@/lib/store/useStore';
+import useStore, { Agent } from '@/lib/store/useStore';
 import {
   ArrowRight,
   BarChart,
@@ -69,7 +69,7 @@ export default function MarketplacePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [agentCategory, agentSearchQuery]);
 
-  const openAgentModal = (agent: any) => {
+  const openAgentModal = (agent: Agent) => {
     setSelectedAgent(agent);
     setIsModalOpen(true);
   };

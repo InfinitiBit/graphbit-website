@@ -42,9 +42,9 @@ function usePerformanceMode() {
     // Check various performance indicators
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const hasWebGL = !!gl;
-    const deviceMemory = (navigator as any).deviceMemory || 4;
+    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory || 4;
     const hardwareConcurrency = navigator.hardwareConcurrency || 2;
-    const connectionSpeed = (navigator as any).connection?.effectiveType || '4g';
+    const connectionSpeed = (navigator as Navigator & { connection?: { effectiveType?: string } }).connection?.effectiveType || '4g';
     
     // Performance scoring
     let score = 0;
@@ -91,7 +91,7 @@ function usePerformanceMode() {
     };
     
     requestAnimationFrame(checkFrameRate);
-  }, []);
+  }, [performanceMode]);
   
   return { performanceMode, mounted };
 }

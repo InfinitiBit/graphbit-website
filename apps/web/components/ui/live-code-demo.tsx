@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight as Play, 
@@ -41,7 +41,7 @@ export function LiveCodeDemo({ className = "" }: LiveCodeDemoProps) {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const outputRef = useRef<HTMLDivElement>(null);
 
-  const codeSteps: CodeStep[] = [
+  const codeSteps: CodeStep[] = useMemo(() => [
     {
       id: 1,
       title: "Install GraphBit SDK",
@@ -199,7 +199,7 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
       duration: 1800,
       language: 'typescript'
     }
-  ];
+  ], []);
 
   const startExecution = useCallback(() => {
     if (currentStep >= codeSteps.length) return;
@@ -306,11 +306,12 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
   }, [autoPlay, isPlaying, currentStep, codeSteps.length, startExecution]);
 
   // Scroll output to bottom
+  const currentOutput = getCurrentOutput();
   useEffect(() => {
     if (outputRef.current && showOutput) {
       outputRef.current.scrollTop = outputRef.current.scrollHeight;
     }
-  }, [showOutput, getCurrentOutput()]);
+  }, [showOutput, currentOutput]);
 
   return (
     <div className={`relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-700/50 rounded-2xl overflow-hidden ${className}`}>

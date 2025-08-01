@@ -20,7 +20,7 @@ export default function ProtectedRoute({
   redirectTo = '/login',
 }: ProtectedRouteProps) {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading, isAdmin, isModerator } = useAuth();
+  const { isAuthenticated, isLoading, isAdmin, isModerator } = useAuth();
 
   useEffect(() => {
     if (isLoading) {

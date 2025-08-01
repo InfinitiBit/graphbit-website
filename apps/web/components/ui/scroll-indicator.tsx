@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Star as Mouse, ChevronDown as ArrowDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 // Types
 interface ScrollIndicatorProps {
@@ -127,7 +127,7 @@ function useTouchGestures(onSwipeUp: () => void) {
 }
 
 // Arrow variant component
-function ArrowIndicator({ onClick, isActive }: { onClick: () => void; isActive: boolean }) {
+function ArrowIndicator({ onClick }: { onClick: () => void }) {
   return (
     <motion.div
       className="flex flex-col items-center cursor-pointer group"
@@ -172,7 +172,7 @@ function ArrowIndicator({ onClick, isActive }: { onClick: () => void; isActive: 
 }
 
 // Mouse variant component
-function MouseIndicator({ onClick, isActive }: { onClick: () => void; isActive: boolean }) {
+function MouseIndicator({ onClick }: { onClick: () => void }) {
   return (
     <motion.div
       className="flex flex-col items-center cursor-pointer group"
@@ -226,7 +226,7 @@ function MouseIndicator({ onClick, isActive }: { onClick: () => void; isActive: 
 }
 
 // Chevron variant component
-function ChevronIndicator({ onClick, isActive }: { onClick: () => void; isActive: boolean }) {
+function ChevronIndicator({ onClick }: { onClick: () => void }) {
   return (
     <motion.div
       className="flex flex-col items-center cursor-pointer group"
@@ -322,7 +322,7 @@ export function ScrollIndicator({
 
   // Render appropriate variant
   const renderIndicator = () => {
-    const props = { onClick: scrollToNextSection, isActive: !isScrolling };
+    const props = { onClick: scrollToNextSection };
     
     switch (variant) {
       case 'mouse':

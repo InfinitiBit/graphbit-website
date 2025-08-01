@@ -229,7 +229,7 @@ function SolutionBenefitsGrid() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        {benefits.map((benefit, index) => {
+        {benefits.map((benefit, _index) => {
           const IconComponent = benefit.icon;
           return (
             <motion.div

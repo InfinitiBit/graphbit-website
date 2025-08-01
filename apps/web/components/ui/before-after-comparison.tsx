@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { Clock, DollarSign, AlertCircle, CheckCircle, ChevronDown, TrendingUp, Code, Shield, Zap } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
+import { Clock, DollarSign, AlertCircle, CheckCircle, ChevronDown, TrendingUp, Shield } from 'lucide-react';
 
 interface ComparisonMetric {
   icon: React.ComponentType<{ className?: string }>;
@@ -88,28 +88,28 @@ export function BeforeAfterComparison({ className = "" }: BeforeAfterComparisonP
     }
   ];
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    updateSliderPosition(e);
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (isDragging) {
-      updateSliderPosition(e);
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const updateSliderPosition = (e: MouseEvent | React.MouseEvent) => {
+  const updateSliderPosition = useCallback((e: MouseEvent | React.MouseEvent) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
       setSliderPosition(percentage);
     }
+  }, []);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    updateSliderPosition(e);
+  };
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (isDragging) {
+      updateSliderPosition(e);
+    }
+  }, [isDragging, updateSliderPosition]);
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
   };
 
   useEffect(() => {
@@ -121,7 +121,7 @@ export function BeforeAfterComparison({ className = "" }: BeforeAfterComparisonP
         document.removeEventListener('mouseup', handleMouseUp);
       };
     }
-  }, [isDragging]);
+  }, [isDragging, handleMouseMove]);
 
   return (
     <motion.div

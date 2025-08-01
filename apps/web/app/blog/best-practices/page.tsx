@@ -120,7 +120,7 @@ export default async function BestPracticesPage() {
                       </div>
 
                       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        {regularPractices.map((post, index) => (
+                        {regularPractices.map((post) => (
                           <BlogCard key={post.slug} post={post} />
                         ))}
                       </div>

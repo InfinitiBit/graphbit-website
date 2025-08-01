@@ -3,7 +3,7 @@
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { SubscriptionModal } from '@/components/ui/subscription-modal';
+import { useRouter } from 'next/navigation';
 import {
   Activity,
   AlertCircle,
@@ -15,7 +15,7 @@ import {
   Users,
   X,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface DashboardStats {
   totalAgents: number;
@@ -27,8 +27,9 @@ interface DashboardStats {
 }
 
 export default function DashboardPage() {
-  const { isLoaded, isSignedIn, user } = useUser();
-  const [stats, _setStats] = useState<DashboardStats>({
+  const { isLoaded, isSignedIn } = useUser();
+  const router = useRouter();
+  const [stats] = useState<DashboardStats>({
     totalAgents: 12,
     activeTraces: 147,
     totalRequests: 2847,
@@ -37,7 +38,7 @@ export default function DashboardPage() {
     errorRate: 1.8,
   });
 
-  const [recentActivity, _setRecentActivity] = useState([
+  const [recentActivity] = useState([
     {
       id: 1,
       type: 'success',
@@ -59,19 +60,20 @@ export default function DashboardPage() {
     },
   ]);
 
-  // Show loading state while Clerk is loading
-  if (!isLoaded) {
+  // Handle authentication redirect
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push('/sign-in');
+    }
+  }, [isLoaded, isSignedIn, router]);
+
+  // Show loading state while Clerk is loading or redirecting
+  if (!isLoaded || (isLoaded && !isSignedIn)) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-lg">Loading...</div>
       </div>
     );
-  }
-
-  // Redirect to sign-in if not authenticated
-  if (!isSignedIn) {
-    window.location.href = '/sign-in';
-    return null;
   }
 
   return (
@@ -94,7 +96,6 @@ export default function DashboardPage() {
                   <Plus className="mr-2 h-4 w-4" />
                   <span className="sm:inline">Settings</span>
                 </Button>
-                <SubscriptionModal />
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-interface Agent {
+export interface Agent {
   id: string;
   name: string;
   description: string;
@@ -29,7 +29,7 @@ interface Agent {
     frequencyPenalty?: number;
     presencePenalty?: number;
     systemPrompt?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   models?: {
     primary: string;
