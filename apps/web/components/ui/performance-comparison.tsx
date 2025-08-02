@@ -181,7 +181,7 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
   const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number }>; label?: string }) => {
     if (active && payload && payload.length && payload[0]) {
       return (
-        <div className="bg-gray-900 text-white p-3 rounded-lg shadow-xl border border-gray-700">
+                    <div className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white p-3 rounded-lg shadow-xl border border-gray-300 dark:border-gray-700">
           <p className="font-semibold">{label}</p>
           <p className="text-green-400">
             {formatValue(payload[0].value, currentMetric.unit)}
@@ -198,23 +198,23 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
   };
 
   return (
-    <section className={`relative bg-gradient-to-b from-background via-muted/30 to-background py-20 sm:py-24 lg:py-32 ${className}`}>
+    <section className={`relative bg-gradient-to-r from-background/95 to-warning/5 py-20 sm:py-24 lg:py-32 ${className}`}>
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:14px_24px]"></div>
       
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2">
-            <div className="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
-            <span className="text-sm font-semibold uppercase tracking-wide text-primary">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-warning/20 bg-warning/10 px-4 py-2">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-warning"></div>
+            <span className="text-sm font-semibold uppercase tracking-wide text-warning">
               Performance Metrics
             </span>
           </div>
           
           <h2 className="mb-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             See How GraphBit
-            <span className="mt-2 block bg-gradient-to-r from-primary via-accent to-success bg-clip-text text-transparent">
+            <span className="mt-2 block bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent">
               Outperforms the Competition
             </span>
           </h2>
@@ -234,8 +234,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
                   onClick={() => setSelectedMetric(metric.id)}
                   className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                     selectedMetric === metric.id
-                      ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg scale-105'
-                      : 'bg-card/80 border border-border/50 text-foreground hover:bg-card hover:border-border backdrop-blur-sm hover:shadow-lg'
+                      ? 'bg-gradient-to-r from-warning to-destructive text-white shadow-lg scale-105'
+                      : 'bg-card/80 border border-warning/20 text-foreground hover:bg-card hover:border-warning/40 backdrop-blur-sm hover:shadow-lg'
                   }`}
                   whileHover={{ scale: selectedMetric === metric.id ? 1.05 : 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -250,13 +250,13 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
         <div className="relative">
           {/* Chart Title */}
           <div className="text-center mb-6">
-            <h4 className="text-2xl font-bold text-gray-900 mb-2">{currentMetric.name}</h4>
-            <p className="text-gray-600">{currentMetric.description}</p>
+            <h4 className="text-2xl font-bold bg-gradient-to-r from-warning to-destructive bg-clip-text text-transparent mb-2">{currentMetric.name}</h4>
+            <p className="text-muted-foreground">{currentMetric.description}</p>
           </div>
 
           {/* Recharts Bar Chart */}
           <motion.div
-            className="relative h-80 mb-8 bg-gray-50/30 rounded-lg border border-gray-200/50 p-4"
+                          className="relative h-80 mb-8 bg-gradient-to-br from-background/80 to-warning/5 rounded-lg border border-warning/20 p-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -271,16 +271,16 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
                   bottom: 5,
                 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" opacity={0.3} />
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--warning))" opacity={0.2} />
                 <XAxis 
                   dataKey="name" 
-                  stroke="#6b7280"
+                  stroke="hsl(var(--muted-foreground))"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
                 />
                 <YAxis 
-                  stroke="#6b7280"
+                  stroke="hsl(var(--muted-foreground))"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
@@ -318,8 +318,8 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
                   key={competitor.name}
                   className={`p-4 rounded-xl border ${
                     isGraphBit 
-                      ? 'bg-green-50 border-green-200' 
-                      : 'bg-gray-50 border-gray-200'
+                      ? 'bg-accent/10 border-accent/30' 
+                      : 'bg-background/50 border-warning/20'
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -330,14 +330,14 @@ export function PerformanceComparison({ className = "" }: PerformanceComparisonP
                       className="w-3 h-3 rounded-full" 
                       style={{ backgroundColor: competitor.color }}
                     />
-                    <h5 className="font-semibold text-gray-900">{competitor.name}</h5>
+                    <h5 className="font-semibold text-gray-900 dark:text-gray-100">{competitor.name}</h5>
                     {isGraphBit && (
                       <div className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
                         Best
                       </div>
                     )}
                   </div>
-                  <div className="text-2xl font-bold text-gray-900 mb-1">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
                     {formatValue(competitor.value, currentMetric.unit)}
                   </div>
                   {improvement && (

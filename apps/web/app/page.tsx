@@ -3,15 +3,16 @@ import { ProblemStatementSection } from '@/components/ui/problem-statement-secti
 import { SolutionOverviewSection } from '@/components/ui/solution-overview-section';
 import { StaticFeaturesSection } from '@/components/ui/static-features-section';
 import { StaticCTASection } from '@/components/ui/static-cta-section';
+import { NeuralNetworkBackground } from '@/components/ui/neural-network-background';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'GraphBit - Build AI Agents That Actually Work',
-  description: 'Download production-ready AI agents, track every LLM interaction, and scale your AI applications with confidence. Join 10k+ developers building the future.',
-  keywords: ['AI agents', 'LLM tracing', 'AI development platform', 'machine learning', 'artificial intelligence'],
+  title: 'GraphBit - The Open-Source Framework That Powers AI Excellence',
+  description: 'GraphBit Framework eliminates the complexity of building AI agents. Our cloud platform is built on this proven foundation, trusted by developers worldwide.',
+  keywords: ['AI agents', 'LLM tracing', 'AI framework', 'open source', 'GraphBit', 'AI development platform', 'machine learning', 'artificial intelligence'],
   openGraph: {
-    title: 'GraphBit - Build AI Agents That Actually Work',
-    description: 'Download production-ready AI agents, track every LLM interaction, and scale your AI applications with confidence.',
+    title: 'GraphBit - The Open-Source Framework That Powers AI Excellence',
+    description: 'GraphBit Framework eliminates the complexity of building AI agents. Start with the framework, scale with the cloud.',
     images: ['/api/og'],
   },
 };
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <main className="relative w-full h-full">
+      {/* Neural network background across the entire landing page */}
+      <NeuralNetworkBackground />
+      
+      <main className="relative w-full min-h-screen flex-1">
         {/* Client-side Interactive Hero Section */}
         <HeroSection />
 

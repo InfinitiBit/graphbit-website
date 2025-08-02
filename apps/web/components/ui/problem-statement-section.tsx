@@ -4,8 +4,10 @@ import { motion } from 'framer-motion';
 import { 
   AlertCircle, 
   Clock, 
-  Shield, 
-  ChevronDown
+  Search, 
+  Shield,
+  TrendingUp,
+  ArrowRight
 } from 'lucide-react';
 import { ScrollSeverityMeters } from './severity-meter';
 import { CostCalculator } from './cost-calculator';
@@ -18,25 +20,33 @@ const problems = [
     icon: Clock,
     title: "Slow Development Cycles",
     description: "Months spent building AI agents from scratch, dealing with complex infrastructure, and debugging production issues that could have been avoided.",
-    gradient: "from-warning to-warning-light"
+    gradient: "from-warning to-warning-light",
+    background: "from-warning/5 via-warning/3 to-warning/1",
+    border: "border-warning/20 hover:border-warning/40"
   },
   {
-    icon: Shield,
+    icon: Search,
     title: "Zero Visibility",
     description: "AI agents fail silently in production with no insights into performance, decision-making processes, or user interactions.",
-    gradient: "from-accent to-accent-light"
+    gradient: "from-accent to-accent-light",
+    background: "from-accent/5 via-accent/3 to-accent/1",
+    border: "border-accent/20 hover:border-accent/40"
   },
   {
     icon: Shield,
     title: "Security Vulnerabilities",
     description: "Prompt injection attacks, data leaks, and unauthorized access threats that put your business and users at risk.",
-    gradient: "from-secondary to-secondary-light"
+    gradient: "from-secondary to-secondary-light",
+    background: "from-secondary/5 via-secondary/3 to-secondary/1",
+    border: "border-secondary/20 hover:border-secondary/40"
   },
   {
-    icon: ChevronDown,
+    icon: TrendingUp,
     title: "Poor Performance at Scale",
     description: "AI agents that work in development but fail under real-world load, leading to frustrated users and lost revenue.",
-    gradient: "from-destructive to-destructive-light"
+    gradient: "from-destructive to-destructive-light",
+    background: "from-destructive/5 via-destructive/3 to-destructive/1",
+    border: "border-destructive/20 hover:border-destructive/40"
   }
 ];
 
@@ -105,84 +115,93 @@ const iconVariants = {
 
 export function ProblemStatementSection() {
   return (
-    <section className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-muted via-muted/50 to-background overflow-hidden">
-      {/* Background Effects */}
+    <section className="relative py-24 sm:py-28 lg:py-36 bg-gradient-to-b from-muted/30 via-background to-background overflow-hidden">
+      {/* Enhanced Background Effects */}
       <div className="absolute inset-0">
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-warning/5 via-transparent to-secondary/5" />
+        {/* Modern gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-warning/10 via-transparent to-destructive/5" />
         
-        {/* Static background pattern - no hydration issues */}
-        <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/30 rounded-full animate-pulse" />
-          <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-accent/25 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-warning/20 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
-          <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-secondary/35 rounded-full animate-pulse" style={{ animationDelay: '3s' }} />
-          <div className="absolute bottom-1/3 right-1/5 w-2 h-2 bg-accent/20 rounded-full animate-pulse" style={{ animationDelay: '4s' }} />
+        {/* Sophisticated pattern overlay */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        </div>
+        
+        {/* Enhanced floating elements */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-1/6 w-4 h-4 bg-gradient-to-br from-warning to-warning-light rounded-full animate-pulse shadow-lg" />
+          <div className="absolute top-1/3 right-1/5 w-2 h-2 bg-gradient-to-br from-accent to-accent-light rounded-full animate-pulse shadow-lg" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-gradient-to-br from-destructive to-destructive-light rounded-full animate-pulse shadow-lg" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-2/3 right-1/3 w-2 h-2 bg-gradient-to-br from-primary to-primary-light rounded-full animate-pulse shadow-lg" style={{ animationDelay: '3s' }} />
           
-          {/* Radial gradients for atmosphere */}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-primary/5 to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl" />
+          {/* Large ambient gradients using CSS variables */}
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-warning/5 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-destructive/5 to-transparent rounded-full blur-3xl" />
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+        {/* Enhanced Section Header */}
         <motion.div 
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-20 sm:mb-24"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Problem Alert Badge */}
+          {/* Enhanced Problem Alert Badge */}
           <motion.div 
-            className="inline-flex items-center gap-3 mb-6 sm:mb-8"
+            className="inline-flex items-center gap-4 mb-8 sm:mb-10"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="relative">
-              <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-gradient-to-br from-warning to-warning-light shadow-2xl">
-                <AlertCircle className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+              <div className="flex h-16 w-16 sm:h-18 sm:w-18 items-center justify-center rounded-2xl bg-gradient-to-br from-warning to-destructive shadow-2xl">
+                <AlertCircle className="h-8 w-8 sm:h-9 sm:w-9 text-white" />
               </div>
-              <div className="absolute inset-0 rounded-full bg-warning opacity-30 animate-ping"></div>
+              <div className="absolute inset-0 rounded-2xl bg-warning opacity-30 animate-ping"></div>
             </div>
-            <span className="text-lg sm:text-xl font-semibold text-warning">
-              Critical Development Challenges
-            </span>
+            <div>
+              <span className="block text-xl sm:text-2xl font-bold text-warning">
+                Problem Statement
+              </span>
+              <span className="text-sm text-muted-foreground uppercase tracking-wide">
+                Current State of AI Development
+              </span>
+            </div>
           </motion.div>
 
-          {/* Main Headline */}
+          {/* Enhanced Main Headline */}
           <motion.h2 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             Building AI Agents
-            <span className="block mt-2 bg-gradient-to-r from-warning via-accent to-destructive bg-clip-text text-transparent">
-              Shouldn&apos;t Be This Hard
+            <span className="block mt-3 bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent">
+              Shouldn&apos;t Be This Painful
             </span>
           </motion.h2>
 
-          {/* Description */}
+          {/* Enhanced Description */}
           <motion.p 
-            className="max-w-3xl mx-auto text-lg sm:text-xl leading-relaxed text-muted-foreground font-light"
+            className="max-w-4xl mx-auto text-xl sm:text-2xl leading-relaxed text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            Developers are struggling with the same painful challenges when building AI agents. 
-            <span className="text-foreground font-medium"> It&apos;s time for a better way.</span>
+            Developers waste <span className="font-bold text-warning">months of valuable time</span> struggling with the same painful challenges. 
+            <span className="block mt-2 text-foreground font-bold"> There&apos;s a better way to build AI that actually works.</span>
           </motion.p>
         </motion.div>
 
-        {/* Problems Grid */}
+        {/* Enhanced Problems Grid */}
         <motion.div
-          className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10 max-w-6xl mx-auto"
+          className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -198,33 +217,39 @@ export function ProblemStatementSection() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="group relative"
               >
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-background to-card backdrop-blur-xl border border-border p-6 sm:p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:border-primary/20 hover:scale-[1.02] hover:-translate-y-1">
-                  {/* Subtle glow effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${problem.background} backdrop-blur-xl border-2 ${problem.border} p-4 sm:p-5 lg:p-6 shadow-lg transition-all duration-300 hover:shadow-xl`}>
+                  {/* Subtle glow effect */}
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-primary/10 opacity-0 blur-sm transition-all duration-300 group-hover:opacity-40" />
                   
                   {/* Icon */}
                   <motion.div 
-                    className="mb-6"
+                    className="mb-4"
                     variants={iconVariants}
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
                   >
-                    <div className={`inline-flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-gradient-to-br ${problem.gradient} shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-110`}>
-                      <IconComponent className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
+                    <div className={`inline-flex h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 items-center justify-center rounded-lg bg-gradient-to-br ${problem.gradient} shadow-lg transition-all duration-300 group-hover:shadow-xl`}>
+                      <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-white" />
                     </div>
                   </motion.div>
 
                   {/* Content */}
                   <div className="relative">
-                    <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                       {problem.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
+                    <p className="text-sm lg:text-base leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                       {problem.description}
                     </p>
+                    
+                    {/* Learn more indicator */}
+                    <div className="mt-4 flex items-center text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
+                      <span className="text-xs font-semibold">Learn how GraphBit solves this</span>
+                      <ArrowRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
+                    </div>
                   </div>
 
-                  {/* Bottom accent line */}
-                  <div className={`absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r ${problem.gradient} transition-all duration-500 group-hover:w-full`} />
+                  {/* Bottom accent */}
+                  <div className={`absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r ${problem.gradient} transition-all duration-300 group-hover:w-full rounded-b-xl`} />
                 </div>
               </motion.div>
             );

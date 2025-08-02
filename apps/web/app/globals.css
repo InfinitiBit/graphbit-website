@@ -4,138 +4,144 @@
 
 @layer base {
   :root {
-    /* GraphBit Brand Color System - Eye-soothing Professional Palette */
+    /* GraphBit SaaS Brand Color System - Modern & Conversion-Optimized */
     
-    /* Base colors - Light theme optimized for readability and calmness */
+    /* Base colors - Ultra-clean light theme */
     --background: 0 0% 100%; /* Pure white */
-    --foreground: 210 10% 23%; /* Deep slate gray #334155 */
+    --foreground: 221 39% 11%; /* Rich charcoal #0F172A */
     --card: 0 0% 100%; /* White */
-    --card-foreground: 210 10% 23%; /* Deep slate gray */
+    --card-foreground: 221 39% 11%; /* Rich charcoal */
     --popover: 0 0% 100%; /* White */
-    --popover-foreground: 210 10% 23%; /* Deep slate gray */
+    --popover-foreground: 221 39% 11%; /* Rich charcoal */
     
-    /* Primary brand colors - Ocean teal/blue family */
-    --primary: 195 100% 28%; /* Deep ocean teal #0C4A6E */
+    /* Primary brand colors - Modern indigo/violet for trust & innovation */
+    --primary: 225 73% 57%; /* Professional indigo #4F46E5 */
     --primary-foreground: 0 0% 100%; /* White */
-    --primary-light: 195 85% 41%; /* Lighter teal #0E7490 */
-    --primary-lighter: 195 85% 65%; /* Even lighter #22D3EE */
+    --primary-light: 225 73% 67%; /* Lighter indigo #6366F1 */
+    --primary-lighter: 225 73% 85%; /* Very light indigo #C7D2FE */
     
-    /* Secondary colors - Sophisticated blue-gray */
-    --secondary: 215 14% 34%; /* Blue-gray #475569 */
+    /* Secondary colors - Sophisticated slate */
+    --secondary: 215 25% 27%; /* Rich slate #334155 */
     --secondary-foreground: 0 0% 100%; /* White */
-    --secondary-light: 215 20% 65%; /* Lighter blue-gray #94A3B8 */
-    --secondary-lighter: 215 25% 85%; /* Very light blue-gray #E2E8F0 */
+    --secondary-light: 215 20% 65%; /* Medium slate #94A3B8 */
+    --secondary-lighter: 215 25% 87%; /* Light slate #E2E8F0 */
     
     /* Muted colors for backgrounds and subtle elements */
-    --muted: 220 14% 96%; /* Very light gray #F8FAFC */
+    --muted: 220 14% 98%; /* Ultra light gray #FAFAFA */
     --muted-foreground: 215 16% 47%; /* Medium gray #64748B */
     --muted-dark: 215 25% 27%; /* Darker muted #334155 */
     
-    /* Accent color - Sophisticated purple for highlights */
-    --accent: 243 75% 59%; /* Warm purple #8B5CF6 */
+    /* Accent color - Electric cyan for CTAs and highlights */
+    --accent: 193 82% 31%; /* Electric teal #0891B2 */
     --accent-foreground: 0 0% 100%; /* White */
-    --accent-light: 243 75% 70%; /* Lighter purple #A78BFA */
-    --accent-lighter: 243 75% 85%; /* Very light purple #DDD6FE */
+    --accent-light: 193 82% 51%; /* Bright cyan #0EA5E9 */
+    --accent-lighter: 193 82% 85%; /* Light cyan #BAE6FD */
     
-    /* Success colors - Calming emerald green */
-    --success: 160 84% 39%; /* Emerald green #059669 */
+    /* Success colors - Fresh green for conversions */
+    --success: 142 76% 36%; /* Fresh green #16A34A */
     --success-foreground: 0 0% 100%; /* White */
-    --success-light: 160 80% 52%; /* Lighter emerald #10B981 */
-    --success-lighter: 160 85% 85%; /* Very light emerald #D1FAE5 */
+    --success-light: 142 76% 46%; /* Brighter green #22C55E */
+    --success-lighter: 142 76% 85%; /* Light green #DCFCE7 */
     
-    /* Warning colors - Warm amber (not harsh) */
-    --warning: 32 95% 44%; /* Warm amber #D97706 */
+    /* Warning colors - Vibrant orange for urgency */
+    --warning: 31 81% 56%; /* Vibrant orange #EA580C */
     --warning-foreground: 0 0% 100%; /* White */
-    --warning-light: 43 96% 56%; /* Lighter amber #F59E0B */
-    --warning-lighter: 43 96% 85%; /* Very light amber #FEF3C7 */
+    --warning-light: 31 81% 66%; /* Lighter orange #FB923C */
+    --warning-lighter: 31 81% 88%; /* Light orange #FFEDD5 */
     
-    /* Error/destructive colors - Softer red */
-    --destructive: 0 84% 60%; /* Softer red #EF4444 */
+    /* Error/destructive colors - Clear red */
+    --destructive: 0 84% 60%; /* Clear red #EF4444 */
     --destructive-foreground: 0 0% 100%; /* White */
     --destructive-light: 0 84% 70%; /* Lighter red #F87171 */
     --destructive-lighter: 0 93% 94%; /* Very light red #FEF2F2 */
     
     /* Border and input colors */
-    --border: 220 13% 91%; /* Light border #E2E8F0 */
-    --border-light: 220 13% 95%; /* Very light border #F1F5F9 */
+    --border: 220 13% 91%; /* Subtle border #E5E7EB */
+    --border-light: 220 13% 95%; /* Very light border #F3F4F6 */
     --input: 220 13% 91%; /* Input border */
-    --ring: 195 100% 28%; /* Focus ring - same as primary */
+    --ring: 225 73% 57%; /* Focus ring - primary color */
     
-    /* Radius for consistent roundness */
-    --radius: 0.75rem; /* Slightly more rounded for modern feel */
+    /* Radius for modern feel */
+    --radius: 0.75rem; /* Consistent roundness */
     
-    /* Brand gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(195 100% 28%) 0%, hsl(195 85% 41%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(215 14% 34%) 0%, hsl(215 20% 65%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(243 75% 59%) 0%, hsl(243 75% 70%) 100%);
-    --gradient-success: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(160 80% 52%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(195 100% 28%) 0%, hsl(243 75% 59%) 50%, hsl(160 84% 39%) 100%);
-    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 14% 96%) 50%, hsl(215 25% 97%) 100%);
+    /* Enhanced SaaS gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(225 73% 57%) 0%, hsl(225 73% 67%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(215 25% 27%) 0%, hsl(215 20% 65%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(193 82% 31%) 0%, hsl(193 82% 51%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(142 76% 46%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(225 73% 57%) 0%, hsl(193 82% 31%) 50%, hsl(142 76% 36%) 100%);
+    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 14% 98%) 50%, hsl(215 25% 97%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(225 73% 57%) 0%, hsl(193 82% 31%) 100%);
+    --gradient-surface: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 14% 98%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 14% 99%) 100%);
   }
 
   .dark {
-    /* Dark theme variant of GraphBit brand colors */
-    --background: 210 11% 6%; /* Very dark slate #0F172A */
-    --foreground: 215 20% 95%; /* Light gray text #F1F5F9 */
-    --card: 210 11% 8%; /* Dark card background */
-    --card-foreground: 215 20% 95%; /* Light text on dark */
-    --popover: 210 11% 8%; /* Dark popover */
-    --popover-foreground: 215 20% 95%; /* Light text */
+    /* Modern Dark Theme - Enhanced for SaaS */
+    --background: 224 71% 4%; /* Deep midnight #0B1120 */
+    --foreground: 213 31% 91%; /* Bright white text #E2E8F0 */
+    --card: 224 71% 6%; /* Slightly lighter card #0F1629 */
+    --card-foreground: 213 31% 91%; /* Bright text on dark cards */
+    --popover: 224 71% 6%; /* Dark popover */
+    --popover-foreground: 213 31% 91%; /* Bright popover text */
     
-    /* Primary colors adjusted for dark theme */
-    --primary: 195 85% 41%; /* Lighter teal for dark bg #0E7490 */
-    --primary-foreground: 210 11% 6%; /* Dark text on light primary */
-    --primary-light: 195 85% 55%; /* Even lighter for dark theme */
-    --primary-lighter: 195 85% 75%; /* Brightest for dark theme */
+    /* Primary colors for dark theme */
+    --primary: 225 73% 67%; /* Brighter indigo #6366F1 */
+    --primary-foreground: 0 0% 100%; /* White text */
+    --primary-light: 225 73% 77%; /* Even brighter #818CF8 */
+    --primary-lighter: 225 73% 87%; /* Brightest #C7D2FE */
     
     /* Secondary colors for dark theme */
-    --secondary: 215 20% 65%; /* Lighter secondary for visibility */
-    --secondary-foreground: 210 11% 6%; /* Dark text */
-    --secondary-light: 215 25% 75%; /* Lighter for dark theme */
-    --secondary-lighter: 215 25% 85%; /* Lightest for dark theme */
+    --secondary: 215 20% 65%; /* Medium slate for visibility #94A3B8 */
+    --secondary-foreground: 224 71% 4%; /* Dark text on light secondary */
+    --secondary-light: 215 25% 75%; /* Lighter slate #CBD5E1 */
+    --secondary-lighter: 215 25% 85%; /* Lightest slate #E2E8F0 */
     
     /* Muted colors for dark theme */
-    --muted: 210 11% 12%; /* Dark muted background #1E293B */
-    --muted-foreground: 215 20% 70%; /* Lighter muted text #94A3B8 */
-    --muted-dark: 210 11% 6%; /* Darker for contrast */
+    --muted: 215 28% 17%; /* Dark surface #1E293B */
+    --muted-foreground: 215 20% 65%; /* Medium gray text #94A3B8 */
+    --muted-dark: 224 71% 4%; /* Darker for contrast */
     
     /* Accent colors for dark theme */
-    --accent: 243 75% 70%; /* Lighter purple for dark bg #A78BFA */
-    --accent-foreground: 210 11% 6%; /* Dark text */
-    --accent-light: 243 75% 80%; /* Even lighter */
-    --accent-lighter: 243 75% 90%; /* Lightest */
+    --accent: 193 82% 51%; /* Bright cyan #0EA5E9 */
+    --accent-foreground: 0 0% 100%; /* White text */
+    --accent-light: 193 82% 61%; /* Brighter cyan #38BDF8 */
+    --accent-lighter: 193 82% 75%; /* Brightest cyan #7DD3FC */
     
     /* Success colors for dark theme */
-    --success: 160 80% 52%; /* Lighter emerald #10B981 */
-    --success-foreground: 210 11% 6%; /* Dark text */
-    --success-light: 160 80% 65%; /* Lighter */
-    --success-lighter: 160 85% 75%; /* Lightest */
+    --success: 142 76% 46%; /* Bright green #22C55E */
+    --success-foreground: 0 0% 100%; /* White text */
+    --success-light: 142 76% 56%; /* Brighter green #4ADE80 */
+    --success-lighter: 142 76% 70%; /* Brightest green #86EFAC */
     
     /* Warning colors for dark theme */
-    --warning: 43 96% 56%; /* Lighter amber #F59E0B */
-    --warning-foreground: 210 11% 6%; /* Dark text */
-    --warning-light: 43 96% 70%; /* Lighter */
-    --warning-lighter: 43 96% 80%; /* Lightest */
+    --warning: 31 81% 66%; /* Bright orange #FB923C */
+    --warning-foreground: 0 0% 100%; /* White text */
+    --warning-light: 31 81% 76%; /* Brighter orange #FDBA74 */
+    --warning-lighter: 31 81% 86%; /* Brightest orange #FED7AA */
     
     /* Error colors for dark theme */
-    --destructive: 0 84% 70%; /* Lighter red #F87171 */
-    --destructive-foreground: 210 11% 6%; /* Dark text */
-    --destructive-light: 0 84% 80%; /* Lighter */
-    --destructive-lighter: 0 93% 85%; /* Lightest */
+    --destructive: 0 84% 70%; /* Bright red #F87171 */
+    --destructive-foreground: 0 0% 100%; /* White text */
+    --destructive-light: 0 84% 80%; /* Brighter red #FCA5A5 */
+    --destructive-lighter: 0 93% 90%; /* Brightest red #FECACA */
     
     /* Borders and inputs for dark theme */
-    --border: 215 20% 20%; /* Dark border #334155 */
-    --border-light: 215 20% 25%; /* Lighter dark border */
-    --input: 215 20% 20%; /* Input border */
-    --ring: 195 85% 41%; /* Focus ring - lighter primary */
+    --border: 215 28% 25%; /* Subtle dark border #374151 */
+    --border-light: 215 28% 30%; /* Lighter dark border #4B5563 */
+    --input: 215 28% 25%; /* Input border */
+    --ring: 225 73% 67%; /* Focus ring - bright primary */
     
-    /* Dark theme gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(195 85% 41%) 0%, hsl(195 85% 55%) 100%);
+    /* Enhanced dark theme gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(225 73% 67%) 0%, hsl(225 73% 77%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(215 20% 65%) 0%, hsl(215 25% 75%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(243 75% 70%) 0%, hsl(243 75% 80%) 100%);
-    --gradient-success: linear-gradient(135deg, hsl(160 80% 52%) 0%, hsl(160 80% 65%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(195 85% 41%) 0%, hsl(243 75% 70%) 50%, hsl(160 80% 52%) 100%);
-    --gradient-background: linear-gradient(135deg, hsl(210 11% 6%) 0%, hsl(210 11% 8%) 50%, hsl(210 11% 10%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(193 82% 51%) 0%, hsl(193 82% 61%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 46%) 0%, hsl(142 76% 56%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(225 73% 67%) 0%, hsl(193 82% 51%) 50%, hsl(142 76% 46%) 100%);
+    --gradient-background: linear-gradient(135deg, hsl(224 71% 4%) 0%, hsl(224 71% 6%) 50%, hsl(215 28% 17%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(225 73% 67%) 0%, hsl(193 82% 51%) 100%);
+    --gradient-surface: linear-gradient(135deg, hsl(224 71% 6%) 0%, hsl(215 28% 17%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(224 71% 6%) 0%, hsl(224 71% 8%) 100%);
   }
 }
 
@@ -330,6 +336,11 @@
     -webkit-background-clip: text;
     color: transparent;
     animation: gradientShift 8s ease infinite;
+  }
+
+  /* Radial gradient utility for subtle backgrounds */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
   }
 
   /* Subtle background gradient */

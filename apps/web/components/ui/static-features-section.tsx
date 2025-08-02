@@ -1,42 +1,63 @@
-import { Star } from 'lucide-react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { 
+  Star, 
+  BarChart3, 
+  Shield, 
+  Zap, 
+  Code, 
+  Package, 
+  TrendingUp,
+  ArrowRight
+} from 'lucide-react';
+
 
 const features = [
   {
-    icon: '📊',
+    icon: BarChart3,
     title: 'Real-time Monitoring',
     description: 'Track every interaction, performance metric, and decision path with comprehensive real-time dashboards and alerts.',
-    gradient: 'from-primary to-primary-light'
+    gradient: 'from-warning to-warning-light',
+    background: 'from-warning/5 via-warning/3 to-warning/1',
+    border: 'border-warning/20 hover:border-warning/40'
   },
   {
-    icon: '🔒',
+    icon: Shield,
     title: 'Security & Compliance',
     description: 'Enterprise-grade security with SOC 2 compliance, data encryption, and built-in protection against prompt injection attacks.',
-    gradient: 'from-success to-success-light'
+    gradient: 'from-destructive to-destructive-light',
+    background: 'from-destructive/5 via-destructive/3 to-destructive/1',
+    border: 'border-destructive/20 hover:border-destructive/40'
   },
   {
-    icon: '⚡',
+    icon: Zap,
     title: 'Auto-scaling Infrastructure',
     description: 'Handle any load with intelligent auto-scaling that adapts to demand while optimizing costs and performance automatically.',
-    gradient: 'from-accent to-accent-light'
+    gradient: 'from-accent to-accent-light',
+    background: 'from-accent/5 via-accent/3 to-accent/1',
+    border: 'border-accent/20 hover:border-accent/40'
   },
   {
-    icon: '💻',
+    icon: Code,
     title: 'Developer Experience',
     description: 'Intuitive APIs, comprehensive documentation, and powerful debugging tools that make development fast and enjoyable.',
-    gradient: 'from-warning to-warning-light'
+    gradient: 'from-primary to-primary-light',
+    background: 'from-primary/5 via-primary/3 to-primary/1',
+    border: 'border-primary/20 hover:border-primary/40'
   },
   {
-    icon: '🏪',
+    icon: Package,
     title: 'AI Agent Marketplace',
     description: 'Discover and deploy pre-built AI agents or share your creations with a thriving community of developers.',
-    gradient: 'from-secondary to-secondary-light'
+    gradient: 'from-secondary to-secondary-light',
+    background: 'from-secondary/5 via-secondary/3 to-secondary/1',
+    border: 'border-secondary/20 hover:border-secondary/40'
   },
   {
-    icon: '📈',
+    icon: TrendingUp,
     title: 'Advanced Analytics',
     description: 'Deep insights into agent performance, user interactions, and business metrics with customizable dashboards and reports.',
-    gradient: 'from-primary-light to-accent'
+    gradient: 'from-warning to-accent-light',
+    background: 'from-warning/5 via-accent/3 to-accent/1',
+    border: 'border-warning/20 hover:border-accent/40'
   }
 ];
 
@@ -47,7 +68,7 @@ const testimonials = [
     badge: 'Tech Lead',
     content: 'GraphBit cut our AI development time by 70%. The marketplace had exactly what we needed, and the tracing tools helped us optimize performance instantly.',
     initials: 'SK',
-    gradient: 'from-primary to-accent'
+    gradient: 'from-warning to-destructive'
   },
   {
     name: 'David Kim',
@@ -55,7 +76,7 @@ const testimonials = [
     badge: 'Enterprise',
     content: 'The observability features are game-changing. We can now track every LLM interaction across our 25+ microservices in real-time.',
     initials: 'DK',
-    gradient: 'from-success to-primary'
+    gradient: 'from-accent to-warning'
   },
   {
     name: 'Alex Chen',
@@ -63,7 +84,7 @@ const testimonials = [
     badge: 'Solo Dev',
     content: 'From prototype to production in 2 days. Now earning $15K/month from my AI SaaS. GraphBit made it possible.',
     initials: 'AC',
-    gradient: 'from-accent to-secondary'
+    gradient: 'from-destructive to-accent'
   }
 ];
 
@@ -73,117 +94,175 @@ export function StaticFeaturesSection() {
       {/* Enhanced Features Section */}
       <section
         id="features-section"
-        className="relative bg-gradient-to-b from-background via-muted/30 to-background py-20 sm:py-24 lg:py-32"
+        className="relative bg-gradient-to-b from-background via-warning/5 to-background py-24 sm:py-28 lg:py-36"
       >
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        {/* Modern Background Pattern - using consistent CSS variables */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:24px_24px] opacity-20"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-warning/5 to-destructive/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-destructive/5 to-accent/5 rounded-full blur-3xl"></div>
+        </div>
 
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
-              <span className="text-sm font-semibold uppercase tracking-wide text-primary">
-                Key Features
+          <div className="mb-20 text-center">
+            <div className="mb-6 inline-flex items-center gap-3 rounded-2xl border border-warning/20 bg-gradient-to-r from-warning/10 to-destructive/10 px-6 py-3">
+              <div className="h-3 w-3 animate-pulse rounded-full bg-warning"></div>
+              <span className="text-sm font-bold uppercase tracking-wide text-warning">
+                Platform Features
               </span>
             </div>
 
-            <h2 className="mb-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h2 className="mb-8 text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Everything You Need to Build
-              <span className="mt-2 block bg-gradient-to-r from-primary via-accent to-success bg-clip-text text-transparent">
-                Production-Ready AI Agents
+              <span className="mt-3 block bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent">
+                AI Agents That Scale
               </span>
             </h2>
 
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            <p className="mx-auto max-w-3xl text-xl leading-relaxed text-muted-foreground lg:text-2xl">
               From development to deployment, monitoring to scaling - GraphBit provides the
-              complete toolkit for AI agent success.
+              enterprise-grade infrastructure your AI applications deserve.
             </p>
           </div>
 
-          {/* Feature Cards */}
-          <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient}/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100`}></div>
+          {/* Enhanced Feature Cards */}
+          <div className="mx-auto grid max-w-8xl gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+            {features.map((feature, index) => {
+              const IconComponent = feature.icon;
+              
+              return (
+                <div
+                  key={index}
+                  className="group relative"
+                >
+                  <div className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${feature.background} backdrop-blur-xl border-2 ${feature.border} p-4 sm:p-5 lg:p-6 shadow-lg transition-all duration-300 hover:shadow-xl`}>
+                    {/* Subtle glow effect */}
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-primary/10 opacity-0 blur-sm transition-all duration-300 group-hover:opacity-40" />
+                    
+                    {/* Icon */}
+                    <div className="mb-4">
+                      <div className={`inline-flex h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 items-center justify-center rounded-lg bg-gradient-to-br ${feature.gradient} shadow-lg transition-all duration-300 group-hover:shadow-xl`}>
+                        <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-white" />
+                      </div>
+                    </div>
 
-                <div className="relative">
-                  <div className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${feature.gradient} shadow-lg text-2xl`}>
-                    {feature.icon}
+                    {/* Content */}
+                    <div className="relative">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm lg:text-base leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                        {feature.description}
+                      </p>
+                      
+                      {/* Learn more indicator */}
+                      <div className="mt-4 flex items-center text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
+                        <span className="text-xs font-semibold">Learn how this helps</span>
+                        <ArrowRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
+                      </div>
+                    </div>
+
+                    {/* Bottom accent */}
+                    <div className={`absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r ${feature.gradient} transition-all duration-300 group-hover:w-full rounded-b-xl`} />
                   </div>
-
-                  <h3 className="mb-3 text-xl font-semibold text-foreground">{feature.title}</h3>
-                  <p className="leading-relaxed text-muted-foreground">
-                    {feature.description}
-                  </p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="relative bg-gradient-to-br from-muted-dark to-secondary py-16 sm:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Enhanced Stats Section */}
+      <section className="relative bg-gradient-to-br from-warning via-destructive to-accent py-20 sm:py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-black/5"></div>
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h3 className="text-3xl font-bold text-white sm:text-4xl">
+              Powering the Future of AI
+            </h3>
+            <p className="mt-4 text-xl text-white/90">
+              Join thousands of teams already building with GraphBit
+            </p>
+          </div>
+          
           <div className="grid gap-8 text-center md:grid-cols-3">
-            <div>
-              <div className="mb-2 text-4xl font-bold text-white sm:text-5xl">10,000+</div>
-              <div className="text-white/70">AI Agents Deployed</div>
+            <div className="group">
+              <div className="mb-4 text-5xl font-black text-white sm:text-6xl transition-transform duration-300 group-hover:scale-110">
+                25,000+
+              </div>
+              <div className="text-xl font-semibold text-white/90">AI Agents Deployed</div>
+              <div className="mt-2 text-white/70">Across 100+ countries</div>
             </div>
-            <div>
-              <div className="mb-2 text-4xl font-bold text-white sm:text-5xl">99.9%</div>
-              <div className="text-white/70">Uptime Guarantee</div>
+            <div className="group">
+              <div className="mb-4 text-5xl font-black text-white sm:text-6xl transition-transform duration-300 group-hover:scale-110">
+                99.99%
+              </div>
+              <div className="text-xl font-semibold text-white/90">Uptime Guarantee</div>
+              <div className="mt-2 text-white/70">Enterprise SLA included</div>
             </div>
-            <div>
-              <div className="mb-2 text-4xl font-bold text-white sm:text-5xl">500+</div>
-              <div className="text-white/70">Enterprise Customers</div>
+            <div className="group">
+              <div className="mb-4 text-5xl font-black text-white sm:text-6xl transition-transform duration-300 group-hover:scale-110">
+                1,500+
+              </div>
+              <div className="text-xl font-semibold text-white/90">Enterprise Customers</div>
+              <div className="mt-2 text-white/70">Fortune 500 companies</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Modern Testimonials */}
-      <section className="relative py-16 sm:py-20 lg:py-24">
+      {/* Enhanced Testimonials */}
+      <section className="relative py-20 sm:py-24 lg:py-28">
         <div className="container-responsive">
-          <div className="mx-auto mb-16 max-w-2xl text-center">
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+          <div className="mx-auto mb-20 max-w-3xl text-center">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-warning/20 to-destructive/20 px-6 py-3">
+              <Star className="h-5 w-5 fill-warning text-warning" />
+              <span className="font-bold text-warning">Customer Stories</span>
+            </div>
+            
+            <h2 className="text-4xl font-black text-foreground sm:text-5xl lg:text-6xl">
               What developers are saying
             </h2>
-            <p className="mt-6 text-lg text-muted-foreground">
-              See how GraphBit is transforming AI development workflows
+            <p className="mt-6 text-xl text-muted-foreground">
+              See how GraphBit is transforming AI development workflows across industries
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 lg:gap-5 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 bg-card/70 shadow-lg backdrop-blur-sm">
-                <CardHeader className="pb-4">
+              <div 
+                key={index} 
+                className="group relative overflow-hidden rounded-xl border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 p-4 lg:p-5 shadow-lg backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-warning/40"
+              >
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-warning to-destructive opacity-0 blur transition-all duration-500 group-hover:opacity-20"></div>
+                
+                <div className="relative">
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="h-4 w-4 fill-warning text-warning" />
                       ))}
                     </div>
-                    <div className="rounded-full bg-gradient-to-r from-secondary to-muted-dark px-3 py-1 text-xs font-medium text-white">
+                    <div className="rounded-full bg-gradient-to-r from-warning to-destructive px-3 py-1 text-xs lg:text-sm font-bold text-white">
                       {testimonial.badge}
                     </div>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-6 font-medium leading-relaxed text-foreground">
-                    &quot;{testimonial.content}&quot;
-                  </p>
+                  
+                  <blockquote className="mb-4 text-sm lg:text-base font-medium leading-relaxed text-foreground">
+                    &ldquo;{testimonial.content}&rdquo;
+                  </blockquote>
+                  
                   <div className="flex items-center gap-3">
-                    <div className={`flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br ${testimonial.gradient} text-sm font-bold text-white`}>
+                    <div className={`flex h-10 w-10 lg:h-11 lg:w-11 items-center justify-center rounded-lg bg-gradient-to-br ${testimonial.gradient} text-sm lg:text-base font-bold text-white shadow-lg`}>
                       {testimonial.initials}
                     </div>
                     <div>
-                      <p className="font-semibold text-foreground">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      <p className="text-sm lg:text-base font-bold text-foreground">{testimonial.name}</p>
+                      <p className="text-xs lg:text-sm text-muted-foreground">{testimonial.role}</p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>

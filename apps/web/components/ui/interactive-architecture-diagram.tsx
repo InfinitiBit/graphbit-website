@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Shield as Database, 
@@ -11,10 +11,7 @@ import {
   Star as GitBranch,
   Users,
   BarChart3,
-  X,
-  Plus as ZoomIn,
-  X as ZoomOut,
-  RefreshCw as RotateCcw
+  X
 } from 'lucide-react';
 
 interface ArchitectureNode {
@@ -44,10 +41,6 @@ interface InteractiveArchitectureDiagramProps {
 
 export function InteractiveArchitectureDiagram({ className = "" }: InteractiveArchitectureDiagramProps) {
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
-  const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [isAnimating, setIsAnimating] = useState(true);
   
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -56,7 +49,7 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     {
       id: 'api-gateway',
       x: 400,
-      y: 50,
+      y: 80,
       title: 'API Gateway',
       description: 'Secure entry point for all AI agent interactions',
       icon: Shield,
@@ -67,8 +60,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     },
     {
       id: 'agent-runtime',
-      x: 200,
-      y: 150,
+      x: 150,
+      y: 180,
       title: 'Agent Runtime',
       description: 'Core execution environment for AI agents',
       icon: Cpu,
@@ -79,8 +72,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     },
     {
       id: 'llm-orchestrator',
-      x: 600,
-      y: 150,
+      x: 650,
+      y: 180,
       title: 'LLM Orchestrator',
       description: 'Intelligent routing and optimization for language models',
       icon: GitBranch,
@@ -91,8 +84,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     },
     {
       id: 'data-layer',
-      x: 100,
-      y: 250,
+      x: 80,
+      y: 280,
       title: 'Data Layer',
       description: 'Secure and scalable data storage and retrieval',
       icon: Database,
@@ -103,9 +96,9 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     },
     {
       id: 'monitoring',
-      x: 700,
-      y: 250,
-      title: 'Monitoring & Analytics',
+      x: 720,
+      y: 280,
+      title: 'Monitoring',
       description: 'Real-time observability and performance tracking',
       icon: BarChart3,
       color: 'hsl(215 14% 34%)',
@@ -115,8 +108,8 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     },
     {
       id: 'external-llms',
-      x: 600,
-      y: 50,
+      x: 550,
+      y: 80,
       title: 'External LLMs',
       description: 'Integration with leading AI model providers',
       icon: Cloud,
@@ -127,7 +120,7 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     },
     {
       id: 'knowledge-base',
-      x: 100,
+      x: 250,
       y: 350,
       title: 'Knowledge Base',
       description: 'Centralized repository for agent knowledge and context',
@@ -139,7 +132,7 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     },
     {
       id: 'user-dashboard',
-      x: 500,
+      x: 550,
       y: 350,
       title: 'User Dashboard',
       description: 'Intuitive interface for managing and monitoring agents',
@@ -157,42 +150,42 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
       to: 'agent-runtime',
       label: 'Requests',
       color: 'hsl(195 100% 28%)',
-      path: 'M 400 80 Q 300 100 200 180'
+      path: 'M 400 110 Q 280 130 150 210'
     },
     {
       from: 'agent-runtime',
       to: 'llm-orchestrator',
       label: 'LLM Calls',
       color: 'hsl(160 84% 39%)',
-      path: 'M 230 150 Q 400 120 570 150'
+      path: 'M 180 180 Q 400 160 620 180'
     },
     {
       from: 'llm-orchestrator',
       to: 'external-llms',
       label: 'API Calls',
       color: 'hsl(243 75% 59%)',
-      path: 'M 600 120 L 600 80'
+      path: 'M 620 150 Q 580 120 550 110'
     },
     {
       from: 'agent-runtime',
       to: 'data-layer',
       label: 'Data Access',
       color: 'hsl(160 84% 39%)',
-      path: 'M 180 180 Q 140 200 120 220'
+      path: 'M 130 210 Q 110 240 80 250'
     },
     {
       from: 'data-layer',
       to: 'knowledge-base',
       label: 'Knowledge',
       color: 'hsl(32 95% 44%)',
-      path: 'M 100 280 L 100 320'
+      path: 'M 120 310 Q 180 330 250 350'
     },
     {
       from: 'monitoring',
       to: 'user-dashboard',
       label: 'Analytics',
       color: 'hsl(215 14% 34%)',
-      path: 'M 680 280 Q 600 300 520 320'
+      path: 'M 690 310 Q 620 330 580 350'
     }
   ];
 
@@ -200,136 +193,25 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
     setSelectedNode(selectedNode === nodeId ? null : nodeId);
   };
 
-  const handleZoomIn = () => {
-    setTransform(prev => ({
-      ...prev,
-      scale: Math.min(prev.scale * 1.2, 3)
-    }));
-  };
 
-  const handleZoomOut = () => {
-    setTransform(prev => ({
-      ...prev,
-      scale: Math.max(prev.scale * 0.8, 0.5)
-    }));
-  };
-
-  const handleReset = () => {
-    setTransform({ x: 0, y: 0, scale: 1 });
-    setSelectedNode(null);
-  };
-
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    if ((e.target as SVGElement).closest('.node')) return;
-    setIsDragging(true);
-    setDragStart({ x: e.clientX - transform.x, y: e.clientY - transform.y });
-  }, [transform]);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging) return;
-    setTransform(prev => ({
-      ...prev,
-      x: e.clientX - dragStart.x,
-      y: e.clientY - dragStart.y
-    }));
-  }, [isDragging, dragStart]);
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
-          const touch = e.touches[0];
-    if (touch) {
-      setIsDragging(true);
-      setDragStart({ x: touch.clientX - transform.x, y: touch.clientY - transform.y });
-    }
-    }
-  }, [transform]);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!isDragging || e.touches.length !== 1) return;
-    e.preventDefault();
-    const touch = e.touches[0];
-    if (touch) {
-      setTransform(prev => ({
-        ...prev,
-        x: touch.clientX - dragStart.x,
-        y: touch.clientY - dragStart.y
-      }));
-    }
-  }, [isDragging, dragStart]);
-
-  const handleTouchEnd = useCallback(() => {
-    setIsDragging(false);
-  }, []);
 
   const selectedNodeData = selectedNode ? nodes.find(n => n.id === selectedNode) : null;
 
-  // Toggle animation
-  const toggleAnimation = () => {
-    setIsAnimating(!isAnimating);
-  };
 
   return (
     <div className={`relative bg-gradient-to-br from-background via-muted/30 to-background border border-border/50 rounded-2xl overflow-hidden shadow-lg backdrop-blur-sm ${className}`}>
       {/* Header */}
       <div className="p-6 border-b border-border/50">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-xl font-bold text-foreground mb-2">GraphBit Architecture</h3>
-            <p className="text-muted-foreground">Interactive diagram showing how our components work together</p>
-          </div>
-          
-          {/* Controls */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handleZoomIn}
-              className="p-2 bg-card border border-border rounded-lg hover:bg-muted transition-colors"
-              aria-label="Zoom in"
-            >
-              <ZoomIn className="h-4 w-4 text-muted-foreground" />
-            </button>
-            <button
-              onClick={handleZoomOut}
-              className="p-2 bg-card border border-border rounded-lg hover:bg-muted transition-colors"
-              aria-label="Zoom out"
-            >
-              <ZoomOut className="h-4 w-4 text-muted-foreground" />
-            </button>
-            <button
-              onClick={handleReset}
-              className="p-2 bg-card border border-border rounded-lg hover:bg-muted transition-colors"
-              aria-label="Reset view"
-            >
-              <RotateCcw className="h-4 w-4 text-muted-foreground" />
-            </button>
-            <button
-              onClick={toggleAnimation}
-              className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                isAnimating 
-                  ? 'bg-primary/10 text-primary border border-primary/20' 
-                  : 'bg-card text-muted-foreground border border-border hover:bg-muted'
-              }`}
-            >
-              {isAnimating ? 'Pause' : 'Play'}
-            </button>
-          </div>
+        <div className="text-center">
+          <h3 className="text-xl font-bold text-foreground mb-2">GraphBit Architecture</h3>
+          <p className="text-muted-foreground">How our components work together</p>
         </div>
       </div>
 
       {/* Diagram Container */}
       <div 
         ref={containerRef}
-        className="relative h-96 overflow-hidden cursor-grab active:cursor-grabbing"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        className="relative h-96 overflow-hidden"
       >
         <svg
           ref={svgRef}
@@ -337,10 +219,6 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
           height="400"
           viewBox="0 0 800 400"
           className="w-full h-full"
-          style={{
-            transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
-            transformOrigin: 'center'
-          }}
         >
           {/* Background Grid */}
           <defs>
@@ -353,15 +231,13 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
               <stop offset="0%" stopColor="transparent" />
               <stop offset="50%" stopColor="currentColor" stopOpacity="0.8" />
               <stop offset="100%" stopColor="transparent" />
-              {isAnimating && (
-                <animateTransform
-                  attributeName="gradientTransform"
-                  type="translate"
-                  values="0 0; 100 0; 0 0"
-                  dur="2s"
-                  repeatCount="indefinite"
-                />
-              )}
+              <animateTransform
+                attributeName="gradientTransform"
+                type="translate"
+                values="0 0; 100 0; 0 0"
+                dur="2s"
+                repeatCount="indefinite"
+              />
             </linearGradient>
           </defs>
           
@@ -381,25 +257,23 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
               />
               
               {/* Animated flow */}
-              {isAnimating && (
-                <path
-                  d={flow.path}
-                  fill="none"
-                  stroke={flow.color}
-                  strokeWidth="3"
-                  opacity="0.8"
-                  strokeDasharray="10,5"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    values="0;-15;0"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </path>
-              )}
+              <path
+                d={flow.path}
+                fill="none"
+                stroke={flow.color}
+                strokeWidth="3"
+                opacity="0.8"
+                strokeDasharray="10,5"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="0;-15;0"
+                  dur="2s"
+                  repeatCount="indefinite"
+                />
+              </path>
               
-              {/* Flow label */}
+              {/* Flow label with improved positioning */}
               <text
                 x={(() => {
                   const segments = flow.path.split(' ');
@@ -418,15 +292,17 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
                   if (flow.path.includes('Q')) {
                     const y1 = parseInt(segments[2] || '0') || 0;
                     const y2 = parseInt(segments[6] || '0') || 0;
-                    return (y1 + y2) / 2 - 10;
+                    const cy = parseInt(segments[4] || '0') || 0;
+                    return Math.min(y1, y2, cy) - 8;
                   } else {
                     const y1 = parseInt(segments[2] || '0') || 0;
                     const y2 = parseInt(segments[4] || '0') || 0;
-                    return (y1 + y2) / 2 - 10;
+                    return Math.min(y1, y2) - 8;
                   }
                 })()}
                 textAnchor="middle"
                 className="text-xs fill-gray-600 font-medium pointer-events-none"
+                style={{ fontSize: '10px' }}
               >
                 {flow.label}
               </text>
@@ -494,38 +370,36 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
                 {/* Node label */}
                 <text
                   x={node.x}
-                  y={node.y + 40}
+                  y={node.y + 45}
                   textAnchor="middle"
-                  className="text-sm font-semibold fill-gray-800 pointer-events-none"
+                  className="text-xs font-semibold fill-gray-800 pointer-events-none"
                 >
                   {node.title}
                 </text>
                 
                 {/* Pulse animation for active nodes */}
-                {isAnimating && (
-                  <circle
-                    cx={node.x}
-                    cy={node.y}
-                    r="25"
-                    fill={node.color}
-                    opacity="0.2"
-                  >
-                    <animate
-                      attributeName="r"
-                      values="25;35;25"
-                      dur="3s"
-                      repeatCount="indefinite"
-                      begin={`${(nodes.findIndex(n => n.id === node.id) * 0.5)}s`}
-                    />
-                    <animate
-                      attributeName="opacity"
-                      values="0.2;0;0.2"
-                      dur="3s"
-                      repeatCount="indefinite"
-                      begin={`${(nodes.findIndex(n => n.id === node.id) * 0.5) + 1}s`}
-                    />
-                  </circle>
-                )}
+                <circle
+                  cx={node.x}
+                  cy={node.y}
+                  r="25"
+                  fill={node.color}
+                  opacity="0.2"
+                >
+                  <animate
+                    attributeName="r"
+                    values="25;35;25"
+                    dur="3s"
+                    repeatCount="indefinite"
+                    begin={`${(nodes.findIndex(n => n.id === node.id) * 0.5)}s`}
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0.2;0;0.2"
+                    dur="3s"
+                    repeatCount="indefinite"
+                    begin={`${(nodes.findIndex(n => n.id === node.id) * 0.5) + 1}s`}
+                  />
+                </circle>
               </g>
             );
           })}
@@ -534,7 +408,7 @@ export function InteractiveArchitectureDiagram({ className = "" }: InteractiveAr
         {/* Instructions */}
         <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg px-3 py-2">
           <p className="text-xs text-gray-600">
-            Click nodes for details • Drag to pan • Use controls to zoom
+            Click nodes for details
           </p>
         </div>
       </div>

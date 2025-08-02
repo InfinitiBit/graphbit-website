@@ -127,13 +127,15 @@ function useTouchGestures(onSwipeUp: () => void) {
 }
 
 // Arrow variant component
-function ArrowIndicator({ onClick }: { onClick: () => void }) {
+function ArrowIndicator({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
   return (
     <motion.div
-      className="flex flex-col items-center cursor-pointer group"
-      onClick={onClick}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
+      className={`flex flex-col items-center group transition-opacity duration-300 ${
+        disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+      }`}
+      onClick={disabled ? undefined : onClick}
+      whileHover={disabled ? {} : { scale: 1.1 }}
+      whileTap={disabled ? {} : { scale: 0.9 }}
     >
       {/* Animated arrows */}
       <div className="relative">
@@ -172,13 +174,15 @@ function ArrowIndicator({ onClick }: { onClick: () => void }) {
 }
 
 // Mouse variant component
-function MouseIndicator({ onClick }: { onClick: () => void }) {
+function MouseIndicator({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
   return (
     <motion.div
-      className="flex flex-col items-center cursor-pointer group"
-      onClick={onClick}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      className={`flex flex-col items-center group transition-opacity duration-300 ${
+        disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+      }`}
+      onClick={disabled ? undefined : onClick}
+      whileHover={disabled ? {} : { scale: 1.05 }}
+      whileTap={disabled ? {} : { scale: 0.95 }}
     >
       {/* Mouse container */}
       <div className="relative w-6 h-10 border-2 border-white/60 rounded-full group-hover:border-white transition-colors">
@@ -226,13 +230,15 @@ function MouseIndicator({ onClick }: { onClick: () => void }) {
 }
 
 // Chevron variant component
-function ChevronIndicator({ onClick }: { onClick: () => void }) {
+function ChevronIndicator({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
   return (
     <motion.div
-      className="flex flex-col items-center cursor-pointer group"
-      onClick={onClick}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
+      className={`flex flex-col items-center group transition-opacity duration-300 ${
+        disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+      }`}
+      onClick={disabled ? undefined : onClick}
+      whileHover={disabled ? {} : { scale: 1.1 }}
+      whileTap={disabled ? {} : { scale: 0.9 }}
     >
       {/* Bouncing chevron */}
       <motion.div
@@ -292,6 +298,9 @@ export function ScrollIndicator({
 
   // Smooth scroll function
   const scrollToNextSection = useCallback(() => {
+    // Prevent multiple scroll actions while already scrolling
+    if (isScrolling) return;
+    
     const targetElement = document.getElementById(targetSectionId) || 
                           document.querySelector('main > section:nth-child(2)') ||
                           document.querySelector('[data-scroll-target]');
@@ -310,19 +319,28 @@ export function ScrollIndicator({
       }, 1000);
     } else {
       // Fallback: scroll by viewport height
+      setIsScrolling(true);
       window.scrollBy({
         top: window.innerHeight,
         behavior: 'smooth'
       });
+      
+      // Reset scrolling state after animation
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, 1000);
     }
-  }, [targetSectionId]);
+  }, [targetSectionId, isScrolling]);
 
   // Touch gesture handlers
   const { handleTouchStart, handleTouchEnd } = useTouchGestures(scrollToNextSection);
 
   // Render appropriate variant
   const renderIndicator = () => {
-    const props = { onClick: scrollToNextSection };
+    const props = { 
+      onClick: scrollToNextSection,
+      disabled: isScrolling 
+    };
     
     switch (variant) {
       case 'mouse':

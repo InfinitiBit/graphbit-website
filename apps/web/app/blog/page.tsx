@@ -1,13 +1,13 @@
 import { BlogCard } from '@/components/blog/blog-card';
 import { getAllBlogPosts } from '@/lib/blog';
-import { BarChart3 as BookOpen, Sparkles, TrendingUp } from 'lucide-react';
+import { BarChart3, Sparkles, TrendingUp } from 'lucide-react';
 
 export default async function BlogPage() {
   const posts = getAllBlogPosts();
 
   const categories = [
-    { id: 'all', name: 'All Posts', icon: BookOpen },
-    { id: 'tutorials', name: 'Tutorials', icon: BookOpen },
+    { id: 'all', name: 'All Posts', icon: BarChart3 },
+    { id: 'tutorials', name: 'Tutorials', icon: BarChart3 },
     { id: 'best-practices', name: 'Best Practices', icon: Sparkles },
     { id: 'advanced', name: 'Advanced Techniques', icon: TrendingUp },
   ];
@@ -21,17 +21,17 @@ export default async function BlogPage() {
 
       <main className="relative w-full pt-16 sm:pt-20">
         {/* Header Section */}
-        <section className="border-b border-gray-200/50 px-4 py-12 text-center">
+        <section className="border-b border-warning/20 px-4 py-12 text-center">
           <div className="mx-auto max-w-4xl">
             <div className="mb-6 flex items-center justify-center">
-              <div className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-white p-3 shadow-lg">
-                <BookOpen className="h-8 w-8 text-blue-600" />
+              <div className="rounded-2xl border-2 border-warning/20 bg-gradient-to-br from-warning/10 to-destructive/10 p-3 shadow-lg">
+                <BarChart3 className="h-8 w-8 text-warning" />
               </div>
             </div>
-            <h1 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
-              GraphBit <span className="text-blue-600">Blog</span>
+            <h1 className="mb-4 text-4xl font-bold text-foreground md:text-5xl">
+              GraphBit <span className="bg-gradient-to-r from-warning to-destructive bg-clip-text text-transparent">Blog</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Insights, tutorials, and developments in LLM frameworks and AI agents
             </p>
           </div>
@@ -44,9 +44,9 @@ export default async function BlogPage() {
             <aside className="flex-shrink-0 lg:w-64">
               <div className="space-y-6">
                 {/* Categories - Static for main blog page */}
-                <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h3 className="mb-4 flex items-center text-lg font-semibold text-gray-900">
-                    <BookOpen className="mr-2 h-5 w-5 text-blue-600" />
+                <div className="rounded-xl border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 p-6 shadow-sm backdrop-blur-sm">
+                  <h3 className="mb-4 flex items-center text-lg font-semibold text-foreground">
+                    <BarChart3 className="mr-2 h-5 w-5 text-warning" />
                     Categories
                   </h3>
                   <nav className="space-y-2">
@@ -61,8 +61,8 @@ export default async function BlogPage() {
                           href={href}
                           className={`flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                             isActive
-                              ? 'bg-blue-600 text-white shadow-md'
-                              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                              ? 'bg-gradient-to-r from-warning to-destructive text-white shadow-md border border-warning/20'
+                              : 'text-muted-foreground hover:bg-warning/10 hover:text-foreground'
                           }`}
                         >
                           <Icon className="mr-3 h-4 w-4 flex-shrink-0" />
@@ -74,22 +74,22 @@ export default async function BlogPage() {
                 </div>
 
                 {/* Stats */}
-                <div className="rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
-                  <h3 className="mb-4 flex items-center text-lg font-semibold text-gray-900">
-                    <TrendingUp className="mr-2 h-5 w-5 text-blue-600" />
+                <div className="rounded-xl border border-warning/20 bg-gradient-to-br from-warning/10 to-destructive/10 p-6 backdrop-blur-sm">
+                  <h3 className="mb-4 flex items-center text-lg font-semibold text-foreground">
+                    <TrendingUp className="mr-2 h-5 w-5 text-warning" />
                     Blog Stats
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <div className="rounded-lg bg-white p-2 shadow-sm">
-                          <BookOpen className="h-4 w-4 text-blue-600" />
+                        <div className="rounded-lg bg-background/80 p-2 shadow-sm border border-warning/20">
+                          <BarChart3 className="h-4 w-4 text-warning" />
                         </div>
-                        <span className="ml-3 text-sm font-medium text-gray-700">
+                        <span className="ml-3 text-sm font-medium text-foreground">
                           Total Articles
                         </span>
                       </div>
-                      <span className="text-sm font-bold text-blue-600">{posts.length}+</span>
+                      <span className="text-sm font-bold bg-gradient-to-r from-warning to-destructive bg-clip-text text-transparent">{posts.length}+</span>
                     </div>
                   </div>
                 </div>
@@ -104,8 +104,8 @@ export default async function BlogPage() {
                   {featuredPost && (
                     <div className="mb-12">
                       <div className="mb-6 flex items-center space-x-3">
-                        <Sparkles className="h-5 w-5 text-yellow-500" />
-                        <h2 className="text-xl font-bold text-gray-900">Featured Article</h2>
+                        <Sparkles className="h-5 w-5 text-warning animate-pulse" />
+                        <h2 className="text-xl font-bold text-foreground">Featured Article</h2>
                       </div>
                       <BlogCard post={featuredPost} featured={true} />
                     </div>
@@ -115,9 +115,9 @@ export default async function BlogPage() {
                   {regularPosts.length > 0 && (
                     <div>
                       <div className="mb-6 flex items-center space-x-3">
-                        <TrendingUp className="h-5 w-5 text-blue-600" />
-                        <h2 className="text-xl font-bold text-gray-900">Latest Articles</h2>
-                        <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
+                        <TrendingUp className="h-5 w-5 text-warning" />
+                        <h2 className="text-xl font-bold text-foreground">Latest Articles</h2>
+                        <span className="rounded-full bg-gradient-to-r from-warning/20 to-destructive/20 border border-warning/30 px-2 py-1 text-xs font-medium text-warning">
                           {regularPosts.length} articles
                         </span>
                       </div>
@@ -132,10 +132,10 @@ export default async function BlogPage() {
                 </>
               ) : (
                 <div className="py-16 text-center">
-                  <div className="mx-auto max-w-md rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
-                    <BookOpen className="mx-auto mb-4 h-12 w-12 text-gray-400" />
-                    <h3 className="mb-3 text-lg font-semibold text-gray-700">No Articles Found</h3>
-                    <p className="text-sm text-gray-500">
+                  <div className="mx-auto max-w-md rounded-lg border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 p-8 shadow-sm backdrop-blur-sm">
+                    <BarChart3 className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                    <h3 className="mb-3 text-lg font-semibold text-foreground">No Articles Found</h3>
+                    <p className="text-sm text-muted-foreground">
                       No articles match your current selection. Try browsing all posts.
                     </p>
                   </div>
@@ -146,17 +146,17 @@ export default async function BlogPage() {
         </div>
 
         {/* Newsletter Subscription */}
-        <section className="mt-16 bg-gradient-to-r from-blue-50 to-purple-50 px-4 py-12">
+        <section className="mt-16 bg-gradient-to-r from-warning/10 to-destructive/10 border-t border-warning/20 px-4 py-12">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="mb-3 text-2xl font-bold text-gray-900">Stay Updated</h2>
-            <p className="mb-6 text-gray-600">Get the latest articles delivered to your inbox.</p>
+            <h2 className="mb-3 text-2xl font-bold text-foreground">Stay Updated</h2>
+            <p className="mb-6 text-muted-foreground">Get the latest articles delivered to your inbox.</p>
             <div className="mx-auto flex max-w-md flex-col justify-center gap-3 sm:flex-row">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 rounded-lg border border-warning/20 bg-background/80 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-warning backdrop-blur-sm"
               />
-              <button className="rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
+              <button className="rounded-lg bg-gradient-to-r from-warning to-destructive px-6 py-2 text-sm font-medium text-white transition-all duration-300 hover:scale-105 shadow-lg">
                 Subscribe
               </button>
             </div>

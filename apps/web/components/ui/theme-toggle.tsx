@@ -5,8 +5,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
 import { 
   Star as Sun, 
-  Star as Moon, 
-  Star as Monitor, 
+  AlertCircle as Moon, 
+  ArrowRight as Monitor, 
   ChevronDown,
   CheckCircle as Check 
 } from 'lucide-react';

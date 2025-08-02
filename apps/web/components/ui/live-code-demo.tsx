@@ -270,28 +270,28 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-accent" />;
       case 'running':
-        return <Clock className="h-4 w-4 text-blue-500 animate-spin" />;
+        return <Clock className="h-4 w-4 text-warning animate-spin" />;
       case 'error':
-        return <AlertCircle className="h-4 w-4 text-red-500" />;
+        return <AlertCircle className="h-4 w-4 text-destructive" />;
       default:
-        return <div className="h-4 w-4 rounded-full border-2 border-gray-300" />;
+        return <div className="h-4 w-4 rounded-full border-2 border-warning/30" />;
     }
   };
 
   const getLanguageColor = (language: string) => {
     switch (language) {
       case 'typescript':
-        return 'text-blue-600';
+        return 'text-warning';
       case 'javascript':
-        return 'text-yellow-600';
+        return 'text-accent';
       case 'json':
-        return 'text-green-600';
+        return 'text-destructive';
       case 'bash':
-        return 'text-purple-600';
+        return 'text-warning';
       default:
-        return 'text-gray-600';
+        return 'text-muted-foreground';
     }
   };
 
@@ -314,17 +314,17 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
   }, [showOutput, currentOutput]);
 
   return (
-    <div className={`relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-700/50 rounded-2xl overflow-hidden ${className}`}>
+    <div className={`relative bg-gradient-to-r from-background/95 to-warning/5 border border-warning/20 hover:border-warning/40 transition-colors duration-300 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl ${className}`}>
       {/* Header */}
-      <div className="p-6 border-b border-gray-700/50">
+      <div className="p-6 border-b border-warning/20">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Terminal className="h-5 w-5 text-blue-400" />
+            <div className="p-2 bg-warning/20 rounded-lg">
+              <Terminal className="h-5 w-5 text-warning" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white mb-1">Live Code Demo</h3>
-              <p className="text-gray-400 text-sm">Step-by-step GraphBit implementation</p>
+              <h3 className="text-xl font-bold bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent mb-1">Live Code Demo</h3>
+              <p className="text-muted-foreground text-sm">Step-by-step GraphBit implementation</p>
             </div>
           </div>
           
@@ -335,8 +335,8 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
               disabled={currentStep >= codeSteps.length}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                 isPlaying 
-                  ? 'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30' 
-                  : 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30'
+                  ? 'bg-destructive/20 text-destructive border border-destructive/30 hover:bg-destructive/30' 
+                  : 'bg-gradient-to-r from-warning to-destructive text-white border border-warning/30 hover:shadow-lg'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
@@ -345,7 +345,7 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
             
             <button
               onClick={resetExecution}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-700/50 text-gray-300 border border-gray-600/50 rounded-lg hover:bg-gray-700/70 transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2 bg-background/50 text-foreground border border-warning/30 rounded-lg hover:bg-warning/10 hover:border-warning/40 transition-all duration-200"
             >
               <RotateCcw className="h-4 w-4" />
               <span>Reset</span>
@@ -355,8 +355,8 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
               onClick={() => setAutoPlay(!autoPlay)}
               className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                 autoPlay 
-                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' 
-                  : 'bg-gray-700/50 text-gray-300 border border-gray-600/50'
+                  ? 'bg-warning/20 text-warning border border-warning/30' 
+                  : 'bg-background/50 text-foreground border border-warning/20'
               }`}
             >
               Auto-play
@@ -368,8 +368,8 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
         {/* Steps Navigation */}
         <div className="lg:col-span-1">
-          <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4">
-            <h4 className="text-lg font-semibold text-white mb-4">Implementation Steps</h4>
+                  <div className="bg-gradient-to-br from-background/80 to-warning/5 border border-warning/20 rounded-xl p-4">
+          <h4 className="text-lg font-semibold bg-gradient-to-r from-warning to-destructive bg-clip-text text-transparent mb-4">Implementation Steps</h4>
             <div className="space-y-3">
               {codeSteps.map((step, index) => {
                 const status = getStepStatus(index);
@@ -378,8 +378,8 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
                     key={step.id}
                     className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-200 ${
                       index === currentStep 
-                        ? 'bg-blue-500/20 border border-blue-500/30' 
-                        : 'bg-gray-700/30 border border-gray-600/30 hover:bg-gray-700/50'
+                        ? 'bg-warning/20 border border-warning/30' 
+                        : 'bg-background/30 border border-warning/20 hover:bg-warning/10 hover:border-warning/30'
                     }`}
                     onClick={() => setCurrentStep(index)}
                     whileHover={{ scale: 1.02 }}
@@ -387,14 +387,14 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
                   >
                     {getStatusIcon(status)}
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm font-medium text-white truncate">
+                      <div className="text-sm font-medium text-foreground truncate">
                         {step.title}
                       </div>
-                      <div className="text-xs text-gray-400 truncate">
+                      <div className="text-xs text-muted-foreground truncate">
                         {step.description}
                       </div>
                     </div>
-                    <ChevronRight className="h-4 w-4 text-gray-500" />
+                    <ChevronRight className="h-4 w-4 text-warning" />
                   </motion.div>
                 );
               })}
@@ -405,11 +405,11 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
         {/* Code Editor */}
         <div className="lg:col-span-2 space-y-4">
           {/* Code Section */}
-          <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b border-gray-700/50">
+                  <div className="bg-gray-200/50 dark:bg-gray-800/50 border border-gray-300/50 dark:border-gray-700/50 rounded-xl overflow-hidden">
+          <div className="flex items-center justify-between p-4 border-b border-gray-300/50 dark:border-gray-700/50">
               <div className="flex items-center gap-3">
                 <div className={`w-3 h-3 rounded-full ${getLanguageColor(codeSteps[currentStep]?.language || 'typescript')}`} />
-                <span className="text-sm font-medium text-gray-300">
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
                   {codeSteps[currentStep]?.title || 'Code Editor'}
                 </span>
                 <span className="text-xs text-gray-500 uppercase">
@@ -419,7 +419,7 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
               
               <button
                 onClick={() => copyToClipboard(getCurrentCode())}
-                className="flex items-center gap-2 px-3 py-1.5 bg-gray-700/50 text-gray-300 border border-gray-600/50 rounded-lg hover:bg-gray-700/70 transition-all duration-200"
+                className="flex items-center gap-2 px-3 py-1.5 bg-gray-200/50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 border border-gray-400/50 dark:border-gray-600/50 rounded-lg hover:bg-gray-200/70 dark:hover:bg-gray-700/70 transition-all duration-200"
               >
                 {copied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
                 <span className="text-sm">{copied ? 'Copied!' : 'Copy'}</span>
@@ -427,7 +427,7 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
             </div>
             
             <div className="p-4">
-              <pre className="text-sm text-gray-300 font-mono leading-relaxed overflow-x-auto">
+              <pre className="text-sm text-gray-700 dark:text-gray-300 font-mono leading-relaxed overflow-x-auto">
                 <code>{getCurrentCode()}</code>
               </pre>
             </div>
@@ -440,12 +440,12 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="bg-gray-800/50 border border-gray-700/50 rounded-xl overflow-hidden"
+                className="bg-gray-200/50 dark:bg-gray-800/50 border border-gray-300/50 dark:border-gray-700/50 rounded-xl overflow-hidden"
               >
-                <div className="flex items-center justify-between p-4 border-b border-gray-700/50">
+                <div className="flex items-center justify-between p-4 border-b border-gray-300/50 dark:border-gray-700/50">
                   <div className="flex items-center gap-3">
                     <Zap className="h-4 w-4 text-green-400" />
-                    <span className="text-sm font-medium text-gray-300">Output</span>
+                    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Output</span>
                     {isPlaying && (
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
@@ -468,14 +468,14 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
           </AnimatePresence>
 
           {/* Progress Bar */}
-          <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4">
+          <div className="bg-gray-200/50 dark:bg-gray-800/50 border border-gray-300/50 dark:border-gray-700/50 rounded-xl p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-300">Progress</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Progress</span>
               <span className="text-sm text-gray-400">
                 {currentStep + 1} of {codeSteps.length} steps
               </span>
             </div>
-            <div className="w-full bg-gray-700 rounded-full h-2">
+            <div className="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2">
               <motion.div
                 className="bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full"
                 initial={{ width: 0 }}
@@ -488,8 +488,8 @@ console.log('Performance Metrics:', JSON.stringify(metrics, null, 2));`,
       </div>
 
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-green-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-full blur-2xl" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-warning/10 to-accent/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-destructive/10 to-warning/10 rounded-full blur-2xl" />
     </div>
   );
 } 
