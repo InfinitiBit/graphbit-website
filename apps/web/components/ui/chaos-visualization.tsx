@@ -89,7 +89,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
         vx: (Math.random() - 0.5) * 4,
         vy: (Math.random() - 0.5) * 4,
         radius: isCore ? 8 : 5,
-        color: isCore ? '#3b82f6' : '#64748b',
+        color: isCore ? '#ea580c' : '#ef4444',
         connections: [],
         isCore
       });
@@ -107,7 +107,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
             from: i,
             to: target,
             strength: Math.random(),
-            color: '#ef4444'
+            color: '#94a3b8'
           });
         }
       }
@@ -121,7 +121,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
           from: i,
           to: j,
           strength: 0,
-          color: '#10b981'
+          color: '#0891b2'
         });
       }
       
@@ -132,7 +132,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
           from: i,
           to: clusterStart + j,
           strength: 0,
-          color: '#10b981'
+          color: '#0891b2'
         });
       }
     }
@@ -197,7 +197,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
     const updatedConnections = connections.map(conn => {
       const newConn = { ...conn };
       
-      if (conn.color === '#ef4444') {
+      if (conn.color === '#94a3b8') {
         // Chaotic connections fade out
         newConn.strength = Math.max(0, 1 - easedProgress);
       } else {
@@ -219,7 +219,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
           ctx.moveTo(fromNode.x, fromNode.y);
           ctx.lineTo(toNode.x, toNode.y);
           ctx.strokeStyle = conn.color + Math.floor(conn.strength * 255).toString(16).padStart(2, '0');
-          ctx.lineWidth = conn.strength * (conn.color === '#ef4444' ? 1 : 2);
+          ctx.lineWidth = conn.strength * (conn.color === '#94a3b8' ? 1 : 2);
           ctx.stroke();
         }
       }
@@ -233,12 +233,13 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
       // Color based on transition progress
       if (currentProgress > 0.5) {
         const colorProgress = (currentProgress - 0.5) / 0.5;
-        const r = Math.floor(100 + (59 - 100) * colorProgress); // Red component
-        const g = Math.floor(116 + (130 - 116) * colorProgress); // Green component
-        const b = Math.floor(139 + (246 - 139) * colorProgress); // Blue component
+        // Transition from warning (ea580c) to accent (0891b2)
+        const r = Math.floor(234 + (8 - 234) * colorProgress); // Red component
+        const g = Math.floor(88 + (145 - 88) * colorProgress); // Green component  
+        const b = Math.floor(12 + (178 - 12) * colorProgress); // Blue component
         ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
       } else {
-        ctx.fillStyle = '#64748b';
+        ctx.fillStyle = '#94a3b8';
       }
       
       ctx.fill();
@@ -247,7 +248,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
       if (node.isCore && currentProgress > 0.6) {
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius + 3, 0, Math.PI * 2);
-        ctx.strokeStyle = '#3b82f6';
+        ctx.strokeStyle = '#ea580c';
         ctx.lineWidth = 2;
         ctx.stroke();
       }
@@ -296,7 +297,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
 
   return (
     <motion.div
-      className={`relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-6 sm:p-8 overflow-hidden ${className}`}
+      className={`relative bg-gradient-to-br from-background/95 to-warning/5 backdrop-blur-xl border border-warning/20 rounded-2xl p-6 sm:p-8 overflow-hidden shadow-xl hover:shadow-2xl hover:border-warning/40 transition-all duration-300 ${className}`}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -311,44 +312,43 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-blue-600 shadow-xl">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-warning to-destructive shadow-xl">
             <div className="w-6 h-6 relative">
               <div className="absolute inset-0 bg-white rounded-full animate-pulse" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
             </div>
           </div>
-          <h3 className="text-xl sm:text-2xl font-bold text-white">
+          <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent">
             From Chaos to Order
           </h3>
         </motion.div>
         
-        <p className="text-gray-300 max-w-2xl mx-auto">
+        <p className="text-muted-foreground max-w-2xl mx-auto">
           Watch how GraphBit transforms complex, disconnected AI development into organized, efficient workflows
         </p>
       </div>
 
       {/* Canvas Container */}
-      <div className="relative bg-gray-900/50 rounded-xl p-4 mb-6">
+              <div className="relative bg-gradient-to-br from-background/80 to-warning/10 rounded-xl p-4 mb-6 border border-warning/20 shadow-lg">
         <canvas
           ref={canvasRef}
           width={CANVAS_WIDTH}
           height={CANVAS_HEIGHT}
-          className="w-full h-auto max-w-full border border-gray-600/50 rounded-lg"
-          style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}
+                      className="w-full h-auto max-w-full border border-warning/20 rounded-lg shadow-inner bg-gradient-to-br from-background/90 to-warning/5"
         />
         
         {/* Progress Indicator */}
         <div className="absolute top-2 left-2 right-2">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-muted-foreground">
               {progress < 0.3 ? 'Chaos' : progress < 0.7 ? 'Transition' : 'Order'}
             </span>
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-muted-foreground">
               {Math.round(progress * 100)}%
             </span>
           </div>
-          <div className="h-1 bg-gray-700 rounded-full overflow-hidden">
+          <div className="h-1 bg-muted rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full"
+              className="h-full bg-gradient-to-r from-warning via-destructive to-accent rounded-full"
               style={{ width: `${progress * 100}%` }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             />
@@ -357,13 +357,13 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
 
         {/* Phase Labels */}
         <div className="absolute bottom-2 left-2 right-2 flex justify-between text-xs">
-          <div className={`px-2 py-1 rounded ${progress < 0.3 ? 'bg-red-500/20 text-red-300' : 'text-gray-500'}`}>
+          <div className={`px-2 py-1 rounded ${progress < 0.3 ? 'bg-warning/20 text-warning' : 'text-muted-foreground'}`}>
             Traditional Development
           </div>
-          <div className={`px-2 py-1 rounded ${progress >= 0.3 && progress < 0.7 ? 'bg-yellow-500/20 text-yellow-300' : 'text-gray-500'}`}>
+          <div className={`px-2 py-1 rounded ${progress >= 0.3 && progress < 0.7 ? 'bg-destructive/20 text-destructive' : 'text-muted-foreground'}`}>
             Migration
           </div>
-          <div className={`px-2 py-1 rounded ${progress >= 0.7 ? 'bg-green-500/20 text-green-300' : 'text-gray-500'}`}>
+          <div className={`px-2 py-1 rounded ${progress >= 0.7 ? 'bg-accent/20 text-accent' : 'text-muted-foreground'}`}>
             GraphBit Platform
           </div>
         </div>
@@ -373,7 +373,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
       <div className="flex items-center justify-center gap-4">
         <button
           onClick={togglePlayPause}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-warning to-destructive hover:scale-105 text-white rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-2 shadow-lg hover:shadow-xl"
           aria-label={isPlaying ? 'Pause animation' : 'Play animation'}
         >
           {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
@@ -384,7 +384,7 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
         
         <button
           onClick={reset}
-          className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-warning/10 to-destructive/10 border border-warning/20 hover:bg-gradient-to-r hover:from-warning/20 hover:to-destructive/20 text-foreground rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-2 shadow-md hover:shadow-lg"
           aria-label="Reset animation"
         >
           <RotateCcw className="h-4 w-4" />
@@ -394,34 +394,34 @@ export function ChaosVisualization({ className = "", autoPlay = true }: ChaosVis
 
       {/* Legend */}
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-        <div className="flex items-center gap-3 p-3 bg-red-900/20 border border-red-500/30 rounded-lg">
-          <div className="w-3 h-3 bg-red-500 rounded-full" />
+        <div className="flex items-center gap-3 p-3 bg-warning/10 border border-warning/30 rounded-lg">
+          <div className="w-3 h-3 bg-warning rounded-full" />
           <div>
-            <div className="font-medium text-red-300">Chaotic Phase</div>
-            <div className="text-gray-400 text-xs">Disconnected, inefficient</div>
+            <div className="font-medium text-warning">Chaotic Phase</div>
+            <div className="text-muted-foreground text-xs">Disconnected, inefficient</div>
           </div>
         </div>
         
-        <div className="flex items-center gap-3 p-3 bg-yellow-900/20 border border-yellow-500/30 rounded-lg">
-          <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+        <div className="flex items-center gap-3 p-3 bg-destructive/10 border border-destructive/30 rounded-lg">
+          <div className="w-3 h-3 bg-destructive rounded-full" />
           <div>
-            <div className="font-medium text-yellow-300">Transition</div>
-            <div className="text-gray-400 text-xs">Organizing structure</div>
+            <div className="font-medium text-destructive">Transition</div>
+            <div className="text-muted-foreground text-xs">Organizing structure</div>
           </div>
         </div>
         
-        <div className="flex items-center gap-3 p-3 bg-green-900/20 border border-green-500/30 rounded-lg">
-          <div className="w-3 h-3 bg-green-500 rounded-full" />
+        <div className="flex items-center gap-3 p-3 bg-accent/10 border border-accent/30 rounded-lg">
+          <div className="w-3 h-3 bg-accent rounded-full" />
           <div>
-            <div className="font-medium text-green-300">GraphBit Order</div>
-            <div className="text-gray-400 text-xs">Connected, optimized</div>
+            <div className="font-medium text-accent">GraphBit Order</div>
+            <div className="text-muted-foreground text-xs">Connected, optimized</div>
           </div>
         </div>
       </div>
 
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 rounded-full blur-2xl" />
+      {/* Background decoration using CSS variables */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-warning/10 to-destructive/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-destructive/10 to-accent/10 rounded-full blur-2xl" />
     </motion.div>
   );
 } 

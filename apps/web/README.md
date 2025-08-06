@@ -31,9 +31,8 @@ npm run build --filter=web
 Create `.env.local` with:
 
 ```env
-# Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
-CLERK_SECRET_KEY=your_secret
+# JWT Authentication
+JWT_SECRET=your_jwt_secret_here
 
 # MongoDB
 MONGODB_URI=mongodb://localhost:27017/graphbit
@@ -47,7 +46,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 - **Agent Marketplace** - Browse and download AI agents
 - **LLM Tracing** - Monitor agent performance and outputs
 - **Blog** - Technical articles and tutorials
-- **Authentication** - Secure user management with Clerk
+- **Authentication** - Secure user management with JWT
 
 ## API Endpoints
 

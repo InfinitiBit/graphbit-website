@@ -9,8 +9,7 @@ import {
   DollarSign, 
   Users,
   BarChart3 as Target,
-  Zap,
-  Star as Info
+  Zap
 } from 'lucide-react';
 
 interface Statistic {
@@ -27,13 +26,6 @@ interface Statistic {
   chartData?: number[];
 }
 
-interface TooltipState {
-  visible: boolean;
-  content: string;
-  url: string;
-  x: number;
-  y: number;
-}
 
 interface StatisticsShowcaseProps {
   className?: string;
@@ -47,44 +39,44 @@ function StatisticCard({ stat, index }: { stat: Statistic; index: number }) {
   return (
     <motion.div
       ref={ref}
-      className="group relative bg-gray-800/50 border border-gray-700/50 rounded-xl p-6 hover:border-red-500/30 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
+      className="group relative bg-gradient-to-br from-background/80 to-warning/5 border border-warning/20 rounded-xl p-6 hover:border-warning/40 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-orange-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-warning/5 to-accent/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
       {/* Content */}
       <div className="relative">
         {/* Icon */}
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-600 mb-4 shadow-lg">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-warning to-destructive mb-4 shadow-lg shadow-warning/20">
           <IconComponent className="h-6 w-6 text-white" />
         </div>
         
         {/* Value */}
         <div className="mb-2">
-          <span className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          <span className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent">
             {current.toLocaleString()}
           </span>
-          <span className="text-2xl sm:text-3xl font-bold text-red-400 ml-1">
+          <span className="text-2xl sm:text-3xl font-bold text-warning ml-1">
             {stat.suffix}
           </span>
         </div>
         
         {/* Label */}
-        <h3 className="text-lg font-semibold text-gray-200 mb-2 group-hover:text-white transition-colors">
+                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-warning transition-colors">
           {stat.label}
         </h3>
         
         {/* Description */}
-        <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors leading-relaxed">
+                  <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
           {stat.description}
         </p>
         
         {/* Decorative element */}
-        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-warning/10 to-accent/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
     </motion.div>
   );
@@ -127,43 +119,8 @@ function useAnimatedCounter(target: number, duration: number = 2000) {
   return { current, ref };
 }
 
-// Simple chart component
-function MiniChart({ data, color }: { data: number[]; color: string }) {
-  const maxValue = Math.max(...data);
-  const points = data.map((value, index) => {
-    const x = (index / (data.length - 1)) * 100;
-    const y = 100 - (value / maxValue) * 80; // Leave 20% padding
-    return `${x},${y}`;
-  }).join(' ');
-
-  return (
-    <svg className="w-16 h-8" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <polyline
-        fill="none"
-        stroke={color}
-        strokeWidth="3"
-        points={points}
-        className="opacity-70"
-      />
-      <circle
-        cx={data.length > 1 ? ((data.length - 1) / (data.length - 1)) * 100 : 50}
-        cy={data.length > 0 ? 100 - ((data[data.length - 1] || 0) / maxValue) * 80 : 50}
-        r="2"
-        fill={color}
-        className="animate-pulse"
-      />
-    </svg>
-  );
-}
 
 export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) {
-  const [tooltip, setTooltip] = useState<TooltipState>({
-    visible: false,
-    content: '',
-    url: '',
-    x: 0,
-    y: 0
-  });
 
   const statistics: Statistic[] = [
     {
@@ -175,7 +132,7 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
       description: 'AI projects exceed initial timeline estimates',
       source: 'McKinsey AI Survey 2024',
       sourceUrl: 'https://www.mckinsey.com',
-      color: '#ef4444',
+      color: 'hsl(var(--warning))',
       trend: 'up',
       chartData: [45, 52, 61, 67, 73]
     },
@@ -188,7 +145,7 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
       description: 'Projects exceed planned development costs',
       source: 'Deloitte Tech Trends 2024',
       sourceUrl: 'https://www.deloitte.com',
-      color: '#f59e0b',
+      color: 'hsl(var(--destructive))',
       trend: 'up',
       chartData: [55, 59, 62, 65, 68]
     },
@@ -201,7 +158,7 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
       description: 'AI systems with unaddressed security risks',
       source: 'IBM Security Report 2024',
       sourceUrl: 'https://www.ibm.com',
-      color: '#dc2626',
+      color: 'hsl(var(--accent))',
       trend: 'up',
       chartData: [72, 76, 79, 82, 84]
     },
@@ -214,7 +171,7 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
       description: 'Developer time spent on setup vs. core features',
       source: 'Stack Overflow Survey 2024',
       sourceUrl: 'https://survey.stackoverflow.co',
-      color: '#ea580c',
+      color: 'hsl(var(--warning))',
       trend: 'up',
       chartData: [35, 37, 39, 41, 42]
     },
@@ -227,7 +184,7 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
       description: 'AI projects that never reach production',
       source: 'Gartner Research 2024',
       sourceUrl: 'https://www.gartner.com',
-      color: '#b91c1c',
+      color: 'hsl(var(--destructive))',
       trend: 'up',
       chartData: [28, 30, 32, 34, 35]
     },
@@ -240,30 +197,16 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
       description: 'Development time spent on troubleshooting',
       source: 'JetBrains Developer Survey 2024',
       sourceUrl: 'https://www.jetbrains.com',
-      color: '#c2410c',
+      color: 'hsl(var(--accent))',
       trend: 'up',
       chartData: [48, 51, 53, 55, 56]
     }
   ];
 
-  const handleMouseEnter = (stat: Statistic, event: React.MouseEvent) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    setTooltip({
-      visible: true,
-      content: stat.source,
-      url: stat.sourceUrl,
-      x: rect.left + rect.width / 2,
-      y: rect.top - 10
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setTooltip(prev => ({ ...prev, visible: false }));
-  };
 
   return (
     <motion.div
-      className={`relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-6 sm:p-8 overflow-hidden ${className}`}
+      className={`relative bg-gradient-to-r from-background/95 to-warning/5 backdrop-blur-xl border border-warning/20 hover:border-warning/40 transition-colors duration-300 rounded-2xl p-6 sm:p-8 overflow-hidden shadow-xl hover:shadow-2xl ${className}`}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -278,15 +221,15 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-orange-600 shadow-xl">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-warning to-destructive shadow-xl shadow-warning/30">
             <TrendingUp className="h-6 w-6 text-white" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-bold text-white">
+          <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent">
             Industry Reality Check
           </h3>
         </motion.div>
         
-        <p className="text-gray-300 max-w-2xl mx-auto">
+        <p className="text-muted-foreground max-w-2xl mx-auto">
           The numbers don&apos;t lie. AI development faces systemic challenges that impact every project.
         </p>
       </div>
@@ -300,7 +243,7 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
 
       {/* Summary Stats */}
       <motion.div
-        className="bg-gradient-to-r from-red-900/20 via-orange-900/20 to-yellow-900/20 border border-red-500/30 rounded-xl p-6"
+        className="bg-gradient-to-r from-warning/10 via-accent/10 to-destructive/10 border border-warning/30 rounded-xl p-6"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -309,46 +252,34 @@ export function StatisticsShowcase({ className = "" }: StatisticsShowcaseProps) 
         <div className="text-center">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-              <span className="text-sm text-gray-300">Critical Issues</span>
+              <div className="w-3 h-3 bg-warning rounded-full animate-pulse" />
+              <span className="text-sm text-muted-foreground">Critical Issues</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-              <span className="text-sm text-gray-300">Rising Trends</span>
+              <div className="w-3 h-3 bg-destructive rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+              <span className="text-sm text-muted-foreground">Rising Trends</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-              <span className="text-sm text-gray-300">Industry Impact</span>
+              <div className="w-3 h-3 bg-accent rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+              <span className="text-sm text-muted-foreground">Industry Impact</span>
             </div>
           </div>
           
-          <h4 className="text-lg font-bold text-white mb-2">
+          <h4 className="text-lg font-bold bg-gradient-to-r from-warning to-destructive bg-clip-text text-transparent mb-2">
             The AI Development Crisis is Real
           </h4>
-          <p className="text-gray-300 max-w-3xl mx-auto">
+          <p className="text-muted-foreground max-w-3xl mx-auto">
             These statistics represent real challenges facing development teams worldwide. 
-            <span className="text-white font-semibold"> GraphBit addresses each of these pain points</span>, 
+            <span className="text-foreground font-semibold"> GraphBit addresses each of these pain points</span>, 
             transforming industry-wide problems into competitive advantages.
           </p>
         </div>
       </motion.div>
 
-      {/* Tooltip */}
-      {tooltip.visible && (
-        <div
-          className="fixed z-50 bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full"
-          style={{ left: tooltip.x, top: tooltip.y }}
-        >
-          <div className="font-medium">{tooltip.content}</div>
-          <div className="text-xs text-gray-400 mt-1">Click to view source</div>
-          {/* Tooltip arrow */}
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" />
-        </div>
-      )}
 
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-orange-500/10 to-yellow-500/10 rounded-full blur-2xl" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-warning/10 to-accent/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-destructive/10 to-warning/10 rounded-full blur-2xl" />
     </motion.div>
   );
 } 

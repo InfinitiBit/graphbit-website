@@ -88,8 +88,8 @@ const statCards = [
     value: mockStats.totalCalls.toLocaleString(),
     change: '+12%',
     icon: BarChart3,
-    color: 'text-blue-600',
-    bgGradient: 'from-blue-500/10 to-blue-600/10',
+    color: 'text-warning',
+    bgGradient: 'from-warning/10 to-destructive/10',
     trend: 'up',
   },
   {
@@ -97,8 +97,8 @@ const statCards = [
     value: `${mockStats.successRate}%`,
     change: 'Healthy',
     icon: CheckCircle,
-    color: 'text-green-600',
-    bgGradient: 'from-green-500/10 to-green-600/10',
+    color: 'text-warning',
+    bgGradient: 'from-warning/10 to-destructive/10',
     trend: 'up',
   },
   {
@@ -106,8 +106,8 @@ const statCards = [
     value: `${mockStats.avgLatency}ms`,
     change: '-5%',
     icon: Clock,
-    color: 'text-orange-600',
-    bgGradient: 'from-orange-500/10 to-orange-600/10',
+    color: 'text-destructive',
+    bgGradient: 'from-destructive/10 to-warning/10',
     trend: 'down',
   },
   {
@@ -115,8 +115,8 @@ const statCards = [
     value: `$${mockStats.totalCost}`,
     change: 'This month',
     icon: DollarSign,
-    color: 'text-purple-600',
-    bgGradient: 'from-purple-500/10 to-purple-600/10',
+    color: 'text-warning',
+    bgGradient: 'from-warning/10 to-destructive/10',
     trend: 'neutral',
   },
   {
@@ -124,8 +124,8 @@ const statCards = [
     value: `${(mockStats.totalTokens / 1000).toFixed(1)}K`,
     change: 'Used today',
     icon: Hash,
-    color: 'text-indigo-600',
-    bgGradient: 'from-indigo-500/10 to-indigo-600/10',
+    color: 'text-destructive',
+    bgGradient: 'from-destructive/10 to-warning/10',
     trend: 'neutral',
   },
   {
@@ -133,8 +133,8 @@ const statCards = [
     value: mockStats.activeAgents.toString(),
     change: 'Running now',
     icon: Activity,
-    color: 'text-emerald-600',
-    bgGradient: 'from-emerald-500/10 to-emerald-600/10',
+    color: 'text-warning',
+    bgGradient: 'from-warning/10 to-destructive/10',
     trend: 'neutral',
   },
 ];
@@ -152,23 +152,23 @@ export default function TracingPage() {
   return (
     <>
       <Navigation />
-      <main className="w-full min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30 pt-16 sm:pt-20">
+      <main className="w-full min-h-screen bg-gradient-to-br from-background via-white to-warning/5 pt-16 sm:pt-20">
         {/* Enhanced Hero Header */}
-        <div className="relative overflow-hidden border-b bg-gradient-to-r from-white via-gray-50 to-blue-50">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5" />
+        <div className="relative overflow-hidden border-b border-warning/20 bg-gradient-to-r from-background/95 to-warning/5">
+          <div className="absolute inset-0 bg-gradient-to-br from-warning/5 via-destructive/5 to-warning/10" />
           <div className="container-responsive relative py-12 sm:py-16 lg:py-20">
             <div className="text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-900/10 px-4 py-2 text-sm font-medium text-gray-800 backdrop-blur-sm">
-                <Zap className="h-4 w-4 text-yellow-500" />
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-warning/20 bg-warning/10 px-4 py-2 text-sm font-medium text-foreground backdrop-blur-sm">
+                <Zap className="h-4 w-4 text-warning animate-pulse" />
                 <span>Real-time monitoring</span>
               </div>
-              <h1 className="mb-6 text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
+              <h1 className="mb-6 text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl">
                 LLM{' '}
-                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-warning to-destructive bg-clip-text text-transparent">
                   Tracing
                 </span>
               </h1>
-              <p className="mx-auto mb-8 max-w-3xl text-lg text-gray-600 sm:text-xl">
+              <p className="mx-auto mb-8 max-w-3xl text-lg text-muted-foreground sm:text-xl">
                 Monitor and analyze your agent outputs and performance with comprehensive
                 observability tools.
               </p>
@@ -182,7 +182,7 @@ export default function TracingPage() {
             {statCards.map((stat, index) => (
               <Card
                 key={stat.title}
-                className="group relative overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
+                className="group relative overflow-hidden border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div
@@ -190,22 +190,22 @@ export default function TracingPage() {
                 />
                 <CardHeader className="relative pb-3">
                   <div className="flex items-center justify-between">
-                    <CardDescription className="text-sm font-medium text-gray-600">
+                    <CardDescription className="text-sm font-medium text-muted-foreground">
                       {stat.title}
                     </CardDescription>
-                    <div className={`rounded-lg p-2 ${stat.bgGradient}`}>
+                    <div className={`rounded-lg p-2 ${stat.bgGradient} border border-warning/20`}>
                       <stat.icon className={`h-5 w-5 ${stat.color}`} />
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="relative">
-                  <div className="mb-2 text-3xl font-bold text-gray-900">{stat.value}</div>
-                  <div className="flex items-center gap-1 text-sm text-gray-500">
-                    {stat.trend === 'up' && <TrendingUp className="h-3 w-3 text-green-500" />}
+                  <div className="mb-2 text-3xl font-bold text-foreground">{stat.value}</div>
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                    {stat.trend === 'up' && <TrendingUp className="h-3 w-3 text-warning" />}
                     {stat.trend === 'down' && (
-                      <TrendingUp className="h-3 w-3 rotate-180 text-red-500" />
+                      <TrendingUp className="h-3 w-3 rotate-180 text-destructive" />
                     )}
-                    {stat.trend === 'neutral' && <Activity className="h-3 w-3" />}
+                    {stat.trend === 'neutral' && <Activity className="h-3 w-3 text-warning" />}
                     <span>{stat.change}</span>
                   </div>
                 </CardContent>
@@ -216,7 +216,7 @@ export default function TracingPage() {
 
         {/* Enhanced Filters */}
         <div className="container-responsive pb-8">
-          <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-sm">
+          <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex flex-wrap gap-2">
@@ -226,7 +226,7 @@ export default function TracingPage() {
                       variant={selectedTimeRange === range ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSelectedTimeRange(range)}
-                      className="touch-target-sm rounded-full"
+                      className={`touch-target-sm rounded-full ${selectedTimeRange === range ? 'bg-gradient-to-r from-warning to-destructive text-white' : 'border-warning/20 hover:bg-warning/10'}`}
                     >
                       <span className="hidden sm:inline">Last </span>
                       {range}
@@ -238,7 +238,7 @@ export default function TracingPage() {
                   variant="outline"
                   size="sm"
                   onClick={() => setShowFilters(!showFilters)}
-                  className="touch-target w-full gap-2 rounded-full lg:w-auto"
+                  className="touch-target w-full gap-2 rounded-full lg:w-auto border-warning/20 hover:bg-warning/10"
                 >
                   <Filter className="h-4 w-4" />
                   <span className="hidden sm:inline">Filters</span>
@@ -250,7 +250,7 @@ export default function TracingPage() {
               </div>
 
               {showFilters && (
-                <div className="mt-6 flex flex-wrap gap-2 border-t border-gray-200 pt-6">
+                <div className="mt-6 flex flex-wrap gap-2 border-t border-warning/20 pt-6">
                   {[
                     { key: 'all', label: 'All Status', icon: Activity },
                     { key: 'success', label: 'Success', icon: CheckCircle },
@@ -262,7 +262,7 @@ export default function TracingPage() {
                       variant={selectedStatus === filter.key ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSelectedStatus(filter.key)}
-                      className="touch-target-sm gap-1 rounded-full"
+                      className={`touch-target-sm gap-1 rounded-full ${selectedStatus === filter.key ? 'bg-gradient-to-r from-warning to-destructive text-white' : 'border-warning/20 hover:bg-warning/10'}`}
                     >
                       <filter.icon className="h-3 w-3" />
                       <span className="hidden xs:inline">{filter.label}</span>
@@ -276,15 +276,15 @@ export default function TracingPage() {
 
         {/* Enhanced Traces List */}
         <div className="container-responsive pb-12">
-          <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-sm">
-            <CardHeader className="border-b border-gray-100">
+          <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm">
+            <CardHeader className="border-b border-warning/20">
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 p-2">
+                <div className="rounded-lg bg-gradient-to-br from-warning to-destructive p-2">
                   <Code className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl font-bold">Recent Traces</CardTitle>
-                  <CardDescription className="text-sm text-gray-600">
+                  <CardTitle className="text-xl font-bold text-foreground">Recent Traces</CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground">
                     Detailed logs of all LLM interactions
                   </CardDescription>
                 </div>
@@ -295,71 +295,71 @@ export default function TracingPage() {
                 {filteredTraces.map((trace, index) => (
                   <div
                     key={trace.id}
-                    className="group rounded-xl border border-gray-100 bg-white/50 p-6 transition-all duration-300 hover:bg-white/80 hover:shadow-lg"
+                    className="group rounded-xl border border-warning/20 bg-gradient-to-br from-background/80 to-warning/5 p-6 transition-all duration-300 hover:bg-warning/10 hover:shadow-lg"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="flex flex-col gap-4">
                       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex min-w-0 flex-1 items-center gap-3">
-                          <h4 className="truncate text-lg font-semibold text-gray-900">
+                          <h4 className="truncate text-lg font-semibold text-foreground">
                             {trace.agentName}
                           </h4>
-                          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+                          <span className="rounded-full bg-warning/10 border border-warning/20 px-3 py-1 text-xs font-medium text-warning">
                             {trace.modelName}
                           </span>
                           {trace.status === 'success' ? (
-                            <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-500" />
+                            <CheckCircle className="h-5 w-5 flex-shrink-0 text-warning" />
                           ) : trace.status === 'error' ? (
-                            <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-500" />
+                            <AlertCircle className="h-5 w-5 flex-shrink-0 text-destructive" />
                           ) : (
-                            <RefreshCw className="h-5 w-5 flex-shrink-0 animate-spin text-yellow-500" />
+                            <RefreshCw className="h-5 w-5 flex-shrink-0 animate-spin text-warning" />
                           )}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm text-muted-foreground">
                           {new Date(trace.createdAt).toLocaleString()}
                         </div>
                       </div>
 
                       <div className="space-y-4">
-                        <div className="rounded-lg bg-gray-50 p-4">
-                          <span className="mb-2 block text-sm font-semibold text-gray-900">
+                        <div className="rounded-lg bg-warning/5 border border-warning/20 p-4">
+                          <span className="mb-2 block text-sm font-semibold text-foreground">
                             Input:
                           </span>
-                          <p className="text-sm leading-relaxed text-gray-700">{trace.input}</p>
+                          <p className="text-sm leading-relaxed text-muted-foreground">{trace.input}</p>
                         </div>
-                        <div className="rounded-lg bg-gray-50 p-4">
-                          <span className="mb-2 block text-sm font-semibold text-gray-900">
+                        <div className="rounded-lg bg-warning/5 border border-warning/20 p-4">
+                          <span className="mb-2 block text-sm font-semibold text-foreground">
                             Output:
                           </span>
-                          <p className="line-clamp-3 text-sm leading-relaxed text-gray-700">
+                          <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                             {trace.output}
                           </p>
                         </div>
                         {trace.error && (
-                          <div className="rounded-lg border border-red-200 bg-red-50 p-4">
-                            <span className="mb-2 block text-sm font-semibold text-red-700">
+                          <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-4">
+                            <span className="mb-2 block text-sm font-semibold text-destructive">
                               Error:
                             </span>
-                            <p className="text-sm text-red-600">{trace.error}</p>
+                            <p className="text-sm text-destructive">{trace.error}</p>
                           </div>
                         )}
                       </div>
 
-                      <div className="flex flex-wrap gap-6 border-t border-gray-200 pt-4 text-sm text-gray-600">
+                      <div className="flex flex-wrap gap-6 border-t border-warning/20 pt-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-2">
-                          <Clock className="h-4 w-4" />
+                          <Clock className="h-4 w-4 text-warning" />
                           <span>{trace.latency}ms</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Hash className="h-4 w-4" />
+                          <Hash className="h-4 w-4 text-warning" />
                           <span>{trace.totalTokens} tokens</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <DollarSign className="h-4 w-4" />
+                          <DollarSign className="h-4 w-4 text-warning" />
                           <span>${trace.cost.toFixed(4)}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4" />
+                          <Calendar className="h-4 w-4 text-warning" />
                           <span>Session: {trace.sessionId}</span>
                         </div>
                       </div>
@@ -370,11 +370,11 @@ export default function TracingPage() {
 
               {filteredTraces.length === 0 && (
                 <div className="py-16 text-center">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 p-4">
-                    <Activity className="h-8 w-8 text-gray-400" />
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-warning/10 border border-warning/20 p-4">
+                    <Activity className="h-8 w-8 text-muted-foreground" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-gray-900">No traces found</h3>
-                  <p className="text-sm text-gray-600">
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">No traces found</h3>
+                  <p className="text-sm text-muted-foreground">
                     No traces match your current filter criteria.
                   </p>
                 </div>

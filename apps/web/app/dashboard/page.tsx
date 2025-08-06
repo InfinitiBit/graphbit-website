@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
@@ -27,7 +27,7 @@ interface DashboardStats {
 }
 
 export default function DashboardPage() {
-  const { isLoaded, isSignedIn } = useUser();
+  const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const [stats] = useState<DashboardStats>({
     totalAgents: 12,
@@ -62,13 +62,13 @@ export default function DashboardPage() {
 
   // Handle authentication redirect
   useEffect(() => {
-    if (isLoaded && !isSignedIn) {
-      router.push('/sign-in');
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
     }
-  }, [isLoaded, isSignedIn, router]);
+  }, [isLoading, isAuthenticated, router]);
 
-  // Show loading state while Clerk is loading or redirecting
-  if (!isLoaded || (isLoaded && !isSignedIn)) {
+  // Show loading state while authentication is loading or redirecting
+  if (isLoading || (!isLoading && !isAuthenticated)) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-lg">Loading...</div>
@@ -78,16 +78,16 @@ export default function DashboardPage() {
 
   return (
     <>
-      <main className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-blue-50/30 pt-16 sm:pt-20">
+      <main className="min-h-screen w-full bg-gradient-to-br from-background via-white to-warning/5 pt-16 sm:pt-20">
         {/* Header */}
-        <div className="border-b bg-white/80 backdrop-blur-sm">
+        <div className="border-b border-warning/20 bg-gradient-to-r from-background/95 to-warning/5 backdrop-blur-sm">
           <div className="container-responsive py-6 sm:py-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
+                <h1 className="text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
                   Dashboard
                 </h1>
-                <p className="mt-2 text-sm text-gray-600 sm:text-base">
+                <p className="mt-2 text-sm text-muted-foreground sm:text-base">
                   Monitor your AI agents and system performance
                 </p>
               </div>
@@ -104,87 +104,87 @@ export default function DashboardPage() {
         <div className="container-responsive py-6 sm:py-8 lg:py-12">
           {/* Stats Grid */}
           <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-6">
-            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
+            <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">Total Agents</CardTitle>
-                  <Users className="h-4 w-4 text-blue-600" />
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Total Agents</CardTitle>
+                  <Users className="h-4 w-4 text-warning" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-2xl font-bold text-gray-900">{stats.totalAgents}</div>
-                <p className="mt-1 text-xs text-green-600">+2 this week</p>
+                <div className="text-2xl font-bold text-foreground">{stats.totalAgents}</div>
+                <p className="mt-1 text-xs text-warning">+2 this week</p>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
+            <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">Active Traces</CardTitle>
-                  <Activity className="h-4 w-4 text-green-600" />
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Active Traces</CardTitle>
+                  <Activity className="h-4 w-4 text-warning animate-pulse" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-2xl font-bold text-gray-900">{stats.activeTraces}</div>
-                <p className="mt-1 text-xs text-blue-600">Real-time</p>
+                <div className="text-2xl font-bold text-foreground">{stats.activeTraces}</div>
+                <p className="mt-1 text-xs text-warning">Real-time</p>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
+            <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">
                     Total Requests
                   </CardTitle>
-                  <BarChart3 className="h-4 w-4 text-purple-600" />
+                  <BarChart3 className="h-4 w-4 text-destructive" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-2xl font-bold text-gray-900">
+                <div className="text-2xl font-bold text-foreground">
                   {stats.totalRequests.toLocaleString()}
                 </div>
-                <p className="mt-1 text-xs text-green-600">+12% from last month</p>
+                <p className="mt-1 text-xs text-warning">+12% from last month</p>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
+            <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">
                     Avg Response Time
                   </CardTitle>
-                  <Clock className="h-4 w-4 text-orange-600" />
+                  <Clock className="h-4 w-4 text-warning" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-2xl font-bold text-gray-900">{stats.avgResponseTime}ms</div>
-                <p className="mt-1 text-xs text-green-600">-15ms from yesterday</p>
+                <div className="text-2xl font-bold text-foreground">{stats.avgResponseTime}ms</div>
+                <p className="mt-1 text-xs text-warning">-15ms from yesterday</p>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
+            <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">Success Rate</CardTitle>
-                  <CheckCircle className="h-4 w-4 text-green-600" />
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Success Rate</CardTitle>
+                  <CheckCircle className="h-4 w-4 text-warning" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-2xl font-bold text-gray-900">{stats.successRate}%</div>
-                <p className="mt-1 text-xs text-green-600">+0.3% this week</p>
+                <div className="text-2xl font-bold text-foreground">{stats.successRate}%</div>
+                <p className="mt-1 text-xs text-warning">+0.3% this week</p>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
+            <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-gray-600">Error Rate</CardTitle>
-                  <X className="h-4 w-4 text-red-600" />
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Error Rate</CardTitle>
+                  <X className="h-4 w-4 text-destructive" />
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-2xl font-bold text-gray-900">{stats.errorRate}%</div>
-                <p className="mt-1 text-xs text-red-600">-0.3% this week</p>
+                <div className="text-2xl font-bold text-foreground">{stats.errorRate}%</div>
+                <p className="mt-1 text-xs text-destructive">-0.3% this week</p>
               </CardContent>
             </Card>
           </div>
@@ -193,11 +193,11 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
             {/* Recent Activity */}
             <div className="lg:col-span-2">
-              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
+              <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg font-semibold">Recent Activity</CardTitle>
-                    <Button variant="outline" size="sm">
+                    <CardTitle className="text-lg font-semibold text-foreground">Recent Activity</CardTitle>
+                    <Button variant="outline" size="sm" className="border-warning/20 hover:bg-warning/10">
                       <Plus className="mr-2 h-4 w-4" />
                       View All
                     </Button>
@@ -208,22 +208,22 @@ export default function DashboardPage() {
                     {recentActivity.map((activity) => (
                       <div
                         key={activity.id}
-                        className="flex items-start gap-3 rounded-lg bg-gray-50/50 p-3 transition-colors hover:bg-gray-100/50"
+                        className="flex items-start gap-3 rounded-lg bg-warning/5 border border-warning/10 p-3 transition-colors hover:bg-warning/10"
                       >
                         <div className="mt-0.5 flex-shrink-0">
                           {activity.type === 'success' && (
-                            <CheckCircle className="h-4 w-4 text-green-600" />
+                            <CheckCircle className="h-4 w-4 text-warning" />
                           )}
                           {activity.type === 'warning' && (
-                            <AlertCircle className="h-4 w-4 text-yellow-600" />
+                            <AlertCircle className="h-4 w-4 text-destructive" />
                           )}
-                          {activity.type === 'error' && <X className="h-4 w-4 text-red-600" />}
+                          {activity.type === 'error' && <X className="h-4 w-4 text-destructive" />}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium leading-5 text-gray-900">
+                          <p className="text-sm font-medium leading-5 text-foreground">
                             {activity.message}
                           </p>
-                          <p className="mt-1 text-xs text-gray-500">{activity.time}</p>
+                          <p className="mt-1 text-xs text-muted-foreground">{activity.time}</p>
                         </div>
                       </div>
                     ))}
@@ -234,54 +234,54 @@ export default function DashboardPage() {
 
             {/* Quick Actions */}
             <div className="space-y-6">
-              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
+              <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-lg font-semibold">Quick Actions</CardTitle>
+                  <CardTitle className="text-lg font-semibold text-foreground">Quick Actions</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start" size="sm">
-                    <Plus className="mr-2 h-4 w-4" />
+                  <Button variant="outline" className="w-full justify-start border-warning/20 hover:bg-warning/10 hover:border-warning/30" size="sm">
+                    <Plus className="mr-2 h-4 w-4 text-warning" />
                     Deploy New Agent
                   </Button>
-                  <Button variant="outline" className="w-full justify-start" size="sm">
-                    <Activity className="mr-2 h-4 w-4" />
+                  <Button variant="outline" className="w-full justify-start border-warning/20 hover:bg-warning/10 hover:border-warning/30" size="sm">
+                    <Activity className="mr-2 h-4 w-4 text-warning" />
                     View Live Traces
                   </Button>
-                  <Button variant="outline" className="w-full justify-start" size="sm">
-                    <BarChart3 className="mr-2 h-4 w-4" />
+                  <Button variant="outline" className="w-full justify-start border-warning/20 hover:bg-warning/10 hover:border-warning/30" size="sm">
+                    <BarChart3 className="mr-2 h-4 w-4 text-warning" />
                     Generate Report
                   </Button>
-                  <Button variant="outline" className="w-full justify-start" size="sm">
-                    <Database className="mr-2 h-4 w-4" />
+                  <Button variant="outline" className="w-full justify-start border-warning/20 hover:bg-warning/10 hover:border-warning/30" size="sm">
+                    <Database className="mr-2 h-4 w-4 text-warning" />
                     Manage Data Sources
                   </Button>
                 </CardContent>
               </Card>
 
-              <Card className="border-0 bg-white/70 shadow-lg backdrop-blur-sm">
+              <Card className="border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-lg font-semibold">System Health</CardTitle>
+                  <CardTitle className="text-lg font-semibold text-foreground">System Health</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">API Status</span>
+                    <span className="text-sm text-muted-foreground">API Status</span>
                     <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                      <span className="text-sm font-medium text-green-600">Operational</span>
+                      <div className="h-2 w-2 rounded-full bg-warning animate-pulse"></div>
+                      <span className="text-sm font-medium text-warning">Operational</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Database</span>
+                    <span className="text-sm text-muted-foreground">Database</span>
                     <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                      <span className="text-sm font-medium text-green-600">Healthy</span>
+                      <div className="h-2 w-2 rounded-full bg-warning animate-pulse"></div>
+                      <span className="text-sm font-medium text-warning">Healthy</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Cache</span>
+                    <span className="text-sm text-muted-foreground">Cache</span>
                     <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
-                      <span className="text-sm font-medium text-yellow-600">Degraded</span>
+                      <div className="h-2 w-2 rounded-full bg-destructive animate-pulse"></div>
+                      <span className="text-sm font-medium text-destructive">Degraded</span>
                     </div>
                   </div>
                 </CardContent>

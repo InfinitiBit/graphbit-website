@@ -1,18 +1,11 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-
-// Enable neural network 3D background
-const ThreeDBackgroundComplete = dynamic(() => import('@/components/ui/three-d-background-complete').then(mod => ({ default: mod.ThreeDBackgroundComplete })), {
-  ssr: false,
-  loading: () => <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900" />
-});
 import { AnimatedHeroStats } from '@/components/ui/animated-hero-stats';
-import { CTAButtonGroup } from '@/components/ui/interactive-cta-buttons';
-import { SimpleScrollIndicator } from '@/components/ui/simple-scroll-indicator';
+import { useEffect, useState } from 'react';
+
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Sparkles, Users, Zap } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight, Shield, Zap, Star, Code } from 'lucide-react';
+
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -29,140 +22,197 @@ const stagger = {
 };
 
 export function HeroSection() {
-  const [primaryButtonState, setPrimaryButtonState] = useState<
-    'idle' | 'loading' | 'success' | 'error'
-  >('idle');
+  const [githubStars, setGithubStars] = useState<number | null>(null);
+
+  // Fetch GitHub stars
+  useEffect(() => {
+    const fetchGithubStars = async () => {
+      try {
+        const response = await fetch('https://api.github.com/repos/graphbit-org/graphbit');
+        const data = await response.json();
+        setGithubStars(data.stargazers_count);
+      } catch (error) {
+        console.error('Failed to fetch GitHub stars:', error);
+        // Fallback to a default number
+        setGithubStars(1200);
+      }
+    };
+
+    fetchGithubStars();
+  }, []);
 
   // Handle primary CTA click (Get Started)
-  const handleGetStarted = async () => {
-    setPrimaryButtonState('loading');
-
-    try {
-      // Simulate API call or form submission
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Redirect to marketplace or show success
-      setPrimaryButtonState('success');
-
-      // Reset after showing success
-      setTimeout(() => {
-        setPrimaryButtonState('idle');
-        // Navigate to marketplace
-        window.location.href = '/marketplace';
-      }, 1500);
-    } catch {
-      setPrimaryButtonState('error');
-
-      // Reset after showing error
-      setTimeout(() => {
-        setPrimaryButtonState('idle');
-      }, 2000);
-    }
+  const handleGetStarted = () => {
+    // Navigate to marketplace
+    window.location.href = '/marketplace';
   };
 
-  // Handle secondary CTA click (Watch Demo)
-  const handleWatchDemo = () => {
-    // Open demo video modal or navigate to demo page
-    console.log('Opening demo video...');
-    // You can implement modal logic here or navigate to demo page
-    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+  // Handle secondary CTA click (Learn Framework)
+  const handleLearnFramework = () => {
+    // Navigate to GitHub repository
+    window.open('https://github.com/graphbit-org/graphbit', '_blank');
   };
 
   return (
-    <section className="relative flex h-screen items-center justify-center overflow-hidden">
-      {/* Neural Network 3D Background */}
-      <ThreeDBackgroundComplete />
-      
-      {/* Subtle overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/20 via-transparent to-purple-900/10 pointer-events-none"></div>
+    <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-gradient-to-b from-muted/30 via-background to-background px-4 sm:px-6 lg:px-8 pt-24 lg:pt-32">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0">
+        {/* Modern gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-warning/10 via-transparent to-destructive/5" />
+        
+        {/* Sophisticated pattern overlay */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        </div>
+        
+        {/* Enhanced floating elements */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-1/6 w-4 h-4 bg-gradient-to-br from-warning to-warning-light rounded-full animate-pulse shadow-lg" />
+          <div className="absolute top-1/3 right-1/5 w-2 h-2 bg-gradient-to-br from-accent to-accent-light rounded-full animate-pulse shadow-lg" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-gradient-to-br from-destructive to-destructive-light rounded-full animate-pulse shadow-lg" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-2/3 right-1/3 w-2 h-2 bg-gradient-to-br from-warning to-warning-light rounded-full animate-pulse shadow-lg" style={{ animationDelay: '3s' }} />
+          
+          {/* Large ambient gradients using CSS variables */}
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-warning/5 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-destructive/5 to-transparent rounded-full blur-3xl" />
+        </div>
+      </div>
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container relative z-10 mx-auto py-8 sm:py-12 lg:py-16">
         <motion.div
-          className="mx-auto max-w-6xl text-center"
+          className="mx-auto max-w-7xl text-center"
           variants={stagger}
           initial="initial"
           animate="animate"
         >
-          {/* Announcement Badge */}
-          <motion.div className="mb-4 sm:mb-6" variants={fadeInUp}>
-            <span className="hover:shadow-3xl group inline-flex items-center gap-3 rounded-full border border-primary/20 bg-gradient-to-r from-background/95 to-primary-lighter/10 px-6 py-3 text-sm font-semibold text-foreground shadow-lg backdrop-blur-xl transition-all duration-500 hover:scale-105 hover:border-primary/30 sm:px-8 sm:py-4">
-              <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent shadow-lg sm:h-8 sm:w-8">
-                <Sparkles className="h-3 w-3 animate-pulse text-white sm:h-4 sm:w-4" />
-                <div className="absolute inset-0 animate-ping rounded-full bg-gradient-to-br from-primary to-accent opacity-50"></div>
-              </div>
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-medium">
-                🚀 Introducing AI Agent Marketplace & LLM Tracing
-              </span>
-              <ArrowRight className="h-4 w-4 text-primary transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110 sm:h-5 sm:w-5" />
-            </span>
-          </motion.div>
 
-          {/* Main Headlines */}
-          <motion.h1
-            className="mx-auto mb-3 max-w-5xl text-3xl font-extrabold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+
+          {/* Framework Badge */}
+          <motion.div 
+            className="mx-auto mb-6 flex items-center justify-center"
             variants={fadeInUp}
           >
-            <span className="block bg-gradient-to-r from-secondary to-muted-dark bg-clip-text text-transparent drop-shadow-sm">
-              Build AI Agents
+            <div className="flex items-center gap-3 rounded-full bg-gradient-to-r from-warning/10 to-destructive/10 border border-warning/20 px-6 py-3">
+              <Code className="h-5 w-5 text-warning" />
+              <span className="text-sm font-semibold text-foreground">GraphBit Framework</span>
+              {githubStars && (
+                <div className="flex items-center gap-1 text-sm font-medium text-muted-foreground">
+                  <Star className="h-4 w-4 fill-warning text-warning" />
+                  <span>{githubStars.toLocaleString()}</span>
+                </div>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Enhanced Main Headlines */}
+          <motion.h1
+            className="mx-auto mb-4 max-w-5xl text-2xl font-black tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight sm:leading-tight md:leading-tight"
+            variants={fadeInUp}
+          >
+            <span className="block bg-gradient-to-r from-foreground via-foreground to-secondary bg-clip-text text-transparent drop-shadow-sm">
+              The Open-Source Framework
             </span>
-            <span className="mt-1 block bg-gradient-to-r from-primary via-accent to-primary-light bg-clip-text text-transparent sm:mt-2">
-              That Actually Work
+            <span className="mt-2 block bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent sm:mt-3">
+              That Powers AI Excellence
             </span>
           </motion.h1>
 
-          {/* Description */}
+          {/* Enhanced Description */}
           <motion.p
-            className="mx-auto mb-4 max-w-3xl text-base font-light leading-relaxed text-muted-foreground sm:mb-6 sm:text-lg lg:text-xl"
+            className="mx-auto mb-6 max-w-3xl text-sm font-medium leading-relaxed text-muted-foreground sm:mb-8 sm:text-base md:text-lg lg:text-xl px-4 sm:px-0"
             variants={fadeInUp}
           >
-            Download <span className="font-semibold text-foreground">production-ready AI agents</span>
-            , track every LLM interaction, and scale your AI applications with{' '}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text font-semibold text-transparent">
-              confidence
+            <span className="text-foreground font-bold">GraphBit Framework</span> eliminates the complexity of building AI agents.{' '}
+            <span className="font-bold text-warning">Our cloud platform</span> is built on top of this proven foundation,{' '}
+            trusted by developers worldwide.{' '}
+            <span className="block mt-2 text-foreground font-bold">
+              Start with the framework, scale with the cloud.
             </span>
-            .
           </motion.p>
 
-          {/* Interactive CTA Buttons */}
-          <motion.div variants={fadeInUp}>
-            <CTAButtonGroup
-              primaryText="Get Started"
-              secondaryText="Watch Demo"
-              onPrimaryClick={handleGetStarted}
-              onSecondaryClick={handleWatchDemo}
-              primaryState={primaryButtonState}
-              className="mb-6 sm:mb-8"
-            />
+          {/* Enhanced CTA Section */}
+          <motion.div variants={fadeInUp} className="mb-8">
+            <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4 lg:gap-6 px-4 sm:px-0">
+              <motion.button
+                onClick={handleGetStarted}
+                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-warning to-destructive px-6 py-3 text-sm font-bold text-white shadow-2xl transition-all duration-300 hover:scale-102 hover:shadow-xl sm:px-8 sm:py-4 sm:text-base lg:px-10 lg:py-5 lg:text-lg w-full sm:w-auto touch-target"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-destructive to-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <span className="relative flex items-center gap-3">
+                  <Zap className="h-6 w-6" />
+                  Try Cloud Platform
+                </span>
+              </motion.button>
+              
+              <motion.button
+                onClick={handleLearnFramework}
+                className="group flex items-center justify-center gap-2 rounded-xl border-2 border-border/50 bg-background/80 px-4 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:border-warning/30 hover:bg-background/90 hover:shadow-md sm:px-6 sm:py-4 sm:text-base lg:px-8 lg:py-5 lg:text-lg w-full sm:w-auto touch-target"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+              >
+                <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-warning/10 to-destructive/10">
+                  <div className="h-6 w-6 rounded-full bg-gradient-to-br from-warning to-destructive flex items-center justify-center">
+                    <Code className="h-3 w-3 text-white" />
+                  </div>
+                </div>
+                Explore Framework
+              </motion.button>
+            </div>
           </motion.div>
 
-          {/* Trust Indicators */}
+          {/* Framework Success Metrics */}
           <motion.div
-            className="mb-8 flex flex-wrap items-center justify-center gap-4 opacity-70 sm:mb-10 sm:gap-6"
+            className="mb-8 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 sm:mb-10 px-4 sm:px-0"
             variants={fadeInUp}
           >
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <CheckCircle className="h-4 w-4 text-success" />
-              <span>500+ Ready Agents</span>
+            <div className="flex items-center gap-3 rounded-full bg-green-500/20 px-3 py-2 text-green-700 dark:text-green-300 sm:px-4 min-w-0 flex-shrink-0">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500">
+                <Zap className="h-5 w-5 text-white" />
+              </div>
+              <span className="font-semibold text-sm sm:text-base">10x Faster Development</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Users className="h-4 w-4 text-primary" />
-              <span>10k+ Developers</span>
+            <div className="flex items-center gap-3 rounded-full bg-blue-500/20 px-3 py-2 text-blue-700 dark:text-blue-300 sm:px-4 min-w-0 flex-shrink-0">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500">
+                <Shield className="h-5 w-5 text-white" />
+              </div>
+              <span className="font-semibold text-sm sm:text-base">Enterprise Security</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Zap className="h-4 w-4 text-accent" />
-              <span>99.9% Uptime</span>
+            <div className="flex items-center gap-3 rounded-full bg-purple-500/20 px-3 py-2 text-purple-700 dark:text-purple-300 sm:px-4 min-w-0 flex-shrink-0">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-500">
+                <Star className="h-5 w-5 text-white" />
+              </div>
+              <span className="font-semibold text-sm sm:text-base">Production Ready</span>
             </div>
           </motion.div>
 
-          {/* Animated Statistics */}
+          {/* Social Proof Section */}
+          <motion.div
+            className="mb-10 text-center"
+            variants={fadeInUp}
+          >
+            <p className="mb-4 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              Trusted by innovative teams worldwide
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 opacity-60 sm:gap-8 lg:gap-12">
+              {['Startups', 'Enterprise', 'Research Labs', 'AI Companies', 'Fortune 500', 'Open Source'].map((segment, index) => (
+                <div
+                  key={index}
+                  className="rounded-lg bg-gradient-to-r from-warning/10 to-destructive/10 px-3 py-2 sm:px-6 sm:py-3 font-bold text-muted-foreground hover:opacity-100 transition-opacity text-sm sm:text-base"
+                >
+                  {segment}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Enhanced Animated Statistics */}
           <motion.div variants={fadeInUp} className="w-full">
             <AnimatedHeroStats />
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <SimpleScrollIndicator targetSectionId="features-section" />
     </section>
   );
 }

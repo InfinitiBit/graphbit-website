@@ -1,35 +1,36 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { SignInButton, useClerk, useUser } from '@clerk/nextjs';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { useAuth } from '@/contexts/AuthContext';
+import Link from 'next/link';
+
 import {
   ArrowRight,
   BarChart3,
-  BarChart3 as BookOpen,
   Home,
   Menu,
   Sparkles,
   X,
   Zap,
 } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
   { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
-  { name: 'Marketplace', href: '/marketplace', icon: X },
+  { name: 'Marketplace', href: '/marketplace', icon: BarChart3 },
   { name: 'Tracing', href: '/tracing', icon: Zap },
-  { name: 'Docs', href: '/docs', icon: BookOpen },
-  { name: 'Blog', href: '/blog', icon: X },
+  { name: 'Pricing', href: '/pricing', icon: Sparkles },
+  { name: 'Docs', href: '/docs', icon: BarChart3 },
+  { name: 'Blog', href: '/blog', icon: BarChart3 },
 ];
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { isSignedIn } = useUser();
-  const { signOut } = useClerk();
+  const { isAuthenticated, logout } = useAuth();
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -49,24 +50,25 @@ export function Navigation() {
   }, [mobileMenuOpen]);
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-border bg-background/95 shadow-sm backdrop-blur-md">
-      <div className="responsive-container">
-        <div className="flex h-16 items-center justify-between sm:h-20">
+    <nav className="fixed left-0 right-0 top-0 z-50 px-3 py-2 sm:px-4 sm:py-3 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="rounded-2xl border border-warning/20 bg-gradient-to-r from-background/95 to-warning/5 shadow-xl backdrop-blur-xl">
+          <div className="flex h-14 items-center justify-between px-4 sm:h-16 sm:px-6 lg:h-18 lg:px-8">
           {/* GraphBit Logo */}
-          <Link href="/" className="group z-10 flex items-center space-x-3">
+          <Link href="/" className="group flex items-center space-x-3 transition-all duration-300 hover:scale-105">
             <div className="relative">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl sm:h-12 sm:w-12">
-                <Sparkles className="h-5 w-5 text-white sm:h-6 sm:w-6" />
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-20"></div>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-warning to-destructive shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:shadow-warning/20 sm:h-10 sm:w-10">
+                <Sparkles className="h-4 w-4 text-white animate-pulse transition-transform duration-300 group-hover:scale-110 sm:h-5 sm:w-5" />
+                <div className="absolute inset-0 animate-ping rounded-xl bg-gradient-to-br from-warning to-destructive opacity-50 transition-opacity duration-300 group-hover:opacity-70"></div>
               </div>
             </div>
-            <span className="bg-gradient-to-r from-foreground via-blue-400 to-foreground bg-clip-text text-xl font-bold text-transparent sm:text-2xl">
+            <span className="text-base font-bold bg-gradient-to-r from-warning via-destructive to-accent bg-clip-text text-transparent transition-all duration-300 group-hover:from-warning/90 group-hover:via-destructive/90 group-hover:to-accent/90 sm:text-lg lg:text-xl">
               GraphBit
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center space-x-1 lg:flex">
+          <div className="hidden items-center space-x-2 lg:flex">
             {navigation.map((item) => {
               const Icon = item.icon;
               const isActive =
@@ -75,22 +77,22 @@ export function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`group relative flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-300 hover:scale-105 hover:bg-muted/80 ${
+                  className={`group relative flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-300 ${
                     isActive
-                      ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-400 shadow-md'
-                      : 'text-muted-foreground hover:text-foreground'
+                      ? 'bg-gradient-to-r from-warning/10 to-destructive/10 text-warning shadow-lg border border-warning/20'
+                      : 'text-muted-foreground hover:bg-gradient-to-r hover:from-warning/5 hover:to-destructive/5 hover:text-foreground hover:shadow-md'
                   }`}
                 >
                   <Icon
                     className={`h-4 w-4 transition-colors duration-300 ${
                       isActive
-                        ? 'text-blue-400'
-                        : 'text-muted-foreground group-hover:text-foreground'
+                        ? 'text-warning'
+                        : 'text-muted-foreground group-hover:text-warning/80'
                     }`}
                   />
                   {item.name}
                   {isActive && (
-                    <div className="absolute bottom-0 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                    <div className="absolute -bottom-1 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-gradient-to-r from-warning to-destructive"></div>
                   )}
                 </Link>
               );
@@ -98,43 +100,48 @@ export function Navigation() {
           </div>
 
           {/* Desktop CTA Button */}
-          <div className="hidden items-center space-x-4 lg:flex">
-            {isSignedIn ? (
+          <div className="hidden items-center space-x-3 lg:flex">
+            <ThemeToggle />
+            {isAuthenticated ? (
               <Button
-                onClick={() => signOut()}
-                className="group relative overflow-hidden rounded-xl border-0 bg-gradient-to-r from-red-600 via-red-700 to-red-800 px-6 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-red-700 hover:via-red-800 hover:to-red-900 hover:shadow-xl"
+                onClick={logout}
+                variant="outline"
+                className="rounded-lg border-destructive/20 px-4 py-2 text-sm font-medium text-destructive"
               >
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="flex items-center gap-2">
                   Log Out
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </Button>
             ) : (
-              <SignInButton mode="modal">
-                <Button className="group relative overflow-hidden rounded-xl border-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 px-6 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 hover:shadow-xl">
-                  <span className="relative z-10 flex items-center gap-2">
+              <Link href="/login">
+                <Button className="rounded-lg bg-gradient-to-r from-warning to-destructive px-4 py-2 text-sm font-medium text-white shadow-lg">
+                  <span className="relative flex items-center gap-2">
+                    <Zap className="h-3.5 w-3.5" />
                     Sign In
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                 </Button>
-              </SignInButton>
+              </Link>
             )}
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="touch-friendly relative z-10 rounded-lg bg-muted transition-colors hover:bg-muted/80 lg:hidden"
-            aria-label="Toggle mobile menu"
-          >
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="group relative rounded-lg bg-gradient-to-r from-warning/10 to-destructive/10 p-2 border border-warning/20 touch-target-sm transition-all duration-300 hover:from-warning/20 hover:to-destructive/20 hover:shadow-md hover:shadow-warning/10"
+              aria-label="Toggle mobile menu"
+            >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-foreground" />
+              <X className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:rotate-90" />
             ) : (
-              <Menu className="h-6 w-6 text-foreground" />
+              <Menu className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:scale-110" />
             )}
-          </button>
+            </button>
+          </div>
+          </div>
         </div>
       </div>
 
@@ -145,11 +152,11 @@ export function Navigation() {
           <div className="mobile-overlay" onClick={() => setMobileMenuOpen(false)} />
 
           {/* Mobile Menu Content */}
-          <div className="fixed inset-x-0 bottom-0 top-16 bg-background shadow-xl sm:top-20">
+          <div className="fixed inset-x-3 top-16 bottom-4 bg-gradient-to-br from-background/95 to-warning/5 backdrop-blur-xl rounded-2xl border border-warning/20 shadow-2xl sm:inset-x-4 sm:top-20 lg:top-24 max-h-[calc(100vh-5rem)] overflow-hidden">
             <div className="flex h-full flex-col">
               {/* Navigation Links */}
-              <div className="flex-1 overflow-y-auto py-6">
-                <div className="mobile-spacing px-4">
+              <div className="flex-1 overflow-y-auto p-6">
+                <div className="space-y-2">
                   {navigation.map((item) => {
                     const Icon = item.icon;
                     const isActive =
@@ -159,18 +166,18 @@ export function Navigation() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={`mobile-nav-item rounded-xl ${
+                        className={`group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium touch-target transition-all duration-300 ${
                           isActive
-                            ? 'border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-400'
-                            : 'text-muted-foreground'
+                            ? 'bg-gradient-to-r from-warning/10 to-destructive/10 text-warning border border-warning/20 shadow-md'
+                            : 'text-muted-foreground hover:bg-gradient-to-r hover:from-warning/5 hover:to-destructive/5 hover:text-foreground hover:shadow-sm'
                         }`}
                       >
                         <Icon
-                          className={`mr-3 h-5 w-5 ${isActive ? 'text-blue-400' : 'text-muted-foreground'}`}
+                          className={`h-5 w-5 transition-colors duration-300 ${isActive ? 'text-warning' : 'text-muted-foreground group-hover:text-warning/80'}`}
                         />
                         {item.name}
                         {isActive && (
-                          <div className="ml-auto h-2 w-2 rounded-full bg-blue-500"></div>
+                          <div className="ml-auto h-1.5 w-1.5 rounded-full bg-gradient-to-r from-warning to-destructive"></div>
                         )}
                       </Link>
                     );
@@ -179,26 +186,28 @@ export function Navigation() {
               </div>
 
               {/* Mobile CTA */}
-              <div className="border-t border-border p-4">
-                {isSignedIn ? (
+              <div className="border-t border-warning/20 p-4 sm:p-6">
+                {isAuthenticated ? (
                   <Button
-                    onClick={() => signOut()}
-                    className="mobile-cta group w-full rounded-xl bg-gradient-to-r from-red-600 via-red-700 to-red-800 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-red-700 hover:via-red-800 hover:to-red-900"
+                    onClick={logout}
+                    variant="outline"
+                    className="w-full rounded-lg border-destructive/20 py-3 text-sm font-medium text-destructive touch-target"
                   >
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center justify-center gap-2">
                       Log Out
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="h-4 w-4" />
                     </span>
                   </Button>
                 ) : (
-                  <SignInButton mode="modal">
-                    <Button className="mobile-cta group w-full rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800">
-                      <span className="flex items-center gap-2">
+                  <Link href="/login">
+                    <Button className="w-full rounded-lg bg-gradient-to-r from-warning to-destructive py-3 text-sm font-medium text-white shadow-lg touch-target">
+                      <span className="relative flex items-center justify-center gap-2">
+                        <Zap className="h-4 w-4" />
                         Sign In
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="h-4 w-4" />
                       </span>
                     </Button>
-                  </SignInButton>
+                  </Link>
                 )}
               </div>
             </div>

@@ -211,7 +211,7 @@ class ApiClient {
   }
 
   // Agent endpoints
-  async getAgents(params: Record<string, string | number> = {}): Promise<ApiResponse<IAgent[]>> {
+  async getAgents(params: Record<string, string | number | boolean> = {}): Promise<ApiResponse<IAgent[]>> {
     const stringParams = Object.fromEntries(
       Object.entries(params).map(([key, value]) => [key, String(value)])
     );
@@ -244,7 +244,7 @@ class ApiClient {
   }
 
   // Trace endpoints
-  async getTraces(params: Record<string, string | number> = {}): Promise<ApiResponse<ITrace[]>> {
+  async getTraces(params: Record<string, string | number | boolean> = {}): Promise<ApiResponse<ITrace[]>> {
     const stringParams = Object.fromEntries(
       Object.entries(params).map(([key, value]) => [key, String(value)])
     );
@@ -270,8 +270,12 @@ class ApiClient {
     });
   }
 
-  async getTraceAnalytics(params: Record<string, any> = {}): Promise<ApiResponse> {
-    const searchParams = new URLSearchParams(params);
+  async getTraceAnalytics(params: Record<string, string | number | boolean> = {}): Promise<ApiResponse> {
+    const stringParams: Record<string, string> = {};
+    Object.entries(params).forEach(([key, value]) => {
+      stringParams[key] = String(value);
+    });
+    const searchParams = new URLSearchParams(stringParams);
     return this.request(`/traces/analytics?${searchParams}`);
   }
 
@@ -304,19 +308,19 @@ export const api = {
   getUserStats: () => apiClient.getUserStats(),
   
   // Agents
-  getAgents: (params?: Record<string, any>) => apiClient.getAgents(params),
+  getAgents: (params?: Record<string, string | number | boolean>) => apiClient.getAgents(params),
   getAgent: (id: string) => apiClient.getAgent(id),
   createAgent: (agentData: Partial<IAgent>) => apiClient.createAgent(agentData),
   updateAgent: (id: string, updates: Partial<IAgent>) => apiClient.updateAgent(id, updates),
   deleteAgent: (id: string) => apiClient.deleteAgent(id),
   
   // Traces
-  getTraces: (params?: Record<string, any>) => apiClient.getTraces(params),
+  getTraces: (params?: Record<string, string | number | boolean>) => apiClient.getTraces(params),
   createTrace: (traceData: Partial<ITrace>) => apiClient.createTrace(traceData),
   getTrace: (id: string) => apiClient.getTrace(id),
   addTraceFeedback: (id: string, feedback: { rating?: number; comment?: string; helpful?: boolean }) => 
     apiClient.addTraceFeedback(id, feedback),
-  getTraceAnalytics: (params?: Record<string, any>) => 
+  getTraceAnalytics: (params?: Record<string, string | number | boolean>) => 
     apiClient.getTraceAnalytics(params),
   
   // Utils

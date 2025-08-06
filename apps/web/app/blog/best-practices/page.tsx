@@ -9,10 +9,10 @@ import Link from 'next/link';
 export default async function BestPracticesPage() {
   const allPosts = getAllBlogPosts();
   const categories = [
-    { id: 'all', name: 'All Posts', icon: 'BookOpen' },
-    { id: 'tutorials', name: 'Tutorials', icon: 'BookOpen' },
-    { id: 'best-practices', name: 'Best Practices', icon: 'BookOpen' },
-    { id: 'advanced', name: 'Advanced Techniques', icon: 'BookOpen' },
+    { id: 'all', name: 'All Posts', icon: 'BarChart3' },
+    { id: 'tutorials', name: 'Tutorials', icon: 'BarChart3' },
+    { id: 'best-practices', name: 'Best Practices', icon: 'BarChart3' },
+    { id: 'advanced', name: 'Advanced Techniques', icon: 'BarChart3' },
   ];
 
   // Filter posts for best practices

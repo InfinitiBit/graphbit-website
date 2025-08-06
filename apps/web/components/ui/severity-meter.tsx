@@ -68,12 +68,12 @@ function SeverityMeter({ percentage, title, description, explanation, index }: S
     }
   }, [isInView, percentage, progress, isMounted]);
 
-  // Generate gradient colors based on percentage
+  // Generate gradient colors based on percentage - using warning/destructive theme
   const getGradientColors = (percent: number) => {
-    if (percent < 30) return { start: '#fbbf24', end: '#f59e0b' }; // Yellow
-    if (percent < 60) return { start: '#f59e0b', end: '#ea580c' }; // Orange
-    if (percent < 80) return { start: '#ea580c', end: '#dc2626' }; // Red-orange
-    return { start: '#dc2626', end: '#b91c1c' }; // Red
+    if (percent < 30) return { start: 'hsl(var(--warning))', end: 'hsl(var(--accent))' };
+    if (percent < 60) return { start: 'hsl(var(--warning))', end: 'hsl(var(--destructive))' };
+    if (percent < 80) return { start: 'hsl(var(--destructive))', end: 'hsl(var(--accent))' };
+    return { start: 'hsl(var(--destructive))', end: 'hsl(var(--warning))' };
   };
 
   const { start: gradientStart, end: gradientEnd } = getGradientColors(percentage);
@@ -131,7 +131,7 @@ function SeverityMeter({ percentage, title, description, explanation, index }: S
             cy={70}
             r={62}
             fill="none"
-            stroke="rgb(55, 65, 81)"
+            stroke="hsl(var(--muted))"
             strokeWidth={8}
           />
           
@@ -156,11 +156,11 @@ function SeverityMeter({ percentage, title, description, explanation, index }: S
         {/* Center content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span
-            className="text-xl font-bold text-white block leading-none"
+            className="text-xl font-bold text-foreground block leading-none"
           >
             {isMounted ? animatedPercentage : percentage}%
           </span>
-          <span className="text-xs text-gray-300 mt-1 text-center leading-tight">
+                      <span className="text-xs text-muted-foreground mt-1 text-center leading-tight">
             {title}
           </span>
         </div>
@@ -173,14 +173,14 @@ function SeverityMeter({ percentage, title, description, explanation, index }: S
             animate={{ scale: 1 }}
             transition={{ delay: 1, type: "spring" }}
           >
-            <AlertCircle className="h-4 w-4 text-red-400" />
+            <AlertCircle className="h-4 w-4 text-destructive" />
           </motion.div>
         )}
       </div>
 
       {/* Description */}
       <div className="text-center mt-4">
-        <p className="text-sm text-gray-300 font-medium">{description}</p>
+                  <p className="text-sm text-muted-foreground font-medium">{description}</p>
       </div>
 
       {/* Tooltip */}
@@ -192,23 +192,23 @@ function SeverityMeter({ percentage, title, description, explanation, index }: S
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.2 }}
         >
-          <div className="bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 shadow-xl max-w-xs">
+          <div className="bg-background border border-warning/30 rounded-lg px-4 py-3 shadow-xl max-w-xs">
             <div className="flex items-start gap-2">
-                             <AlertCircle className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                             <AlertCircle className="h-4 w-4 text-warning mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-sm text-gray-200 leading-relaxed">
+                <p className="text-sm text-foreground leading-relaxed">
                   {explanation}
                 </p>
                 
                 {/* Severity scale */}
-                <div className="mt-3 pt-2 border-t border-gray-600">
-                  <p className="text-xs text-gray-400 mb-2">Severity Scale:</p>
+                <div className="mt-3 pt-2 border-t border-warning/20">
+                  <p className="text-xs text-muted-foreground mb-2">Severity Scale:</p>
                   <div className="flex justify-between text-xs">
-                    <span className="text-yellow-400">Low (0-30%)</span>
-                    <span className="text-orange-400">Medium (30-60%)</span>
-                    <span className="text-red-400">High (60%+)</span>
+                    <span className="text-warning">Low (0-30%)</span>
+                    <span className="text-accent">Medium (30-60%)</span>
+                    <span className="text-destructive">High (60%+)</span>
                   </div>
-                  <div className="h-1 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 rounded-full mt-1" />
+                  <div className="h-1 bg-gradient-to-r from-warning via-accent to-destructive rounded-full mt-1" />
                 </div>
               </div>
             </div>
