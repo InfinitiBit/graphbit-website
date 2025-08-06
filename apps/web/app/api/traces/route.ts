@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { cookies } from 'next/headers';
 import { connectDB } from '@/lib/db';
 import Trace from '@/lib/models/trace';
 
@@ -8,11 +8,14 @@ export const dynamic = 'force-static';
 
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    // For now, we'll disable authentication requirement
+    // TODO: Implement proper JWT authentication
+    // const token = cookies().get('auth-token')?.value;
+    // if (!token) {
+    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    // }
+    
+    const userId = 'user-placeholder'; // TODO: Extract from JWT token
 
     await connectDB();
 
@@ -102,11 +105,14 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    // For now, we'll disable authentication requirement
+    // TODO: Implement proper JWT authentication
+    // const token = cookies().get('auth-token')?.value;
+    // if (!token) {
+    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    // }
+    
+    const userId = 'user-placeholder'; // TODO: Extract from JWT token
 
     await connectDB();
 

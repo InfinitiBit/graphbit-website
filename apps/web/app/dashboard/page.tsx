@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
@@ -27,7 +27,7 @@ interface DashboardStats {
 }
 
 export default function DashboardPage() {
-  const { isLoaded, isSignedIn } = useUser();
+  const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const [stats] = useState<DashboardStats>({
     totalAgents: 12,
@@ -62,13 +62,13 @@ export default function DashboardPage() {
 
   // Handle authentication redirect
   useEffect(() => {
-    if (isLoaded && !isSignedIn) {
-      router.push('/sign-in');
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
     }
-  }, [isLoaded, isSignedIn, router]);
+  }, [isLoading, isAuthenticated, router]);
 
-  // Show loading state while Clerk is loading or redirecting
-  if (!isLoaded || (isLoaded && !isSignedIn)) {
+  // Show loading state while authentication is loading or redirecting
+  if (isLoading || (!isLoading && !isAuthenticated)) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-lg">Loading...</div>

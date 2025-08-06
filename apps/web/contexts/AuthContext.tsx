@@ -216,12 +216,13 @@ export function useAuthStore() {
 
 // Helper hook for authentication checks
 export const useAuth = () => {
-  const { user, isAuthenticated, isLoading } = useAuthStore();
+  const { user, isAuthenticated, isLoading, logout } = useAuthStore();
   
   return {
     user,
     isAuthenticated,
     isLoading,
+    logout,
     isAdmin: user?.role === 'admin',
     isModerator: user?.role === 'moderator' || user?.role === 'admin',
   };

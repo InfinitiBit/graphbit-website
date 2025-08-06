@@ -4,7 +4,7 @@ import { Navigation } from '@/components/navbar';
 import { ThemeStoreProvider } from '@/components/providers/ThemeStoreProvider';
 import { AppProvider } from '@/contexts/AppContext';
 import { LoadingProvider } from '@/contexts/ThemeContext';
-import { ClerkProvider } from '@clerk/nextjs';
+
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
@@ -51,15 +51,13 @@ export default function RootLayout({
         <div id="main-content" className="relative">
           <ThemeStoreProvider>
             <LoadingProvider>
-              <ClerkProvider>
-                <AuthProvider>
-                  <AppProvider>
-                    <Navigation />
-                    <div className="flex min-h-screen w-full flex-col">{children}</div>
-                    <Footer />
-                  </AppProvider>
-                </AuthProvider>
-              </ClerkProvider>
+              <AuthProvider>
+                <AppProvider>
+                  <Navigation />
+                  <div className="flex min-h-screen w-full flex-col">{children}</div>
+                  <Footer />
+                </AppProvider>
+              </AuthProvider>
             </LoadingProvider>
           </ThemeStoreProvider>
         </div>

@@ -1,29 +1,4 @@
-declare module '@clerk/nextjs' {
-  export function useUser(): {
-    user: {
-      id: string;
-      firstName?: string;
-      lastName?: string;
-      emailAddresses: Array<{ emailAddress: string }>;
-    } | null;
-    isSignedIn: boolean;
-    isLoaded: boolean;
-  };
 
-  export function useClerk(): {
-    signOut: () => void;
-  };
-
-  export function ClerkProvider(props: { children: React.ReactNode }): JSX.Element;
-  export function UserButton(props: { afterSignOutUrl?: string }): JSX.Element;
-  export function SignInButton(props: { mode?: string; children: React.ReactNode }): JSX.Element;
-}
-
-declare module '@clerk/nextjs/server' {
-  export function auth(): Promise<{ userId: string | null }>;
-  export function clerkMiddleware(handler: (auth: any, req: any) => Promise<void>): any;
-  export function createRouteMatcher(routes: string[]): (req: any) => boolean;
-}
 
 declare module 'geist/font/sans' {
   export const GeistSans: {
