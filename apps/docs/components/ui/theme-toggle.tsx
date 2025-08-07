@@ -45,8 +45,8 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button className="h-9 w-9 p-0 rounded-md border border-gray-300 bg-white hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700 flex items-center justify-center">
-        <MonitorIcon className="h-4 w-4" />
+      <button className="h-9 w-9 p-0 rounded-lg border border-border bg-card hover:bg-muted flex items-center justify-center transition-colors">
+        <MonitorIcon className="h-4 w-4 text-muted-foreground" />
         <span className="sr-only">Toggle theme</span>
       </button>
     );
@@ -79,13 +79,13 @@ export function ThemeToggle() {
   return (
     <div className="relative">
       <button
-        className="h-9 px-2 rounded-md border border-gray-300 bg-white hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700 flex items-center gap-1 transition-colors"
+        className="h-9 px-2 rounded-lg border border-border bg-card hover:bg-muted flex items-center gap-1 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-haspopup="menu"
       >
-        <CurrentIcon className="h-4 w-4" />
-        <ChevronDownIcon className="h-3 w-3" />
+        <CurrentIcon className="h-4 w-4 text-foreground" />
+        <ChevronDownIcon className="h-3 w-3 text-muted-foreground" />
         <span className="sr-only">Toggle theme menu</span>
       </button>
 
@@ -98,16 +98,16 @@ export function ThemeToggle() {
           />
           
           {/* Dropdown Menu */}
-          <div className="absolute right-0 top-full z-50 mt-2 w-48 rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800">
+          <div className="absolute right-0 top-full z-50 mt-2 w-48 rounded-xl border border-border bg-card shadow-enhanced backdrop-blur-sm">
             <div className="p-1">
               {themes.map((themeOption) => {
                 const Icon = themeOption.icon;
                 const isSelected = theme === themeOption.key;
-                
+
                 return (
                   <button
                     key={themeOption.key}
-                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-200"
+                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted text-foreground"
                     onClick={() => {
                       setTheme(themeOption.key);
                       setIsOpen(false);
@@ -116,21 +116,21 @@ export function ThemeToggle() {
                     <Icon className="h-4 w-4" />
                     <div className="flex flex-1 flex-col items-start">
                       <span>{themeOption.label}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                      <span className="text-xs text-muted-foreground">
                         {themeOption.description}
                       </span>
                     </div>
                     {isSelected && (
-                      <CheckIcon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      <CheckIcon className="h-4 w-4 text-primary" />
                     )}
                   </button>
                 );
               })}
             </div>
-            
+
             {/* Current resolved theme indicator */}
-            <div className="border-t border-gray-200 px-3 py-2 dark:border-gray-700">
-              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+            <div className="border-t border-border px-3 py-2">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 {resolvedTheme === 'dark' ? (
                   <MoonIcon className="h-3 w-3" />
                 ) : (
