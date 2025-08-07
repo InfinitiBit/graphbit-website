@@ -8,16 +8,12 @@ import {
   BarChart3 as Brain,
   Check,
   Code,
-  Copy,
-  Database,
   Globe,
   Menu,
   MessageSquare,
   Search,
-  Settings,
   Shield,
   Sparkles,
-  Terminal,
   Users,
   X,
   Zap,
@@ -32,7 +28,7 @@ const sidebarSections = [
       { label: 'Quick Start', href: '#quick-start', icon: Zap },
       { label: 'Installation', href: '#installation', icon: Code },
       { label: 'Authentication', href: '#authentication', icon: Shield },
-      { label: 'Configuration', href: '#configuration', icon: Settings },
+      { label: 'Configuration', href: '#configuration', icon: Code },
       { label: 'First Steps', href: '#first-steps', icon: ArrowRight },
     ],
   },
@@ -43,7 +39,7 @@ const sidebarSections = [
       { label: 'LLM Tracing', href: '#llm-tracing', icon: BarChart },
       { label: 'Marketplace', href: '#marketplace', icon: Globe },
       { label: 'Workflows', href: '#workflows', icon: ArrowRight },
-      { label: 'Data Models', href: '#data-models', icon: Database },
+      { label: 'Data Models', href: '#data-models', icon: Code },
       { label: 'Event System', href: '#events', icon: Zap },
       { label: 'Security', href: '#security', icon: Shield },
     ],
@@ -56,7 +52,7 @@ const sidebarSections = [
       { label: 'Webhooks', href: '#webhooks', icon: Zap },
       { label: 'SDKs', href: '#sdks', icon: Sparkles },
       { label: 'REST Endpoints', href: '#rest-api', icon: Globe },
-      { label: 'GraphQL Schema', href: '#graphql', icon: Database },
+      { label: 'GraphQL Schema', href: '#graphql', icon: Code },
       { label: 'Rate Limiting', href: '#rate-limits', icon: Shield },
       { label: 'Error Codes', href: '#errors', icon: X },
     ],
@@ -78,7 +74,7 @@ const sidebarSections = [
       { label: 'OpenAI Integration', href: '#openai', icon: Brain },
       { label: 'Anthropic Claude', href: '#claude', icon: Brain },
       { label: 'Langchain', href: '#langchain', icon: Code },
-      { label: 'LlamaIndex', href: '#llamaindex', icon: Database },
+      { label: 'LlamaIndex', href: '#llamaindex', icon: Code },
       { label: 'Custom Providers', href: '#custom-providers', icon: Sparkles },
     ],
   },
@@ -156,21 +152,6 @@ export default function DocsPage() {
 
   return (
     <>
-      <style jsx>{`
-        .sidebar-scroll::-webkit-scrollbar {
-          width: 6px;
-        }
-        .sidebar-scroll::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .sidebar-scroll::-webkit-scrollbar-thumb {
-          background: hsl(var(--muted-foreground) / 0.2);
-          border-radius: 3px;
-        }
-        .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-          background: hsl(var(--muted-foreground) / 0.4);
-        }
-      `}</style>
       <div className="min-h-screen w-full bg-gradient-background">
         {/* Docs page header section */}
         <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm">
@@ -218,10 +199,10 @@ export default function DocsPage() {
               className={`fixed top-20 bottom-0 left-0 z-40 w-80 transform border-r border-border bg-card/90 backdrop-blur-sm transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : 'lg:translate-x-0 -translate-x-full'} overflow-hidden`}
             >
               <div
-                className="h-full overflow-y-auto sidebar-scroll"
+                className="h-full overflow-y-auto"
                 style={{
                   scrollbarWidth: 'thin',
-                  scrollbarColor: 'hsl(var(--muted-foreground) / 0.2) transparent'
+                  scrollbarColor: 'rgba(100, 116, 139, 0.2) transparent'
                 }}
               >
                 <div className="space-y-6 p-6 pb-8">
@@ -388,7 +369,7 @@ export default function DocsPage() {
                       }
                       className="text-muted-foreground hover:text-secondary-foreground"
                     >
-                      {copiedCode ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copiedCode ? <Check className="h-4 w-4" /> : <Code className="h-4 w-4" />}
                     </Button>
                   </div>
                   <div className="p-6">
