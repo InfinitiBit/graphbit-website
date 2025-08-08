@@ -4,6 +4,7 @@ import { AgentDetailModal } from '@/components/marketplace/agent-detail-modal';
 import { Navigation } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { NeuralNetworkBackground } from '@/components/ui/neural-network-background';
 import { useStore, type Agent } from '@/contexts/AppContext';
 import {
   ArrowRight,
@@ -27,24 +28,24 @@ import {
 import { useEffect, useState } from 'react';
 
 const categories = [
-  { value: 'all', label: 'All Categories', icon: Globe, color: 'from-warning to-destructive' },
-  { value: 'chatbot', label: 'Chatbots', icon: MessageSquare, color: 'from-warning to-destructive' },
-  { value: 'analyzer', label: 'Analyzers', icon: BarChart, color: 'from-destructive to-warning' },
-  { value: 'generator', label: 'Generators', icon: Sparkles, color: 'from-warning to-destructive' },
-  { value: 'translator', label: 'Translators', icon: Globe, color: 'from-destructive to-warning' },
+  { value: 'all', label: 'All Categories', icon: Globe, color: 'from-primary to-accent' },
+  { value: 'chatbot', label: 'Chatbots', icon: MessageSquare, color: 'from-primary to-accent' },
+  { value: 'analyzer', label: 'Analyzers', icon: BarChart, color: 'from-accent to-primary' },
+  { value: 'generator', label: 'Generators', icon: Sparkles, color: 'from-primary to-accent' },
+  { value: 'translator', label: 'Translators', icon: Globe, color: 'from-accent to-primary' },
   {
     value: 'classifier',
     label: 'Classifiers',
     icon: Filter,
-    color: 'from-warning to-destructive',
+    color: 'from-primary to-accent',
   },
 ];
 
 const featuredStats = [
-  { icon: Package, label: 'Active Agents', value: '2,400+', color: 'text-warning' },
-  { icon: Users, label: 'Developers', value: '12K+', color: 'text-warning' },
-  { icon: Download, label: 'Downloads', value: '50K+', color: 'text-destructive' },
-  { icon: TrendingUp, label: 'Growth', value: '+25%', color: 'text-warning' },
+  { icon: Package, label: 'Active Agents', value: '2,400+', color: 'text-primary' },
+  { icon: Users, label: 'Developers', value: '12K+', color: 'text-primary' },
+  { icon: Download, label: 'Downloads', value: '50K+', color: 'text-accent' },
+  { icon: TrendingUp, label: 'Growth', value: '+25%', color: 'text-primary' },
 ];
 
 export default function MarketplacePage() {
@@ -81,20 +82,21 @@ export default function MarketplacePage() {
 
   return (
     <>
+      <NeuralNetworkBackground />
       <Navigation />
-      <main className="w-full min-h-screen bg-gradient-to-br from-background via-white to-warning/5 pt-16 sm:pt-20">
+      <main className="relative w-full min-h-screen pt-16 sm:pt-20">
         {/* Enhanced Hero Header */}
-        <div className="relative overflow-hidden border-b border-warning/20 bg-gradient-to-r from-background/95 to-warning/5">
-          <div className="absolute inset-0 bg-gradient-to-br from-warning/5 via-destructive/5 to-warning/10" />
+        <div className="relative overflow-hidden border-b border-primary/20 bg-gradient-to-r from-background/80 to-primary/5 backdrop-blur-sm">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10" />
           <div className="container-responsive relative py-16 sm:py-20 lg:py-24">
             <div className="text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-warning/20 bg-warning/10 px-4 py-2 text-sm font-medium text-foreground backdrop-blur-sm">
-                <Zap className="h-4 w-4 text-warning animate-pulse" />
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-foreground backdrop-blur-sm">
+                <Zap className="h-4 w-4 text-primary animate-pulse" />
                 <span>New agents added weekly</span>
               </div>
               <h1 className="mb-6 text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl">
                 AI Agent{' '}
-                <span className="bg-gradient-to-r from-warning to-destructive bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Marketplace
                 </span>
               </h1>
@@ -108,7 +110,7 @@ export default function MarketplacePage() {
                 {featuredStats.map((stat, index) => (
                   <div
                     key={stat.label}
-                    className="group rounded-2xl border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 p-4 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:bg-warning/10 hover:shadow-md"
+                    className="group rounded-2xl border border-primary/20 bg-gradient-to-br from-background/80 to-primary/5 p-4 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:bg-primary/10 hover:shadow-md"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="flex items-center justify-center gap-3">
@@ -130,7 +132,7 @@ export default function MarketplacePage() {
         {/* Enhanced Search Section */}
         <div className="container-responsive py-8 sm:py-12">
           <div className="mx-auto max-w-4xl">
-            <div className="rounded-3xl bg-gradient-to-br from-background/95 to-warning/5 border border-warning/20 p-6 shadow-xl backdrop-blur-sm sm:p-8">
+            <div className="rounded-3xl bg-gradient-to-br from-background/80 to-primary/5 border border-primary/20 p-6 shadow-xl backdrop-blur-sm sm:p-8">
               <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                 <div className="relative flex-1">
                   <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
@@ -139,13 +141,13 @@ export default function MarketplacePage() {
                     placeholder="Search for AI agents, frameworks, or use cases..."
                     value={agentSearchQuery}
                     onChange={(e) => setAgentSearchQuery(e.target.value)}
-                    className="w-full rounded-2xl border-2 border-warning/20 bg-background py-4 pl-12 pr-4 text-lg text-foreground transition-all duration-300 focus:border-warning focus:outline-none focus:ring-4 focus:ring-warning/10"
+                    className="w-full rounded-2xl border-2 border-primary/20 bg-background py-4 pl-12 pr-4 text-lg text-foreground transition-all duration-300 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
                   />
                 </div>
                 <Button
                   variant="outline"
                   onClick={() => setAgentCategory(agentCategory === 'all' ? 'chatbot' : 'all')}
-                  className="group gap-3 rounded-2xl border-2 border-warning/20 px-6 py-4 text-lg font-medium transition-all duration-300 hover:scale-[1.02] hover:bg-warning/10"
+                  className="group gap-3 rounded-2xl border-2 border-primary/20 px-6 py-4 text-lg font-medium transition-all duration-300 hover:scale-[1.02] hover:bg-primary/10"
                 >
                   <Filter className="h-5 w-5" />
                   Filters
@@ -223,17 +225,17 @@ export default function MarketplacePage() {
               {agents.map((agent, index) => (
                                   <Card
                   key={agent.id}
-                  className="group relative cursor-pointer overflow-hidden rounded-3xl border border-warning/20 bg-gradient-to-br from-background/95 to-warning/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl hover:border-warning/30"
+                  className="group relative cursor-pointer overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-background/80 to-primary/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl hover:border-primary/30"
                   style={{ animationDelay: `${index * 100}ms` }}
                   onClick={() => openAgentModal(agent)}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-warning/3 via-destructive/3 to-warning/5 opacity-0 transition-opacity duration-300 group-hover:opacity-80" />
-                  <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-warning to-destructive" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-accent/3 to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-80" />
+                  <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-primary to-accent" />
 
                   <CardHeader className="relative p-6">
                     <div className="flex items-start justify-between gap-4">
                       <div className="min-w-0 flex-1">
-                        <CardTitle className="truncate text-xl font-bold leading-tight text-foreground transition-colors duration-300 group-hover:text-warning">
+                        <CardTitle className="truncate text-xl font-bold leading-tight text-foreground transition-colors duration-300 group-hover:text-primary">
                           {agent.name}
                         </CardTitle>
                         <CardDescription className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
@@ -241,7 +243,7 @@ export default function MarketplacePage() {
                           by {agent.author} • v{agent.version}
                         </CardDescription>
                       </div>
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-warning to-destructive shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                         <Brain className="h-6 w-6 text-white" />
                       </div>
                     </div>
@@ -257,7 +259,7 @@ export default function MarketplacePage() {
                       {agent.tags.slice(0, 3).map((tag, tagIndex) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center rounded-full bg-gradient-to-r from-warning/10 to-destructive/10 px-3 py-1 text-xs font-medium text-warning ring-1 ring-warning/20"
+                          className="inline-flex items-center rounded-full bg-gradient-to-r from-primary/10 to-accent/10 px-3 py-1 text-xs font-medium text-primary ring-1 ring-primary/20"
                           style={{ animationDelay: `${tagIndex * 100}ms` }}
                         >
                           {tag}
@@ -274,27 +276,27 @@ export default function MarketplacePage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
-                          <Download className="h-4 w-4 text-warning" />
+                          <Download className="h-4 w-4 text-primary" />
                           <span className="font-medium">{agent.downloads.toLocaleString()}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Star className="h-4 w-4 fill-warning text-warning" />
+                          <Star className="h-4 w-4 fill-primary text-primary" />
                           <span className="font-medium">{agent.rating}</span>
                           <span className="text-xs">({agent.reviews})</span>
                         </div>
                       </div>
-                      <Button className="group relative overflow-hidden bg-gradient-to-r from-warning to-destructive px-6 py-2 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                      <Button className="group relative overflow-hidden bg-gradient-to-r from-primary to-accent px-6 py-2 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                         <span className="relative z-10 flex items-center gap-2">
                           Install
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-warning/80 to-destructive/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-accent/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       </Button>
                     </div>
 
                     {/* Trust Indicators */}
                     <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-                      <Shield className="h-3 w-3 text-warning" />
+                      <Shield className="h-3 w-3 text-primary" />
                       <span>Verified</span>
                       <Clock className="ml-2 h-3 w-3" />
                       <span>Updated 2 days ago</span>
@@ -309,26 +311,24 @@ export default function MarketplacePage() {
           {!isLoadingAgents && agents.length === 0 && (
             <div className="py-20 text-center">
               <div className="mx-auto max-w-md">
-                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-muted to-muted/80">
-                  <Package className="h-10 w-10 text-muted-foreground" />
-                </div>
-                <h3 className="mb-4 text-2xl font-bold text-foreground">No agents found</h3>
-                <p className="mb-8 text-muted-foreground">
-                  No agents match your current search criteria. Try adjusting your filters or search
-                  terms.
-                </p>
-                <Button
-                  onClick={() => {
-                    setAgentSearchQuery('');
-                    setAgentCategory('all');
-                  }}
-                  className="group bg-gradient-to-r from-warning to-destructive px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-                >
-                  <span className="flex items-center gap-2">
+                <div className="flex flex-col items-center justify-center rounded-3xl border border-primary/20 bg-gradient-to-br from-background/80 to-primary/5 p-12 text-center backdrop-blur-sm">
+                  <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-accent/20">
+                    <Search className="h-10 w-10 text-primary" />
+                  </div>
+                  <h3 className="mb-4 text-2xl font-bold text-foreground">No agents found</h3>
+                  <p className="mb-8 text-lg text-muted-foreground">
+                    Try adjusting your search or filters to find what you're looking for.
+                  </p>
+                  <Button
+                    onClick={() => {
+                      setAgentSearchQuery('');
+                      setAgentCategory('all');
+                    }}
+                    className="rounded-2xl bg-gradient-to-r from-primary to-accent px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  >
                     Clear all filters
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Button>
+                  </Button>
+                </div>
               </div>
             </div>
           )}
