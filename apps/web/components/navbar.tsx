@@ -23,8 +23,8 @@ const navigation = [
   { name: 'Marketplace', href: '/marketplace', icon: BarChart3 },
   { name: 'Tracing', href: '/tracing', icon: Zap },
   { name: 'Pricing', href: '/pricing', icon: Sparkles },
-  { name: 'Docs', href: '/docs', icon: BarChart3 },
-  { name: 'Blog', href: '/blog', icon: BarChart3 },
+//   { name: 'Docs', href: '/docs', icon: BarChart3 },
+//   { name: 'Blog', href: '/blog', icon: BarChart3 },
 ];
 
 export function Navigation() {
