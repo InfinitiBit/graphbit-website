@@ -4,8 +4,7 @@ import { AnimatedHeroStats } from '@/components/ui/animated-hero-stats';
 import { useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Zap, Star, Code } from 'lucide-react';
-
+import { Code, Shield, Star, Zap } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -126,10 +125,11 @@ export function HeroSection() {
             className="mx-auto mb-6 max-w-3xl px-4 text-sm font-medium leading-relaxed text-muted-foreground sm:mb-8 sm:px-0 sm:text-base md:text-lg lg:text-xl"
             variants={fadeInUp}
           >
-            <span className="font-bold text-foreground">GraphBit Framework</span> eliminates the
-            complexity of building AI agents.{' '}
-            <span className="font-bold text-warning">Our cloud platform</span> is built on top of
-            this proven foundation, trusted by developers worldwide.{' '}
+            <span className="font-bold text-foreground">GraphBit Framework</span> simplifies the
+            complexity of building AI agents as It&apos;s Build with{' '}
+            <span className="font-bold text-warning">Rust &amp; Wrapped with Python</span>. Our
+            cloud platform is built on top of this proven foundation, trusted by developers
+            worldwide.{' '}
             <span className="mt-2 block font-bold text-foreground">
               Start with the framework, scale with the cloud.
             </span>
